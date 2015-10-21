@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/custom.css">
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    </head>
+    <body>
+        <div id="chatroom">
+        
+        </div>
+        <input id="msg" type="text"></input>
+        <button id="send"></button>
+    </body>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        var lastData = "";
+        $("#send").click(function(){
+            $.ajax({
+                url: "append?msg=" + $("#msg").attr("value"),
+            }).done(function(){
+                refresh();
+            })
+        })
+        function refresh(){
+            $.get("retreive",function(data){
+                a = data
+                $("#chatroom").empty()
+                data = data.replace(/\n/g, "<br />");
+                $("#chatroom").append(data)
+                if(lastData !== data){
+                    $(window).scrollTop(10000000);
+                    lastData = data;
+                }
+            })
+        }
+        refresh();
+        setInterval("refresh()", 10000)
+    </script>
+</html>
