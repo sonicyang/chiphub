@@ -10,6 +10,7 @@
     {% endblock %}
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>{% block title %}Chiphub{% endblock %}</title>
 </head>
 
@@ -20,7 +21,11 @@
     <div class="row">
         <aside id="sidebar" class="col-md-3">
             <section>
-                <a href="/">Home</a>
+                <div class="sb-icon"><i class="material-icons">home</i></div>
+                <div class="sb-text">
+                    <a href="/">Home</a><br />
+                    <span>CHIPHUB</span>
+                </div>
             </section>
             <section>
                 <a href="/chatroom/">Chatroom</a>
