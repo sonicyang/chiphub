@@ -12,6 +12,14 @@
 }
 .member-item{
     margin-bottom: 50px;
+}
+
+.member-item div:first-child{
+    margin: 7px;
+    padding: 10px;
+
+    border-style: solid;
+    border-width: 1px;
 
     background-color: #F6FFE0;
     color: #95AB63;
