@@ -1,16 +1,40 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="static/css/custom.css">
+        <link rel="stylesheet" href="../static/css/chat-main.css" >
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     </head>
     <body>
+      
+      <h1 class="title">ChipHub Chat Room</h>
+      <div class="wrapper">
+          <nav id="nav" class="nav">
+            <div class="default-nav">
+              <div class="main-nav">
+                <div class="toggle"></div>
+                <div class="options"></div>
+              </div>
+            </div>
+          </nav>
+          <div id="inner" class="inner">
+            <div id="chatroom" class="content"></div>
+          </div>
+          <div id="bottom" class="bottom">
+            <input id="msg" type="text"></input>
+            <button id="send" class="send"></button>
+          </div>
+      </div>
+      
+     <!-- 
         <div id="chatroom">
         
         </div>
         <input id="msg" type="text"></input>
         <button id="send">send</button>
+
+        -->
+
     </body>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
