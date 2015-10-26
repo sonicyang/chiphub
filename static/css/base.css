@@ -4,10 +4,15 @@ html, body{
 .row{
     margin-left: 0;
     margin-right: 0;
+
+    background-color: #BDD684;
 }
+
 #header{
-    height: 20%;
-    min-height: 150px;
+    height: 5%;
+    min-height: 50px;
+
+    background-color: #10222B;
 }
 
 #sidebar{
@@ -18,6 +23,6 @@ html, body{
 }
 
 footer{
-    height: 10%;
+    height: 5%;
     min-height: 80px;
 }
