@@ -13,3 +13,15 @@ def append(request):
 def retreive(request):
     return HttpResponse(open("data").read())
 
+def faq(request):
+    return render(request, 'faq.html')
+
+def about_us(request):
+    return render(request, 'about_us.html')
+
+def exchange(request):
+    return render(request, 'exchange.html')
+
+def chatroom(request):
+    return render(request, 'chatroom.html')
+

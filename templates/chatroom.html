@@ -1,0 +1,78 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1">
+        <link href="{% static 'css/chat-main.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    </head>
+    <body>
+      
+      <h1 class="title">ChipHub Chat Room</h>
+      <div class="wrapper">
+          <nav id="nav" class="nav">
+            <div class="default-nav">
+              <div class="main-nav">
+                <div class="toggle"></div>
+                <div class="options"></div>
+              </div>
+            </div>
+          </nav>
+          <div id="inner" class="inner">
+            <div id="chatroom" class="content"></div>
+          </div>
+          <div id="bottom" class="bottom">
+            <input id="msg" type="text"></input>
+            <button id="send" class="send"></button>
+          </div>
+      </div>
+      
+     <!-- 
+        <div id="chatroom">
+        
+        </div>
+        <input id="msg" type="text"></input>
+        <button id="send">send</button>
+        -->
+
+    </body>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        var lastData = "";
+        $("#send").click(function(){
+            $.ajax({
+                url: "/append/?msg=" + $("#msg").attr("value"),
+            }).done(function(){
+                refresh();
+            })
+        })
+        function refresh(){
+            $.get("/retreive/",function(data){
+                a = data
+                
+                $("#chatroom").empty()
+                for (var i = 0; i < lastData.length; i++){
+                    var key = lastData[i];
+                    $("#chatroom").append("<div>" + key + "</div>")
+                }
+                data = data.split("\n");
+                for (var i = lastData.length - 1; i < data.length; i++){
+                    var key = data[i];
+                    if(key === undefined)
+                        continue;
+                    $("#chatroom").append("<div class='new_msg' style='opacity : 0'>" + key + "</div>")
+                }
+                $('.new_msg').animate({opacity: 1}, 700, function(){$(this).removeClass('new_msg')});
+                if(lastData !== data){
+                    $('.content').scrollTop(10000000);
+                    lastData = data;
+                }
+            })
+        }
+        refresh();
+        setInterval("refresh()", 10000)
+    </script>
+</html>
+

@@ -1,0 +1,16 @@
+#about_us{
+    padding: 5% 10% 5% 10%;
+    /*font-family: 'Montserrat', sans-serif;*/
+}
+#about_us h2{
+    /*font-family: 'Montserrat', sans-serif;*/
+    margin-bottom: 7%;
+}
+#about_us img{
+    width: 200px;
+    margin-bottom: 15px;
+}
+.member-item{
+     margin-bottom: 50px;
+
+}

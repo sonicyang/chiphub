@@ -21,5 +21,9 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', index),
     url(r'^append/$', append),
-    url(r'^retreive$', retreive),
+    url(r'^retreive/$', retreive),
+    url(r'^faq/$', faq),
+    url(r'^chatroom/$', chatroom),
+    url(r'^exchange/$', exchange),
+    url(r'^about_us/$', about_us),
 ]

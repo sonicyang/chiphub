@@ -1,0 +1,23 @@
+html, body{
+    height: 100%;
+}
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+#header{
+    height: 20%;
+    min-height: 150px;
+}
+
+#sidebar{
+}
+
+#container{
+    background-color: green;
+}
+
+footer{
+    height: 10%;
+    min-height: 80px;
+}

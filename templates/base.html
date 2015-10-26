@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet" media="screen">
+    {% block css %}
+    
+    {% endblock %}
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <title>{% block title %}Chiphub{% endblock %}</title>
+</head>
+
+<body>
+    <div id="header" class="text-center">
+        <h1> Chiphub</h1>
+    </div>
+    <div class="row">
+        <aside id="sidebar" class="col-md-3">
+            <section>
+                <a href="/">Home</a>
+            </section>
+            <section>
+                <a href="/chatroom/">Chatroom</a>
+            </section>
+            <section>
+                <a href="/exchange/">Exchange</a>
+            </section>
+            <section>
+                <a href="/faq/">FAQ</a>
+            </section>
+            <section>
+                <a href="/about_us/">About us</a>
+            </section>
+        </aside>
+
+        <div id="content" class="col-md-9">
+            {% block content%}{% endblock %}
+        </div>
+    
+    </div>
+    <footer>
+        
+    </footer>
+</body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</html>

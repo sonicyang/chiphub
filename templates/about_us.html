@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'css/about_us.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block content %}
+<div id="about_us" >
+    <div class="">
+            <div class="row text-center">
+                <div class="col-md-6 member-item">
+                    <a href="http://sonicyang.github.io/Resume" target="_blank">
+                        <img src="{% static 'images/sonicyang.jpg' %}" class="img-circle"></img>
+                    </a>
+                    <h4>Sonicyang</h4>
+                        <p>雖然程式能力強大，但依舊孜孜不倦進修硬體的勤奮學生，</br>實際上是個被各種專案、學習、愛情追著跑的可憐工程師 </p>
+                </div>
+                <div class="col-md-6 member-item">
+                    <a href="http://anarchih.github.io/NCKU_Web_HW" target="_blank">
+                        <img src="{% static 'images/anarchih.jpg' %}" class="img-circle"></img>
+                    </a>
+                    <h4>anarchih</h4>
+                        <p>喜歡玩資料，專研各式演算法，對細微瑣事提不起興趣，</br>什麼都學的打雜工程師</p>
+                </div>
+                <div class="col-md-6 member-item">
+                    <a href="http://alanaudi.github.io/resume" target="_blank">
+                        <img src="{% static 'images/alanaudi.png' %}" class="img-circle"></img>
+                    </a>
+                    <h4>alanudi</h4>
+                    <p>面對網頁設計抱持極大熱情，雖然還不成熟但努力中</p>
+                </div>
+                <div class="col-md-6 member-item">
+                        <a href="http://luffy.ee.ncku.edu.tw/~slime01/hw1/resume" target="_blank">
+                            <img src="{% static 'images/yanhea.jpg' %}" class="img-circle" ></img>
+                        </a>
+                    <h4>pds828dc</h4>
+                    <p>總被人覺得厲害時既沒什麼能力，依賴著同伴，向著獨立工程師加油中的同鞋</p>
+                </div>
+            </div>
+        </div>
+
+</div>
+{% endblock %}
