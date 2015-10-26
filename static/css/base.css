@@ -13,6 +13,14 @@ html, body{
     min-height: 50px;
 
     background-color: #10222B;
+    text-align: left;
+}
+
+#header h1{
+    padding-left: 20px;
+    padding-top: 5px;
+
+    color: #F0EED0;
 }
 
 #sidebar {
