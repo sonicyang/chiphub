@@ -50,6 +50,11 @@ body {
   margin-bottom: 32px;
 }
 
+.content{
+     overflow: scroll;
+     height: 85%;
+}
+
 .nav {
   position: fixed;
   top: 0;

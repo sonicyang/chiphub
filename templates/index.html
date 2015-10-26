@@ -50,11 +50,24 @@
         function refresh(){
             $.get("retreive",function(data){
                 a = data
+                
                 $("#chatroom").empty()
-                data = data.replace(/\n/g, "<br />");
-                $("#chatroom").append(data)
+                for (var i = 0; i < lastData.length; i++){
+                    var key = lastData[i];
+                    $("#chatroom").append("<div>" + key + "</div>")
+                }
+
+                data = data.split("\n");
+                for (var i = lastData.length - 1; i < data.length; i++){
+                    var key = data[i];
+                    if(key === undefined)
+                        continue;
+                    $("#chatroom").append("<div class='new_msg' style='opacity : 0'>" + key + "</div>")
+                }
+                $('.new_msg').animate({opacity: 1}, 700, function(){$(this).removeClass('new_msg')});
+
                 if(lastData !== data){
-                    $(window).scrollTop(10000000);
+                    $('.content').scrollTop(10000000);
                     lastData = data;
                 }
             })
