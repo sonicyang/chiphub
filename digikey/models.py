@@ -1,12 +1,12 @@
 from django.db import models
-from login.models import users
+from login.models import Users
 
 class Groups(models.Model):
     ordered = models.BooleanField()
-    orderdate = models.DataField()
+    orderdate = models.DateField()
 
 class Orders(models.Model):
-    Order = models.ForeignKey(users)
+    Order = models.ForeignKey(Users)
     shipping_address = models.CharField(max_length = 100)
     phone_number = models.CharField(max_length = 20)
     sent = models.BooleanField()
@@ -15,9 +15,8 @@ class Orders(models.Model):
 
 class Components(models.Model):
     part_number = models.CharField(max_length = 40)
-    manufacture_pn = models.CharField(max_length = 40)
-    weight = models.IntegerField('Weight of Component in grams')
-    unit_price = models.FloatField("Unit price in USD")
+    # weight = models.IntegerField('Weight of Component in grams')
+    unit_price = models.FloatField("Unit price in TWD")
     qunaties = models.IntegerField()
-    order_id = models.ForigenKey(Orders)
+    order_id = models.ForeignKey(Orders)
 
