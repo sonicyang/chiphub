@@ -7,11 +7,13 @@ def index(request):
 
 def append(request):
     # open("data", "a").write(str(request.args.get("msg")) + "\n\r")
-    open("data", "a").write(request.GET['msg'] + "\n\r")
+    open("/tmp/data", "ab").write(request.GET['msg'].encode('utf8') + "\n\r".encode('utf-8'))
     return HttpResponse("")
 
 def retreive(request):
-    return HttpResponse(open("data").read())
+    fil = open("/tmp/data", "rb")
+    payload = fil.read()
+    return HttpResponse(payload)
 
 def faq(request):
     return render(request, 'faq.html')
