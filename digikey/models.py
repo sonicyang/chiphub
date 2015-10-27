@@ -14,7 +14,8 @@ class Orders(models.Model):
     group_id = models.ForeignKey(Groups)
 
 class Components(models.Model):
-    part_number = models.CharField(max_length = 30)
+    part_number = models.CharField(max_length = 40)
+    manufacture_pn = models.CharField(max_length = 40)
     weight = models.IntegerField('Weight of Component in grams')
     unit_price = models.FloatField("Unit price in USD")
     qunaties = models.IntegerField()
