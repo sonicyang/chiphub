@@ -1,16 +1,36 @@
 from django.contrib.sessions.models import Session
 from login.models import Users
 from django.core.exceptions import ObjectDoesNotExist
+import requests
+import json
+import random
+from keys import keys
 
 login_providers = []
 
-def trueRNG():
-    return 100
-    #XXX: hook with random.org
-
 def generate_token(email):
-    #XXX: should be non predictable, random, no collision hash
-    return hash(email + str(trueRNG()))
+    url = "https://api.random.org/json-rpc/1/invoke"
+    headers = {'content-type': 'application/json'}
+    ID = random.randint(0, 65536)
+
+    #XXX: hide API_key
+    payload = {
+            "jsonrpc": "2.0",
+            "method": "generateUUIDs",
+            "params": {
+                "apiKey": keys.RAMDOM_ORG_API_KEY,
+                "n": 1
+            },
+            "id": ID
+        }
+
+    response = requests.post(
+        url, data=json.dumps(payload), headers=headers).json()
+
+    assert response['id'] == ID
+    assert 'result' in response
+
+    return response['result']['random']['data']
 
 def authuicate(request, user_email):
     user = Users.objects.get(email = user_email)
