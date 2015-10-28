@@ -6,7 +6,7 @@ login_providers = []
 
 def trueRNG():
     return 100
-    # hook with random.org
+    #XXX: hook with random.org
 
 def generate_token(email):
     #XXX: should be non predictable, random, no collision hash
@@ -21,8 +21,6 @@ def register(user_data):
     user_data.token = generate_token(user_data.email)
     user_data.save()
 
-    #XXX: should let user fill in more detail data or missing data
-
 def hasUser(user_email):
     try:
         Users.objects.get(email=user_email)
@@ -31,14 +29,16 @@ def hasUser(user_email):
         return False
 
 def isLogin(request):
-    return request.session['logined']
+    if 'logined' not in request.session:
+        return False
+    else:
+        return request.session['logined']
 
-def getSession_token():
-    if isLogin:
+def get_session_token(request):
+    if isLogin(request):
         return request.session['token']
     else:
-        return
-        #Raise Exceptions
+        raise ''
 
 def get_user_data(user_token):
     return Users.objects.filter(token = user_token)

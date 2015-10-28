@@ -3,8 +3,11 @@ from django.http import HttpResponse
 import bs4
 import requests
 import json
-from models import Orders
-from models import Components
+from login import auth
+from login.models import Users
+from digikey.models import Orders
+from digikey.models import Components
+from digikey.models import Groups
 
 def reterieve_html(url):
     try:
@@ -24,31 +27,42 @@ def reterieve_price(part_number):
     except AttributeError:
         return 0.0
 
-def create_order(parts):
-    order = Orders.object.create()
+def create_order(user, parts):
+    unordered_group = Groups.objects.get_or_create(ordered=False)[0]
+
+    order = Orders.objects.create(Orderer = user,
+                                  shipping_address = user.default_shipping_address,
+                                  phone_number = user.phone_number,
+                                  group_id = unordered_group
+                                  )
 
     for part in parts:
-        comp = Components(part_number=part[0])
-        comp.order_id = order
-        comp.quanties = int(part[1])
-        comp.unit_price = float(part[2])
+        comp = Components(part_number=part[0],
+                          order_id = order,
+                          quantity = int(part[1]),
+                          unit_price = float(part[2])
+                          )
         comp.save()
 
 def order_digikey(request):
-    parts = request.GET['order_list'].split(',')
-    parts = map(lambda x: x.split(':'), parts)
-    parts = map(lambda x: x + [(reterieve_price(x[0]))], parts)
+    #XXX: should user POST
+    if auth.isLogin(request):
+        parts = request.GET['order_list'].split(',')
+        parts = map(lambda x: x.split(':'), parts)
+        parts = map(lambda x: x + [(reterieve_price(x[0]))], parts)
 
-    non_exist = filter(lambda x: x[2] == 0.0, parts)
+        non_exist = filter(lambda x: x[2] == 0.0, parts)
 
-    response = HttpResponse(json.dumps(parts))
-    if(len(non_exist)):
-        response.status_code = 400
+        response = HttpResponse(json.dumps(parts))
+        if(len(non_exist)):
+            response.status_code = 400
+        else:
+            response.status_code = 200
+
+            user = Users.objects.get(token = auth.get_session_token(request))
+
+            create_order(user, parts)
     else:
-        response.status_code = 201
-        create_order(parts)
-
-
-
+        response.status_code = 403
 
     return response

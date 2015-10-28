@@ -21,7 +21,6 @@ def login(request):
 def login_error(request):
     return HttpResponse("ERROR!")
 
-
 def login_page(request):
     return render(request, 'login.html')
 
