@@ -1,15 +1,11 @@
-body{
-    height: 100%;
-}
+body, html {
+  height: 100%; }
 
-html{
-    height: 100%;
-}
+#chatroom {
+  width: 80%;
+  min-height: 300px;
+  vertical-align: top;
+  height: 100%;
+  overflow: scroll; }
 
-#chatroom{
-    width: 80%;
-    min-height: 300px;
-    vertical-align: top;
-    height: 100%;
-    overflow: scroll;
-}
+/*# sourceMappingURL=custom.css.map */
