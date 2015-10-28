@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from chatroom.views import *
 from digikey.views import *
+from login.views import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -27,5 +28,9 @@ urlpatterns = [
     url(r'^chatroom/$', chatroom),
     url(r'^exchange/$', exchange),
     url(r'^about_us/$', about_us),
+
+    url(r'^login/$', login_page),
+    url(r'^smoke_callback/$', smoke_callback),
+
     url(r'^order_digikey/$', order_digikey),
 ]

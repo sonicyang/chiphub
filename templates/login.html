@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'css/index.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block content %}
+<form action="../smoke_callback">
+    <input type="submit">Login</input>
+</form>
+
+{% endblock %}
