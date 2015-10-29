@@ -5,6 +5,7 @@ import json
 import random
 from keys import keys
 from uuid import UUID
+import uuid
 
 login_providers = []
 
@@ -16,7 +17,10 @@ def validate_uuid4(uuid_string):
 
     return True
 
-def generate_token(email):
+def generate_static_uuid(secret):
+    return uuid.uuid4(uuid.NAMESPACE_DNS, str(secret))
+
+def generate_random_uuid():
     url = "https://api.random.org/json-rpc/1/invoke"
     headers = {'content-type': 'application/json'}
     ID = random.randint(0, 65536)
@@ -40,9 +44,9 @@ def generate_token(email):
 
     return response['result']['random']['data']
 
-def authuicate(request, user_email):
+def authuicate(request, uuid):
     try:
-        user = Users.objects.get(email = user_email)
+        user = Users.objects.get(uuid = uuid)
         if validate_uuid4(user.token):
             request.session['token'] = user.token
             return True
@@ -54,17 +58,17 @@ def authuicate(request, user_email):
             request.session.modified = True
         return False
 
-def create_empty_user(user_email, service_provider, access_token, **additional):
+def create_empty_user(uuid, service_provider, access_token, **additional):
     try:
-        user = Users.objects.get(email = user_email)
-        if not validate_uuid4(user.token):
+        user = Users.objects.get(uuid = uuid)
+        if user.username is None:
             user.delete()
         else:
             return False
     except ObjectDoesNotExist:
         pass
 
-    user = Users(email = user_email,
+    user = Users(uuid = uuid,
                  login_service = service_provider,
                  access_token = access_token
                  )
@@ -80,7 +84,8 @@ def register_data(user_data):
 
     assert empty_user.token == None
 
-    empty_user.token = generate_token(empty_user.email)
+    empty_user.token = generate_random_uuid()
+    empty_user.email = user_data.email
     empty_user.username = user_data.username
     empty_user.default_shipping_address = user_data.default_shipping_address
     empty_user.phone_number = user_data.phone_number
@@ -88,10 +93,10 @@ def register_data(user_data):
     empty_user.real_name = user_data.real_name
     empty_user.save()
 
-def hasUser(user_email):
+def hasUser(uuid):
     try:
-        user = Users.objects.get(email=user_email)
-        if validate_uuid4(user.token):
+        user = Users.objects.get(uuid = uuid)
+        if user.username is not None:
             return True
         else:
             return False

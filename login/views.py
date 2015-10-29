@@ -22,13 +22,16 @@ def login_page(request):
     return render(request, 'login.html')
 
 def smoke_callback(request):
-    if auth.hasUser("smoke@cc.xyz"):
-        if auth.authuicate(request, "smoke@cc.xyz"):
+    email = "smoke@cc.xyz"
+    uuid = auth.generate_static_uuid(email)
+
+    if auth.hasUser(uuid):
+        if auth.authuicate(request, uuid):
             return redirect("chatroom.views.index")
         else:
             return redirect("login.views.login_error")
     else:
-        if auth.create_empty_user("smoke@cc.xyz", "SMOKE", "ASDF", refresh_token = "FDA"):
+        if auth.create_empty_user(uuid, "SMOKE", "ASDF", refresh_token = "FDA"):
             #XXX: should be done in a profile edit page
             user = Users()
             user.email="smoke@cc.xyz"
@@ -39,7 +42,7 @@ def smoke_callback(request):
             user.real_name = "smoke"
 
             auth.register_data(user)
-            if auth.authuicate(request, "smoke@cc.xyz"):
+            if auth.authuicate(request, uuid):
                 return redirect("chatroom.views.index")
             else:
                 return redirect("login.views.login_error")
