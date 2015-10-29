@@ -5,14 +5,11 @@ from login.auth import login_providers
 from login import auth
 from login.models import Users
 
-def login(request):
+def isLogin(request):
     response = HttpResponse("")
 
-    if 'logined' in request.login:
-        if request.session['logined'] == True:
-            response.status_code = 200
-        else:
-            response.status_code = 400
+    if auth.isLogin(request):
+        response.status_code = 200
     else:
         response.status_code = 400
 
@@ -26,24 +23,26 @@ def login_page(request):
 
 def smoke_callback(request):
     if auth.hasUser("smoke@cc.xyz"):
-        auth.authuicate(request, "smoke@cc.xyz")
-        #XXX: too gernela
-        return redirect("chatroom.views.index")
-    else:
-        user = Users()
-        user.username = "smoke"
-        user.email = "smoke@cc.xyz"
-        user.login_service = "smoke"
-        user.access_toke = "smoke"
-        user.refresh_token = "smoke"
-        user.default_shipping_address = "smoke"
-        user.phone_number = "smoke"
-        user.roc_id = "smoke"
-        user.real_name = "smoke"
-        try:
-            auth.register(user)
-            #XXX: too gernela
+        if auth.authuicate(request, "smoke@cc.xyz"):
             return redirect("chatroom.views.index")
-        except Exception:
+        else:
+            return redirect("login.views.login_error")
+    else:
+        if auth.create_empty_user("smoke@cc.xyz", "SMOKE", "ASDF", refresh_token = "FDA"):
+            #XXX: should be done in a profile edit page
+            user = Users()
+            user.email="smoke@cc.xyz"
+            user.username = "smoke"
+            user.default_shipping_address = "smoke"
+            user.phone_number = "smoke"
+            user.roc_id = "smoke"
+            user.real_name = "smoke"
+
+            auth.register_data(user)
+            if auth.authuicate(request, "smoke@cc.xyz"):
+                return redirect("chatroom.views.index")
+            else:
+                return redirect("login.views.login_error")
+        else:
             return redirect("login.views.login_error")
 

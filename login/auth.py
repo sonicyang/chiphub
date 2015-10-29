@@ -1,4 +1,3 @@
-from django.contrib.sessions.models import Session
 from login.models import Users
 from django.core.exceptions import ObjectDoesNotExist
 import requests
@@ -11,7 +10,7 @@ login_providers = []
 
 def validate_uuid4(uuid_string):
     try:
-        val = UUID(uuid_string, version=4)
+        UUID(uuid_string, version=4)
     except ValueError:
         return False
 
@@ -44,23 +43,58 @@ def generate_token(email):
 def authuicate(request, user_email):
     try:
         user = Users.objects.get(email = user_email)
-        request.session['token'] = user.token
-        return True
+        if validate_uuid4(user.token):
+            request.session['token'] = user.token
+            return True
+        else:
+            return False
     except ObjectDoesNotExist:
         if 'token' in request.session:
-            del resuest.sesion['token']
+            del request.sesion['token']
             request.session.modified = True
         return False
 
+def create_empty_user(user_email, service_provider, access_token, **additional):
+    try:
+        user = Users.objects.get(email = user_email)
+        if not validate_uuid4(user.token):
+            user.delete()
+        else:
+            return False
+    except ObjectDoesNotExist:
+        pass
 
-def register(user_data):
-    user_data.token = generate_token(user_data.email)
-    user_data.save()
+    user = Users(email = user_email,
+                 login_service = service_provider,
+                 access_token = access_token
+                 )
+    if 'refresh_token' in additional:
+        user.refresh_token = additional['refresh_token']
+
+    user.save()
+
+    return True
+
+def register_data(user_data):
+    empty_user = Users.objects.get(email = user_data.email)
+
+    assert empty_user.token == None
+
+    empty_user.token = generate_token(empty_user.email)
+    empty_user.username = user_data.username
+    empty_user.default_shipping_address = user_data.default_shipping_address
+    empty_user.phone_number = user_data.phone_number
+    empty_user.roc_id = user_data.roc_id
+    empty_user.real_name = user_data.real_name
+    empty_user.save()
 
 def hasUser(user_email):
     try:
-        Users.objects.get(email=user_email)
-        return True
+        user = Users.objects.get(email=user_email)
+        if validate_uuid4(user.token):
+            return True
+        else:
+            return False
     except ObjectDoesNotExist:
         return False
 
