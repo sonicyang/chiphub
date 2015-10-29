@@ -13,3 +13,6 @@ class Users(models.Model):
     roc_id = models.CharField(max_length=10, null=True)
     real_name = models.CharField(max_length=10, null=True)
 
+class Login_Sessions(models.Model):
+    token = models.CharField(max_length=40)
+    user = models.ForeignKey(Users)

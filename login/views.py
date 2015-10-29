@@ -26,7 +26,7 @@ def smoke_callback(request):
     uuid = auth.generate_static_uuid(email)
 
     if auth.hasUser(uuid):
-        if auth.authuicate(request, uuid):
+        if auth.create_session(request, uuid):
             return redirect("chatroom.views.index")
         else:
             return redirect("login.views.login_error")

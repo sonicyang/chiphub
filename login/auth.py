@@ -1,4 +1,5 @@
 from login.models import Users
+from login.models import Login_Sessions
 from django.core.exceptions import ObjectDoesNotExist
 import requests
 import json
@@ -44,15 +45,16 @@ def generate_random_uuid():
 
     return response['result']['random']['data']
 
-def authuicate(request, uuid):
-    try:
-        user = Users.objects.get(uuid = uuid)
-        if validate_uuid4(user.token):
-            request.session['token'] = user.token
-            return True
-        else:
-            return False
-    except ObjectDoesNotExist:
+def create_session(request, uuid):
+    if hasUser(uuid):
+        login_session = Login_Sessions(uuid = generate_random_uuid(),
+                                       user = Users.objects.filter(uuid = uuid)
+                                       )
+        request.session['token'] = login_session.uuid
+
+        login_session.save()
+        return True
+    else:
         if 'token' in request.session:
             del request.sesion['token']
             request.session.modified = True
@@ -108,7 +110,10 @@ def isLogin(request):
         return False
     else:
         if validate_uuid4(request.sesion['token']):
-            return True
+            if Login_Sessions.objects.filter(uuid = request.session['token']) is not None:
+                return True
+            else:
+                return False
         else:
             del request.sesion['token']
             request.session.modified = True
