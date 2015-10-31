@@ -257,7 +257,7 @@ p{
 
 
 .overlay {
-  pointer-events: none;
+  /*pointer-events: none;*/
   position: relative;
   overflow: auto;
   width: 100%;
