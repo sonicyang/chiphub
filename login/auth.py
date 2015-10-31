@@ -127,5 +127,5 @@ def get_session_token(request):
     else:
         return ''
 
-def get_user_data(user_token):
-    return Users.objects.filter(token = user_token)
+def get_user_data(request):
+    return Login_Sessions.objects.filter(token = get_session_token(request)).user
