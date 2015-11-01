@@ -266,8 +266,8 @@ p{
   background-position: top right, top left, bottom left, bottom right;
   background-size: 50% 50%;
   background-repeat: no-repeat;
-  background-image: -webkit-radial-gradient(0% 100%, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px), -webkit-radial-gradient(100% 100%, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px), -webkit-radial-gradient(100% 0, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px), -webkit-radial-gradient(0 0, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px);
-  background-image: radial-gradient(0% 100%, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px), radial-gradient(100% 100%, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px), radial-gradient(100% 0, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px), radial-gradient(0 0, circle, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 0px);
+  background-image: -webkit-radial-gradient(0% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -webkit-radial-gradient(100% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -webkit-radial-gradient(100% 0, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -webkit-radial-gradient(0 0, circle, rgba(255, 255, 255, 0.9) 0px, rgba(255,255,255,0.9) 0px);
+  background-image: radial-gradient(0% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), radial-gradient(100% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), radial-gradient(100% 0, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), radial-gradient(0 0, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px);
 }
 
 .overlay h1 {
@@ -289,7 +289,7 @@ p{
     color: #FFF;
 }
 
-/*=========   button ============*/
+/*=========   button 1 ============
 #getStarted {
   background-image: -webkit-linear-gradient(106deg, #2C3E50 50%, #304459 50%);
   background-image: linear-gradient(106deg, #2C3E50 50%, #304459 50%);
@@ -329,5 +329,57 @@ p{
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
+}*/
+
+/* ========  button 2  ==========*/
+/* GENERAL BUTTON STYLING */
+.getbtn,
+.getbtn::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 
+.getbtn {
+  width: 200px ;
+    height:100%;
+  background: none;
+  border: 3px solid #2C3E50;
+  border-radius: 5px;
+  color: #2C3E50;
+  display: block;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 1em auto;
+  margin-top: 5em;
+  padding: 8px 24px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.getbtn::before,
+.getbtn::after {
+  background: #2C3E50   ;
+  content: '';
+  position: absolute;
+  z-index: -1;
+    width: 30%;
+}
+
+.getbtn:hover {
+  z-index: 1;
+  color: #FFF;
+}
+
+/* BUTTON 1 */
+.btn-1::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.btn-1:hover:after {
+  height: 100%;
+}
