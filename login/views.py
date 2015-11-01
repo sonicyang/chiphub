@@ -1,14 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from login.auth import login_providers
 from login import auth
 from login.models import Users
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 import requests
 import json
+from keys import keys
 
 def isLogin(request):
     response = HttpResponse("")
@@ -29,8 +27,8 @@ def login_page(request):
 def google_login(request):
     token_request_uri = "https://accounts.google.com/o/oauth2/auth"
     response_type = "code"
-    client_id = "468549470135-o2si5pna5k3751jejoa5e819ojp4fkjn.apps.googleusercontent.com"
-    redirect_uri = "http://127.0.0.1:8000/auth/"
+    client_id = keys.GOOGLE_CLIENT_ID
+    redirect_uri = "http://127.0.0.1:8000/google_callback"
     scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
 
     url = "{token_request_uri}?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}".format(
@@ -48,13 +46,13 @@ def google_callback(request):
             return redirect("login.views.login_error")
 
     access_token_uri = 'https://accounts.google.com/o/oauth2/token'
-    redirect_uri = "http://127.0.0.1:8000/auth/"
+    redirect_uri = "http://127.0.0.1:8000/google_callback"
 
     params = {
         'code':request.GET['code'],
         'redirect_uri':redirect_uri,
-        'client_id':"468549470135-o2si5pna5k3751jejoa5e819ojp4fkjn.apps.googleusercontent.com",
-        'client_secret':"",
+        'client_id':keys.GOOGLE_CLIENT_ID,
+        'client_secret': keys.GOOGLE_CLIENT_SECRET,
         'grant_type':'authorization_code'
     }
     headers={'content-type':'application/x-www-form-urlencoded'}

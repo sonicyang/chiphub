@@ -30,6 +30,8 @@ urlpatterns = [
     url(r'^about_us/$', about_us),
 
     url(r'^login/$', login_page),
+    url(r'^google_login/$', google_login),
+    url(r'^google_callback/$', google_callback),
     url(r'^smoke_callback/$', smoke_callback),
 
     url(r'^order_digikey/$', order_digikey),
