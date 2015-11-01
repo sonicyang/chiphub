@@ -60,13 +60,15 @@ def create_session(request, uuid):
             request.session.modified = True
         return False
 
-def create_empty_user(uuid, service_provider, access_token, **additional):
+def create_empty_user(unique, service_provider, access_token, **additional):
+    uuid = generate_static_uuid(unique)
+
     try:
         user = Users.objects.get(uuid = uuid)
         if user.username is None:
             user.delete()
         else:
-            return False
+            return None
     except ObjectDoesNotExist:
         pass
 
@@ -79,12 +81,12 @@ def create_empty_user(uuid, service_provider, access_token, **additional):
 
     user.save()
 
-    return True
+    return uuid
 
 def register_data(user_data):
-    empty_user = Users.objects.get(email = user_data.email)
+    empty_user = Users.objects.get(uuid = user_data.uuid)
 
-    assert empty_user.token == None
+    assert empty_user.username == None
 
     empty_user.token = generate_random_uuid()
     empty_user.email = user_data.email
@@ -125,5 +127,5 @@ def get_session_token(request):
     else:
         return ''
 
-def get_user_data(user_token):
-    return Users.objects.filter(token = user_token)
+def get_user_data(request):
+    return Login_Sessions.objects.filter(token = get_session_token(request)).user
