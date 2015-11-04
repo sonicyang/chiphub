@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>ChipHub | Home</title>
-	<meta name="author" content="Alvaro Trigo Lopez" />
-	<meta name="description" content="fullPage looping demo." />
-	<meta name="keywords"  content="fullpage,jquery,looping,loop,loopTop,loopBottom,demo" />
-	<meta name="Resource-type" content="Document" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ChipHub | Home</title>
+    <meta name="author" content="Alvaro Trigo Lopez" />
+    <meta name="description" content="fullPage looping demo." />
+    <meta name="keywords"  content="fullpage,jquery,looping,loop,loopTop,loopBottom,demo" />
+    <meta name="Resource-type" content="Document" />
 
     <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900,700,500' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="../jquery.fullPage.css" />
-	<link rel="stylesheet" type="text/css" href="examples.css" />
+    <link rel="stylesheet" type="text/css" href="../jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="examples.css" />
 
-	<!--[if IE]>
-		<script type="text/javascript">
-			 var console = { log: function() {} };
-		</script>
-	<![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+      var console = { log: function() {} };
+    </script>
+    <![endif]-->
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 
-	<script type="text/javascript" src="../jquery.fullPage.js"></script>
-	<script type="text/javascript" src="examples.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fullpage').fullpage({
-				sectionsColor: ['#FFF ', '#2C3E50', '#FFF'],
-				anchors: ['firstPage', 'secondPage', '3rdPage'],
-				menu: '#menu',
-				loopTop: true,
-				loopBottom: true
-			});
-		});
-	</script>
+    <script type="text/javascript" src="../jquery.fullPage.js"></script>
+    <script type="text/javascript" src="examples.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#fullpage').fullpage({
+          sectionsColor: ['#FFF ', '#2C3E50', '#FFF'],
+          anchors: ['firstPage', 'secondPage', '3rdPage'],
+          menu: '#menu',
+          loopTop: true,
+          loopBottom: true
+          });
+        });
+    </script>
 
-</head>
-<body>
-<div id="fullpage">
-	<div class="section" id="section0">
+  </head>
+  <body>
+    <div id="fullpage">
+      <div class="section" id="section0">
         <div class="overlay">
-            <h1>ChipHub</h1>
-		    <p> Order together , Be better</p>
-            <div id="btn-con">
-                <a class="btn-1 getbtn" href="http://merry.ee.ncku.edu.tw/~alanaudi/chiphub/aboutus">Get Started</a>
-            </div>
-            
+          <h1>ChipHub</h1>
+          <p> Order together , Be better</p>
+          <div id="btn-con">
+            <a class="btn-1 getbtn" href="http://merry.ee.ncku.edu.tw/~alanaudi/chiphub/aboutus">Get Started</a>
+          </div>
+
         </div> 
-	</div>
-	<div class="section" id="section1">
-		<div class="intro">
-			<h1>Service</h1>  <!-- 神置中  super container-->
-            
-		</div>
-	</div>
-	<div class="section" id="section2">
-		<div class="intro">
-			<h1>About Us</h1>
-			<p>ChipHub Contributors</p>
-		</div>
-	</div>
-</div>
-</body>
+      </div>
+      <div class="section" id="section1">
+        <div class="intro">
+          <h1>Service</h1>  <!-- 神置中  super container-->
+
+        </div>
+      </div>
+      <div class="section" id="section2">
+        <div class="intro">
+          <h1>About Us</h1>
+          <p>ChipHub Contributors</p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
