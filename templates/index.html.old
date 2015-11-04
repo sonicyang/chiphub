@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'css/index.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
