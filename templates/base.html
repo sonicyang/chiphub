@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="{% static 'css/base.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet" media="screen">
     {% block css %}
     
     {% endblock %}
@@ -18,58 +19,76 @@
     <div id="header" class="text-center">
         <h1> Chiphub</h1>
     </div>
-    <div class="row">
-        <aside id="sidebar" class="col-md-2">
-            <section>
-                <a href="/">
-                    <div class="sb-icon"><i class="material-icons">home</i></div>
-                    <div class="sb-text">
-                        <span href="/">Home</span><br />
-                        <span>CHIPHUB</span>
-                    </div>
-                    <div>{{login_username}}</div>
-                </a>
-            </section>
-            <section>
-                <a href="/chatroom">
-                    <div class="sb-icon"><i class="material-icons">mode_comment</i></div>
-                    <div class="sb-text">
-                        <span href="/">Chatroom</span><br />
-                        <span>Talk about components</span>
-                    </div>
-                </a>
-            </section>
-            <section>
-                <a href="/exchange">
-                    <div class="sb-icon"><i class="material-icons">autorenew</i></div>
-                    <div class="sb-text">
-                        <span href="/">Exchange</span><br />
-                        <span>Got somthing special?</span>
-                    </div>
-                </a>
-            </section>
-            <section>
-                <a href="/faq">
-                    <div class="sb-icon"><i class="material-icons">question_answer</i></div>
-                    <div class="sb-text">
-                        <span href="/">FAQ</span><br />
-                        <span>Problems?</span>
-                    </div>
-                </a>
-            </section>
-            <section>
-                <a href="/about_us">
-                    <div class="sb-icon"><i class="material-icons">group</i></div>
-                    <div class="sb-text">
-                        <span href="/">About Us</span><br />
-                        <span>Who are you?</span>
-                    </div>
-                </a>
-            </section>
-        </aside>
+    <div id="wrapper">
 
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="">
+                    <a href="/">
+                        <!--<div class="sb-icon"><i class="material-icons">home</i></div>-->
+                        <div class="sb-text">
+                            <span href="/">Home</span><br />
+                            <span>CHIPHUB</span>
+                        </div>
+                        <!--<div>{{login_username}}</div>-->
+                    </a>
+                </li>
+                <li>
+                    <a href="/chatroom/">
+                        <!--<div class="sb-icon"><i class="material-icons">mode_comment</i></div>-->
+                        <div class="sb-text">
+                            <span href="/">Chatroom</span><br />
+                            <span>Talk about components</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/exchange/">
+                        <!--<div class="sb-icon"><i class="material-icons">autorenew</i></div>-->
+                        <div class="sb-text">
+                            <span href="/">Exchange</span><br />
+                            <span>Got somthing special?</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/faq/">
+                        <!--<div class="sb-icon"><i class="material-icons">question_answer</i></div>-->
+                        <div class="sb-text">
+                            <span href="/">FAQ</span><br />
+                            <span>Problems?</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/about_us/">
+                        <!--<div class="sb-icon"><i class="material-icons">group</i></div>-->
+                        <div class="sb-text">
+                            <span href="/">About Us</span><br />
+                            <span>Who are you?</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% block content%}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <div class="row">
         <div id="content" class="col-md-10">
-            {% block content%}{% endblock %}
         </div>
     
     </div>
@@ -78,4 +97,16 @@
     </footer>
 </body>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 </html>
