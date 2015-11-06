@@ -1,0 +1,25 @@
+machine:
+
+  timezone:
+    Asia/Taipei # Set the timezone
+
+  python:
+    version:
+      2.7.10
+
+  # Override /etc/hosts
+  hosts:
+    c4labs.xyz: 127.0.0.1
+
+checkout:
+  pre:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  post:
+    - git submodule sync
+    - git submodule update --init # use submodules
+
+dependencies:
+  pre:
+    - pip install -r requirements.txt
+
+test:
