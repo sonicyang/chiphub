@@ -12,8 +12,6 @@ machine:
     c4labs.xyz: 127.0.0.1
 
 checkout:
-  pre:
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   post:
     - git submodule sync
     - git submodule update --init # use submodules
