@@ -23,3 +23,5 @@ dependencies:
     - pip install -r requirements.txt
 
 test:
+  pre:
+    - echo "No Test Now"
