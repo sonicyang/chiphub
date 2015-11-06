@@ -82,7 +82,7 @@ def smoke_callback(request):
             user.username = "smoke"
             user.default_shipping_address = "smoke"
             user.phone_number = "smoke"
-            user.roc_id = "smoke"
+            user.tw_id = "smoke"
             user.real_name = "smoke"
 
             auth.register_data(user)

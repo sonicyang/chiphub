@@ -42,7 +42,7 @@ class Users(models.Model):
     refresh_token = models.CharField(max_length=50, null=True)
     default_shipping_address = models.CharField(max_length=100, null=True)
     phone_number = models.CharField(max_length=20, null=True)
-    roc_id = models.CharField(max_length=10, null=True)
+    tw_id = models.CharField(max_length=10, null=True)
     real_name = models.CharField(max_length=10, null=True)
 
 class Login_Sessions(models.Model):
