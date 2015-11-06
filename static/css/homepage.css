@@ -266,6 +266,7 @@ p{
   background-position: top right, top left, bottom left, bottom right;
   background-size: 50% 50%;
   background-repeat: no-repeat;
+  background-image: -moz-radial-gradient(0% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -moz-radial-gradient(100% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -moz-radial-gradient(100% 0, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -moz-radial-gradient(0 0, circle, rgba(255, 255, 255, 0.9) 0px, rgba(255,255,255,0.9) 0px);
   background-image: -webkit-radial-gradient(0% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -webkit-radial-gradient(100% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -webkit-radial-gradient(100% 0, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), -webkit-radial-gradient(0 0, circle, rgba(255, 255, 255, 0.9) 0px, rgba(255,255,255,0.9) 0px);
   background-image: radial-gradient(0% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), radial-gradient(100% 100%, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), radial-gradient(100% 0, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px), radial-gradient(0 0, circle, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 0px);
 }
