@@ -9,9 +9,13 @@
     {% block css %}
     
     {% endblock %}
+
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>{% block title %}Chiphub{% endblock %}</title>
 </head>
 
@@ -80,7 +84,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/about_us/">
+                <a id="login_button" href="#">
                         <div class="sb-icon"><i class="material-icons">vpn_key</i></div>
                         <div class="sb-text">
                             <span href="/">Login</span><br />
@@ -109,6 +113,22 @@
         <div id="content" class="col-md-10">
         </div>
     
+    </div>
+
+    <div id="login_wrapper">
+        <div id="login_providers">
+            <div id="login_title">
+                Login
+            </div>
+            <hr />
+            <div id="login_options">
+            </div>
+            <hr />
+            <div id="login_footer">
+                Note: You will be redirected to other sites for authentication
+            </div>
+
+        </div>
     </div>
     <footer>
         
