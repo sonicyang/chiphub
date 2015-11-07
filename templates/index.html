@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>ChipHub | Home</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900,700,500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fullPage.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
@@ -49,15 +50,24 @@
       <div class="section" id="section1">
         <div class="intro">
           <h1>Service</h1>  <!-- 神置中  super container-->
-
-        </div>
-      </div>
-      <div class="section" id="section2">
-        <div class="intro">
-          <h1>About Us</h1>
-          <p>ChipHub Contributors</p>
+          <div class="row service-row">
+              <div class="col-md-4 service-item">
+                  Chiphub
+              </div>
+              <div class="col-md-4 service-item">
+                  Exchange
+              </div>
+              <div class="col-md-4 service-item">
+                  Chatroom
+              </div>
+          </div>
         </div>
       </div>
     </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

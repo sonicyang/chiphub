@@ -63,10 +63,14 @@ body{
 }
 h1{
 	font-size: 6em;
+    height: 100px;
 }
 p{
 	font-size: 2em;
     font-family: 'Verdana' ,sans-serif;
+}
+.intro{
+    height: 100%;
 }
 .intro p{
 	width: 50%;
@@ -383,4 +387,13 @@ p{
 
 .btn-1:hover:after {
   height: 100%;
+}
+.service-row{
+  height: calc(100% - 100px)
+}
+.service-item{
+  position: relative;
+  height: 60%;
+  top: 20%;
+  padding: 0 5% 0 5%;
 }
