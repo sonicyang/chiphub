@@ -20,37 +20,31 @@ h1 {
     padding-top: 5px;
     color: #F0EED0; }
 
-#sidebar {
+#sidebar-wrapper {
   margin-top: 15px; }
-  #sidebar section {
+  #sidebar-wrapper section {
     width: 100%;
     height: 54px;
     text-align: center;
     margin-bottom: 5px; }
-    #sidebar section:hover {
-      background-color: #95AB63; }
-  #sidebar div {
+  #sidebar-wrapper div {
     display: inline-block;
     vertical-align: middle;
-    text-align: left; }
-  #sidebar .sb-icon {
-    position: relative;
-    height: 24px;
+    text-align: left;
+    line-height: 20px; }
+  #sidebar-wrapper .sb-icon {
     width: 24px;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-right: 5px;
     margin-top: 10px;
-    margin-bottom: 20px;
-    color: #10222B; }
-  #sidebar .sb-text {
+    margin-bottom: 20px; }
+  #sidebar-wrapper .sb-text {
     position: relative;
-    height: 44px;
-    width: calc(100% - 45px);
-    color: #10222B; }
-    #sidebar .sb-text span {
+    width: calc(100% - 65px); }
+    #sidebar-wrapper .sb-text span {
       font-weight: 500;
       font-size: 12px; }
-      #sidebar .sb-text span:first-child {
+      #sidebar-wrapper .sb-text span:first-child {
         font-weight: bold;
         font-size: 15px; }
 
