@@ -58,9 +58,10 @@ h1 {
   width: 100%;
   top: 0px;
   left: 0px;
-  z-index: 20000;
+  z-index: 10000;
   display: none; }
   #login_wrapper #login_providers {
+    z-index: 10001;
     background-color: black;
     position: relative;
     height: 250px;
@@ -83,14 +84,19 @@ h1 {
       color: #DDD;
       width: 100%;
       height: 150px; }
+      #login_wrapper #login_providers #login_options #login_google {
+        background-image: url("../images/google_login.png");
+        background-size: contain;
+        width: 180px;
+        height: 45px; }
     #login_wrapper #login_providers #login_footer {
       font-size: 10px;
       color: #999;
       width: 100%;
       height: 30px; }
     #login_wrapper #login_providers hr {
-      margin-top: 0px;
-      margin-bottom: 0px; }
+      margin-top: 5px;
+      margin-bottom: 5px; }
 
 footer {
   height: 5%;
