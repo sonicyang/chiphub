@@ -79,6 +79,7 @@ p{
 }
 .section{
 	text-align:center;
+    overflow: hidden;
 }
 #menu li {
 	display:inline-block;
