@@ -22,8 +22,11 @@ def isLogin(request):
 def login_error(request):
     return HttpResponse("ERROR!")
 
-def login_page(request):
-    return render(request, 'login.html')
+def logout(request):
+    if isLogin(request):
+        auth.close_session(request, auth.get_session_token(request))
+
+    return redirect('chatroom.views.index')
 
 def update_profile(request):
     if isLogin(request):

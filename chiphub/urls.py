@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^update_profile/$', update_profile),
     url(r'^islogin/$', isLogin),
 
-    url(r'^login/$', login_page),
+    url(r'^logout/$', logout),
     url(r'^google_login/$', google_login),
     url(r'^google_callback/$', google_callback),
     url(r'^smoke_callback/$', smoke_callback),

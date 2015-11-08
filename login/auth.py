@@ -61,6 +61,17 @@ def create_session(request, uuid):
             request.session.modified = True
         return False
 
+def close_session(request, token):
+    if hasSession(token):
+        Login_Sessions.objects.get(token = token).delete()
+        del request.session['token']
+        return True
+    else:
+        if 'token' in request.session:
+            del request.sesion['token']
+            request.session.modified = True
+        return False
+
 def create_empty_user(uuid, service_provider, access_token, **additional):
     try:
         user = Users.objects.get(uuid = uuid)
@@ -115,6 +126,13 @@ def hasProfile(uuid):
     try:
         user = Users.objects.get(uuid = uuid)
         User_Profiles.objects.get(user = user)
+        return True
+    except ObjectDoesNotExist:
+        return False
+
+def hasSession(token):
+    try:
+        Login_Sessions.objects.get(token = token)
         return True
     except ObjectDoesNotExist:
         return False
