@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'css/faq.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block content %}
+<div id="profile_form_wrapper">
+    <form target="">
+        Username:<input id="username" type="text" value="{{ username }}" /><br />
+        Email:<input id="email" type="text" value="{{ email }}" /><br />
+        Real Name:<input id="realname" type="text" value="{{ realname }}" /><br />
+        Shipping Address:<input id="shipping_address" type="text" value="{{ shipping_address }}" /><br />
+        Phone:<input id="phone" type="text" value="{{ phone }}" /><br />
+        ID:<input id="id" type="text" value="{{ id }}" /><br />
+        <input type="submit" />
+    </form>
+</div>
+{% endblock %}

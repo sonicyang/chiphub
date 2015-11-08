@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^chatroom/$', chatroom),
     url(r'^exchange/$', exchange),
     url(r'^about_us/$', about_us),
+    url(r'^profile/$', profile),
 
     url(r'^login/$', login_page),
     url(r'^google_login/$', google_login),

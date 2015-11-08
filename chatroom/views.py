@@ -18,6 +18,9 @@ def retreive(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def profile(request):
+    return render(request, 'profile.html')
+
 def about_us(request):
     return render(request, 'about_us.html')
 
