@@ -1,4 +1,5 @@
 from login.models import Users
+from login.models import User_Profiles
 from login.models import Login_Sessions
 from django.core.exceptions import ObjectDoesNotExist
 import requests
@@ -19,7 +20,7 @@ def validate_uuid4(uuid_string):
     return True
 
 def generate_static_uuid(secret):
-    return uuid.uuid4(uuid.NAMESPACE_DNS, str(secret))
+    return uuid.uuid5(uuid.NAMESPACE_DNS, str(secret))
 
 def generate_random_uuid():
     url = "https://api.random.org/json-rpc/1/invoke"
@@ -41,16 +42,16 @@ def generate_random_uuid():
 
     assert response['id'] == ID
     assert 'result' in response
-    assert validate_uuid4(response['result']['random']['data'])
+    assert validate_uuid4(response['result']['random']['data'][0])
 
-    return response['result']['random']['data']
+    return response['result']['random']['data'][0]
 
 def create_session(request, uuid):
     if hasUser(uuid):
-        login_session = Login_Sessions(uuid = generate_random_uuid(),
-                                       user = Users.objects.filter(uuid = uuid)
+        login_session = Login_Sessions(token = generate_random_uuid(),
+                                       user = Users.objects.get(uuid = uuid)
                                        )
-        request.session['token'] = login_session.uuid
+        request.session['token'] = login_session.token
 
         login_session.save()
         return True
@@ -60,22 +61,15 @@ def create_session(request, uuid):
             request.session.modified = True
         return False
 
-def create_empty_user(unique, service_provider, access_token, **additional):
-    uuid = generate_static_uuid(unique)
-
+def create_empty_user(uuid, service_provider, access_token, **additional):
     try:
         user = Users.objects.get(uuid = uuid)
-        if user.username is None:
-            user.delete()
-        else:
-            return None
-    except ObjectDoesNotExist:
+        user.delete()
+    except:
         pass
 
-    user = Users(uuid = uuid,
-                 login_service = service_provider,
-                 access_token = access_token
-                 )
+    user = Users(uuid = uuid, login_service = service_provider, access_token = access_token)
+
     if 'refresh_token' in additional:
         user.refresh_token = additional['refresh_token']
 
@@ -83,27 +77,23 @@ def create_empty_user(unique, service_provider, access_token, **additional):
 
     return uuid
 
-def register_data(user_data):
-    empty_user = Users.objects.get(uuid = user_data.uuid)
+def register_data(uuid, user_profile):
+    empty_user = Users.objects.get(uuid = uuid)
 
-    assert empty_user.username == None
+    try:
+        profile = User_Profiles.objects.get(user = empty_user)
 
-    empty_user.token = generate_random_uuid()
-    empty_user.email = user_data.email
-    empty_user.username = user_data.username
-    empty_user.default_shipping_address = user_data.default_shipping_address
-    empty_user.phone_number = user_data.phone_number
-    empty_user.roc_id = user_data.roc_id
-    empty_user.real_name = user_data.real_name
-    empty_user.save()
+        profile.delete()
+    except:
+        pass
+
+    user_profile.user = empty_user
+    user_profile.save()
 
 def hasUser(uuid):
     try:
-        user = Users.objects.get(uuid = uuid)
-        if user.username is not None:
-            return True
-        else:
-            return False
+        Users.objects.get(uuid = uuid)
+        return True
     except ObjectDoesNotExist:
         return False
 
@@ -111,8 +101,8 @@ def isLogin(request):
     if 'token' not in request.session:
         return False
     else:
-        if validate_uuid4(request.sesion['token']):
-            if Login_Sessions.objects.filter(uuid = request.session['token']) is not None:
+        if validate_uuid4(request.session['token']):
+            if Login_Sessions.objects.filter(token = request.session['token']) is not None:
                 return True
             else:
                 return False
@@ -121,6 +111,14 @@ def isLogin(request):
             request.session.modified = True
             return False
 
+def hasProfile(uuid):
+    try:
+        user = Users.objects.get(uuid = uuid)
+        User_Profiles.objects.get(user = user)
+        return True
+    except ObjectDoesNotExist:
+        return False
+
 def get_session_token(request):
     if isLogin(request):
         return request.session['token']
@@ -128,4 +126,4 @@ def get_session_token(request):
         return ''
 
 def get_user_data(request):
-    return Login_Sessions.objects.filter(token = get_session_token(request)).user
+    return Login_Sessions.objects.get(token = get_session_token(request)).user

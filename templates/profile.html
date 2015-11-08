@@ -7,13 +7,13 @@
 
 {% block content %}
 <div id="profile_form_wrapper">
-    <form target="">
-        Username:<input id="username" type="text" value="{{ username }}" /><br />
-        Email:<input id="email" type="text" value="{{ email }}" /><br />
-        Real Name:<input id="realname" type="text" value="{{ realname }}" /><br />
-        Shipping Address:<input id="shipping_address" type="text" value="{{ shipping_address }}" /><br />
-        Phone:<input id="phone" type="text" value="{{ phone }}" /><br />
-        ID:<input id="id" type="text" value="{{ id }}" /><br />
+    <form action="/update_profile" method='get'>
+        Username:<input name="username" type="text" value="{{ username }}" /><br />
+        Email:<input name="email" type="text" value="{{ email }}" /><br />
+        Real Name:<input name="realname" type="text" value="{{ realname }}" /><br />
+        Shipping Address:<input name="shipping_address" type="text" value="{{ shipping_address }}" /><br />
+        Phone:<input name="phone" type="text" value="{{ phone }}" /><br />
+        ID:<input name="id" type="text" value="{{ id }}" /><br />
         <input type="submit" />
     </form>
 </div>

@@ -32,19 +32,28 @@ class Santilizer(object):
 
         return False
 
+
 class Users(models.Model):
+    id = models.AutoField(primary_key=True)
     uuid = models.CharField(max_length=40, unique=True)
     token = models.CharField(max_length=40, null=True)
-    username = models.CharField(max_length=20, null=True)
-    email = models.CharField(max_length=50)
     login_service = models.CharField(max_length=20)
     access_token = models.CharField(max_length=50)
     refresh_token = models.CharField(max_length=50, null=True)
-    default_shipping_address = models.CharField(max_length=100, null=True)
-    phone_number = models.CharField(max_length=20, null=True)
-    tw_id = models.CharField(max_length=10, null=True)
-    real_name = models.CharField(max_length=10, null=True)
+
+
+class User_Profiles(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Users)
+    username = models.CharField(max_length=20)
+    email = models.CharField(max_length=50)
+    default_shipping_address = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=20)
+    tw_id = models.CharField(max_length=10)
+    real_name = models.CharField(max_length=10)
+
 
 class Login_Sessions(models.Model):
+    id = models.AutoField(primary_key=True)
     token = models.CharField(max_length=40)
     user = models.ForeignKey(Users)

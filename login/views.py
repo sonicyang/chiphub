@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from login import auth
 from login.models import Users
+from login.models import User_Profiles
 from django.http import HttpResponseRedirect
 import requests
 import json
@@ -24,6 +25,22 @@ def login_error(request):
 def login_page(request):
     return render(request, 'login.html')
 
+def update_profile(request):
+    if isLogin(request):
+        uuid = auth.get_user_data(request).uuid
+
+        user_profile = User_Profiles(username = request.GET['username'],
+                                     email = request.GET['email'],
+                                     default_shipping_address = request.GET['shipping_address'],
+                                     phone_number = request.GET['phone'],
+                                     real_name = request.GET['realname'],
+                                     tw_id = request.GET['id']
+                                     )
+
+    auth.register_data(uuid, user_profile)
+
+    return redirect('chatroom.views.index')
+
 def google_login(request):
     token_request_uri = "https://accounts.google.com/o/oauth2/auth"
     response_type = "code"
@@ -43,7 +60,7 @@ def google_login(request):
 
 def google_callback(request):
     if 'error' in request.GET:
-            return redirect("login.views.login_error")
+        return redirect("login.views.login_error")
 
     access_token_uri = 'https://accounts.google.com/o/oauth2/token'
     redirect_uri = "http://127.0.0.1:8000/google_callback"
@@ -61,9 +78,23 @@ def google_callback(request):
     token = json.loads(r.text)
 
     r = requests.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token={accessToken}".format(accessToken=token['access_token']))
-    print(r.text)
 
-    return HttpResponse("Success!")
+    payload = json.loads(r.text)
+
+    uuid = auth.generate_static_uuid(payload['id'])
+
+    if auth.hasUser(uuid) and auth.hasProfile(uuid):
+        if auth.create_session(request, uuid):
+            return redirect("chatroom.views.index")
+        else:
+            return redirect("login.views.login_error")
+    else:
+        if auth.create_empty_user(uuid, "GOOGLE", token['access_token']):
+            if auth.create_session(request, uuid):
+                return render(request, "profile.html", {'realname' : payload['name'],
+                                                        'email' : payload['email']})
+        return redirect("login.views.login_error")
+
 
 def smoke_callback(request):
     email = "smoke@cc.xyz"
