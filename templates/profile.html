@@ -2,19 +2,59 @@
 {% load staticfiles %}
 
 {% block css %}
-<link href="{% static 'css/faq.css' %}" rel="stylesheet" media="screen">
+<link href="{% static 'css/profile.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
 {% block content %}
 <div id="profile_form_wrapper">
-    <form action="/update_profile" method='get'>
-        Username:<input name="username" type="text" value="{{ username }}" /><br />
-        Email:<input name="email" type="text" value="{{ email }}" /><br />
-        Real Name:<input name="realname" type="text" value="{{ realname }}" /><br />
-        Shipping Address:<input name="shipping_address" type="text" value="{{ shipping_address }}" /><br />
-        Phone:<input name="phone" type="text" value="{{ phone }}" /><br />
-        ID:<input name="id" type="text" value="{{ id }}" /><br />
-        <input type="submit" />
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-md-3" for="username">Username:</label>
+            <div class="col-md-9">
+                <input type="username" class="form-control" id="username" name="username" value="{{ username }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3" for="email">Email:</label>
+            <div class="col-md-9">
+                <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" value="{{ email }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3" for="realname">Real Name:</label>
+            <div class="col-md-9">
+                <input type="realname" class="form-control" id="realname" name="realname" value="{{ realname }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3" for="shipping_address">Shipping Address:</label>
+            <div class="col-md-9">
+                <input type="shipping_address" class="form-control" id="shipping_address" name="shipping_address" value="{{ shipping_address }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3" for="phone">Phone:</label>
+            <div class="col-md-9">
+                <input type="phone" class="form-control" id="phone" name="phone" value="{{ phone }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3" for="id">ID:</label>
+            <div class="col-md-9">
+                <input type="id" class="form-control" id="id" name="id" value="{{ id }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
     </form>
 </div>
 {% endblock %}
