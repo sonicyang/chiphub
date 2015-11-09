@@ -29,20 +29,21 @@ def logout(request):
     return redirect('chatroom.views.index')
 
 def update_profile(request):
-    if isLogin(request):
+    if auth.isLogin(request):
         uuid = auth.get_user_data(request).uuid
+        if auth.hasProfile(uuid):
 
-        user_profile = User_Profiles(username = request.GET['username'],
-                                     email = request.GET['email'],
-                                     default_shipping_address = request.GET['shipping_address'],
-                                     phone_number = request.GET['phone'],
-                                     real_name = request.GET['realname'],
-                                     tw_id = request.GET['id']
-                                     )
+            user_profile = User_Profiles(username = request.GET['username'],
+                                        email = request.GET['email'],
+                                        default_shipping_address = request.GET['shipping_address'],
+                                        phone_number = request.GET['phone'],
+                                        real_name = request.GET['realname'],
+                                        tw_id = request.GET['id']
+                                        )
 
-    auth.register_data(uuid, user_profile)
+        auth.register_data(uuid, user_profile)
 
-    return redirect('chatroom.views.index')
+        return redirect('chatroom.views.index')
 
 def google_login(request):
     token_request_uri = "https://accounts.google.com/o/oauth2/auth"
@@ -99,31 +100,14 @@ def google_callback(request):
         return redirect("login.views.login_error")
 
 
-def smoke_callback(request):
-    email = "smoke@cc.xyz"
-    uuid = auth.generate_static_uuid(email)
-
-    if auth.hasUser(uuid):
-        if auth.create_session(request, uuid):
-            return redirect("chatroom.views.index")
-        else:
-            return redirect("login.views.login_error")
-    else:
-        if auth.create_empty_user(uuid, "SMOKE", "ASDF", refresh_token = "FDA"):
-            #XXX: should be done in a profile edit page
-            user = Users()
-            user.email="smoke@cc.xyz"
-            user.username = "smoke"
-            user.default_shipping_address = "smoke"
-            user.phone_number = "smoke"
-            user.tw_id = "smoke"
-            user.real_name = "smoke"
-
-            auth.register_data(user)
-            if auth.authuicate(request, uuid):
-                return redirect("chatroom.views.index")
-            else:
-                return redirect("login.views.login_error")
-        else:
-            return redirect("login.views.login_error")
-
+def profile(request):
+    if isLogin(request):
+        uuid = auth.get_user_data(request).uuid
+        if auth.hasProfile(uuid):
+            profile = auth.get_user_profile(request)
+            return render(request, "profile.html", {'realname' : profile.real_name,
+                                                    'email' : profile.email,
+                                                    'username' : profile.username,
+                                                    'shipping_address' : profile.default_shipping_address,
+                                                    'id' : profile.tw_id,
+                                                    'phone' : profile.phone_number})

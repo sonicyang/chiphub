@@ -145,3 +145,7 @@ def get_session_token(request):
 
 def get_user_data(request):
     return Login_Sessions.objects.get(token = get_session_token(request)).user
+
+def get_user_profile(request):
+    user = Login_Sessions.objects.get(token = get_session_token(request)).user
+    return User_Profiles.objects.get(user = user)

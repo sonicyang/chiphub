@@ -36,7 +36,6 @@ urlpatterns = [
     url(r'^logout/$', logout),
     url(r'^google_login/$', google_login),
     url(r'^google_callback/$', google_callback),
-    url(r'^smoke_callback/$', smoke_callback),
 
     url(r'^order_digikey/$', order_digikey),
 ]
