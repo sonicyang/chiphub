@@ -72,6 +72,13 @@ p{
 .intro{
         height: 100%;
 }
+.intro h1 {
+        margin-top: 5%;
+}
+.intro hr {
+        size: 5px; 
+        width: 90%;
+}
 .intro p{
         width: 50%;
         margin: 0 auto;
@@ -297,8 +304,8 @@ p{
 
 }
 
-#section1 h1 {
-        color: #FFF;
+.section h1 {
+        color: #2C3E50 ;
 }
 
 /*=========   button 1 ============
@@ -347,27 +354,27 @@ transition: all 0.3s ease-out;
 /* GENERAL BUTTON STYLING 
 .getbtn,
 .getbtn::after {
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
+-webkit-transition: all 0.3s;
+-moz-transition: all 0.3s;
+-o-transition: all 0.3s;
+transition: all 0.3s;
 }
 
 .getbtn {
-        width: 20%;
-        height:100%;
-        background: none;
-        border: 3px solid #2C3E50;
-        border-radius: 5px;
-        color: #2C3E50;
-        display: block;
-        font-size: 1.6em;
-        font-weight: bold;
-        margin: 1em auto;
-        margin-top: 5em;
-        padding: 8px 24px;
-        position: relative;
-        text-transform: uppercase;
+width: 20%;
+height:100%;
+background: none;
+border: 3px solid #2C3E50;
+border-radius: 5px;
+color: #2C3E50;
+display: block;
+font-size: 1.6em;
+font-weight: bold;
+margin: 1em auto;
+margin-top: 5em;
+padding: 8px 24px;
+position: relative;
+text-transform: uppercase;
 }
 
 .getbtn::before,
@@ -396,24 +403,44 @@ transition: all 0.3s ease-out;
         height: 100%;
 }
 .service-row{
-        height: calc(100% - 100px);
-        margin: 0 5% 0 5%;
+        height: calc(100% - 80px);
+        margin: -7% 5% 0 5%;
 }
 .service-item{
         position: relative;
         height: 60%;
+        width: 30%;
+        margin: 1.65%;
         top: 20%;
         padding-left:15px;
         /*padding: 0 2% 0 2%;*/
-        background-clip:content-box;
-        background-color: #5B76B4;
+        /*background-clip:content-box;*/
+        /* Material Card */
+        box-sizing: border-box;
+        background-color: #FFFFFF;
+
+        border-top: 0px solid #98AEE2;
+        border-radius: 3px;
+        box-shadow: 5px 3px 3px 0 rgba(0, 0, 0, 0.26);
 }
-
-
+#header-service {
+    color: #FFFFFF;
+}
+.service-item h1,h2{
+        font-family: Verdana;
+        color: #2C3E50;
+}
+.service-item h1 {
+        font-size: 30px;
+}
+.service-item h2 {
+        font-size: 30px;
+}
 button{
         background:transparent;
         color:#2C3E50;
         border: 5px solid #2C3E50;
+        border-radius: 1%;
         position:relative;
         height:60px;
         font-size:1.6em;
@@ -448,4 +475,6 @@ button:hover:before,button:hover:after{
         transition:800ms ease all;
 }
 
+.col-md-4 {
 
+}
