@@ -432,9 +432,12 @@ text-transform: uppercase;
 }
 .service-item h1 {
         font-size: 30px;
+        margin-bottom: -20px;
+        margin-top: 65px;
 }
 .service-item h2 {
         font-size: 30px;
+        margin-top: 30px;
 }
 button{
         background:transparent;
@@ -473,8 +476,4 @@ button:after{
 button:hover:before,button:hover:after{
         width:100%;
         transition:800ms ease all;
-}
-
-.col-md-4 {
-
 }
