@@ -425,10 +425,13 @@ text-transform: uppercase;
 }
 #header-service {
     color: #FFFFFF;
+    font-family: Verdana , wt011;
 }
+
 .service-item h1,h2{
-        font-family: Verdana;
+        font-family: Verdana, wt011;
         color: #2C3E50;
+        font-weight: 400;
 }
 .service-item h1 {
         font-size: 30px;
