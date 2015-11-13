@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.conf import settings
 from login import auth
 from login.models import Users
 from login.models import User_Profiles
@@ -50,6 +51,8 @@ def google_login(request):
     response_type = "code"
     client_id = keys.GOOGLE_CLIENT_ID
     redirect_uri = "http://127.0.0.1:8000/google_callback"
+    if settings.DEBUG == True:
+        redirect_uri = "http://" + request.META['HTTP_HOST'] + "/google_callback"
     scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
 
     url = "{token_request_uri}?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}".format(
@@ -68,6 +71,8 @@ def google_callback(request):
 
     access_token_uri = 'https://accounts.google.com/o/oauth2/token'
     redirect_uri = "http://127.0.0.1:8000/google_callback"
+    if settings.DEBUG == True:
+        redirect_uri = "http://" + request.META['HTTP_HOST'] + "/google_callback"
 
     params = {
         'code':request.GET['code'],
