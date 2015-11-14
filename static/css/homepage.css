@@ -483,3 +483,6 @@ button:hover:before,button:hover:after{
         width:100%;
         transition:800ms ease all;
 }
+#justfont-badge{
+    display: none !important;
+}
