@@ -407,8 +407,9 @@ text-transform: uppercase;
         margin: -7% 5% 0 5%;
 }
 .service-item{
+        color: #2C3E5;0
         position: relative;
-        height: 60%;
+        height: 65%;
         width: 30%;
         margin: 1.65%;
         top: 20%;
@@ -424,12 +425,11 @@ text-transform: uppercase;
         box-shadow: 5px 3px 3px 0 rgba(0, 0, 0, 0.26);
 }
 #header-service {
-    color: #FFFFFF;
-    font-family: Verdana , wt011;
+    color: #FFF;
+    font-family: Verdana , wt014;
 }
-
 .service-item h1,h2{
-        font-family: Verdana, wt011;
+        font-family: Verdana, wt014;
         color: #2C3E50;
         font-weight: 400;
 }
@@ -441,6 +441,9 @@ text-transform: uppercase;
 .service-item h2 {
         font-size: 30px;
         margin-top: 30px;
+}
+.service small {
+  color: #425861;
 }
 button{
         background:transparent;
