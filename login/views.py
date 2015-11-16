@@ -32,15 +32,14 @@ def logout(request):
 def update_profile(request):
     if auth.isLogin(request):
         uuid = auth.get_user_data(request).uuid
-        if auth.hasProfile(uuid):
 
-            user_profile = User_Profiles(username = request.GET['username'],
-                                        email = request.GET['email'],
-                                        default_shipping_address = request.GET['shipping_address'],
-                                        phone_number = request.GET['phone'],
-                                        real_name = request.GET['realname'],
-                                        tw_id = request.GET['id']
-                                        )
+        user_profile = User_Profiles(username = request.GET['username'],
+                                    email = request.GET['email'],
+                                    default_shipping_address = request.GET['shipping_address'],
+                                    phone_number = request.GET['phone'],
+                                    real_name = request.GET['realname'],
+                                    tw_id = request.GET['id']
+                                    )
 
         auth.register_data(uuid, user_profile)
 
@@ -102,6 +101,7 @@ def google_callback(request):
             if auth.create_session(request, uuid):
                 return render(request, "profile.html", {'realname' : payload['name'],
                                                         'email' : payload['email']})
+
         return redirect("login.views.login_error")
 
 
