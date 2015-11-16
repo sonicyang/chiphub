@@ -101,6 +101,21 @@ def register_data(uuid, user_profile):
     user_profile.user = empty_user
     user_profile.save()
 
+def update_data(uuid, user_profile):
+    user = Users.objects.get(uuid = uuid)
+
+    profile = User_Profiles.objects.get(user = user)
+
+    profile.email = user_profile.email
+    profile.default_shipping_address = user_profile.default_shipping_address
+    profile.real_name = user_profile.real_name
+    profile.username = user_profile.username
+    profile.tw_id = user_profile.tw_id
+    profile.phone_number = user_profile.phone_number
+
+    profile.save()
+
+
 def hasUser(uuid):
     try:
         Users.objects.get(uuid = uuid)
