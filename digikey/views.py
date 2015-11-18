@@ -26,12 +26,13 @@ def reterieve_price(part_number):
     except AttributeError:
         return 0.0
 
-def create_order(user, parts):
+def create_order(user, profile, parts):
     unordered_group = Groups.objects.get_or_create(ordered=False)[0]
 
+
     order = Orders.objects.create(Orderer = user,
-                                  shipping_address = user.default_shipping_address,
-                                  phone_number = user.phone_number,
+                                  shipping_address = profile.default_shipping_address,
+                                  phone_number = profile.phone_number,
                                   group_id = unordered_group
                                   )
 
@@ -59,8 +60,9 @@ def order_digikey(request):
             response.status_code = 200
 
             user = auth.get_user_data(request)
+            profile = auth.get_user_profile(request)
 
-            create_order(user, parts)
+            create_order(user, profile, parts)
     else:
         response.status_code = 403
 
