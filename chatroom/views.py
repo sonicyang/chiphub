@@ -15,6 +15,9 @@ def retreive(request):
     payload = fil.read()
     return HttpResponse(payload)
 
+def order(request):
+    return render(request, 'order.html')
+
 def faq(request):
     return render(request, 'faq.html')
 

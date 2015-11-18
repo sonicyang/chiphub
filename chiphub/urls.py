@@ -22,8 +22,11 @@ from login.views import *
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', index),
+
     url(r'^append/$', append),
     url(r'^retreive/$', retreive),
+
+    url(r'^order/$', order),
     url(r'^faq/$', faq),
     url(r'^chatroom/$', chatroom),
     url(r'^exchange/$', exchange),
