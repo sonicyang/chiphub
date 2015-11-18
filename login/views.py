@@ -32,25 +32,28 @@ def logout(request):
 def update_profile(request):
     if auth.isLogin(request):
         uuid = auth.get_user_data(request).uuid
-        if auth.hasProfile(uuid):
 
-            user_profile = User_Profiles(username = request.GET['username'],
-                                        email = request.GET['email'],
-                                        default_shipping_address = request.GET['shipping_address'],
-                                        phone_number = request.GET['phone'],
-                                        real_name = request.GET['realname'],
-                                        tw_id = request.GET['id']
-                                        )
+        user_profile = User_Profiles(username = request.GET['username'],
+                                    email = request.GET['email'],
+                                    default_shipping_address = request.GET['shipping_address'],
+                                    phone_number = request.GET['phone'],
+                                    real_name = request.GET['realname'],
+                                    tw_id = request.GET['id']
+                                    )
 
-        auth.register_data(uuid, user_profile)
+        if not auth.hasProfile(uuid):
+            auth.register_data(uuid, user_profile)
+            return redirect('chatroom.views.index')
+        else:
+            auth.update_data(uuid, user_profile)
+            return redirect('login.views.profile')
 
-        return redirect('chatroom.views.index')
 
 def google_login(request):
     token_request_uri = "https://accounts.google.com/o/oauth2/auth"
     response_type = "code"
     client_id = keys.GOOGLE_CLIENT_ID
-    redirect_uri = "http://127.0.0.1:8000/google_callback"
+    redirect_uri = "http://chipchub.c4labs.xyz/google_callback"
     if settings.DEBUG == True:
         redirect_uri = "http://" + request.META['HTTP_HOST'] + "/google_callback"
     scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
@@ -70,7 +73,7 @@ def google_callback(request):
         return redirect("login.views.login_error")
 
     access_token_uri = 'https://accounts.google.com/o/oauth2/token'
-    redirect_uri = "http://127.0.0.1:8000/google_callback"
+    redirect_uri = "http://chiphub.c4labs.xyz/google_callback"
     if settings.DEBUG == True:
         redirect_uri = "http://" + request.META['HTTP_HOST'] + "/google_callback"
 
@@ -102,6 +105,7 @@ def google_callback(request):
             if auth.create_session(request, uuid):
                 return render(request, "profile.html", {'realname' : payload['name'],
                                                         'email' : payload['email']})
+
         return redirect("login.views.login_error")
 
 
@@ -110,6 +114,7 @@ def profile(request):
         uuid = auth.get_user_data(request).uuid
         if auth.hasProfile(uuid):
             profile = auth.get_user_profile(request)
+
             return render(request, "profile.html", {'realname' : profile.real_name,
                                                     'email' : profile.email,
                                                     'username' : profile.username,
