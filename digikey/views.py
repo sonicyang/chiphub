@@ -4,7 +4,6 @@ import bs4
 import requests
 import json
 from login import auth
-from login.models import Users
 from digikey.models import Orders
 from digikey.models import Components
 from digikey.models import Groups
@@ -59,7 +58,7 @@ def order_digikey(request):
         else:
             response.status_code = 200
 
-            user = Users.objects.get(token = auth.get_session_token(request))
+            user = auth.get_user_data(request)
 
             create_order(user, parts)
     else:
