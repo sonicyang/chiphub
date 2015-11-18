@@ -24,6 +24,10 @@ def faq(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
+def progress(request):
+    return render(request, 'progress.html')
+
+
 def exchange(request):
     return render(request, 'exchange.html')
 

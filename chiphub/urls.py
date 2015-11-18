@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^faq/$', faq),
     url(r'^chatroom/$', chatroom),
     url(r'^exchange/$', exchange),
+    url(r'^progress/$', progress),
     url(r'^about_us/$', about_us),
     url(r'^profile/$', profile),
 

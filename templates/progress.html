@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'css/progress.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="downloader">
+    <div class="downloading-progress">
+      <div class="downloading-progress-bar" data-value="0" data-max="100"></div>
+    </div>
+    <div class="percentage"></div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
