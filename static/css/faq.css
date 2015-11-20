@@ -19,7 +19,7 @@ body {
       z-index: 2;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 3px;
-      font-family: Helvetica;
+      font-family: "source-han-sans-traditional";
       font-weight: 100; }
     body section .response {
       position: relative;
