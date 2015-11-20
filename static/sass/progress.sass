@@ -1,49 +1,34 @@
-@import url(http://fonts.googleapis.com/css?family=Exo+2:400,700,500,300)
-
-body
-  background-color: #F0F0F0
-  font-smoothing: antialiased
-
-.container
-  position: absolute
-  margin-top: 60px
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
-  width: 500px
-  height: 200px
-
-  .downloader
-    width: 450px
-
-    .downloading-progress
-      position: relative
-      float: left
-      width: 300px
-      height: 40px
-      background-color: rgba(0, 0, 0, 0.15)
-      padding: 5px
-      box-sizing: border-box
-      border-radius: 20px
-
-      .downloading-progress-bar
-        position: relative
-        width: 0%
-        height: 30px
-        border-radius: 15px
-        background-color: white
-
-    .percentage
-      background-color: #D9290B
-      border-radius: 20px
-      height: 40px
-      box-sizing: border-box
-      width: 50px
-      font-family: Arial, Helvetica, sans-serif
-      color: white
-      font-size: 15px
-      text-align: center
-      float: left
-      line-height: 40px !important
-      margin: 0 0 0 10px
+#countdown-wrap
+	width: 100%
+	height: 300px
+	padding: 20px
+	font-family: arial
+	#goal
+		font-size: 48px
+		text-align: right
+		width: 80%
+	#glass
+		width: 80%
+		height: 20px
+		background: #c7c7c7
+		border-radius: 10px
+		float: left
+		overflow: hidden
+		#progress
+			float: left
+			width: 16%
+			height: 20px
+			background: #AB2430
+			z-index: 333
+	.goal-stat
+		width: 20%
+		height: 30px
+		padding: 10px
+		float: left
+		margin: 0
+		.goal-number, .goal-label
+			display: block
+		.goal-number
+			font-weight: bold
+		.goal-stat:first-child
+			clear: left
