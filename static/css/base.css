@@ -8,18 +8,6 @@ h1 {
   margin-left: 0;
   margin-right: 0; }
 
-#header {
-  height: 5%;
-  min-height: 50px;
-  padding-top: 1px;
-  background-color: #10222B;
-  text-align: left;
-  position: relative; }
-  #header h1 {
-    padding-left: 20px;
-    padding-top: 5px;
-    color: #F0EED0; }
-
 #sidebar-wrapper {
   margin-top: 0; }
   #sidebar-wrapper section {

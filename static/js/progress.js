@@ -17,7 +17,7 @@ function CountDownTimer(dt, id)
 		if (distance < 0) {
 
 			clearInterval(timer);
-			document.getElementById(id).innerHTML = '0';
+			document.getElementById(id).innerHTML = '5';
 
 			return;
 		}
