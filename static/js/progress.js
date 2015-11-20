@@ -1,5 +1,7 @@
 $(document).ready(function() {
+
   function modifValues(){
+
     var val = $('.downloading-progress-bar').attr('data-value');
     if(val>=100){val=5;}
     var newVal = val*1+0.5;
@@ -7,9 +9,9 @@ $(document).ready(function() {
 
     $('.downloading-progress-bar').attr('data-value',newVal);
     $('.percentage').html(txt);
-    $('.downloading-progress-bar').css("width", txt);
+    $('.downloading-progress-bar').css  ("width", txt);
   }
 
   setInterval(function(){ modifValues(); },50);
 
-}
+});
