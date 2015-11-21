@@ -35,6 +35,17 @@ h1 {
       #sidebar-wrapper .sb-text span:first-child {
         font-weight: bold;
         font-size: 15px; }
+  #sidebar-wrapper .titular {
+    font-size: 40px;
+    font-weight: 400;
+    display: block;
+    font-family: "Orbitron", sans-serif !important;
+    height: 60px;
+    line-height: 60px;
+    margin: 0;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; }
 
 #container {
   background-color: green; }

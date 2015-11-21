@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900,700,500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="{% static 'css/base.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet" media="screen">
@@ -30,12 +31,19 @@
         <ul class="sidebar-nav">
           <li class="">
             <a href="/">
-              <div class="sb-icon"><i class="material-icons">home</i></div>
-              <div class="sb-text">
-                <span href="/">Home</span><br />
-                <span>CHIPHUB</span>
+              <div class="titular">
+                <span href="/">CHIPHUB</span><br />
               </div>
               <!--<div>{{login_username}}</div>-->
+            </a>
+          </li>
+          <li>
+            <a href="/progress/">
+              <div class="sb-icon"><i class="material-icons">shopping_cart</i></div>
+              <div class="sb-text">
+                <span href="/">Progress</span><br />
+                <span>Save Money</span>
+              </div>
             </a>
           </li>
           <li>
@@ -157,9 +165,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <script>
-$("#menu-toggle").click(function(e) {
-  e.preventDefault();
-  $("#wrapper").toggleClass("toggled");
-});
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
   </script>
 </html>
