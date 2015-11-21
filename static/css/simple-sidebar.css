@@ -55,8 +55,8 @@
       color: #EEE; }
       .sidebar-nav li a:hover {
         text-decoration: none;
-        color: #EEE;
-        background: black; }
+        color: #23231A;
+        background: #60E1E0; }
       .sidebar-nav li a:active, .sidebar-nav li a:focus {
         text-decoration: none; }
   .sidebar-nav > .sidebar-brand {
@@ -66,7 +66,7 @@
     .sidebar-nav > .sidebar-brand a {
       color: #EEE; }
       .sidebar-nav > .sidebar-brand a:hover {
-        color: #EEE;
+        color: #23231A;
         background: none; }
 
 @media (min-width: 768px) {

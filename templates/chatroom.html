@@ -8,7 +8,6 @@
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     </head>
     <body>
-      
       <h1 class="title">ChipHub Chat Room</h>
       <div class="wrapper">
           <nav id="nav" class="nav">
@@ -27,10 +26,8 @@
             <button id="send" class="send"></button>
           </div>
       </div>
-      
-     <!-- 
+     <!--
         <div id="chatroom">
-        
         </div>
         <input id="msg" type="text"></input>
         <button id="send">send</button>
@@ -51,7 +48,6 @@
         function refresh(){
             $.get("/retreive/",function(data){
                 a = data
-                
                 $("#chatroom").empty()
                 for (var i = 0; i < lastData.length; i++){
                     var key = lastData[i];
