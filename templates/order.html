@@ -15,60 +15,34 @@
         <div id="chip-list">
             <h2>Order</h2>
             <div class="form-group order">
-                <label class="col-md-2 control-label" for="">料號:</label>
-                <div class="col-md-4">
-                    <input type="pd" class="form-control pd">
+                <div class="col-md-7 order-item order-row">
+                    <div class="row">
+                        <label class="col-xs-3 control-label order-item" for="">料號:</label>
+                        <div class="col-xs-8 order-item">
+                            <input type="pd" class="form-control pd">
+                        </div>
+                    </div>
                 </div>
-                <label class="col-md-2 control-label" for="">數量:</label>
-                <div class="col-md-4">
-                    <input type="amounts" class="form-control amounts">
-                </div>
-            </div>
-            <div class="form-group order">
-                <label class="col-md-2 control-label" for="">料號:</label>
-                <div class="col-md-4">
-                    <input type="pd" class="form-control pd">
-                </div>
-                <label class="col-md-2 control-label" for="">數量:</label>
-                <div class="col-md-4">
-                    <input type="amounts" class="form-control amounts">
-                </div>
-            </div>
-            <div class="form-group order">
-                <label class="col-md-2 control-label" for="">料號:</label>
-                <div class="col-md-4">
-                    <input type="pd" class="form-control pd">
-                </div>
-                <label class="col-md-2 control-label" for="">數量:</label>
-                <div class="col-md-4">
-                    <input type="amounts" class="form-control amounts">
-                </div>
-            </div>
-            <div class="form-group order">
-                <label class="col-md-2 control-label" for="">料號:</label>
-                <div class="col-md-4">
-                    <input type="pd" class="form-control pd">
-                </div>
-                <label class="col-md-2 control-label" for="">數量:</label>
-                <div class="col-md-4">
-                    <input type="amounts" class="form-control amounts">
-                </div>
-            </div>
-            <div class="form-group order">
-                <label class="col-md-2 control-label" for="">料號:</label>
-                <div class="col-md-4">
-                    <input type="pd" class="form-control pd">
-                </div>
-                <label class="col-md-2 control-label" for="">數量:</label>
-                <div class="col-md-4">
-                    <input type="amounts" class="form-control amounts">
+                <div class="col-md-5 order-item order-row">
+                    <div class="row">
+                        <label class="col-xs-3 control-label order-item" for="">數量:</label>
+                        <div class="col-xs-3 order-item">
+                            <input type="amounts" class="form-control amounts">
+                        </div>
+                        <label class="col-xs-3 control-label order-item price" for="" >金額:</label>
+                        <label class="col-xs-3 control-label order-item" for="" >-</label>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn btn-default" onclick="add_chip()">Add</button>
+        <div class="form-group order">
+            <div class="col-xs-3">
+                <a id="order-button" type="button" class="btn btn-default" onclick="add_chip()">+</a>
             </div>
+            <label id="total" class="col-xs-8">
+                <span>Total</span>
+                <span id="total-price">-</span>
+            </label>
         </div>
         <hr/>
         <div class="form-group">

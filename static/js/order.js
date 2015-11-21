@@ -1,14 +1,26 @@
 function add_chip(){
-    var content = "<div class=\"form-group order\">\
-        <label class=\"col-md-2 control-label\" for=\"\">料號:</label>\
-            <div class=\"col-md-4\">\
-                <input type=\"pd\" class=\"form-control pd\">\
+    var content = "\
+            <div class=\"form-group order\">\
+                <div class=\"col-md-7 order-item order-row\">\
+                    <div class=\"row\">\
+                        <label class=\"col-xs-3 control-label order-item\" for=\"\">料號:</label>\
+                        <div class=\"col-xs-8 order-item\">\
+                            <input type=\"pd\" class=\"form-control pd\">\
+                        </div>\
+                    </div>\
+                </div>\
+                <div class=\"col-md-5 order-item order-row\">\
+                    <div class=\"row\">\
+                        <label class=\"col-xs-3 control-label order-item\" for=\"\">數量:</label>\
+                        <div class=\"col-xs-3 order-item\">\
+                            <input type=\"amounts\" class=\"form-control amounts\">\
+                        </div>\
+                        <label class=\"col-xs-3 control-label order-item price\" for=\"\" >金額:</label>\
+                        <label class=\"col-xs-3 control-label order-item\" for=\"\" >-</label>\
+                    </div>\
+                </div>\
             </div>\
-            <label class=\"col-md-2 control-label\" for=\"\">數量:</label>\
-            <div class=\"col-md-4\">\
-                <input type=\"amounts\" class=\"form-control amounts\">\
-            </div>\
-        </div>"
+    "
     $("#chip-list").append(content)
     $("#chip-list").append(content)
     $("#chip-list").append(content)
