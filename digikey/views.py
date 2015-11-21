@@ -103,3 +103,16 @@ def order_digikey(request):
         response.status_code = 403
 
     return response
+
+def get_current_rally(request):
+    unordered_group = Groups.objects.get_or_create(ordered=False)[0]
+
+    total = 0
+
+    for order in Orders.objects.get(group_id = unordered_group):
+        for component in order.components_set.all():
+            detail = Order_Details.get(order = order, component = component)
+
+            total += detail
+
+    return detail

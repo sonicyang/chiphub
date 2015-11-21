@@ -43,4 +43,5 @@ urlpatterns = [
 
     url(r'^order_digikey/$', order_digikey),
     url(r'^price_digikey/$', get_digikey_price),
+    url(r'^rally_digikey/$', get_current_rally),
 ]
