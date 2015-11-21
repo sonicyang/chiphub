@@ -5,12 +5,6 @@ class Groups(models.Model):
     ordered = models.BooleanField(default=False)
     orderdate = models.DateField(null=True)
 
-class Components(models.Model):
-    part_number = models.CharField(max_length = 40)
-    # weight = models.IntegerField('Weight of Component in grams')
-    unit_price = models.FloatField("Unit price in TWD")
-    quantity = models.IntegerField()
-
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
     shipping_address = models.CharField(max_length = 100)
@@ -18,4 +12,14 @@ class Orders(models.Model):
     sent = models.BooleanField(default=False)
     sent_date = models.DateField(null=True)
     group_id = models.ForeignKey(Groups)
-    compoents_id = models.ManyToManyField(Components)
+
+class Components(models.Model):
+    part_number = models.CharField(max_length = 40)
+    # weight = models.IntegerField('Weight of Component in grams')
+    unit_price = models.FloatField("Unit price in TWD")
+    associated_order = models.ManyToManyField(Orders, through='Order_Details')
+
+class Order_Details(models.Model):
+    quantity = models.IntegerField()
+    component = models.ForeignKey(Components)
+    order = models.ForeignKey(Orders)

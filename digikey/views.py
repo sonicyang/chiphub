@@ -1,4 +1,5 @@
-# from django.shortcuts import render
+ # coding= utf-8
+#from django.shortcuts import render
 from django.http import HttpResponse
 import bs4
 import requests
@@ -7,6 +8,7 @@ from login import auth
 from digikey.models import Orders
 from digikey.models import Components
 from digikey.models import Groups
+from digikey.models import Order_Details
 
 def reterieve_html(url):
     try:
@@ -22,7 +24,7 @@ def reterieve_price(part_number):
     html = reterieve_html('http://www.digikey.tw/product-search/zh?vendor=0&keywords=' + part_number)
     soup = bs4.BeautifulSoup(html, 'html.parser')
 
-    no_stocking = "非庫存貨" in str(soup.select(".product-details-feedback")[0].contents[0])
+    no_stocking = "非庫存貨".encode("utf-8") in str(soup.select(".product-details-feedback")[0].contents[0])
 
     try:
         min_qty = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[0].get_text())
@@ -46,14 +48,18 @@ def create_order(user, profile, parts):
                                   )
 
     for part in parts:
-        comp = Components(part_number=part[0],
-                          order_id = order,
-                          quantity = int(part[1]),
-                          unit_price = float(part[2])
-                          )
-        comp.save()
+        comp = Components.objects.get_or_create(part_number=part[0],defaults={
+                                                "order_id" : order,
+                                                "unit_price" : float(part[2])}
+                                                )
 
-def get_digikey_prices(request):
+        od = Order_Details(quantity = int(part[1]),
+                           component = comp,
+                           order = order)
+
+        od.save()
+
+def get_digikey_price(request):
     #XXX: should user POST
     if auth.isLogin(request):
         parts = request.GET['order_list'].split(',')
