@@ -2,6 +2,7 @@
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0. */
+/*60E1E0 */
 /* Toggle Styles */
 #wrapper {
   position: relative;
@@ -47,6 +48,9 @@
   margin: 0;
   padding: 0;
   list-style: none; }
+  .sidebar-nav hr {
+    margin: 0px 0 5px 0;
+    width: 100%; }
   .sidebar-nav li {
     line-height: 40px; }
     .sidebar-nav li a {
@@ -55,8 +59,8 @@
       color: #EEE; }
       .sidebar-nav li a:hover {
         text-decoration: none;
-        color: #23231A;
-        background: #60E1E0; }
+        color: #F1F4F1;
+        background: rgba(96, 227, 224, 0.4); }
       .sidebar-nav li a:active, .sidebar-nav li a:focus {
         text-decoration: none; }
   .sidebar-nav > .sidebar-brand {
@@ -66,7 +70,7 @@
     .sidebar-nav > .sidebar-brand a {
       color: #EEE; }
       .sidebar-nav > .sidebar-brand a:hover {
-        color: #23231A;
+        color: #F1F4F1;
         background: none; }
 
 @media (min-width: 768px) {
