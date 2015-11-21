@@ -42,4 +42,5 @@ urlpatterns = [
     url(r'^google_callback/$', google_callback),
 
     url(r'^order_digikey/$', order_digikey),
+    url(r'^price_digikey/$', get_digikey_price),
 ]

@@ -62,7 +62,6 @@ class Google_Oauth(oauth.oauth):
 
     def get_userdata_and_uuid(self, access_token, request):
         r = requests.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token={accessToken}".format(accessToken = access_token))
-        #XXX: will fail if access token expired
 
         payload = json.loads(r.text)
 
