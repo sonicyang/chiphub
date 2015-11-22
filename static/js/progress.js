@@ -1,5 +1,16 @@
 CountDownTimer('12/20/2014 10:1 AM', 'countdown');
 CountDownTimer('12/20/2014 10:1 AM', 'newcountdown');
+var GOAL = 3000;
+var current_rally = 1000;
+//XXX: get current rally at the beginning
+
+
+$(document).ready(function(){
+    $.get("http://127.0.0.1:8000/about_us", function(data){
+        console.log(data)
+    })
+    update_price()
+})
 
 function CountDownTimer(dt, id)
 {
@@ -35,4 +46,12 @@ function CountDownTimer(dt, id)
 	timer = setInterval(showRemaining, 1000);
 }
 
-
+function update_price(){
+    var percent = current_rally / GOAL * 100;
+    $('#progress').animate({
+        width: (percent + "%")
+    }, 750);
+    //$("#progress").css("width", percent + '%');
+    $("#funds-raised").text('$' + current_rally)
+    $("#funds-raised-percent").text(percent.toFixed(2) + '%')
+}
