@@ -5,6 +5,11 @@
 <link href="{% static 'css/progress.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/progress.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
 
@@ -15,11 +20,11 @@
     </div>
   </div>
   <div class="goal-stat">
-    <span class="goal-number">35%</span>
+    <span id="funds-raised-percent" class="goal-number">35%</span>
     <span class="goal-label">Funded</span>
   </div>
   <div class="goal-stat">
-    <span class="goal-number">$1,640</span>
+    <span id="funds-raised"class="goal-number">$1,640</span>
     <span class="goal-label">Raised</span>
   </div>
   <div class="goal-stat">
@@ -31,8 +36,6 @@
     <span class="goal-label">Sponsors</span>
   </div>
 </div>
-<!--http://stackoverflow.com/questions/9335140/how-to-countdown-to-a-date -->
-<script type="text/javascript" src="{% static 'js/progress.js' %}"></script>
 
 
 {% endblock %}
