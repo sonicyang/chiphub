@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^append/$', append),
     url(r'^retreive/$', retreive),
 
-    url(r'^order/$', order),
     url(r'^faq/$', faq),
     url(r'^chatroom/$', chatroom),
     url(r'^exchange/$', exchange),
@@ -41,6 +40,7 @@ urlpatterns = [
     url(r'^google_login/$', google_login),
     url(r'^google_callback/$', google_callback),
 
+    url(r'^order/$', digikey.order_page),
     url(r'^order_digikey/$', digikey.order_digikey),
     url(r'^price_digikey/$', digikey.get_digikey_price),
     url(r'^rally_digikey/$', digikey.get_current_rally),

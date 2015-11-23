@@ -63,7 +63,7 @@ def create_order(user, profile, parts):
 
 def get_digikey_price(request):
     #XXX: should user POST
-    if auth.isLogin(request):
+    if auth.isLogin(request) and auth.hasProfile(auth.get_user_data().uuid):
         parts = request.GET['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
         parts = map(lambda x: x + [(reterieve_price(x[0]))], parts)
@@ -85,9 +85,26 @@ def get_digikey_price(request):
         return response
 
 
+def order_page(request):
+    if isLogin(request):
+        data = auth.get_user_data(request)
+        if auth.hasProfile(data.uuid):
+            profile = auth.get_user_profile(request)
+            return render(request, "order.html", {'realname' : profile.real_name,
+                                                    'email' : profile.email,
+                                                    'shipping_address' : profile.default_shipping_address,
+                                                    'phone' : profile.phone_number})
+        else:
+            return redirect("/profile/")
+
+    response = HttpResponse(json.dumps(parts))
+    response.status_code = 403
+
+    return response
+
 def order_digikey(request):
     #XXX: should user POST
-    if auth.isLogin(request):
+    if auth.isLogin(request) and auth.hasProfile(auth.get_user_data().uuid):
         parts = request.GET['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
         parts = map(lambda x: x + [(reterieve_price(x[0]))], parts)
@@ -105,10 +122,13 @@ def order_digikey(request):
             profile = auth.get_user_profile(request)
 
             create_order(user, profile, parts)
+
+        return response
     else:
+        response = HttpResponse()
         response.status_code = 403
 
-    return response
+        return response
 
 def get_current_rally(request):
     unordered_group = Groups.objects.get_or_create(ordered=False)[0]
@@ -126,3 +146,4 @@ def get_current_rally(request):
     response = HttpResponse(json.dumps((total, person_count)))
 
     return response
+

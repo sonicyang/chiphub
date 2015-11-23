@@ -17,18 +17,6 @@ def retreive(request):
     payload = fil.read()
     return HttpResponse(payload)
 
-def order(request):
-    if isLogin(request):
-        data = auth.get_user_data(request)
-        if auth.hasProfile(data.uuid):
-            profile = auth.get_user_profile(request)
-            return render(request, "order.html", {'realname' : profile.real_name,
-                                                    'email' : profile.email,
-                                                    'shipping_address' : profile.default_shipping_address,
-                                                    'phone' : profile.phone_number})
-
-        else:
-            redirect("/profile/")
 
 def faq(request):
     return render(request, 'faq.html')
