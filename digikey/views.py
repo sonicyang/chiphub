@@ -86,7 +86,7 @@ def get_digikey_price(request):
 
 
 def order_page(request):
-    if isLogin(request):
+    if auth.isLogin(request):
         data = auth.get_user_data(request)
         if auth.hasProfile(data.uuid):
             profile = auth.get_user_profile(request)
@@ -147,3 +147,30 @@ def get_current_rally(request):
 
     return response
 
+def get_user_orders(request):
+    if auth.isLogin(request):
+        user = auth.get_user_data(request)
+        if auth.hasProfile(user.uuid):
+
+            order_list = []
+
+            for order in Orders.objects.all().filter(Orderer = user):
+                order_dict = {
+                    "shipping_address": order.shipping_address,
+                    "phone_number": order.phone_number,
+                    "paid": order.paid,
+                    "paid_account": order.paid_account,
+                    "paid_date": order.paid_date,
+                    "sent": order.sent,
+                    "sent_date": order.sent_date}
+
+                order_list.append(order_dict)
+
+            response = HttpResponse(json.dumps(order_list))
+
+            return response
+
+    response = HttpResponse(json.dumps(parts))
+    response.status_code = 403
+
+    return response
