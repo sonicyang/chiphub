@@ -116,7 +116,7 @@ def get_current_rally(request):
     total = 0
     person_count = 0
 
-    for order in Orders.objects.all().filter(group_id = unordered_group):
+    for order in Orders.objects.all().filter(group_id = unordered_group, paid = True):
         person_count += 1
         for component in order.components_set.all():
             detail = Order_Details.objects.get(order = order, component = component)

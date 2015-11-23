@@ -9,8 +9,11 @@ class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
     shipping_address = models.CharField(max_length = 100)
     phone_number = models.CharField(max_length = 20)
+    paid = models.BooleanField(default=False)
+    paid_account = models.CharField(max_length = 10, null=True, blank=True)
+    paid_date = models.DateField(null=True, blank=True)
     sent = models.BooleanField(default=False)
-    sent_date = models.DateField(null=True)
+    sent_date = models.DateField(null=True, blank=True)
     group_id = models.ForeignKey(Groups)
 
 class Components(models.Model):
