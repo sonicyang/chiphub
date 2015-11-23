@@ -24,13 +24,20 @@ class Santilizer(object):
         return True if value % 10 == 0 else False
 
     @classmethod
-    def email(email):
+    def email(self, email):
         is_valid = validate_email(email,verify=True)
 
         if is_valid is True:
             return True
 
         return False
+
+    @classmethod
+    def phone_number(self, number):
+        if 9 > len(number) > 10:
+            return False
+
+        return True
 
 
 class Users(models.Model):
@@ -40,7 +47,6 @@ class Users(models.Model):
     login_service = models.CharField(max_length=20)
     access_token = models.CharField(max_length=50)
     refresh_token = models.CharField(max_length=50, null=True)
-
 
 class User_Profiles(models.Model):
     id = models.AutoField(primary_key=True)
@@ -52,6 +58,12 @@ class User_Profiles(models.Model):
     tw_id = models.CharField(max_length=10)
     real_name = models.CharField(max_length=10)
 
+    def save(self, *args, **kwargs):
+        assert(Santilizer.email(self.email))
+        assert(Santilizer.taiwan_ID(self.tw_id))
+        assert(Santilizer.phone_number(self.phone_number))
+
+        super(User_Profiles, self).save(*args, **kwargs)
 
 class Login_Sessions(models.Model):
     id = models.AutoField(primary_key=True)
