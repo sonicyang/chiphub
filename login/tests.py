@@ -14,7 +14,7 @@ class UUIDTestCase(TestCase):
     def setUp(self):
         self.dummyuser = Users.objects.create(uuid="00000000-0000-0000-C000-000000000046", login_service="dummy", access_token="dummy")
         self.dummyuser2 = Users.objects.create(uuid="6a8f7800-91ba-11e5-af58-0002a5d5c51b", login_service="dummy", access_token="dummy")
-        self.dummyprofile = User_Profiles.objects.create(user=self.dummyuser, username="dummy", email="dummy@cc.cc", default_shipping_address="nowhere", phone_number="0000000000", tw_id="A123456789", real_name="DUMMY")
+        self.dummyprofile = User_Profiles.objects.create(user=self.dummyuser, username="dummy", email="admin@mail.ncku.edu.tw", default_shipping_address="nowhere", phone_number="0000000000", tw_id="A123456789", real_name="DUMMY")
 
     def test_validate_uuid(self):
         self.assertEqual(auth.validate_uuid4("00000000-0000-0000-C000-000000000046"), True)
@@ -59,7 +59,7 @@ class UUIDTestCase(TestCase):
         self.assertEqual(auth.hasUser("79d4c540-91ba-11e5-a9ec-0002a5d5c51b"), True)
 
     def test_register_profile(self):
-        profile = User_Profiles(username="dummy", email="dummy@cc.cc", default_shipping_address="nowhere", phone_number="0000000000", tw_id="A123456789", real_name="DUMMY")
+        profile = User_Profiles(username="dummy", email="admin@mail.ncku.edu.tw", default_shipping_address="nowhere", phone_number="0000000000", tw_id="A123456789", real_name="DUMMY")
         auth.register_data("6a8f7800-91ba-11e5-af58-0002a5d5c51b", profile)
         self.assertEqual(auth.hasProfile("6a8f7800-91ba-11e5-af58-0002a5d5c51b"), True)
 
