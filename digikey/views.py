@@ -51,8 +51,7 @@ def create_order(user, profile, parts):
                                   )
 
     for part in parts:
-        comp = Components.objects.get_or_create(part_number=part[0],defaults={
-                                                "order_id" : order,
+        comp, created = Components.objects.get_or_create(part_number=part[0],defaults={
                                                 "unit_price" : float(part[2])}
                                                 )
 

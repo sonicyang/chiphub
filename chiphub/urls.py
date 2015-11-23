@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from chatroom.views import *
-from digikey.views import *
+import digikey.views as digikey
 from login.views import *
 
 urlpatterns = [
@@ -41,7 +41,7 @@ urlpatterns = [
     url(r'^google_login/$', google_login),
     url(r'^google_callback/$', google_callback),
 
-    url(r'^order_digikey/$', order_digikey),
-    url(r'^price_digikey/$', get_digikey_price),
-    url(r'^rally_digikey/$', get_current_rally),
+    url(r'^order_digikey/$', digikey.order_digikey),
+    url(r'^price_digikey/$', digikey.get_digikey_price),
+    url(r'^rally_digikey/$', digikey.get_current_rally),
 ]
