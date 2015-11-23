@@ -20,7 +20,7 @@ def validate_uuid4(uuid_string):
     return True
 
 def generate_static_uuid(secret):
-    return uuid.uuid5(uuid.NAMESPACE_DNS, str(secret))
+    return str(uuid.uuid5(uuid.NAMESPACE_DNS, str(secret)))
 
 def generate_random_uuid():
     url = "https://api.random.org/json-rpc/1/invoke"
