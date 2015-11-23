@@ -3,7 +3,7 @@ var current_rally = 0;
 var rally_person_count = 0;
 
 $(document).ready(function(){
-    $.get("http://127.0.0.1:8000/rally_digikey", function(data){
+    $.get("/rally_digikey/", function(data){
         data = JSON.parse(data);
         current_rally = parseFloat(data[0]);
         rally_person_count = data[1];
