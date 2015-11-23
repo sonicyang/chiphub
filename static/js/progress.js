@@ -54,4 +54,19 @@ function update_price(){
     //$("#progress").css("width", percent + '%');
     $("#funds-raised").text('$' + current_rally)
     $("#funds-raised-percent").text(percent.toFixed(2) + '%')
-}
+    }
+
+    /////////////////////////////////////////////////////////////  select section in main page */
+    $("nav ul li").click(function(){
+      var xcoord = $(this).data("xcoord");
+
+      $("nav div").stop().animate({marginLeft:xcoord}, 500, "easeInOutExpo");
+      $(this).addClass("active");
+      $("nav ul li").not(this).removeClass("active");
+
+    });
+
+
+
+
+

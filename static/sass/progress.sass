@@ -33,3 +33,44 @@ body
         display: block
       .goal-number
         font-weight: bold
+
+  #nav
+    position: relative
+    width: 640px
+    margin: 50px auto
+
+    nav
+      width: 100%
+      ul
+        li
+          display: inline-block
+          list-style: none
+          width: 160px
+          text-align: center
+          font-family: Helvetica, sans-serif
+          border: 1px dashed black
+          color: #2C3E50
+          padding: 10px 0 10px 0
+          margin: -1px -5px -1px -1px
+          cursor: pointer
+          transition: all .2s
+          -webkit-transition: all .2s
+          &:hover
+            border: 1px dashed #fff
+            background: gray
+        border: 1px solid #fff
+        position: absolute
+        width: 100%
+        padding: 0
+        z-index: 100
+      div
+        position: absolute
+        left: 0
+        background: #fff
+        width: 162px
+        height: 40px
+        z-index: 99
+
+    .active
+      color: rgba(55, 186, 177, 1)
+
