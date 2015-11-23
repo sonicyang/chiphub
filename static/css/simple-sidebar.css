@@ -48,6 +48,9 @@
   margin: 0;
   padding: 0;
   list-style: none; }
+  .sidebar-nav div {
+    color: #EEE;
+    padding-left: 5px; }
   .sidebar-nav hr {
     margin: 0px 0 5px 0;
     width: 100%; }
