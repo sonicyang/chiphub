@@ -61,6 +61,7 @@ target/
 .sass-cache/
 *.css.map
 
+# database
+db.sqlite3
+
 data
-
-
