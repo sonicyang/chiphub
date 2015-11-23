@@ -115,10 +115,12 @@ def get_current_rally(request):
 
     total = 0
 
-    for order in Orders.objects.get(group_id = unordered_group):
+    for order in Orders.objects.all().filter(group_id = unordered_group):
         for component in order.components_set.all():
-            detail = Order_Details.get(order = order, component = component)
+            detail = Order_Details.objects.get(order = order, component = component)
 
-            total += detail
+            total += detail.quantity * component.unit_price
 
-    return detail
+    response = HttpResponse(str(total))
+
+    return response
