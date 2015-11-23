@@ -13,30 +13,29 @@
 {% block content %}
 
 
-<div id=countdown-wrap>
-  <div id="goal">$3000</div>
-  <div id="glass">
-    <div id="progress">
+  <div id=countdown-wrap>
+    <div id="goal">集單進度</div>
+    <div id="glass">
+      <div id="progress">
+      </div>
+    </div>
+    <div class="goal-stat">
+      <span class="goal-label">集單目標</span>
+      <span class="goal-number">$3000</span>
+    </div>
+    <div class="goal-stat">
+      <span class="goal-label">已完成</span>
+      <span id="funds-raised-percent" class="goal-number">0%</span>
+    </div>
+    <div class="goal-stat">
+      <span class="goal-label">已集單價格</span>
+      <span id="funds-raised"class="goal-number">$0</span>
+    </div>
+    <div class="goal-stat">
+      <span class="goal-label">參與本次集單人數</span>
+      <span class="goal-number" id="funds-count">0</span>
     </div>
   </div>
-  <div class="goal-stat">
-    <span id="funds-raised-percent" class="goal-number">35%</span>
-    <span class="goal-label">Funded</span>
-  </div>
-  <div class="goal-stat">
-    <span id="funds-raised"class="goal-number"></span>
-    <span class="goal-label">Raised</span>
-  </div>
-  <div class="goal-stat">
-    <span class="goal-number"><div id="countdown"></div></span>
-    <span class="goal-label">Days to Go</span>
-  </div>
-  <div class="goal-stat">
-    <span class="goal-number">5</span>
-    <span class="goal-label">Sponsors</span>
-  </div>
-</div>
-
 <!-- Breadcrumb form pagination -->
 
 

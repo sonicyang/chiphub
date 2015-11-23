@@ -24,7 +24,10 @@ def reterieve_price(part_number):
     html = reterieve_html('http://www.digikey.tw/product-search/zh?vendor=0&keywords=' + part_number)
     soup = bs4.BeautifulSoup(html, 'html.parser')
 
-    no_stocking = "非庫存貨".encode("utf-8") in str(soup.select(".product-details-feedback")[0].contents[0])
+    try:
+        no_stocking = u"非庫存貨".encode("utf-8") in str(soup.select(".product-details-feedback")[0].contents[0])
+    except IndexError:
+        no_stocking = False
 
     try:
         min_qty = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[0].get_text())
@@ -48,8 +51,7 @@ def create_order(user, profile, parts):
                                   )
 
     for part in parts:
-        comp = Components.objects.get_or_create(part_number=part[0],defaults={
-                                                "order_id" : order,
+        comp, created = Components.objects.get_or_create(part_number=part[0],defaults={
                                                 "unit_price" : float(part[2])}
                                                 )
 
@@ -74,10 +76,14 @@ def get_digikey_price(request):
             response.status_code = 400
         else:
             response.status_code = 200
+
+        return response
     else:
+        response = HttpResponse()
         response.status_code = 403
 
-    return response
+        return response
+
 
 def order_digikey(request):
     #XXX: should user POST
@@ -108,11 +114,15 @@ def get_current_rally(request):
     unordered_group = Groups.objects.get_or_create(ordered=False)[0]
 
     total = 0
+    person_count = 0
 
-    for order in Orders.objects.get(group_id = unordered_group):
+    for order in Orders.objects.all().filter(group_id = unordered_group):
+        person_count += 1
         for component in order.components_set.all():
-            detail = Order_Details.get(order = order, component = component)
+            detail = Order_Details.objects.get(order = order, component = component)
 
-            total += detail
+            total += detail.quantity * component.unit_price
 
-    return detail
+    response = HttpResponse(json.dumps((total, person_count)))
+
+    return response

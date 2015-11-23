@@ -5,9 +5,13 @@
 <link href="{% static 'css/profile.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
+{% block js %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <div id="profile_form_wrapper">
-    <form class="form-horizontal" role="form" action="/update_profile" method="get">
+    <form id="profile_form" class="form-horizontal" role="form" action="/update_profile/" method="get">
         <div class="form-group">
             <label class="control-label col-md-3" for="username">Username:</label>
             <div class="col-md-9">

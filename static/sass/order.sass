@@ -35,3 +35,15 @@
 
 #modify-button
   display: none
+
+.shipping-info
+  font-weight: 700
+  word-break: break-all
+  &:nth-child(even)
+    color: #444444
+    margin-bottom: 15px
+    text-align: left
+  &:nth-child(odd)
+    color: #000000
+    @media screen and (max-width: 991px)
+      text-align: left

@@ -38,4 +38,17 @@
 #modify-button {
   display: none; }
 
+.shipping-info {
+  font-weight: 700;
+  word-break: break-all; }
+  .shipping-info:nth-child(even) {
+    color: #444444;
+    margin-bottom: 15px;
+    text-align: left; }
+  .shipping-info:nth-child(odd) {
+    color: #000000; }
+    @media screen and (max-width: 991px) {
+      .shipping-info:nth-child(odd) {
+        text-align: left; } }
+
 /*# sourceMappingURL=order.css.map */
