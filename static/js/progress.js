@@ -1,15 +1,16 @@
 CountDownTimer('12/20/2014 10:1 AM', 'countdown');
 CountDownTimer('12/20/2014 10:1 AM', 'newcountdown');
 var GOAL = 3000;
-var current_rally = 1000;
-//XXX: get current rally at the beginning
-
+var current_rally = 0;
+var rally_person_count = 0;
 
 $(document).ready(function(){
-    $.get("http://127.0.0.1:8000/about_us", function(data){
-        console.log(data)
+    $.get("http://127.0.0.1:8000/rally_digikey", function(data){
+        data = JSON.parse(data);
+        current_rally = parseFloat(data[0]);
+        rally_person_count = data[1];
+        update_price();
     })
-    update_price()
 })
 
 function CountDownTimer(dt, id)
@@ -28,7 +29,6 @@ function CountDownTimer(dt, id)
 		if (distance < 0) {
 
 			clearInterval(timer);
-			document.getElementById(id).innerHTML = '5';
 
 			return;
 		}
@@ -47,11 +47,14 @@ function CountDownTimer(dt, id)
 }
 
 function update_price(){
+    document.getElementById("funds-count").innerHTML = rally_person_count;
+
     var percent = current_rally / GOAL * 100;
+
     $('#progress').animate({
         width: (percent + "%")
     }, 750);
-    //$("#progress").css("width", percent + '%');
+    $("#progress").css("width", percent + '%');
     $("#funds-raised").text('$' + current_rally)
     $("#funds-raised-percent").text(percent.toFixed(2) + '%')
     }
