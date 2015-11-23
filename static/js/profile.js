@@ -1,11 +1,19 @@
 
+function validateNotEmpty(text){
+    var re = /\s/g;
+    if (text.replace(re, "") === ""){
+        return false;
+    }
+    return true;
+}
+
 function validateEmail(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return re.test(email);
 }
 
 function validatePhone(phone){
-    return true;
+    return validateNotEmpty(phone);
 }
 
 tab = "ABCDEFGHJKLMNPQRSTUVXYWZIO"
@@ -28,6 +36,24 @@ function validateID(id) {
     return true;
 }
 
+function chooseValidateMethod(type){
+    var method = "";
+    switch(type){
+        case "email":
+            method = validateEmail;
+            break;
+        case "phone":
+            method = validatePhone;
+            break;
+        case "id":
+            method = validateID;
+            break;
+        default:
+            method = validateNotEmpty;
+    }
+    return method;
+}
+
 function warningColor(input_type){
     $("input[type=\"" + input_type + "\"]").css("border-color", "#ff0000");
     $("input[type=\"" + input_type + "\"]").css("box-shadow", "0 0 5px rgba(255, 000, 0, 0.4)");
@@ -44,52 +70,44 @@ $(document).ready(function(){
         var phone = $("#phone").val();
         var id = $("#id").val();
         var pass = true;
-
-        if (!validateEmail(email)){
-            warningColor("email");
-            pass = false;
-        }
-        if (!validatePhone(phone)){
-            warningColor("phone");
-            pass = false;
-        }
-        if (!validateID(id)){
-            warningColor("id");
-            pass = false;
-        }
-
+        $('.form-control').each(function() {
+            var text = $(this).val();
+            var type = $(this).attr("type");
+            var validate = chooseValidateMethod(type)
+            if (!validate(text)){
+                warningColor(type);
+                pass = false;
+            }else{
+                normalColor(type);
+            }
+        });
         if (!pass){
             event.preventDefault();
         }
     });
 
-    $('#email').on('input', function(e) {
+    $('.form-control').on('input', function(e) {
         var text = $(this).val();
         var type = $(this).attr("type");
-        if (!validateEmail(text)){
+        var validate = chooseValidateMethod(type)
+        if (!validate(text)){
             warningColor(type);
         }else{
             normalColor(type);
         }
 
     });
-    $('#phone').on('input', function(e) {
+
+    $('.form-control').each(function() {
         var text = $(this).val();
         var type = $(this).attr("type");
-        if (!validatePhone(text)){
+        var validate = chooseValidateMethod(type)
+        if (!validate(text)){
             warningColor(type);
         }else{
             normalColor(type);
         }
-    });
-    $('#id').on('input', function(e) {
-        var text = $(this).val();
-        var type = $(this).attr("type");
-        if (!validateID(text)){
-            warningColor(type);
-        }else{
-            normalColor(type);
-        }
+
     });
 })
 
