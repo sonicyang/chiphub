@@ -1,39 +1,121 @@
-/*
-Error: The line was indented 4 levels deeper than the previous line.
-        on line 91 of sass/progress.sass
+body {
+  background-color: #F1F4F1;
+  font-family: Helvetica, sans-serif; }
+  body #countdown-wrap {
+    width: 80%;
+    margin: auto;
+    height: 300px;
+    font-family: arial; }
+    body #countdown-wrap #goal {
+      font-size: 60px;
+      text-align: left;
+      width: 100%;
+      text-align: center; }
+    body #countdown-wrap #glass {
+      width: 100%;
+      height: 30px;
+      background: #c7c7c7;
+      border-radius: 15px;
+      float: left;
+      overflow: hidden; }
+      body #countdown-wrap #glass #progress {
+        float: left;
+        width: 0%;
+        height: 30px;
+        background: #00ABC9;
+        z-index: 333; }
+    body #countdown-wrap .goal-stat {
+      width: 25%;
+      height: 50px;
+      padding: 20px;
+      float: left;
+      font-size: 20px;
+      margin: 0; }
+      body #countdown-wrap .goal-stat .goal-number, body #countdown-wrap .goal-stat .goal-label {
+        display: block; }
+      body #countdown-wrap .goal-stat .goal-number {
+        font-weight: bold;
+        padding-left: 5px; }
+  body .breadcrumb-pagination {
+    width: 100%;
+    border-bottom: 1px solid #E1E6EB;
+    text-align: center;
+    float: left;
+    color: #B3B7C1; }
+    body .breadcrumb-pagination div {
+      width: 25%;
+      display: inline-block; }
+      body .breadcrumb-pagination div p {
+        text-align: center;
+        line-height: 0;
+        margin: 30px auto 25px; }
+      body .breadcrumb-pagination div span {
+        margin: 0 auto;
+        display: block;
+        border-radius: 100%;
+        height: 36px;
+        width: 36px;
+        padding: 3px;
+        font-size: 20px; }
+    body .breadcrumb-pagination .completed span {
+      background-color: none;
+      color: #2C3E50;
+      border: 2px solid #2C3E50; }
+    body .breadcrumb-pagination .completed p {
+      font-size: 20px;
+      color: #2C3E50; }
+    body .breadcrumb-pagination .active span {
+      background-color: #00abc9;
+      color: #fff; }
+    body .breadcrumb-pagination .active p {
+      border-bottom: 2px solid #00ABC9;
+      padding-bottom: 27px;
+      margin-bottom: 0px !important;
+      color: #3c4043;
+      font-weight: 700;
+      font-size: 20px; }
+    body .breadcrumb-pagination .todo span {
+      background-color: none;
+      color: #E1E2EB;
+      border: 2px solid #E1E2EB; }
+    body .breadcrumb-pagination .todo p {
+      font-size: 20px; }
+  body #nav {
+    position: relative;
+    width: 640px;
+    margin: 50px auto; }
+    body #nav nav {
+      width: 100%; }
+      body #nav nav ul {
+        border: 1px solid #fff;
+        position: absolute;
+        width: 100%;
+        padding: 0;
+        z-index: 100; }
+        body #nav nav ul li {
+          display: inline-block;
+          list-style: none;
+          width: 160px;
+          text-align: center;
+          font-family: Helvetica, sans-serif;
+          border: 1px dashed black;
+          color: #2C3E50;
+          padding: 10px 0 10px 0;
+          margin: -1px -5px -1px -1px;
+          cursor: pointer;
+          transition: all 0.2s;
+          -webkit-transition: all 0.2s; }
+          body #nav nav ul li:hover {
+            border: 1px dashed #fff;
+            background: gray; }
+      body #nav nav div {
+        position: absolute;
+        left: 0;
+        background: #fff;
+        width: 162px;
+        height: 40px;
+        z-index: 99; }
+    body #nav .active {
+      color: #37bab1; }
 
-86:         color: $TODO-COLOR
-87:         border: 2px solid $TODO-COLOR
-88:       p
-89:         font-size: 20px
-90: =======
-91:         padding-left: 5px
-92: 
-93:   #nav
-94:     position: relative
-95:     width: 640px
-96:     margin: 50px auto
-
-Backtrace:
-sass/progress.sass:91
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/engine.rb:521:in `tree'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/engine.rb:406:in `_to_tree'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/engine.rb:378:in `_render_with_sourcemap'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/engine.rb:295:in `render_with_sourcemap'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:209:in `each'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:470:in `on_file_changed'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:328:in `block in watch'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/vendor/listen/lib/listen/listener.rb:252:in `call'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
-/var/lib/gems/1.9.1/gems/sass-3.4.19/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: The line was indented 4 levels deeper than the previous line.\A         on line 91 of sass/progress.sass\A \A 86:         color: $TODO-COLOR\A 87:         border: 2px solid $TODO-COLOR\A 88:       p\A 89:         font-size: 20px\A 90: =======\A 91:         padding-left: 5px\A 92: \A 93:   #nav\A 94:     position: relative\A 95:     width: 640px\A 96:     margin: 50px auto"; }
+/*# sourceMappingURL=progress.css.map */
