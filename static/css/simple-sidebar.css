@@ -23,7 +23,7 @@ body {
     width: 0;
     height: 100%;
     margin-left: -250px;
-    overflow-y: hidden;
+    overflow: hidden;
     background: #2c3e50;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
