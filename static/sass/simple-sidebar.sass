@@ -11,90 +11,93 @@ $SIDEBAR_HOVERED_TEXT_COLOR: #FFF
 $SIDEBAR_HOVERED_BACKGROUND: rgba(96,227,224,0.4)
 /*60E1E0*/
 /* Toggle Styles
-#wrapper
-  position: relative
-  padding-left: 0
-  -webkit-transition: all 0.5s ease
-  -moz-transition: all 0.5s ease
-  -o-transition: all 0.5s ease
-  transition: all 0.5s ease
-  &.toggled
-    padding-left: $SIDEBAR_WIDTH
 
-#sidebar-wrapper
-  z-index: 1000
-  position: fixed
-  left: $SIDEBAR_WIDTH
-  width: 0
-  height: $SIDEBAR_HEIGHT
-  margin-left: 0 - $SIDEBAR_WIDTH
-  overflow-y: hidden
-  background: $SIDEBAR_BACKGROUND
-  -webkit-transition: all 0.5s ease
-  -moz-transition: all 0.5s ease
-  -o-transition: all 0.5s ease
-  transition: all 0.5s ease
-
-#wrapper.toggled #sidebar-wrapper
-  width: $SIDEBAR_WIDTH
-
-#page-content-wrapper
-  width: 100%
-  position: absolute
-  padding: 15px
-
-#wrapper.toggled #page-content-wrapper
-  position: absolute
-  margin-right: 0 - $SIDEBAR_WIDTH
-
-/* Sidebar Styles
-
-
-.sidebar-nav
-  position: absolute
-  top: 0
-  width: $SIDEBAR_WIDTH
-  margin: 0
-  padding: 0
-  list-style: none
-  hr
-    margin: 0px 0 5px 0
-    width: 100%
-  li
-    line-height: 40px
-    a
-      display: block
-      text-decoration: none
-      color: $SIDEBAR_TEXT_COLOR
-
-      &:hover
-        text-decoration: none
-        color: $SIDEBAR_HOVERED_TEXT_COLOR
-        background: $SIDEBAR_HOVERED_BACKGROUND
-      &:active, &:focus
-        text-decoration: none
-  > .sidebar-brand
-    height: 65px
-    font-size: 18px
-    line-height: 60px
-    a
-      color: $SIDEBAR_TEXT_COLOR
-      &:hover
-        color: $SIDEBAR_HOVERED_TEXT_COLOR
-        background: none
-
-@media (min-width: 768px)
+body
+  font-family: ".PingFang-SC-Regular", sans-serif
   #wrapper
-    padding-left: $SIDEBAR_WIDTH
+    position: relative
+    padding-left: 0
+    -webkit-transition: all 0.5s ease
+    -moz-transition: all 0.5s ease
+    -o-transition: all 0.5s ease
+    transition: all 0.5s ease
     &.toggled
-      padding-left: 0
+      padding-left: $SIDEBAR_WIDTH
+
   #sidebar-wrapper
-    width: $SIDEBAR_WIDTH
-  #wrapper.toggled #sidebar-wrapper
+    z-index: 1000
+    position: fixed
+    left: $SIDEBAR_WIDTH
     width: 0
+    height: $SIDEBAR_HEIGHT
+    margin-left: 0 - $SIDEBAR_WIDTH
+    overflow-y: hidden
+    background: $SIDEBAR_BACKGROUND
+    -webkit-transition: all 0.5s ease
+    -moz-transition: all 0.5s ease
+    -o-transition: all 0.5s ease
+    transition: all 0.5s ease
+
+  #wrapper.toggled #sidebar-wrapper
+    width: $SIDEBAR_WIDTH
+
   #page-content-wrapper
-    padding: 20px
-    position: relative
+    width: 100%
+    position: absolute
+    padding: 15px
+
   #wrapper.toggled #page-content-wrapper
-    position: relative
-    margin-right: 0
+    position: absolute
+    margin-right: 0 - $SIDEBAR_WIDTH
+
+  /* Sidebar Styles
+
+
+  .sidebar-nav
+    position: absolute
+    top: 0
+    width: $SIDEBAR_WIDTH
+    margin: 0
+    padding: 0
+    list-style: none
+    hr
+      margin: 0px 0 5px 0
+      width: 100%
+    li
+      line-height: 40px
+      a
+        display: block
+        text-decoration: none
+        color: $SIDEBAR_TEXT_COLOR
+
+        &:hover
+          text-decoration: none
+          color: $SIDEBAR_HOVERED_TEXT_COLOR
+          background: $SIDEBAR_HOVERED_BACKGROUND
+        &:active, &:focus
+          text-decoration: none
+    > .sidebar-brand
+      height: 65px
+      font-size: 18px
+      line-height: 60px
+      a
+        color: $SIDEBAR_TEXT_COLOR
+        &:hover
+          color: $SIDEBAR_HOVERED_TEXT_COLOR
+          background: none
+
+  @media (min-width: 768px)
+    #wrapper
+      padding-left: $SIDEBAR_WIDTH
+      &.toggled
+        padding-left: 0
+    #sidebar-wrapper
+      width: $SIDEBAR_WIDTH
+    #wrapper.toggled #sidebar-wrapper
+      width: 0
+    #page-content-wrapper
+      padding: 20px
+      position: relative
+    #wrapper.toggled #page-content-wrapper
+      position: relative
+      margin-right: 0

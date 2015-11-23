@@ -1,12 +1,13 @@
 body {
-  background-color: #F1F4F1; }
+  background-color: #F1F4F1;
+  font-family: Helvetica, sans-serif; }
   body #countdown-wrap {
-    width: 100%;
+    width: 80%;
+    margin: auto;
     height: 300px;
-    padding: 20px;
     font-family: arial; }
     body #countdown-wrap #goal {
-      font-size: 48px;
+      font-size: 60px;
       text-align: left;
       width: 100%; }
     body #countdown-wrap #glass {
@@ -20,54 +21,62 @@ body {
         float: left;
         width: 0%;
         height: 30px;
-        background: #2E5EAA;
+        background: #00ABC9;
         z-index: 333; }
     body #countdown-wrap .goal-stat {
-      width: 20%;
-      height: 30px;
-      padding: 10px;
+      width: 25%;
+      height: 50px;
+      padding: 20px;
       float: left;
+      font-size: 30px;
       margin: 0; }
       body #countdown-wrap .goal-stat .goal-number, body #countdown-wrap .goal-stat .goal-label {
         display: block; }
       body #countdown-wrap .goal-stat .goal-number {
         font-weight: bold; }
-  body #nav {
-    position: relative;
-    width: 640px;
-    margin: 50px auto; }
-    body #nav nav {
-      width: 100%; }
-      body #nav nav ul {
-        border: 1px solid #fff;
-        position: absolute;
-        width: 100%;
-        padding: 0;
-        z-index: 100; }
-        body #nav nav ul li {
-          display: inline-block;
-          list-style: none;
-          width: 160px;
-          text-align: center;
-          font-family: Helvetica, sans-serif;
-          border: 1px dashed black;
-          color: #2C3E50;
-          padding: 10px 0 10px 0;
-          margin: -1px -5px -1px -1px;
-          cursor: pointer;
-          transition: all 0.2s;
-          -webkit-transition: all 0.2s; }
-          body #nav nav ul li:hover {
-            border: 1px dashed #fff;
-            background: gray; }
-      body #nav nav div {
-        position: absolute;
-        left: 0;
-        background: #fff;
-        width: 162px;
-        height: 40px;
-        z-index: 99; }
-    body #nav .active {
-      color: #37bab1; }
+  body .breadcrumb-pagination {
+    width: 100%;
+    border-bottom: 1px solid #E1E6EB;
+    text-align: center;
+    float: left;
+    color: #B3B7C1; }
+    body .breadcrumb-pagination div {
+      width: 25%;
+      display: inline-block; }
+      body .breadcrumb-pagination div p {
+        text-align: center;
+        line-height: 0;
+        margin: 30px auto 25px; }
+      body .breadcrumb-pagination div span {
+        margin: 0 auto;
+        display: block;
+        border-radius: 100%;
+        height: 36px;
+        width: 36px;
+        padding: 3px;
+        font-size: 20px; }
+    body .breadcrumb-pagination .completed span {
+      background-color: none;
+      color: #2C3E50;
+      border: 2px solid #2C3E50; }
+    body .breadcrumb-pagination .completed p {
+      font-size: 20px;
+      color: #2C3E50; }
+    body .breadcrumb-pagination .active span {
+      background-color: #00abc9;
+      color: #fff; }
+    body .breadcrumb-pagination .active p {
+      border-bottom: 2px solid #00ABC9;
+      padding-bottom: 27px;
+      margin-bottom: 0px !important;
+      color: #3c4043;
+      font-weight: 700;
+      font-size: 20px; }
+    body .breadcrumb-pagination .todo span {
+      background-color: none;
+      color: #E1E2EB;
+      border: 2px solid #E1E2EB; }
+    body .breadcrumb-pagination .todo p {
+      font-size: 20px; }
 
 /*# sourceMappingURL=progress.css.map */
