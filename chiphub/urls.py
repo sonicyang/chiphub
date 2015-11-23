@@ -45,4 +45,5 @@ urlpatterns = [
     url(r'^price_digikey/$', digikey.get_digikey_price),
     url(r'^rally_digikey/$', digikey.get_current_rally),
     url(r'^list_digikey/$', digikey.get_user_orders),
+    url(r'^pay_digikey/$', digikey.apply_paying_info),
 ]

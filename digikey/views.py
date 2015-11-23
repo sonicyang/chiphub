@@ -1,9 +1,12 @@
  # coding= utf-8
 #from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, redirect
 import bs4
 import requests
 import json
+import datetime
 from login import auth
 from digikey.models import Orders
 from digikey.models import Components
@@ -97,9 +100,8 @@ def order_page(request):
         else:
             return redirect("/profile/")
 
-    response = HttpResponse(json.dumps(parts))
+    response = HttpResponse()
     response.status_code = 403
-
     return response
 
 def order_digikey(request):
@@ -170,7 +172,33 @@ def get_user_orders(request):
 
             return response
 
-    response = HttpResponse(json.dumps(parts))
+    response = HttpResponse()
+    response.status_code = 403
+
+    return response
+
+def apply_paying_info(request):
+    #XXX: should use POST
+    if auth.isLogin(request):
+        user = auth.get_user_data(request)
+        if auth.hasProfile(user.uuid):
+
+            try:
+                order = Orders.objects.get(pk=int(request.GET["OID"]), Orderer = user)
+                order.paid_account = request.GET["PACCOUNT"]
+                order.paid_date = datetime.date(datetime.date.today().year, int(request.GET["PMONTH"]), int(request.GET["PDAY"]))
+                order.save()
+
+                response = HttpResponse()
+                response.status_code = 200
+                return response
+
+            except ObjectDoesNotExist:
+                response = HttpResponse()
+                response.status_code = 400
+                return response
+
+    response = HttpResponse()
     response.status_code = 403
 
     return response
