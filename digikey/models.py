@@ -1,5 +1,6 @@
 from django.db import models
 from login.models import Users, User_Profiles
+from django.utils import timezone
 
 class Groups(models.Model):
     ordered = models.BooleanField(default=False)
@@ -13,6 +14,7 @@ class Groups(models.Model):
 
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
+    date = models.DateField(default=timezone.now())
     receiver = models.CharField(max_length = 10)
     shipping_address = models.CharField(max_length = 100)
     phone_number = models.CharField(max_length = 20)
