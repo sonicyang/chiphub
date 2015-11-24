@@ -5,6 +5,9 @@ class Groups(models.Model):
     ordered = models.BooleanField(default=False)
     orderdate = models.DateField(null=True)
 
+    class Meta:
+        verbose_name = "Order Group"
+
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
     shipping_address = models.CharField(max_length = 100)
@@ -16,13 +19,25 @@ class Orders(models.Model):
     sent_date = models.DateField(null=True, blank=True)
     group_id = models.ForeignKey(Groups)
 
+    class Meta:
+        verbose_name = "Order"
+
+    def __str__(self):
+        return str(self.pk)
+
 class Components(models.Model):
     part_number = models.CharField(max_length = 40)
     # weight = models.IntegerField('Weight of Component in grams')
     unit_price = models.FloatField("Unit price in TWD")
     associated_order = models.ManyToManyField(Orders, through='Order_Details')
 
+    class Meta:
+        verbose_name = "Component"
+
 class Order_Details(models.Model):
     quantity = models.IntegerField()
     component = models.ForeignKey(Components)
     order = models.ForeignKey(Orders)
+
+    class Meta:
+        verbose_name = "Order Detail"
