@@ -34,7 +34,7 @@ function update_price(){
 
     });
 
-
+/*
 (function (jQuery) {
   jQuery.mark = {
     tabs: function (options) {
@@ -118,12 +118,12 @@ function update_price(){
           });
         });
       })
-    } 
+    }
 
   }
 })(jQuery);
 
-jQuery(function(){  
+jQuery(function(){
   jQuery.mark.tabs();
   jQuery.mark.doNotes();
 });ist */
@@ -132,6 +132,6 @@ jQuery(function(){
 
 
 
- 
+
 
 
