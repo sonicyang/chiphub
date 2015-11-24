@@ -1,4 +1,8 @@
 #profile_form_wrapper {
   padding: 5% 15% 5% 0%; }
 
+#alert-message {
+  position: fixed;
+  top: -150px; }
+
 /*# sourceMappingURL=profile.css.map */

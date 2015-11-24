@@ -54,6 +54,11 @@ function chooseValidateMethod(type){
     return method;
 }
 
+function alertWarning(type){
+    alert_msg = $("#alert-message")
+    alert_msg.text(type + " 不合法！");
+    alert_msg.animate({top:"10px"}, 500);
+}
 function warningColor(input_type){
     $("input[type=\"" + input_type + "\"]").css("border-color", "#ff0000");
     $("input[type=\"" + input_type + "\"]").css("box-shadow", "0 0 5px rgba(255, 000, 0, 0.4)");
@@ -65,6 +70,16 @@ function normalColor(input_type){
 }
 
 $(document).ready(function(){
+    $("#alert-message").css("left", function(){
+        return $(window).width() / 2 - $(this).outerWidth() / 2;
+    })
+
+    $(window).resize(function(){
+        $("#alert-message").css("left", function(){
+            return $(window).width() / 2 - $(this).outerWidth() / 2;
+        })
+    })
+
     $("#profile_form").submit(function(event) {
         var email = $("#email").val();
         var phone = $("#phone").val();
@@ -76,6 +91,9 @@ $(document).ready(function(){
             var validate = chooseValidateMethod(type)
             if (!validate(text)){
                 warningColor(type);
+                if (pass == true){
+                    alertWarning(type);
+                }
                 pass = false;
             }else{
                 normalColor(type);
