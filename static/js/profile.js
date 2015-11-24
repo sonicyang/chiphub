@@ -13,7 +13,17 @@ function validateEmail(email) {
 }
 
 function validatePhone(phone){
-    return validateNotEmpty(phone);
+    var re = /\s/g;
+    if(isNaN(parseInt(phone, 10))){
+        return false;
+    }
+    if(phone !== phone.replace(re, "")){
+        return false;
+    }
+    if(phone.length < 9 || phone.length > 10){
+        return false;
+    }
+    return true;
 }
 
 tab = "ABCDEFGHJKLMNPQRSTUVXYWZIO"
