@@ -112,4 +112,5 @@ function submit_form(){
     $.get("/order_digikey/",
         {order_list: order_list}
     )
+    window.location.href = "/progress/";
 }
