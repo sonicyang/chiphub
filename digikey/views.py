@@ -159,6 +159,7 @@ def get_user_orders(request):
 
             for order in Orders.objects.all().filter(Orderer = user):
                 order_dict = {
+                    "data": order.data,
                     "shipping_address": order.shipping_address,
                     "phone_number": order.phone_number,
                     "paid": order.paid,
