@@ -13,6 +13,10 @@ from digikey.models import Components
 from digikey.models import Groups
 from digikey.models import Order_Details
 
+def progress(request):
+    return render(request, 'progress.html')
+
+
 def reterieve_html(url):
     try:
         r = requests.get(url)

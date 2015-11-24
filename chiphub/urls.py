@@ -15,31 +15,38 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from chatroom.views import *
+import chatroom.views as chatroom
 import digikey.views as digikey
-from login.views import *
+import login.views as login
+import main.views as main
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', index),
 
-    url(r'^append/$', append),
-    url(r'^retreive/$', retreive),
+    # Misc
+    url(r'^$', main.index),
+    url(r'^faq/$', main.faq),
+    url(r'^exchange/$', main.exchange),
+    url(r'^about_us/$', main.about_us),
 
-    url(r'^faq/$', faq),
-    url(r'^chatroom/$', chatroom),
-    url(r'^exchange/$', exchange),
-    url(r'^progress/$', progress),
-    url(r'^about_us/$', about_us),
-    url(r'^profile/$', profile),
+    # ChatRoom
+    url(r'^append/$', chatroom.append),
+    url(r'^retreive/$', chatroom.retreive),
+    url(r'^chatroom/$', chatroom.chatroom),
 
-    url(r'^update_profile/$', update_profile),
-    url(r'^islogin/$', isLogin),
+    # Login
+    url(r'^profile/$', login.profile),
+    url(r'^update_profile/$', login.update_profile),
 
-    url(r'^logout/$', logout),
-    url(r'^google_login/$', google_login),
-    url(r'^google_callback/$', google_callback),
+    url(r'^islogin/$', login.isLogin),
+    url(r'^logout/$', login.logout),
 
+    # Google OAuth
+    url(r'^google_login/$', login.google_login),
+    url(r'^google_callback/$', login.google_callback),
+
+    # Digikey
+    url(r'^progress/$', digikey.progress),
     url(r'^order/$', digikey.order_page),
     url(r'^order_digikey/$', digikey.order_digikey),
     url(r'^price_digikey/$', digikey.get_digikey_price),
