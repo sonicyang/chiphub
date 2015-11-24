@@ -15,6 +15,7 @@ class OrderInline(admin.TabularInline):
 
 @admin.register(Orders)
 class OrderAdmin(admin.ModelAdmin):
+    list_filter = ['sent', 'paid', 'sent_date']
     list_display = ('pk', 'group_id','paid', 'sent')
 
     fieldsets = [
@@ -28,6 +29,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Groups)
 class GroupAdmin(admin.ModelAdmin):
+    list_filter = ['ordered', 'orderdate']
     fieldsets = [
                 (None,               {'fields': ['ordered', 'orderdate']}),
     ]
