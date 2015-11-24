@@ -48,6 +48,7 @@ def create_order(user, profile, parts):
 
 
     order = Orders.objects.create(Orderer = user,
+                                  receiver = profile.real_name,
                                   shipping_address = profile.default_shipping_address,
                                   phone_number = profile.phone_number,
                                   group_id = unordered_group
