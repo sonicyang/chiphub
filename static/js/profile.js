@@ -57,6 +57,7 @@ function chooseValidateMethod(type){
 function alertWarning(type){
     alert_msg = $("#alert-message")
     alert_msg.text(type + " 不合法！");
+    changeAlertMsgForRWD();
     alert_msg.animate({top:"10px"}, 500);
 }
 function warningColor(input_type){
@@ -68,16 +69,16 @@ function normalColor(input_type){
     $("input[type=\"" + input_type + "\"]").css("border-color", "");
     $("input[type=\"" + input_type + "\"]").css("box-shadow", "");
 }
-
-$(document).ready(function(){
+function changeAlertMsgForRWD(){
     $("#alert-message").css("left", function(){
         return $(window).width() / 2 - $(this).outerWidth() / 2;
     })
+}
+$(document).ready(function(){
+    changeAlertMsgForRWD();
 
     $(window).resize(function(){
-        $("#alert-message").css("left", function(){
-            return $(window).width() / 2 - $(this).outerWidth() / 2;
-        })
+        changeAlertMsgForRWD();
     })
 
     $("#profile_form").submit(function(event) {
