@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'css/list_order.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/list_order.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="order-list">
+        <!--<div class="order">-->
+            <!--<div class="container-fluid">-->
+                <!--<h2 class="order-time">2015/12/31</h2>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-4 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--寄出日期:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="sent_date"></label>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-8 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--寄送地址:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="shipping_address"></label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-4 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--付款日期:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="paid_date"></label>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-8 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--匯款帳戶:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="paid_account"></label>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+{% endblock %}
