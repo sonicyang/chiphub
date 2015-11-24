@@ -19,7 +19,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('pk', 'group_id','paid', 'sent')
 
     fieldsets = [
-                (None,               {'fields': ['Orderer', 'group_id']}),
+                (None,               {'fields': ['Orderer', 'group_id', 'date']}),
                 ('Payment information', {'fields': ['paid', 'paid_account', 'paid_date']}),
                 ('Uplink information', {'fields': ['sent', 'sent_date']}),
                 ('Additional Shipping information', {'fields': ['receiver', 'shipping_address', 'phone_number']}),
