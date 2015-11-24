@@ -170,14 +170,14 @@ def get_user_orders(request):
                     total += detail.quantity * component.unit_price
 
                 order_dict = {
-                    "data": order.date,
+                    "data": str(order.date),
                     "shipping_address": order.shipping_address,
                     "phone_number": order.phone_number,
                     "paid": order.paid,
                     "paid_account": order.paid_account,
-                    "paid_date": order.paid_date,
+                    "paid_date": str(order.paid_date),
                     "sent": order.sent,
-                    "sent_date": order.sent_date,
+                    "sent_date": str(order.sent_date),
                     "net": total}
 
                 order_list.append(order_dict)
