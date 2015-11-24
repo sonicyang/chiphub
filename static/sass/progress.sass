@@ -7,7 +7,6 @@ body
   #countdown-wrap
     width: 80%
     margin: auto
-    height: 300px
     #goal
       font-size: 60px
       text-align: left
@@ -38,91 +37,67 @@ body
       .goal-number
         font-weight: bold
         padding-left: 5px
-  .breadcrumb-pagination
-    width: 100%
-    border-bottom: 1px solid #E1E6EB
-    border-top: 1px solid #E1E6EB
-    text-align: center
-    float: left
-    color: #B3B7C1
-    div
-      width: 25%
-      display: inline-block
+  #drop-shadow-wrapper
+    margin: 0 auto
+    width: 90%
+    .drop-shadow
+      float: left
+      color: yellow
+      position: relative
+      width: 30%
+      height: 50px
+      background: #e3e3e3
+      text-align: center
+      line-height: 50px
+      margin: 0 auto
+      margin-left: 10%
+      margin-right: 10%
+      margin-top: 10%
+      font-family: Tahoma
       p
-        text-align: center
-        line-height: 0
-        margin: 30px auto 25px
-      span
-        margin: 0 auto
-        display: block
-        border-radius: 100%
-        height: 36px
-        width: 36px
-        padding: 3px
+        color: #2C3E50
         font-size: 20px
-    .completed 
-      span
-        background-color: none
-        color: $COMPLITED-COLOR
-        border: 2px solid $COMPLITED-COLOR
-        &::before
-      p
-        font-size: 20px
-        color: $COMPLITED-COLOR
-    .active 
-      span
-        background-color: #00abc9
-        color: #fff
-      p
-        border-bottom: 2px solid $ACTIVE-COLOR
-        padding-bottom: 27px
-        margin-bottom: 0px !important
-        color: #3c4043
-        font-weight: 700
-        font-size: 20px
-    .todo 
-      span
-        background-color: none
-        color: $TODO-COLOR
-        border: 2px solid $TODO-COLOR
-      p
-        font-size: 20px
-  #nav
-    position: relative
-    width: 640px
-    margin: 50px auto
-
-    nav
-      width: 100%
-      ul
-        li
-          display: inline-block
-          list-style: none
-          width: 160px
-          text-align: center
-          font-family: Helvetica, sans-serif
-          border: 1px dashed black
-          color: #2C3E50
-          padding: 10px 0 10px 0
-          margin: -1px -5px -1px -1px
-          cursor: pointer
-          transition: all .2s
-          -webkit-transition: all .2s
-          &:hover
-            border: 1px dashed #fff
-            background: gray
-        border: 1px solid #fff
+      &:hover
+        cursor: pointer
+        background-color: #2C3E50
+        color: yellow
+        p
+          color: #FFF
+      &:before
+        content: ""
         position: absolute
-        width: 100%
-        padding: 0
-        z-index: 100
-      div
+        z-index: -1
+        bottom: 15px
+        left: 10px
+        width: 50%
+        height: 20%
+        max-width: 300px
+        -webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
+        -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
+        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
+        -webkit-transform: rotate(-3deg)
+        -moz-transform: rotate(-3deg)
+        -o-transform: rotate(-3deg)
+        transform: rotate(-3deg)
+      &:after
+        content: ""
         position: absolute
-        left: 0
-        background: #fff
-        width: 162px
-        height: 40px
-        z-index: 99
-
-    .active
-      color: rgba(55, 186, 177, 1)
+        z-index: -1
+        bottom: 15px
+        left: 10px
+        width: 50%
+        height: 20%
+        max-width: 300px
+        -webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
+        -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
+        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
+        -webkit-transform: rotate(-3deg)
+        -moz-transform: rotate(-3deg)
+        -o-transform: rotate(-3deg)
+        transform: rotate(-3deg)
+        right: 10px
+        left: auto
+        -webkit-transform: rotate(3deg)
+        -moz-transform: rotate(3deg)
+        -o-transform: rotate(3deg)
+        transform: rotate(3deg)

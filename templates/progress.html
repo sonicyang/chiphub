@@ -11,48 +11,42 @@
 {% endblock %}
 
 {% block content %}
-
-
-  <div id=countdown-wrap>
-    <div id="goal">集單進度</div>
-    <div id="glass">
-      <div id="progress">
-      </div>
-    </div>
-    <div class="goal-stat">
-      <span class="goal-label">集單目標</span>
-      <span class="goal-number">$3000</span>
-    </div>
-    <div class="goal-stat">
-      <span class="goal-label">已完成</span>
-      <span id="funds-raised-percent" class="goal-number">0%</span>
-    </div>
-    <div class="goal-stat">
-      <span class="goal-label">已集單價格</span>
-      <span id="funds-raised"class="goal-number">$0</span>
-    </div>
-    <div class="goal-stat">
-      <span class="goal-label">參與本次集單人數</span>
-      <span class="goal-number" id="funds-count">0</span>
+<!-- Progress Bar -->
+<div id=countdown-wrap>
+  <div id="goal">集單進度</div>
+  <div id="glass">
+    <div id="progress">
     </div>
   </div>
-<!-- Breadcrumb form pagination -->
-
-
-
-
-
-<div class="breadcrumb-pagination">
-  <div class="completed">
-    <p>Order</p>
+  <div class="goal-stat">
+    <span class="goal-label">集單目標</span>
+    <span class="goal-number">$3000</span>
   </div>
-  <div class="active">
-    <p>Check</p>
+  <div class="goal-stat">
+    <span class="goal-label">已完成</span>
+    <span id="funds-raised-percent" class="goal-number">0%</span>
   </div>
-  <div class="todo">
-    <p>Shop</p>
+  <div class="goal-stat">
+    <span class="goal-label">已集單價格</span>
+    <span id="funds-raised"class="goal-number">$0</span>
   </div>
-
+  <div class="goal-stat">
+    <span class="goal-label">參與本次集單人數</span>
+    <span class="goal-number" id="funds-count">0</span>
+  </div>
 </div>
-
+<!-- End Progress Bar -->
+<!-- Button to Order -->
+<div id="drop-shadow-wrapper">
+  <div class="drop-shadow" onclick="window.location = 'http://merry.ee.ncku.edu.tw:5000'">
+    <p>Build a new Order</p>
+  </div>
+  <div class="drop-shadow" onclick="window.location = 'http://merry.ee.ncku.edu.tw:5000'">
+    <p>Check yout order</p>
+  </div>
+</div>
+<!-- Button to Order -->
+<!-- Ordered History -->
+  
+<!-- End Ordered List -->
 {% endblock %}
