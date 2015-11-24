@@ -56,7 +56,7 @@ class Users(models.Model):
 
 class User_Profiles(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(Users)
+    user = models.OneToOneField(Users)
     username = models.CharField(max_length=20)
     email = models.CharField(max_length=50)
     default_shipping_address = models.CharField(max_length=100)
