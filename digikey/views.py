@@ -106,7 +106,7 @@ def order_page(request):
 
 def order_digikey(request):
     #XXX: should user POST
-    if auth.isLogin(request) and auth.hasProfile(auth.get_user_data().uuid):
+    if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
         parts = request.GET['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
         parts = map(lambda x: x + [(reterieve_price(x[0]))], parts)
