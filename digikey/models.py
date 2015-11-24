@@ -1,12 +1,15 @@
 from django.db import models
-from login.models import Users
+from login.models import Users, User_Profiles
 
 class Groups(models.Model):
     ordered = models.BooleanField(default=False)
-    orderdate = models.DateField(null=True)
+    orderdate = models.DateField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Order Group"
+
+    def __str__(self):
+        return "Order Group:" + str(self.pk).zfill(3) + " / Sent: " + str(self.ordered) + " / Sent Date: " + str(self.orderdate)
 
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
@@ -23,7 +26,7 @@ class Orders(models.Model):
         verbose_name = "Order"
 
     def __str__(self):
-        return str(self.pk)
+        return "Order No." + str(self.pk).zfill(5) + " / By: " + str(User_Profiles.objects.get(user = self.Orderer).real_name.encode("utf-8")) + " / Paid: " + str(self.paid) + " / Sent: " + str(self.sent) + " / Group ID: " + str(self.group_id.pk)
 
 class Components(models.Model):
     part_number = models.CharField(max_length = 40)
@@ -33,6 +36,9 @@ class Components(models.Model):
 
     class Meta:
         verbose_name = "Component"
+
+    def __str__(self):
+        return "Component No." + str(self.pk).zfill(5) + " / #PN: " + str(self.part_number) + " / Unit Pice: " + str(self.unit_price)
 
 class Order_Details(models.Model):
     quantity = models.IntegerField()
