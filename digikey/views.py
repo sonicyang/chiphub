@@ -162,6 +162,13 @@ def get_user_orders(request):
             order_list = []
 
             for order in Orders.objects.all().filter(Orderer = user):
+
+                total = 0
+                for component in order.components_set.all():
+                    detail = Order_Details.objects.get(order = order, component = component)
+
+                    total += detail.quantity * component.unit_price
+
                 order_dict = {
                     "data": order.data,
                     "shipping_address": order.shipping_address,
@@ -170,7 +177,8 @@ def get_user_orders(request):
                     "paid_account": order.paid_account,
                     "paid_date": order.paid_date,
                     "sent": order.sent,
-                    "sent_date": order.sent_date}
+                    "sent_date": order.sent_date,
+                    "net": total}
 
                 order_list.append(order_dict)
 
