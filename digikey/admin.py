@@ -1,9 +1,6 @@
 from django.contrib import admin
 from digikey.models import Components, Orders, Order_Details, Groups
 
-admin.site.register(Components)
-admin.site.register(Order_Details)
-
 class ComponentInline(admin.TabularInline):
     model = Order_Details
     extra = 1
@@ -18,6 +15,8 @@ class OrderInline(admin.TabularInline):
 
 @admin.register(Orders)
 class OrderAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'group_id','paid', 'sent')
+
     fieldsets = [
                 (None,               {'fields': ['Orderer', 'group_id']}),
                 ('Payment information', {'fields': ['paid', 'paid_account', 'paid_date']}),
@@ -34,3 +33,7 @@ class GroupAdmin(admin.ModelAdmin):
     ]
 
     inlines = [OrderInline]
+
+@admin.register(Components)
+class ComponentAdmin(admin.ModelAdmin):
+    list_display = ('part_number','unit_price')

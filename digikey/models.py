@@ -9,7 +9,7 @@ class Groups(models.Model):
         verbose_name = "Order Group"
 
     def __str__(self):
-        return "Order Group:" + str(self.pk).zfill(3) + " / Sent: " + str(self.ordered) + " / Sent Date: " + str(self.orderdate)
+        return str(self.pk).zfill(3)
 
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
@@ -27,7 +27,7 @@ class Orders(models.Model):
         verbose_name = "Order"
 
     def __str__(self):
-        return "Order No." + str(self.pk).zfill(5) + " / By: " + str(User_Profiles.objects.get(user = self.Orderer).real_name.encode("utf-8")) + " / Paid: " + str(self.paid) + " / Sent: " + str(self.sent) + " / Group ID: " + str(self.group_id.pk)
+        return str(self.pk).zfill(5) + " / By: " + str(User_Profiles.objects.get(user = self.Orderer).real_name.encode("utf-8")) + " / Paid: " + str(self.paid) + " / Sent: " + str(self.sent) + " / Group ID: " + str(self.group_id.pk)
 
 class Components(models.Model):
     part_number = models.CharField(max_length = 40)
