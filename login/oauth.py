@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.shortcuts import redirect
 from login import auth
 
 class User_Data(object):
@@ -35,7 +36,11 @@ class oauth(object):
     def init_session_with_uuid(self, uuid, request):
         if auth.hasUser(uuid):
             if auth.create_session(request, uuid):
-                return True
+                if auth.hasProfile(uuid):
+                    return redirect("digikey.views.progress")
+
+                else:
+                    return redirect("login.views.profile")
             else:
                 raise RuntimeError
         else:

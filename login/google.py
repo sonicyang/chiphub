@@ -42,7 +42,7 @@ class Google_Oauth(oauth.oauth):
         uuid, data = self.get_userdata_and_uuid(access_token, request)
 
         self.init_user(uuid, access_token)
-        self.init_session_with_uuid(uuid, request)
+        return self.init_session_with_uuid(uuid, request)
 
         return redirect("login.views.profile")
 
