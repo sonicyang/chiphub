@@ -266,3 +266,6 @@ def apply_paying_info(request):
     response.status_code = 403
 
     return response
+
+def order_info(request):
+    return render(request, 'order_info.html')

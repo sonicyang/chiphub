@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Sans-serif, Microsoft JhengHei; }
+
+body {
+  background: #F1F4F1; }
+
+.invoice {
+  background: #FFF;
+  color: #222;
+  padding: 3rem 2rem 4rem 3rem;
+  width: 90%;
+  margin: 3rem auto;
+  position: relative; }
+  .invoice h1 {
+    font-size: 50px;
+    text-transform: uppercase;
+    margin: 0; }
+  .invoice h3 {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 20px;
+    margin: 10px 0 1rem 0;
+    color: #999; }
+
+.invoice-id {
+  color: #999;
+  margin: 0 0 2rem 0; }
+
+.invoice-grid {
+  margin: 0 0 2rem 0; }
+  .invoice-grid > div {
+    padding-right: 1rem; }
+  .invoice-grid pre {
+    margin-top: 20px;
+    font-size: 13px;
+    font-family: inherit; }
+
+.invoice-module {
+  border: 1px solid #ccc;
+  padding: 1rem; }
+
+.invoice-for {
+  word-break: break-all; }
+
+.amount-due-amount, .due-date-date {
+  font-size: 1.5rem;
+  font-weight: 800; }
+
+.paid-line {
+  padding: 2rem 0 1rem 0;
+  text-align: center; }
+  .paid-line img {
+    display: block;
+    margin: 0 auto 0.5rem; }
+
+.grid [class^="grid-"] {
+  float: left;
+  width: 100%; }
+.grid .grid-1-2 {
+  width: 50%;
+  height: 100%; }
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both; }
+
+.chip {
+  margin: 1rem 1.2rem 1rem 1.2rem; }
+  .chip .invoice-module {
+    padding: 0.5rem; }
+  .chip .invoice-grid {
+    margin: 0 0 1rem 0; }
+
+/*# sourceMappingURL=order_info.css.map */

@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^profile/$', login.profile),
     url(r'^update_profile/$', login.update_profile),
     url(r'^list_order/$', chatroom.list_order),
+    url(r'^order_info/$', digikey.order_info),
 
     url(r'^islogin/$', login.isLogin),
     url(r'^logout/$', login.logout),
