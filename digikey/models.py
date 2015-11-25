@@ -4,12 +4,13 @@ from login.models import Users, User_Profiles
 import django
 import random
 import string
+import time
 
 def pesudo_random_string_generator():
-    return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
+    return auth.generate_static_uuid(str(time.time()))
 
 class Groups(models.Model):
-    uuid = models.CharField(max_length=40, unique=True, default=auth.generate_static_uuid(pesudo_random_string_generator()))
+    uuid = models.CharField(max_length=40, unique=True, default=pesudo_random_string_generator)
     ordered = models.BooleanField(default=False)
     orderdate = models.DateField(null=True, blank=True)
 
@@ -21,15 +22,18 @@ class Groups(models.Model):
 
     def save(self, *args, **kwargs):
         if self.ordered == True:
-            group = Groups.objects.create()
+            group, newed = Groups.objects.get_or_create(ordered = False)
+            if group.uuid == self.uuid:
+                group = Groups.objects.create()
             for order in Orders.objects.all().filter(group_id = self, paid = False):
                 order.group_id = group
+                order.save()
 
-        super(User_Profiles, self).save(*args, **kwargs)
+        super(Groups, self).save(*args, **kwargs)
 
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
-    uuid = models.CharField(max_length=40, unique=True, default=auth.generate_static_uuid(pesudo_random_string_generator()))
+    uuid = models.CharField(max_length=40, unique=True, default=pesudo_random_string_generator)
     date = models.DateField(default=django.utils.timezone.now)
     expire = models.DateField(default=django.utils.timezone.now)
     receiver = models.CharField(max_length = 10)
