@@ -1,3 +1,29 @@
+function changeAlertMsgForRWD(){
+    $("#alert-message").css("left", function(){
+        return $(window).width() / 2 - $(this).outerWidth() / 2;
+    })
+}
+
+function alertWarning(type){
+    alert_msg = $("#alert-message")
+    alert_msg.text(type);
+    changeAlertMsgForRWD();
+    alert_msg.animate({top:"10px"}, 500);
+}
+
+function warningColor(no){
+    $($("input[type=\"pd\"]")[no]).css("border-color", "#ff0000");
+    $($("input[type=\"pd\"]")[no]).css("box-shadow", "0 0 5px rgba(255, 000, 0, 0.4)");
+}
+
+function normalColor(no){
+    $($("input[type=\"pd\"]"))[no].css("border-color", "");
+    $($("input[type=\"pd\"]"))[no].css("box-shadow", "");
+}
+function resetColor(){
+    $("input[type=\"pd\"]").css("border-color", "");
+    $("input[type=\"pd\"]").css("box-shadow", "");
+}
 
 var order_dom_element = "\
         <div class=\"form-group order\">\
@@ -89,14 +115,21 @@ function confirm_price(){
         $.get("/price_digikey/",
             {order_list: order_list})
              .success(function(data){
-                update_price(JSON.parse(data))
+                update_price(JSON.parse(data));
                 go_to_stage2();
 
              })
              .error(function(jqXHR){
                  if (jqXHR.status == 400){
-                     alert("Chip not existed or no price!");
-                 }
+                    alertWarning("有不存在的料號、不可以1單位訂購的零件、沒有庫存的零件");
+                    data = JSON.parse(jqXHR.responseText);
+                    for(var i = 0; i < data.length; i++){
+                        if(data[i][2] <= 0){
+                            warningColor(i);
+                        }
+                    }
+
+                }
              })
     }else{
         $("#chip-list").append(order_dom_element)

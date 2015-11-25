@@ -51,4 +51,8 @@
       .shipping-info:nth-child(odd) {
         text-align: left; } }
 
+#alert-message {
+  position: fixed;
+  top: -150px; }
+
 /*# sourceMappingURL=order.css.map */
