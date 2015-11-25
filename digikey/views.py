@@ -154,6 +154,17 @@ def get_current_rally(request):
 
     return response
 
+def get_all_orders(request):
+
+    order_list = []
+
+    for order in Orders.objects.all():
+        order_list.append(order.uuid)
+
+    response = HttpResponse(json.dumps(order_list))
+
+    return response
+
 def get_user_orders(request):
     if auth.isLogin(request):
         user = auth.get_user_data(request)
@@ -163,24 +174,7 @@ def get_user_orders(request):
 
             for order in Orders.objects.all().filter(Orderer = user):
 
-                total = 0
-                for component in order.components_set.all():
-                    detail = Order_Details.objects.get(order = order, component = component)
-
-                    total += detail.quantity * component.unit_price
-
-                order_dict = {
-                    "date": str(order.date),
-                    "shipping_address": order.shipping_address,
-                    "phone_number": order.phone_number,
-                    "paid": order.paid,
-                    "paid_account": order.paid_account,
-                    "paid_date": str(order.paid_date),
-                    "sent": order.sent,
-                    "sent_date": str(order.sent_date),
-                    "net": total}
-
-                order_list.append(order_dict)
+                order_list.append(order.uuid)
 
             response = HttpResponse(json.dumps(order_list))
 
@@ -190,6 +184,36 @@ def get_user_orders(request):
     response.status_code = 403
 
     return response
+
+def get_single_order(request):
+    uuid = request.GET['UUID']
+    try:
+        order = Orders.objects.all().get(uuid = uuid)
+
+        total = 0
+        for component in order.components_set.all():
+            detail = Order_Details.objects.get(order = order, component = component)
+
+            total += detail.quantity * component.unit_price
+
+        order_dict = {
+            "date": str(order.date),
+            "shipping_address": order.shipping_address,
+            "phone_number": order.phone_number,
+            "paid": order.paid,
+            "paid_account": order.paid_account,
+            "paid_date": str(order.paid_date),
+            "sent": order.sent,
+            "sent_date": str(order.sent_date),
+            "net": total}
+
+        response = HttpResponse(json.dumps(order_dict))
+
+        return response
+    except ObjectDoesNotExist:
+        response = HttpResponse()
+        response.status_code = 400
+
 
 def apply_paying_info(request):
     #XXX: should use POST

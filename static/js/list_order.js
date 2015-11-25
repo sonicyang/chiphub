@@ -42,45 +42,50 @@ var order_html = "\
     </div>\
     <hr />\
 ";
-$.get("/list_digikey/", function(d){
-    data = JSON.parse(d);
-    data = data.reverse();
+
+$.get("/user_digikey/", function(d){
+    list = JSON.parse(d);
+    list = list.reverse();
     $(document).ready(function(){
         order_list = $("#order-list")
-        for (var i = 0; i < data.length; i ++){
+        for (var i = 0; i < list.length; i ++){
             order_list.append(order_html);
         }
         $('.order').each(function(index){
+            var item = $(this)
+            $.get("/history_digikey?UUID=" + list[index], function(d){
+                data = JSON.parse(d)
 
-            $(this).find('.order-date').each(function(){
-                var type = $(this).attr("type");
-                var text = data[index][type];
-                $(this).text(text);
-            })
+                item.find('.order-date').each(function(){
+                    var type = $(this).attr("type");
+                    var text = data[type];
+                    $(this).text(text);
+                })
 
-            $(this).find('.order-price').each(function(){
-                var type = $(this).attr("type");
-                var text = data[index][type];
-                text = '$ ' + text;
-                $(this).text(text);
-            })
+                item.find('.order-price').each(function(){
+                    var type = $(this).attr("type");
+                    var text = data[type];
+                    text = '$ ' + text;
+                    $(this).text(text);
+                })
 
-            $(this).find(".sent").each(function(){
-                var type = $(this).attr("type");
-                var text = data[index][type];
-                if (!text || text == "None"){
-                    text = "尚未寄送";
-                }
-                $(this).text(text);
-            })
+                item.find(".sent").each(function(){
+                    var type = $(this).attr("type");
+                    var text = data[type];
+                    if (!text || text == "None"){
+                        text = "尚未寄送";
+                    }
+                    $(this).text(text);
+                })
 
-            $(this).find(".paid").each(function(){
-                var type = $(this).attr("type");
-                var text = data[index][type];
-                if (!text || text == "None"){
-                    text = "尚未付款";
-                }
-                $(this).text(text);
+                item.find(".paid").each(function(){
+                    var type = $(this).attr("type");
+                    var text = data[type];
+                    if (!text || text == "None"){
+                        text = "尚未付款";
+                    }
+                    $(this).text(text);
+                })
             })
         })
         //$("label[type=shipping_address]").each(function(index){
