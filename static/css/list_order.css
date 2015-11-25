@@ -6,6 +6,7 @@ body {
   background: #F1F4F1; }
 
 .invoice {
+  background: #FFF;
   color: #222;
   padding: 3rem 2rem 4rem 3rem;
   width: 90%;
@@ -32,6 +33,7 @@ body {
     padding-right: 1rem; }
   .invoice-grid pre {
     margin-top: 20px;
+    font-size: 13px;
     font-family: inherit; }
 
 .invoice-module {
