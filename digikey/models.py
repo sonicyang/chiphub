@@ -9,6 +9,7 @@ def pesudo_random_string_generator():
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
 
 class Groups(models.Model):
+    uuid = models.CharField(max_length=40, unique=True, default=auth.generate_static_uuid(pesudo_random_string_generator()))
     ordered = models.BooleanField(default=False)
     orderdate = models.DateField(null=True, blank=True)
 

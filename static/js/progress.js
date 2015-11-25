@@ -2,6 +2,16 @@ var GOAL = 3000;
 var current_rally = 0;
 var rally_person_count = 0;
 
+var data;
+var order_html = "\
+  <div class=\"row-list\">\
+	  <input type=\"radio\" name=\"expand\">\
+    <span class=\"cell-list primary order-date\" data-label=\"serial-num\" type=\"date\">2015-10-D-RC-103324</span>\
+    <span class=\"cell-list order-price\" data-label=\"sum\" type=\"total\">NT$ 4500</span>\
+    <span class=\"cell-list order-person\" data-label=\"person\" type=\"person\">8</span>\
+  </div>\
+";
+
 $(document).ready(function(){
     $.get("/rally_digikey/", function(data){
         data = JSON.parse(data);
@@ -21,6 +31,51 @@ $(document).ready(function(){
             $("#order").hide()
         }
       }
+    })
+    $.get("/group_history_digikey/", function(d){
+        list = JSON.parse(d);
+        list = list.reverse();
+        $(document).ready(function(){
+            order_list = $("#table-list")
+            for (var i = 0; i < list.length; i ++){
+                order_list.append(order_html);
+            }
+            $('.row-list').each(function(index){
+                if(index==0){
+                     return;
+                }
+                var item = $(this)
+                $.get("/group_info_digikey?UUID=" + list[index - 1], function(d){
+                    data = JSON.parse(d)
+
+                    item.find(".order-date").each(function(){
+                        var type = $(this).attr("type");
+                        var text = data[type];
+                        if (!text || text == "None"){
+                            text = "尚未下訂";
+                        }
+                        $(this).text(text);
+                    })
+
+                    item.find('.order-price').each(function(){
+                        var type = $(this).attr("type");
+                        var text = data[type];
+                        text = '$ ' + text;
+                        $(this).text(text);
+                    })
+
+                    item.find('.order-person').each(function(){
+                        var type = $(this).attr("type");
+                        var text = data[type];
+                        $(this).text(text);
+                    })
+
+                })
+            })
+            //$("label[type=shipping_address]").each(function(index){
+                //console.log(data[index]['shipping_address'])
+            //})
+        })
     })
 })
 

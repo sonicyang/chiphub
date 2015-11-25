@@ -43,7 +43,7 @@ var order_html = "\
     <hr />\
 ";
 
-$.get("/user_digikey/", function(d){
+$.get("/user_history_digikey/", function(d){
     list = JSON.parse(d);
     list = list.reverse();
     $(document).ready(function(){
@@ -53,7 +53,7 @@ $.get("/user_digikey/", function(d){
         }
         $('.order').each(function(index){
             var item = $(this)
-            $.get("/history_digikey?UUID=" + list[index], function(d){
+            $.get("/order_info_digikey?UUID=" + list[index], function(d){
                 data = JSON.parse(d)
 
                 item.find('.order-date').each(function(){

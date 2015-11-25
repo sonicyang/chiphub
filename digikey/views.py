@@ -154,16 +154,42 @@ def get_current_rally(request):
 
     return response
 
-def get_all_orders(request):
+def get_groups(request):
 
-    order_list = []
+    group_list = []
 
-    for order in Orders.objects.all():
-        order_list.append(order.uuid)
+    for group in Groups.objects.all().filter(ordered = True):
+        group_list.append(group.uuid)
 
-    response = HttpResponse(json.dumps(order_list))
+    response = HttpResponse(json.dumps(group_list))
 
     return response
+
+def get_group_info(request):
+    uuid = request.GET['UUID']
+    try:
+        group = Groups.objects.all().get(uuid = uuid)
+        total = 0
+        person = 0
+        for order in Orders.objects.all().filter(group_id = group):
+            person += 1
+            for component in order.components_set.all():
+                detail = Order_Details.objects.get(order = order, component = component)
+
+                total += detail.quantity * component.unit_price
+
+        group_dict = {
+            "date": str(group.orderdate),
+            "total": total,
+            "person": person,
+            }
+
+        response = HttpResponse(json.dumps(group_dict))
+
+        return response
+    except ObjectDoesNotExist:
+        response = HttpResponse()
+        response.status_code = 400
 
 def get_user_orders(request):
     if auth.isLogin(request):

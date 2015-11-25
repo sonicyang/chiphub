@@ -52,8 +52,9 @@ urlpatterns = [
     url(r'^order_digikey/$', digikey.order_digikey),
     url(r'^price_digikey/$', digikey.get_digikey_price),
     url(r'^rally_digikey/$', digikey.get_current_rally),
-    url(r'^list_digikey/$', digikey.get_all_orders),
-    url(r'^user_digikey/$', digikey.get_user_orders),
-    url(r'^history_digikey/$', digikey.get_single_order),
+    url(r'^group_history_digikey/$', digikey.get_groups),
+    url(r'^group_info_digikey/$', digikey.get_group_info),
+    url(r'^user_history_digikey/$', digikey.get_user_orders),
+    url(r'^order_info_digikey/$', digikey.get_single_order),
     url(r'^pay_digikey/$', digikey.apply_paying_info),
 ]
