@@ -19,6 +19,14 @@ class Groups(models.Model):
     def __str__(self):
         return str(self.pk).zfill(3)
 
+    def save(self, *args, **kwargs):
+        if self.ordered == True:
+            group = Groups.objects.create()
+            for order in Orders.objects.all().filter(group_id = self, paid = False):
+                order.group_id = group
+
+        super(User_Profiles, self).save(*args, **kwargs)
+
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
     uuid = models.CharField(max_length=40, unique=True, default=auth.generate_static_uuid(pesudo_random_string_generator()))
