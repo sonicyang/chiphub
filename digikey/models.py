@@ -1,6 +1,12 @@
 from django.db import models
+from login import auth
 from login.models import Users, User_Profiles
 import django
+import random
+import string
+
+def pesudo_random_string_generator():
+    return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
 
 class Groups(models.Model):
     ordered = models.BooleanField(default=False)
@@ -14,7 +20,9 @@ class Groups(models.Model):
 
 class Orders(models.Model):
     Orderer = models.ForeignKey(Users)
+    uuid = models.CharField(max_length=40, unique=True, default=auth.generate_static_uuid(pesudo_random_string_generator()))
     date = models.DateField(default=django.utils.timezone.now)
+    expire = models.DateField(default=django.utils.timezone.now)
     receiver = models.CharField(max_length = 10)
     shipping_address = models.CharField(max_length = 100)
     phone_number = models.CharField(max_length = 20)
