@@ -16,10 +16,10 @@ class OrderInline(admin.TabularInline):
 @admin.register(Orders)
 class OrderAdmin(admin.ModelAdmin):
     list_filter = ['sent', 'paid', 'sent_date']
-    list_display = ('pk', 'group_id','paid', 'sent')
+    list_display = ('uuid', 'group_id','paid', 'sent')
 
     fieldsets = [
-                (None,               {'fields': ['Orderer', 'group_id', 'date']}),
+                (None,               {'fields': ['uuid', 'Orderer', 'group_id', 'date', 'expire']}),
                 ('Payment information', {'fields': ['paid', 'paid_account', 'paid_date']}),
                 ('Uplink information', {'fields': ['sent', 'sent_date']}),
                 ('Additional Shipping information', {'fields': ['receiver', 'shipping_address', 'phone_number']}),
