@@ -10,66 +10,39 @@
 {% endblock %}
 
 {% block content %}
-<div class="invoice">
-  <h1>Invoice</h1>
-  <div class="invoice-id"># 2015-10-D-RC-103323</div>
-
-  <div class="grid group invoice-parties invoice-grid">
-
-    <div class="grid-1-2">
-      <div class="invoice-module">
-        <h3>收件人地址</h3>
-        <pre>台南市 東區 大學路 1 號</pre>
-      </div>
+    <div id="order-list">
+        <!--<div class="order">-->
+            <!--<div class="container-fluid">-->
+                <!--<h2 class="order-time">2015/12/31</h2>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-4 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--寄出日期:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="sent_date"></label>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-8 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--寄送地址:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="shipping_address"></label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-4 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--付款日期:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="paid_date"></label>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-8 info-item">-->
+                        <!--<label class="control-label">-->
+                            <!--匯款帳戶:-->
+                        <!--</label>-->
+                        <!--<label class="control-label output" type="paid_account"></label>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
-
-    <div class="grid-1-2">
-      <div class="invoice-module">
-        <h3>From</h3>
-        CHIPHUB<br>
-        台南市 東區 大學路 1號<br>
-        電機系館  92A99
-      </div>
-    </div>
-  </div>
-
-  <div class="grid group invoice-paid-details invoice-grid">
-    <div class="grid-1-1">
-      <div class="invoice-module">
-        <h3>For</h3>
-        <div class="invoice-for">
-          Order components from CHIPHUB in Dec.23,2015
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="grid group invoice-paid-details invoice-grid">
-    <div class="grid-1-1">
-      <div class="invoice-module">
-        <h3>匯款帳戶</h3>
-        <div class="invoice-for">
-          700-0001110-1314520
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="grid group invoice-details invoice-grid">
-    <div class="grid-1-2">
-      <div class="invoice-module">
-        <h3>應付金額</h3>
-        <div class="amount-due-amount">NT$ 830</div>
-        <h3>實付金額</h3>
-        <div class="amount-due-amount">NT$ 830</div>
-      </div>
-    </div>
-    <div class="grid-1-2">
-      <div class="invoice-module">
-        <h3>繳款截止日期</h3>
-        <div class="due-date-date">2015 / 12 / 31</div>
-        <h3>匯款日期</h3>
-        <div class="due-date-date">2015 / 12 / 23</div>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}
