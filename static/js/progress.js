@@ -9,6 +9,19 @@ $(document).ready(function(){
         rally_person_count = data[1];
         update_price();
     })
+    $.ajax({
+      url: "/islogin",
+      statusCode: {
+        200: function(){
+            $("#list").show()
+            $("#order").show()
+        },
+        400: function(){
+            $("#list").hide()
+            $("#order").hide()
+        }
+      }
+    })
 })
 
 function update_price(){
