@@ -25,7 +25,7 @@ class Santilizer(object):
 
     @classmethod
     def email(self, email):
-        is_valid = validate_email(email,verify=True)
+        is_valid = validate_email(email)
 
         if is_valid is True:
             return True
