@@ -21,7 +21,7 @@ body {
       border-radius: 5px;
       border: 10px solid #2C3E50;
       /*font-family: "source-han-sans-traditional" */
-      font-weight: 700;
+      font-weight: 800;
       font-family: Microsoft JhengHei; }
     body section .response {
       position: relative;
@@ -41,7 +41,7 @@ body {
     body section input[name=question]:checked + label {
       background: #6698C8;
       border-color: #6698C8;
-      font-weight: 500; }
+      font-weight: 800; }
     body section input[name=question]:checked + label + .response {
       opacity: 1;
       visibility: visible;
@@ -50,7 +50,7 @@ body {
       -webkit-filter: blur(0px);
       margin-bottom: 10px;
       color: #2C3E50;
-      font-weight: 400; }
+      font-weight: 500; }
     body section .fixed-height {
       height: 20px;
       overflow: hidden;
