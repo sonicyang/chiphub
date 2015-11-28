@@ -1,0 +1,53 @@
+#slide-1 h1 {
+    font-size: 4em;
+    font-family: Orbitron, sans-serif;
+
+}
+#slide-1 h4 {
+    font-size: 30px;
+    text-transform: none;
+    font-weight: 300;
+}
+#slide-2 h2 {
+    float: left;
+}
+#slide-2 td:last-child {
+    text-align: right;
+}
+#slide-2 table {
+    font-family: verdana; 
+
+}
+#slide-2 th {
+    font-size: 20px;
+    font-weight: 300;
+}
+#slide-2 td {
+    font-size: 20px;
+}
+#slide-2 tr,th,td,thead {
+    border: 1px solid #FFF; 
+    padding: 10px;
+}
+#slide-2 tbody tr td {
+    border: 1px solid #FFF; 
+}
+#slide-2 thead tr th {
+    border: 1px solid #FFF; 
+}
+#slide-2 tbody {
+    border: 1px solid #FFF;
+}
+#slide-2 table {
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 100;
+}
+#slide-10 tbody {
+    font-size: 24px;
+    border-collapse: none;
+
+}
+#slide-5 ul ul,#slide-6 ul ul  {
+    list-style-type: circle;
+}
