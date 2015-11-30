@@ -104,7 +104,7 @@ function arrange_order(){
     for (var i = 0; i < pds.length; i ++){
         pd = $(pds[i]).attr("value")
         pd_amounts = $(amounts[i]).attr("value")
-        if (pd !== "" && pd_amounts !== ""){
+        if (pd !== "" && pd_amounts !== "" && pd_amounts % 1 === 0){
             order_list += $(pds[i]).attr("value")
             order_list += ":"
             order_list += $(amounts[i]).attr("value")
