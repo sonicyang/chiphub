@@ -11,6 +11,12 @@ function alertWarning(type){
     alert_msg.animate({top:"10px"}, 500);
 }
 
+function alertWarningClear(){
+    alert_msg = $("#alert-message")
+    changeAlertMsgForRWD();
+    alert_msg.animate({top:"-100px"}, 500);
+}
+
 function warningColor(no){
     $($("input[type=\"pd\"]")[no]).css("border-color", "#ff0000");
     $($("input[type=\"pd\"]")[no]).css("box-shadow", "0 0 5px rgba(255, 000, 0, 0.4)");
@@ -112,15 +118,19 @@ function confirm_price(){
     arrange_order()
     if (order_list !== ""){
         order_list = order_list.slice(0, -1)
+        $(".loader").show()
         $.get("/price_digikey/",
             {order_list: order_list})
              .success(function(data){
+                $(".loader").hide()
                 update_price(JSON.parse(data));
+                alertWarningClear();
+                resetColor();
                 go_to_stage2();
-
              })
              .error(function(jqXHR){
                  if (jqXHR.status == 400){
+                    $(".loader").hide()
                     alertWarning("有不存在的料號、不可以1單位訂購的零件、沒有庫存的零件");
                     data = JSON.parse(jqXHR.responseText);
                     for(var i = 0; i < data.length; i++){
@@ -145,5 +155,8 @@ function submit_form(){
     $.get("/order_digikey/",
         {order_list: order_list}
     )
-    window.location.href = "/progress/";
+    .success(function(){
+        window.location.href = "/progress/";
+    })
+    $(".loader").show();
 }

@@ -1,6 +1,24 @@
 body {
   font-family: Microsoft JhengHei; }
 
+.loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000; }
+  .loader svg {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: calc(50% - 50px);
+    top: calc(50% - 50px); }
+    .loader svg path, .loader svg rect {
+      fill: #ffffff; }
+
 .order {
   padding-top: 10px;
   padding-bottom: 10px;
