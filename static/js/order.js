@@ -160,3 +160,6 @@ function submit_form(){
     })
     $(".loader").show();
 }
+$(window).resize(function(){
+    changeAlertMsgForRWD();
+})
