@@ -74,6 +74,7 @@ body {
 
 #alert-message {
   position: fixed;
-  top: -150px; }
+  top: -150px;
+  z-index: 1000; }
 
 /*# sourceMappingURL=order.css.map */
