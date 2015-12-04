@@ -17,7 +17,7 @@ def progress(request):
     return render(request, 'progress.html')
 
 
-def reterieve_html(url):
+def retrieve_html(url):
     try:
         r = requests.get(url)
         if r.status_code == 200:
@@ -27,14 +27,14 @@ def reterieve_html(url):
     except:
         return 'Failed to get :' + str(url)
 
-def reterieve_price(part_number):
+def retrieve_component_detail(part_number):
     comp, created = Components.objects.get_or_create(part_number=part_number,defaults={
                                             "unit_price" : 0}
                                             )
     if not created:
-        return comp.unit_price
+        return comp
     else:
-        html = reterieve_html('http://www.digikey.tw/product-search/zh?vendor=0&keywords=' + part_number)
+        html = retrieve_html('http://www.digikey.tw/product-search/zh?vendor=0&keywords=' + part_number)
         soup = bs4.BeautifulSoup(html, 'html.parser')
 
         try:
@@ -46,7 +46,7 @@ def reterieve_price(part_number):
             min_qty = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[0].get_text())
             price = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[1].get_text())
         except Exception:
-            return -1.0
+            return None
 
         try:
             cname = str(soup.find(itemprop='model').get_text())
@@ -55,12 +55,12 @@ def reterieve_price(part_number):
 
 
         if min_qty != 1 or no_stocking:
-            return -1.0
+            return None
         else:
             comp.unit_price = float(price)
             comp.common_name = cname
             comp.save()
-            return price
+            return comp
 
 def create_order(user, profile, parts):
     for part in parts:
@@ -80,9 +80,7 @@ def create_order(user, profile, parts):
                                   )
 
     for part in parts:
-        comp, created = Components.objects.get_or_create(part_number=part[0],defaults={
-                                                "unit_price" : float(part[2])}
-                                                )
+        comp = retrieve_component_detail(part[0])
 
         od = Order_Details(quantity = int(part[1]),
                            component = comp,
@@ -97,7 +95,7 @@ def get_digikey_price(request):
     if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
         parts = request.GET['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
-        parts = map(lambda x: x + [(reterieve_price(x[0]))], parts)
+        parts = map(lambda x: x + [(retrieve_component_detail(x[0])).unit_price], parts)
 
         non_exist_or_noprice = filter(lambda x: x[2] <= 0.0, parts)
 
@@ -137,7 +135,7 @@ def order_digikey(request):
     if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
         parts = request.GET['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
-        parts = map(lambda x: x + [(reterieve_price(x[0]))], parts)
+        parts = map(lambda x: x + [(retrieve_component_detail(x[0]).unit_price)], parts)
 
         non_exist_or_noprice = filter(lambda x: x[2] <= 0.0, parts)
 
