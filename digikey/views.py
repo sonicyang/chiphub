@@ -12,6 +12,8 @@ from digikey.models import Orders
 from digikey.models import Components
 from digikey.models import Groups
 from digikey.models import Order_Details
+from django.forms.models import model_to_dict
+import operator
 
 def progress(request):
     return render(request, 'progress.html')
@@ -78,13 +80,7 @@ def retrieve_component_detail(part_number):
             comp.save()
             return comp
 
-def create_order(user, profile, parts):
-    for part in parts:
-        try:
-            int(part[1])
-        except ValueError:
-            return False
-
+def create_order(user, profile, parts_detail):
     unordered_group = Groups.objects.get_or_create(ordered=False)[0]
 
 
@@ -95,40 +91,43 @@ def create_order(user, profile, parts):
                                   group_id = unordered_group
                                   )
 
-    for part in parts:
-        comp = retrieve_component_detail(part[0])
-
-        od = Order_Details(quantity = int(part[1]),
-                           component = comp,
+    for part in parts_detail:
+        od = Order_Details(quantity = part[1],
+                           component = part[0],
                            order = order)
 
         od.save()
 
-    return True
+
+def removekey(d, key):
+    r = dict(d)
+    del r[key]
+    return r
+
+def addquantity(d, qty):
+    d["qunatity"] = qty
+    return d
 
 
-def order_digikey(request):
+def get_digikey_price(request):
     #XXX: should user POST
     if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
         parts = request.GET['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
-        parts = map(lambda x: x + [(retrieve_component_detail(x[0]).unit_price)], parts)
+        parts_detail = map(lambda x: [retrieve_component_detail(x[0]), int(x[1])], parts)
 
-        non_exist_or_noprice = filter(lambda x: x[2] <= 0.0, parts)
+        non_exist_or_noprice = filter(lambda x: x[0] is None, parts_detail)
 
-        response = HttpResponse(json.dumps(parts))
+        part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
+        part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
+        part_detail_dicts = map(lambda x: removekey(x, "id"), part_detail_dicts)
+
+        response = HttpResponse(json.dumps(part_detail_dicts))
 
         if(len(non_exist_or_noprice)):
             response.status_code = 400
         else:
-
-            user = auth.get_user_data(request)
-            profile = auth.get_user_profile(request)
-
-            if create_order(user, profile, parts):
-                response.status_code = 200
-            else:
-                response.status_code = 400
+            response.status_code = 200
 
         return response
     else:
@@ -137,21 +136,29 @@ def order_digikey(request):
 
         return response
 
-def get_digikey_price(request):
+def order_digikey(request):
     #XXX: should user POST
     if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
         parts = request.GET['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
-        parts = map(lambda x: x + [(retrieve_component_detail(x[0])).unit_price], parts)
+        parts_detail = map(lambda x: [retrieve_component_detail(x[0]), int(x[1])], parts)
 
-        non_exist_or_noprice = filter(lambda x: x[2] <= 0.0, parts)
+        non_exist_or_noprice = filter(lambda x: x[0] is None, parts_detail)
 
-        response = HttpResponse(json.dumps(parts))
+        part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
+        part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
+        part_detail_dicts = map(lambda x: removekey(x, "id"), part_detail_dicts)
+
+        response = HttpResponse(json.dumps(part_detail_dicts))
 
         if(len(non_exist_or_noprice)):
             response.status_code = 400
         else:
-            response.status_code = 200
+
+            user = auth.get_user_data(request)
+            profile = auth.get_user_profile(request)
+
+            create_order(user, profile, parts_detail)
 
         return response
     else:
