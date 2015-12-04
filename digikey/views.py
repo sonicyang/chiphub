@@ -250,20 +250,23 @@ def get_single_order(request):
             detail = Order_Details.objects.get(order = order, component = component)
 
             total += detail.quantity * component.unit_price
+            cdict = model_to_dict(component)
+            cdict.pop("id")
+            cdict.pop("associated_order")
+            cdict["quantity"] = detail.quantity
 
-            component_list.append((component.part_number, detail.quantity,detail.quantity * component.unit_price,))
+            component_list.append(cdict)
 
-        order_dict = {
-            "date": str(order.date),
-            "shipping_address": order.shipping_address,
-            "phone_number": order.phone_number,
-            "paid": order.paid,
-            "paid_account": order.paid_account,
-            "paid_date": str(order.paid_date),
-            "sent": order.sent,
-            "sent_date": str(order.sent_date),
-            "net": total,
-            "components": component_list}
+        order_dict = model_to_dict(order)
+        order_dict.pop("id")
+        order_dict.pop("Orderer")
+        order_dict.pop("group_id")
+        order_dict["paid_date"] = str(order_dict["paid_date"])
+        order_dict["sent_date"] = str(order_dict["sent_date"])
+        order_dict["date"] = str(order_dict["date"])
+        order_dict["expire"] = str(order_dict["expire"])
+        order_dict["net"] = total
+        order_dict["components"] = component_list
 
         response = HttpResponse(json.dumps(order_dict))
 
