@@ -16,6 +16,22 @@ from digikey.models import Order_Details
 def progress(request):
     return render(request, 'progress.html')
 
+def order_page(request):
+    if auth.isLogin(request):
+        data = auth.get_user_data(request)
+        if auth.hasProfile(data.uuid):
+            profile = auth.get_user_profile(request)
+            return render(request, "order.html", {'realname' : profile.real_name,
+                                                    'email' : profile.email,
+                                                    'shipping_address' : profile.default_shipping_address,
+                                                    'phone' : profile.phone_number})
+        else:
+            return redirect("/profile/")
+
+    response = HttpResponse()
+    response.status_code = 403
+    return response
+
 
 def retrieve_html(url):
     try:
@@ -90,45 +106,6 @@ def create_order(user, profile, parts):
 
     return True
 
-def get_digikey_price(request):
-    #XXX: should user POST
-    if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
-        parts = request.GET['order_list'].split(',')
-        parts = map(lambda x: x.split(':'), parts)
-        parts = map(lambda x: x + [(retrieve_component_detail(x[0])).unit_price], parts)
-
-        non_exist_or_noprice = filter(lambda x: x[2] <= 0.0, parts)
-
-        response = HttpResponse(json.dumps(parts))
-
-        if(len(non_exist_or_noprice)):
-            response.status_code = 400
-        else:
-            response.status_code = 200
-
-        return response
-    else:
-        response = HttpResponse()
-        response.status_code = 403
-
-        return response
-
-
-def order_page(request):
-    if auth.isLogin(request):
-        data = auth.get_user_data(request)
-        if auth.hasProfile(data.uuid):
-            profile = auth.get_user_profile(request)
-            return render(request, "order.html", {'realname' : profile.real_name,
-                                                    'email' : profile.email,
-                                                    'shipping_address' : profile.default_shipping_address,
-                                                    'phone' : profile.phone_number})
-        else:
-            return redirect("/profile/")
-
-    response = HttpResponse()
-    response.status_code = 403
-    return response
 
 def order_digikey(request):
     #XXX: should user POST
@@ -152,6 +129,29 @@ def order_digikey(request):
                 response.status_code = 200
             else:
                 response.status_code = 400
+
+        return response
+    else:
+        response = HttpResponse()
+        response.status_code = 403
+
+        return response
+
+def get_digikey_price(request):
+    #XXX: should user POST
+    if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
+        parts = request.GET['order_list'].split(',')
+        parts = map(lambda x: x.split(':'), parts)
+        parts = map(lambda x: x + [(retrieve_component_detail(x[0])).unit_price], parts)
+
+        non_exist_or_noprice = filter(lambda x: x[2] <= 0.0, parts)
+
+        response = HttpResponse(json.dumps(parts))
+
+        if(len(non_exist_or_noprice)):
+            response.status_code = 400
+        else:
+            response.status_code = 200
 
         return response
     else:
