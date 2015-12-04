@@ -1,5 +1,12 @@
+#close-order-info span {
+  position: absolute;
+  right: 1%;
+  top: 1rem;
+  font-size: 2.5rem;
+  color: white;
+  z-index: 1001; }
+
 #order-info {
-  display: none;
   position: fixed;
   left: 0px;
   top: 0px;
@@ -22,6 +29,7 @@ body {
   padding: 3rem 2rem 4rem 3rem;
   width: 90%;
   margin: 5% auto;
+  margin: 4rem 5% 5rem 5%;
   position: relative; }
   .invoice h1 {
     font-size: 50px;

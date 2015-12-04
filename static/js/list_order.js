@@ -105,10 +105,15 @@ $.get("/user_history_digikey/", function(d){
             }
         });
     })
+
     $(document).on('keyup',function(evt) {
         if (evt.keyCode == 27) {
             $("#order-info").hide();
         }
     });
+
+    $("#close-order-info").click(function(){
+            $("#order-info").hide();
+    })
 
 })
