@@ -48,6 +48,12 @@ def reterieve_price(part_number):
         return price
 
 def create_order(user, profile, parts):
+    for part in parts:
+        try:
+            int(part[1])
+        except ValueError:
+            return False
+
     unordered_group = Groups.objects.get_or_create(ordered=False)[0]
 
 
@@ -68,6 +74,8 @@ def create_order(user, profile, parts):
                            order = order)
 
         od.save()
+
+    return True
 
 def get_digikey_price(request):
     #XXX: should user POST
@@ -123,12 +131,14 @@ def order_digikey(request):
         if(len(non_exist_or_noprice)):
             response.status_code = 400
         else:
-            response.status_code = 200
 
             user = auth.get_user_data(request)
             profile = auth.get_user_profile(request)
 
-            create_order(user, profile, parts)
+            if create_order(user, profile, parts):
+                response.status_code = 200
+            else:
+                response.status_code = 400
 
         return response
     else:
