@@ -105,7 +105,7 @@ def removekey(d, key):
     return r
 
 def addquantity(d, qty):
-    d["qunatity"] = qty
+    d["quantity"] = qty
     return d
 
 
