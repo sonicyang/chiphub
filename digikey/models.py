@@ -1,6 +1,8 @@
 from django.db import models
 from login import auth
 from login.models import Users, User_Profiles
+from ComponentLibrary.models import GComponents
+from ComponentLibrary.models import GClasses
 import django
 import random
 import string
@@ -54,17 +56,15 @@ class Orders(models.Model):
 
 class Components(models.Model):
     part_number = models.CharField(max_length = 40)
-    common_name = models.CharField(max_length = 60, null=True, blank=True)
-    manufacturer = models.CharField(max_length = 60, null=True, blank=True)
-    # weight = models.IntegerField('Weight of Component in grams')
     unit_price = models.FloatField("Unit price in TWD")
     associated_order = models.ManyToManyField(Orders, through='Order_Details')
+    generic_type = models.ForeignKey(GComponents, null=True, blank=True)
 
     class Meta:
         verbose_name = "Component"
 
     def __str__(self):
-        return "Component No." + str(self.pk).zfill(5) + " / #PN: " + str(self.part_number) + " / CName: " + str(self.common_name) + " / Unit Pice: " + str(self.unit_price)
+        return "Component No." + str(self.pk).zfill(5) + " / #PN: " + str(self.part_number) + " / CName: " + str(self.generic_type.common_name) + " / Unit Pice: " + str(self.unit_price)
 
 class Order_Details(models.Model):
     quantity = models.IntegerField()

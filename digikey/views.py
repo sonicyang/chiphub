@@ -12,7 +12,10 @@ from digikey.models import Orders
 from digikey.models import Components
 from digikey.models import Groups
 from digikey.models import Order_Details
+from ComponentLibrary.models import GComponents
+from ComponentLibrary.models import GClasses
 from django.forms.models import model_to_dict
+import operator
 
 def progress(request):
     return render(request, 'progress.html')
@@ -51,11 +54,11 @@ def retrieve_component_detail(part_number):
     if not created:
         return comp
     else:
-        html = retrieve_html('http://www.digikey.tw/product-search/zh?vendor=0&keywords=' + part_number)
+        html = retrieve_html('http://www.digikey.tw/product-search/en?vendor=0&keywords=' + part_number)
         soup = bs4.BeautifulSoup(html, 'html.parser')
 
         try:
-            no_stocking = u"非庫存貨".encode("utf-8") in str(soup.select(".product-details-feedback")[0].contents[0])
+            no_stocking = u"Non-Stock".encode("utf-8") in str(soup.select(".product-details-feedback")[0].contents[0])
         except IndexError:
             no_stocking = False
 
@@ -74,13 +77,25 @@ def retrieve_component_detail(part_number):
         except Exception:
             mname = ""
 
+        try:
+            main_type = str(soup.select('.attributes-table-main').find_all("table")[0].find_all("tbody")[0].find_all("tr")[5].find_all("a").get_text())
+        except Exception:
+            main_type = ""
+        try:
+            sub_type = str(soup.select('.attributes-table-sub').find_all("table")[0].find_all("tbody")[0].find_all("tr")[6].find_all("a").get_text())
+        except Exception:
+            sub_type = ""
+
 
         if min_qty != 1 or no_stocking or float(price) <= 0:
             return comp
         else:
+
+            gclass, created = GClasses.objects.get_or_create(mname = main_type, sname = sub_type)
+            gcomp, created = GComponents.objects.get_or_create(common_name = cname, manufacturer = mname, ctype = gclass)
+
             comp.unit_price = float(price)
-            comp.common_name = cname
-            comp.manufacturer = mname
+            comp.generic_type = gcomp
             comp.save()
             return comp
 
@@ -124,6 +139,9 @@ def get_digikey_price(request):
         part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
         part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
         part_detail_dicts = map(lambda x: removekey(x, "id"), part_detail_dicts)
+        map(lambda x: operator.setitem(x, "generic_type", model_to_dict(GComponents.objects.get(pk = x["generic_type"]))), part_detail_dicts)
+        map(lambda x: x["generic_type"].pop("id"), part_detail_dicts)
+        map(lambda x: x["generic_type"].pop("ctype"), part_detail_dicts)
 
         response = HttpResponse(json.dumps(part_detail_dicts))
 
@@ -151,6 +169,9 @@ def order_digikey(request):
         part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
         part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
         part_detail_dicts = map(lambda x: removekey(x, "id"), part_detail_dicts)
+        map(lambda x: operator.setitem(x, "generic_type", model_to_dict(GComponents.objects.get(pk = x["generic_type"]))), part_detail_dicts)
+        map(lambda x: x["generic_type"].pop("id"), part_detail_dicts)
+        map(lambda x: x["generic_type"].pop("ctype"), part_detail_dicts)
 
         response = HttpResponse(json.dumps(part_detail_dicts))
 
@@ -259,6 +280,7 @@ def get_single_order(request):
             cdict.pop("id")
             cdict.pop("associated_order")
             cdict["quantity"] = detail.quantity
+            cdict["generic_type"] = GComponents.objects.get(pk = cdict["generic_type"])
 
             component_list.append(cdict)
 
