@@ -28,24 +28,39 @@ def reterieve_html(url):
         return 'Failed to get :' + str(url)
 
 def reterieve_price(part_number):
-    html = reterieve_html('http://www.digikey.tw/product-search/zh?vendor=0&keywords=' + part_number)
-    soup = bs4.BeautifulSoup(html, 'html.parser')
-
-    try:
-        no_stocking = u"非庫存貨".encode("utf-8") in str(soup.select(".product-details-feedback")[0].contents[0])
-    except IndexError:
-        no_stocking = False
-
-    try:
-        min_qty = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[0].get_text())
-        price = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[1].get_text())
-    except Exception:
-        return -1.0
-
-    if min_qty != 1 or no_stocking:
-        return -1.0
+    comp, created = Components.objects.get_or_create(part_number=part_number,defaults={
+                                            "unit_price" : 0}
+                                            )
+    if not created:
+        return comp.unit_price
     else:
-        return price
+        html = reterieve_html('http://www.digikey.tw/product-search/zh?vendor=0&keywords=' + part_number)
+        soup = bs4.BeautifulSoup(html, 'html.parser')
+
+        try:
+            no_stocking = u"非庫存貨".encode("utf-8") in str(soup.select(".product-details-feedback")[0].contents[0])
+        except IndexError:
+            no_stocking = False
+
+        try:
+            min_qty = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[0].get_text())
+            price = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[1].get_text())
+        except Exception:
+            return -1.0
+
+        try:
+            cname = str(soup.find(itemprop='model').get_text())
+        except Exception:
+            cname = ""
+
+
+        if min_qty != 1 or no_stocking:
+            return -1.0
+        else:
+            comp.unit_price = float(price)
+            comp.common_name = cname
+            comp.save()
+            return price
 
 def create_order(user, profile, parts):
     for part in parts:
