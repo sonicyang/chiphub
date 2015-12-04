@@ -69,6 +69,10 @@ def retrieve_component_detail(part_number):
             cname = str(soup.find(itemprop='model').get_text())
         except Exception:
             cname = ""
+        try:
+            mname = str(soup.find(itemprop='manufacturer').get_text())
+        except Exception:
+            mname = ""
 
 
         if min_qty != 1 or no_stocking or float(price) <= 0:
@@ -76,6 +80,7 @@ def retrieve_component_detail(part_number):
         else:
             comp.unit_price = float(price)
             comp.common_name = cname
+            comp.manufacturer = mname
             comp.save()
             return comp
 

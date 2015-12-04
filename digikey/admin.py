@@ -50,4 +50,4 @@ class GroupAdmin(admin.ModelAdmin):
 
 @admin.register(Components)
 class ComponentAdmin(admin.ModelAdmin):
-    list_display = ('part_number', 'common_name', 'unit_price')
+    list_display = ('part_number', 'common_name', 'manufacturer', 'unit_price')

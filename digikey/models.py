@@ -55,6 +55,7 @@ class Orders(models.Model):
 class Components(models.Model):
     part_number = models.CharField(max_length = 40)
     common_name = models.CharField(max_length = 60, null=True, blank=True)
+    manufacturer = models.CharField(max_length = 60, null=True, blank=True)
     # weight = models.IntegerField('Weight of Component in grams')
     unit_price = models.FloatField("Unit price in TWD")
     associated_order = models.ManyToManyField(Orders, through='Order_Details')
