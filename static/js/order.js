@@ -61,9 +61,10 @@ function add_chip(){
 }
 
 function update_price(data){
+    //XXX: How would you assume .price DOM object has the same arrangement as data returned
     var total = 0;
     $(".price").each(function(index){
-        price = parseInt(data[index][1], 10) * data[index][2];
+        price = parseInt(data[index]["unit_price"], 10) * data[index]["quantity"];
         $(this).text(price);
         total += price;
     })
@@ -134,11 +135,13 @@ function confirm_price(){
                     alertWarning("有不存在的料號、不可以1單位訂購的零件、沒有庫存的零件");
                     data = JSON.parse(jqXHR.responseText);
                     for(var i = 0; i < data.length; i++){
-                        if(data[i][2] <= 0){
+                        if(data[i]["unit_price"] <= 0){
                             warningColor(i);
                         }
                     }
-
+                }else if(jqXHR.status == 500){
+                    $(".loader").hide()
+                    alertWarning("我們出錯了，請再試一次");
                 }
              })
     }else{
