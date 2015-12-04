@@ -91,5 +91,24 @@ $.get("/user_history_digikey/", function(d){
         //$("label[type=shipping_address]").each(function(index){
             //console.log(data[index]['shipping_address'])
         //})
+        $('#order-info').bind("mousewheel DOMMouseScroll", function(e) {
+            var scrollTo = null;
+            if (e.type == 'mousewheel') {
+                scrollTo = (e.originalEvent.wheelDelta * -1);
+            } else if (e.type == 'DOMMouseScroll') {
+                scrollTo = 1000 * e.originalEvent.detail;
+            }
+
+            if (scrollTo) {
+                e.preventDefault();
+                $(this).scrollTop(scrollTo + $(this).scrollTop());
+            }
+        });
     })
+    $(document).on('keyup',function(evt) {
+        if (evt.keyCode == 27) {
+            $("#order-info").hide();
+        }
+    });
+
 })

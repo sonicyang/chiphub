@@ -10,6 +10,75 @@
 {% endblock %}
 
 {% block content %}
+    <div id="order-info">
+        <div class="invoice">
+            <h1>Invoice</h1>
+            <!--<div class="invoice-id"># 2015-10-D-RC-103323</div>-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="grid group invoice-parties invoice-grid col-md-12">
+
+                        <div class="invoice-module">
+                            <h3>收件人地址</h3>
+                            <label class="">
+                                {{ shipping_address }}
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="grid group invoice-paid-details invoice-grid col-md-12">
+                        <div class="invoice-module">
+                            <h3>匯款帳戶</h3>
+                            <div class="invoice-for">
+                                {{ paid_account }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="grid group invoice-details invoice-grid col-md-6">
+                        <div class="invoice-module">
+                            <h3>訂單金額</h3>
+                            <div class="amount-due-amount"> {{ paid }} </div>
+                            <h3>手續費</h3>
+                            <div class="amount-due-amount"> {{ tmp }}</div>
+                        </div>
+                    </div>
+                    <div class="grid group invoice-details invoice-grid col-md-6">
+                        <div class="invoice-module">
+                            <h3>匯款日期</h3>
+                            <div class="due-date-date">{{ paid_date }}</div>
+                            <h3>寄送日期</h3>
+                            <div class="due-date-date">{{ sent_date }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="chip-list">
+                    <div class="row chip invoice-module">
+                        <div class="">
+                            <div class="col-md-6">
+                                <h3>CHIP</h3>
+                                <div class="invoice-for">
+                                    KASJDLKSAJDLASJDKLASD
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-md-6">
+                                <h3>數量</h3>
+                                <div class="invoice-for">
+                                    20
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div id="order-list">
         <!--<div class="order">-->
             <!--<div class="container-fluid">-->
