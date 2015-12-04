@@ -143,7 +143,7 @@ function confirm_price(){
              })
     }else{
         $("#chip-list").append(order_dom_element)
-        alert("No Order!")
+        alertWarning("尚未輸入任何訂單!")
     }
 }
 
