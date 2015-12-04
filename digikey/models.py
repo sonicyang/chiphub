@@ -54,6 +54,7 @@ class Orders(models.Model):
 
 class Components(models.Model):
     part_number = models.CharField(max_length = 40)
+    common_name = models.CharField(max_length = 60, null=True, blank=True)
     # weight = models.IntegerField('Weight of Component in grams')
     unit_price = models.FloatField("Unit price in TWD")
     associated_order = models.ManyToManyField(Orders, through='Order_Details')
@@ -62,7 +63,7 @@ class Components(models.Model):
         verbose_name = "Component"
 
     def __str__(self):
-        return "Component No." + str(self.pk).zfill(5) + " / #PN: " + str(self.part_number) + " / Unit Pice: " + str(self.unit_price)
+        return "Component No." + str(self.pk).zfill(5) + " / #PN: " + str(self.part_number) + " / CName: " + str(self.common_name) + " / Unit Pice: " + str(self.unit_price)
 
 class Order_Details(models.Model):
     quantity = models.IntegerField()
