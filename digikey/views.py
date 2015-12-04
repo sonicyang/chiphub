@@ -13,7 +13,6 @@ from digikey.models import Components
 from digikey.models import Groups
 from digikey.models import Order_Details
 from django.forms.models import model_to_dict
-import operator
 
 def progress(request):
     return render(request, 'progress.html')
@@ -64,7 +63,7 @@ def retrieve_component_detail(part_number):
             min_qty = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[0].get_text())
             price = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[1].get_text())
         except Exception:
-            return None
+            return comp
 
         try:
             cname = str(soup.find(itemprop='model').get_text())
@@ -72,8 +71,8 @@ def retrieve_component_detail(part_number):
             cname = ""
 
 
-        if min_qty != 1 or no_stocking:
-            return None
+        if min_qty != 1 or no_stocking or float(price) <= 0:
+            return comp
         else:
             comp.unit_price = float(price)
             comp.common_name = cname
@@ -108,7 +107,6 @@ def addquantity(d, qty):
     d["quantity"] = qty
     return d
 
-
 def get_digikey_price(request):
     #XXX: should user POST
     if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
@@ -116,7 +114,7 @@ def get_digikey_price(request):
         parts = map(lambda x: x.split(':'), parts)
         parts_detail = map(lambda x: [retrieve_component_detail(x[0]), int(x[1])], parts)
 
-        non_exist_or_noprice = filter(lambda x: x[0] is None, parts_detail)
+        non_exist_or_noprice = filter(lambda x: x[0].unit_price <= 0, parts_detail)
 
         part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
         part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
@@ -143,7 +141,7 @@ def order_digikey(request):
         parts = map(lambda x: x.split(':'), parts)
         parts_detail = map(lambda x: [retrieve_component_detail(x[0]), int(x[1])], parts)
 
-        non_exist_or_noprice = filter(lambda x: x[0] is None, parts_detail)
+        non_exist_or_noprice = filter(lambda x: x[0].unit_price <= 0,  parts_detail)
 
         part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
         part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
