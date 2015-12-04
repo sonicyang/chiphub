@@ -215,12 +215,15 @@ def get_single_order(request):
     uuid = request.GET['UUID']
     try:
         order = Orders.objects.all().get(uuid = uuid)
+        component_list = []
 
         total = 0
         for component in order.components_set.all():
             detail = Order_Details.objects.get(order = order, component = component)
 
             total += detail.quantity * component.unit_price
+
+            component_list.append((component.part_number, detail.quantity,detail.quantity * component.unit_price,))
 
         order_dict = {
             "date": str(order.date),
@@ -231,7 +234,8 @@ def get_single_order(request):
             "paid_date": str(order.paid_date),
             "sent": order.sent,
             "sent_date": str(order.sent_date),
-            "net": total}
+            "net": total,
+            "components": component_list}
 
         response = HttpResponse(json.dumps(order_dict))
 
