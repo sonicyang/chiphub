@@ -51,7 +51,7 @@ def retrieve_component_detail(part_number):
     comp, created = Components.objects.get_or_create(part_number=part_number,defaults={
                                             "unit_price" : 0}
                                             )
-    if not created:
+    if not created and comp.unit_price > 0:
         return comp
     else:
         html = retrieve_html('http://www.digikey.tw/product-search/en?vendor=0&keywords=' + part_number)
@@ -66,7 +66,7 @@ def retrieve_component_detail(part_number):
             min_qty = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[0].get_text())
             price = float(soup.find(id='pricing').find_all('tr')[1].find_all('td')[1].get_text())
         except Exception:
-            return comp
+            price = 0
 
         try:
             cname = str(soup.find(itemprop='model').get_text())
@@ -82,10 +82,9 @@ def retrieve_component_detail(part_number):
         except Exception:
             main_type = ""
         try:
-            main_type = str(soup.find(itemprop='breadcrumb').find_all("a")[2].get_text())
+            sub_type = str(soup.find(itemprop='breadcrumb').find_all("a")[2].get_text())
         except Exception:
             sub_type = ""
-
 
         if min_qty != 1 or no_stocking or float(price) <= 0:
             return comp
@@ -93,6 +92,8 @@ def retrieve_component_detail(part_number):
 
             gclass, created = GClasses.objects.get_or_create(mname = main_type, sname = sub_type)
             gcomp, created = GComponents.objects.get_or_create(common_name = cname, manufacturer = mname, ctype = gclass)
+
+            print gclass, gcomp
 
             comp.unit_price = float(price)
             comp.generic_type = gcomp
