@@ -77,14 +77,14 @@ def retrieve_component_detail(part_number):
         except Exception:
             mname = ""
 
-        # try:
-        main_type = str(soup.find(class_='attributes-table-main').find("table").find_all("tr")[5].find("td").find("h4").find("a").get_text())
-        # except Exception:
-            # main_type = ""
-        # try:
-        sub_type = str(soup.find(class_='attributes-table-main').find("table").find_all("tr")[6].find("td").find("h3").find("a").get_text())
-        # except Exception:
-            # sub_type = ""
+        try:
+            main_type = str(soup.find(itemprop='breadcrumb').find_all("a")[1].get_text())
+        except Exception:
+            main_type = ""
+        try:
+            main_type = str(soup.find(itemprop='breadcrumb').find_all("a")[2].get_text())
+        except Exception:
+            sub_type = ""
 
 
         if min_qty != 1 or no_stocking or float(price) <= 0:
