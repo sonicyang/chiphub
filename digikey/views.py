@@ -281,7 +281,7 @@ def get_single_order(request):
             cdict.pop("id")
             cdict.pop("associated_order")
             cdict["quantity"] = detail.quantity
-            cdict["generic_type"] = GComponents.objects.get(pk = cdict["generic_type"])
+            cdict["generic_type"] = model_to_dict(GComponents.objects.get(pk = cdict["generic_type"]))
 
             component_list.append(cdict)
 
