@@ -39,6 +39,9 @@ def order_page(request):
     response.status_code = 403
     return response
 
+def order_info(request):
+    return render(request, 'order_info.html')
+
 
 def retrieve_html(url):
     try:
@@ -132,37 +135,19 @@ def addquantity(d, qty):
     d["quantity"] = qty
     return d
 
+
+# Backward Capability
 def get_digikey_price(request):
-    #XXX: should user POST
-    if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
-        parts = request.GET['order_list'].split(',')
-        parts = map(lambda x: x.split(':'), parts)
-        parts_detail = map(lambda x: [retrieve_component_detail(x[0]), int(x[1])], parts)
-
-        non_exist_or_noprice = filter(lambda x: x[0].unit_price <= 0, parts_detail)
-
-        part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
-        part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
-        part_detail_dicts = map(lambda x: removekey(x, "id"), part_detail_dicts)
-        map(lambda x: operator.setitem(x, "generic_type", model_to_dict(GComponents.objects.get(pk = x["generic_type"]))), part_detail_dicts)
-        map(lambda x: x["generic_type"].pop("id"), part_detail_dicts)
-        map(lambda x: x["generic_type"].pop("ctype"), part_detail_dicts)
-
-        response = HttpResponse(json.dumps(part_detail_dicts))
-
-        if(len(non_exist_or_noprice)):
-            response.status_code = 400
-        else:
-            response.status_code = 200
-
-        return response
-    else:
-        response = HttpResponse()
-        response.status_code = 403
-
-        return response
+    order(request, False)
 
 def order_digikey(request):
+    order(request, True)
+
+def get_single_order(request):
+    get_single_order_info(request)
+
+
+def order(request, ordering):
     #XXX: should user POST
     if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
         parts = request.GET['order_list'].split(',')
@@ -183,12 +168,12 @@ def order_digikey(request):
         if(len(non_exist_or_noprice)):
             response.status_code = 400
         else:
+            if ordering:
+                user = auth.get_user_data(request)
+                profile = auth.get_user_profile(request)
+                create_order(user, profile, parts_detail)
 
-            user = auth.get_user_data(request)
-            profile = auth.get_user_profile(request)
-
-            create_order(user, profile, parts_detail)
-
+            response.status_code = 200
         return response
     else:
         response = HttpResponse()
@@ -270,7 +255,7 @@ def get_user_orders(request):
 
     return response
 
-def get_single_order(request):
+def get_single_order_info(request):
     uuid = request.GET['UUID']
     try:
         order = Orders.objects.all().get(uuid = uuid)
@@ -334,5 +319,3 @@ def apply_paying_info(request):
 
     return response
 
-def order_info(request):
-    return render(request, 'order_info.html')
