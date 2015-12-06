@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from login import auth
-from login import google
+
 from login.models import User_Profiles
+
+from login import auth, google
 
 login_providers = {"google" : google.Google_Oauth}
 

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import redirect
+
 from login import auth
 
 class User_Data(object):

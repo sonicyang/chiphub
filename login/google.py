@@ -1,13 +1,9 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-from django.http import HttpResponse
-from django.conf import settings
-from login import auth
-from login.models import Users
-from login.models import User_Profiles
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+
+
+from login import auth, oauth
 from keys import keys
-from login import oauth
 import requests
 import json
 
