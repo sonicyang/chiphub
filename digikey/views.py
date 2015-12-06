@@ -312,7 +312,7 @@ def apply_paying_info(request):
         if auth.hasProfile(user.uuid):
 
             try:
-                order = Orders.objects.get(pk=int(request.GET["OID"]), Orderer = user)
+                order = Orders.objects.get(uuid=request.GET["OID"], Orderer = user)
                 order.paid_account = request.GET["PACCOUNT"]
                 order.paid_date = datetime.date(datetime.date.today().year, int(request.GET["PMONTH"]), int(request.GET["PDAY"]))
                 order.save()
