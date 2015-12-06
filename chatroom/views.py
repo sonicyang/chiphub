@@ -14,5 +14,3 @@ def retreive(request):
 def chatroom(request):
     return render(request, 'chatroom.html')
 
-def list_order(request):
-    return render(request, 'list_order.html')

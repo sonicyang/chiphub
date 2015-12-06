@@ -313,3 +313,5 @@ def apply_paying_info(request):
 
     return response
 
+def list_order(request):
+    return render(request, 'list_order.html')
