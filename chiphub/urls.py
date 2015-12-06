@@ -60,8 +60,8 @@ urlpatterns = [
     url(r'^pay_digikey/$', digikey.apply_paying_info),
 
     # Digikey
-    url(r'^/digikey/progress_page/$', digikey.progress_page),
-    url(r'^/digikey/ordering/$', digikey.order_page),
+    url(r'^/progress/$', digikey.progress_page),
+    url(r'^/order/$', digikey.order_page),
 
     url(r'^/digikey/order/$', digikey.order_digikey),
     url(r'^/digikey/pay/$', digikey.apply_paying_info),
