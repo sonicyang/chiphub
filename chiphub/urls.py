@@ -38,7 +38,6 @@ urlpatterns = [
     url(r'^profile/$', login.profile),
     url(r'^update_profile/$', login.update_profile),
     url(r'^list_order/$', chatroom.list_order),
-    url(r'^order_info/$', digikey.order_info),
 
     url(r'^islogin/$', login.isLogin),
     url(r'^logout/$', login.logout),
@@ -48,8 +47,8 @@ urlpatterns = [
     url(r'^google_callback/$', login.google_callback),
 
     # Digikey
-    url(r'^/progress/$', digikey.progress_page),
-    url(r'^/order/$', digikey.order_page),
+    url(r'^progress/$', digikey.progress_page),
+    url(r'^order/$', digikey.order_page),
 
     url(r'^/digikey/order/$', digikey.order_digikey),
     url(r'^/digikey/pay/$', digikey.apply_paying_info),
