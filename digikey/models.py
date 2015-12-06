@@ -1,11 +1,9 @@
 from django.db import models
-from login import auth
-from login.models import Users, User_Profiles
 from ComponentLibrary.models import GComponents
-from ComponentLibrary.models import GClasses
+from login.models import Users, User_Profiles
+
+from login import auth
 import django
-import random
-import string
 import time
 
 def pesudo_random_string_generator():

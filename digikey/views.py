@@ -3,18 +3,21 @@
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
-import bs4
-import requests
-import json
-import datetime
-from login import auth
+from django.forms.models import model_to_dict
+
+from ComponentLibrary.models import GComponents
+from ComponentLibrary.models import GClasses
 from digikey.models import Orders
 from digikey.models import Components
 from digikey.models import Groups
 from digikey.models import Order_Details
-from ComponentLibrary.models import GComponents
-from ComponentLibrary.models import GClasses
-from django.forms.models import model_to_dict
+
+from login import auth
+
+import bs4
+import requests
+import json
+import datetime
 import operator
 
 def progress(request):
