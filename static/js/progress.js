@@ -32,7 +32,7 @@ $(document).ready(function(){
         }
       }
     })
-    $.get("/digikey/group_history/", function(d){
+    $.get("/digikey/groups/", function(d){
         list = JSON.parse(d);
         list = list.reverse();
         $(document).ready(function(){
