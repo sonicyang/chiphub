@@ -225,7 +225,7 @@ function sendPaidInfo(){
     var month = date.getMonth() + 1;
     var day = date.getDate();
     if (!isNaN(month) && !isNaN(day)){
-        $.get("http://127.0.0.1:8000/pay_digikey/",
+        $.get("pay_digikey/",
             {'OID': oid, 'PACCOUNT': account, 'PMONTH': month, 'PDAY': day})
             .success(function(d){
                 disableEditPaidInfoMode();
