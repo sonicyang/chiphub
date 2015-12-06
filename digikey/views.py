@@ -20,7 +20,7 @@ import json
 import datetime
 import operator
 
-def progress(request):
+def progress_page(request):
     return render(request, 'progress.html')
 
 def order_page(request):
@@ -38,9 +38,6 @@ def order_page(request):
     response = HttpResponse()
     response.status_code = 403
     return response
-
-def order_info(request):
-    return render(request, 'order_info.html')
 
 
 def retrieve_html(url):
