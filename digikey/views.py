@@ -140,9 +140,6 @@ def get_digikey_price(request):
 def order_digikey(request):
     order(request, True)
 
-def get_single_order(request):
-    get_single_order_info(request)
-
 
 def order(request, ordering):
     #XXX: should user POST
