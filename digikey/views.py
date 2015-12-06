@@ -112,11 +112,12 @@ def create_order(user, profile, parts_detail):
                                   )
 
     for part in parts_detail:
-        od = Order_Details(quantity = part[1],
-                           component = part[0],
-                           order = order)
+        od, created = Order_Details.objects.get_or_create(component = part[0], order = order, defaults={"quantity": int(part[1])})
 
-        od.save()
+        if not created:
+            od.quantity += int(part[1])
+
+            od.save()
 
 
 def removekey(d, key):
