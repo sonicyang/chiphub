@@ -120,7 +120,7 @@ function confirm_price(){
     if (order_list !== ""){
         order_list = order_list.slice(0, -1)
         $(".loader").show()
-        $.get("/price_digikey/",
+        $.get("/digikey/price/",
             {order_list: order_list})
              .success(function(data){
                 $(".loader").hide()
@@ -155,7 +155,7 @@ function modify_form(){
 }
 
 function submit_form(){
-    $.get("/order_digikey/",
+    $.get("/digikey/order/",
         {order_list: order_list}
     )
     .success(function(){

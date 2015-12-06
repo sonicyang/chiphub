@@ -13,7 +13,7 @@ var order_html = "\
 ";
 
 $(document).ready(function(){
-    $.get("/rally_digikey/", function(data){
+    $.get("/digikey/rally/", function(data){
         data = JSON.parse(data);
         current_rally = parseFloat(data[0]);
         rally_person_count = data[1];
@@ -32,7 +32,7 @@ $(document).ready(function(){
         }
       }
     })
-    $.get("/group_history_digikey/", function(d){
+    $.get("/digikey/group_history/", function(d){
         list = JSON.parse(d);
         list = list.reverse();
         $(document).ready(function(){
@@ -45,7 +45,7 @@ $(document).ready(function(){
                      return;
                 }
                 var item = $(this)
-                $.get("/group_info_digikey?UUID=" + list[index - 1], function(d){
+                $.get("/digikey/group_info?UUID=" + list[index - 1], function(d){
                     data = JSON.parse(d)
 
                     item.find(".order-date").each(function(){

@@ -99,7 +99,7 @@ var chip_html = "\
 "
 var data_list = []
 var current_data_index;
-$.get("/user_history_digikey/", function(d){
+$.get("/digikey/user_history/", function(d){
     list = JSON.parse(d);
     list = list.reverse();
     $(document).ready(function(){
@@ -110,7 +110,7 @@ $.get("/user_history_digikey/", function(d){
         counter = 0
         $('.order').each(function(index){
             var item = $(this)
-            $.get("/order_info_digikey?UUID=" + list[index], function(d){
+            $.get("/digikey/order_info?UUID=" + list[index], function(d){
                 data = JSON.parse(d)
                 data_list[index] = data
                 counter += 1
@@ -247,7 +247,7 @@ function sendPaidInfo(){
     var month = date.getMonth() + 1;
     var day = date.getDate();
     if (!isNaN(month) && !isNaN(day)){
-        $.get("pay_digikey/",
+        $.get("digikey/pay/",
             {'OID': oid, 'PACCOUNT': account, 'PMONTH': month, 'PDAY': day})
             .success(function(d){
                 disableEditPaidInfoMode();
