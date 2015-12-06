@@ -40,7 +40,7 @@ body {
     font-weight: 500;
     text-transform: uppercase;
     font-size: 20px;
-    margin: 10px 0 1rem 0;
+    margin: 0.8rem 0 1rem 0;
     color: #999; }
 
 .invoice-id {
@@ -57,6 +57,7 @@ body {
     font-family: inherit; }
 
 .invoice-module {
+  position: relative;
   border: 1px solid #ccc;
   padding: 1rem; }
 
@@ -92,5 +93,10 @@ body {
     padding: 0.5rem; }
   .chip .invoice-grid {
     margin: 0 0 1rem 0; }
+
+#paid-info-button {
+  position: absolute;
+  right: 1rem;
+  top: 1.8rem; }
 
 /*# sourceMappingURL=list_order.css.map */

@@ -77,6 +77,7 @@ var chip_html = "\
     </div>\
 "
 var data_list = []
+var current_data_index;
 $.get("/user_history_digikey/", function(d){
     list = JSON.parse(d);
     list = list.reverse();
@@ -149,11 +150,23 @@ $.get("/user_history_digikey/", function(d){
     $(document).on('keyup',function(evt) {
         if (evt.keyCode == 27) {
             $("#order-info").hide();
+            disableEditPaidInfoMode();
         }
     });
 
     $("#close-order-info").click(function(){
-            $("#order-info").hide();
+        $("#order-info").hide();
+        disableEditPaidInfoMode();
+    })
+
+    $("#paid-info-button").click(function(e){
+        button = $(this)
+        action = button.attr("action")
+        if(action == "edit"){
+            editPaidInfo();
+        }else if (action == "save"){
+            sendPaidInfo();
+        }
     })
 
 })
@@ -164,9 +177,24 @@ function addEventForLinks(){
         $("#info-shipping-address").text(data_list[ind]["shipping_address"])
         $("#info-sent-date").text(data_list[ind]["sent_date"])
         $("#info-net").text(data_list[ind]["net"])
-        $("#info-paid-date").text(data_list[ind]["paid_date"])
-        $("#info-paid-account").text(data_list[ind]["paid_account"])
+        if(data_list[ind]["paid_account"] == "None"){
+            $("#info-paid-date").text("尚未填寫")
+        }else{
+            $("#info-paid-date").text(data_list[ind]["paid_date"])
+        }
+        if(data_list[ind]["paid_account"] == null){
+            $("#info-paid-account").text("尚未填寫")
+        }else{
+            $("#info-paid-account").text(data_list[ind]["paid_account"])
+        }
 
+        current_data_index = ind;
+        showChipList(ind);
+    })
+
+}
+
+function showChipList(ind){
         for (var i = 0; i < data_list[ind]['components'].length; i ++){
             $("#chip-list").append(chip_html)
         }
@@ -179,6 +207,51 @@ function addEventForLinks(){
             chip.find(".chip-total-price").text(comp['quantity'] * comp['unit_price'])
         })
         $("#order-info").show()
-    })
+}
 
+function editPaidInfo(){
+    $("#info-paid-account").prop("contenteditable", true);
+    $("#info-paid-account").css("box-shadow", "0 0 2px 0px #0000cc");
+    $("#info-paid-date").prop("contenteditable", true);
+    $("#info-paid-date").css("box-shadow", "0 0 2px 0px #0000cc");
+    button.text("儲存");
+    button.attr("action", "save")
+}
+
+function sendPaidInfo(){
+    var oid = data_list[current_data_index]['uuid'];
+    var account = $("#info-paid-account").text();
+    var date = new Date($("#info-paid-date").text());
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (!isNaN(month) && !isNaN(day)){
+        $.get("http://127.0.0.1:8000/pay_digikey/",
+            {'OID': oid, 'PACCOUNT': account, 'PMONTH': month, 'PDAY': day})
+            .success(function(d){
+                disableEditPaidInfoMode();
+            })
+            .error(function(d){
+                alert("儲存失敗");
+            })
+    }else{
+        alert("錯誤的日期格式")
+    }
+}
+
+function disableEditPaidInfoMode(){
+    $("#info-paid-account").prop("contenteditable", false);
+    $("#info-paid-account").css("box-shadow", "");
+    $("#info-paid-date").prop("contenteditable", false);
+    $("#info-paid-date").css("box-shadow", "");
+    button.text("編輯");
+    button.attr("action", "edit")
+}
+
+function parseDate(str){
+    var minutes = 1000 * 60
+    var hours = minutes * 60
+    var days = hours * 24
+    var years = days * 365
+    var t = Date.parse("Jul 8, 2005")
+    var y = t / years;
 }
