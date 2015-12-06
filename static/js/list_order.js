@@ -44,32 +44,53 @@ var order_html = "\
     <hr />\
 ";
 
-var chip_html = "\
+var chip_header_html =  "\
     <div class=\"row chip invoice-module\">\
         <div class=\"\">\
-            <div class=\"col-md-6\">\
+            <div class=\"col-md-3\">\
                 <h3>CHIP</h3>\
+            </div>\
+        </div>\
+        <div class=\"\">\
+            <div class=\"col-md-3\">\
+                <h3>單價</h3>\
+            </div>\
+        </div>\
+        <div class=\"\">\
+            <div class=\"col-md-3\">\
+                <h3>數量</h3>\
+            </div>\
+        </div>\
+        <div class=\"\">\
+            <div class=\"col-md-3\">\
+                <h3>總價 (單價X數量)</h3>\
+            </div>\
+        </div>\
+    </div>\
+"
+
+var chip_html = "\
+    <div class=\"row chip item invoice-module\">\
+        <div class=\"\">\
+            <div class=\"col-md-3\">\
                 <div class=\"invoice-for part-number\">\
                 </div>\
             </div>\
         </div>\
         <div class=\"\">\
-            <div class=\"col-md-6\">\
-                <h3>單價</h3>\
+            <div class=\"col-md-3\">\
                 <div class=\"invoice-for unit-price\">\
                 </div>\
             </div>\
         </div>\
         <div class=\"\">\
-            <div class=\"col-md-6\">\
-                <h3>數量</h3>\
+            <div class=\"col-md-3\">\
                 <div class=\"invoice-for quantity\">\
                 </div>\
             </div>\
         </div>\
         <div class=\"\">\
-            <div class=\"col-md-6\">\
-                <h3>總價 (單價X數量)</h3>\
+            <div class=\"col-md-3\">\
                 <div class=\"invoice-for chip-total-price\">\
                 </div>\
             </div>\
@@ -195,12 +216,13 @@ function addEventForLinks(){
 }
 
 function showChipList(ind){
+        $("#chip-list").append(chip_header_html)
         for (var i = 0; i < data_list[ind]['components'].length; i ++){
             $("#chip-list").append(chip_html)
         }
-        $("#chip-list .chip").each(function(){
+        $("#chip-list .item").each(function(){
             var chip = $(this)
-            var comp = data_list[ind]['components'][chip.index()]
+            var comp = data_list[ind]['components'][chip.index() - 1]
             chip.find(".part-number").text(comp['part_number'])
             chip.find(".unit-price").text(comp['unit_price'])
             chip.find(".quantity").text(comp['quantity'])
