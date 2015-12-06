@@ -211,6 +211,7 @@ function addEventForLinks(){
 
         current_data_index = ind;
         showChipList(ind);
+        $("#order-info").show()
     })
 
 }
@@ -228,7 +229,6 @@ function showChipList(ind){
             chip.find(".quantity").text(comp['quantity'])
             chip.find(".chip-total-price").text(comp['quantity'] * comp['unit_price'])
         })
-        $("#order-info").show()
 }
 
 function editPaidInfo(){
