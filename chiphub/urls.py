@@ -47,7 +47,7 @@ urlpatterns = [
     url(r'^google_login/$', login.google_login),
     url(r'^google_callback/$', login.google_callback),
 
-    # Digikey
+    # Digikey - deprecated
     url(r'^progress/$', digikey.progress),
     url(r'^order/$', digikey.order_page),
     url(r'^order_digikey/$', digikey.order_digikey),
@@ -59,9 +59,9 @@ urlpatterns = [
     url(r'^order_info_digikey/$', digikey.get_single_order),
     url(r'^pay_digikey/$', digikey.apply_paying_info),
 
-    # Digikey - new
-    url(r'^/digikey/progress_page/$', digikey.progress),
-    url(r'^/digikey/current_order/$', digikey.order_page),
+    # Digikey
+    url(r'^/digikey/progress_page/$', digikey.progress_page),
+    url(r'^/digikey/ordering/$', digikey.order_page),
 
     url(r'^/digikey/order/$', digikey.order_digikey),
     url(r'^/digikey/pay/$', digikey.apply_paying_info),
