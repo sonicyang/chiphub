@@ -39,15 +39,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="grid group invoice-details invoice-grid col-md-6">
-                        <div class="invoice-module">
-                            <h3>訂單金額</h3>
-                            <div id="info-net"> {{ net }} </div>
-                            <h3>手續費</h3>
-                            <div id="amount-due-amount"> {{ tmp }}</div>
-                        </div>
-                    </div>
-                    <div class="grid group invoice-details invoice-grid col-md-6">
+                    <div class="grid group invoice-details invoice-grid col-md-12">
                         <div class="invoice-module">
                             <h3>匯款帳戶</h3>
                             <button id="paid-info-button" action="edit">編輯</button>
@@ -59,28 +51,36 @@
                         </div>
                     </div>
                 </div>
-                <div id="chip-list">
-                    <div class="row chip invoice-module">
-                        <div class="">
-                            <div class="col-md-3">
-                                <h3>CHIP</h3>
+                <div id="chip-list-container" class="invoice-module">
+                    <div id="chip-list">
+                        <div class="row chip">
+                            <div class="">
+                                <div class="col-md-3">
+                                    <h3>CHIP</h3>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="col-md-3">
+                                    <h3>單價</h3>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="col-md-3">
+                                    <h3>數量</h3>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="col-md-3">
+                                    <h3>總價 (單價X數量)</h3>
+                                </div>
                             </div>
                         </div>
-                        <div class="">
-                            <div class="col-md-3">
-                                <h3>單價</h3>
-                            </div>
-                        </div>
-                        <div class="">
-                            <div class="col-md-3">
-                                <h3>數量</h3>
-                            </div>
-                        </div>
-                        <div class="">
-                            <div class="col-md-3">
-                                <h3>總價 (單價X數量)</h3>
-                            </div>
-                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <h2 id="info-net" class="col-md-offset-9 col-md-3">
+                            asd
+                        </h2>
                     </div>
                 </div>
             </div>

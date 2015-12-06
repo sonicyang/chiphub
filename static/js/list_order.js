@@ -45,7 +45,7 @@ var order_html = "\
 ";
 
 var chip_header_html =  "\
-    <div class=\"row chip invoice-module\">\
+    <div class=\"row chip\">\
         <div class=\"\">\
             <div class=\"col-md-3\">\
                 <h3>CHIP</h3>\
@@ -70,7 +70,7 @@ var chip_header_html =  "\
 "
 
 var chip_html = "\
-    <div class=\"row chip item invoice-module\">\
+    <div class=\"row chip item\">\
         <div class=\"\">\
             <div class=\"col-md-3\">\
                 <div class=\"invoice-for part-number\">\
