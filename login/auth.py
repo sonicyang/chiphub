@@ -58,7 +58,7 @@ def create_session(request, uuid):
         return True
     else:
         if 'token' in request.session:
-            del request.sesion['token']
+            del request.session['token']
             request.session.modified = True
         return False
 
@@ -69,7 +69,7 @@ def close_session(request, token):
         return True
     else:
         if 'token' in request.session:
-            del request.sesion['token']
+            del request.session['token']
             request.session.modified = True
         return False
 
@@ -134,7 +134,7 @@ def isLogin(request):
             else:
                 return False
         else:
-            del request.sesion['token']
+            del request.session['token']
             request.session.modified = True
             return False
 
