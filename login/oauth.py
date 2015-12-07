@@ -38,7 +38,7 @@ class oauth(object):
         if auth.hasUser(uuid):
             if auth.create_session(request, uuid):
                 if auth.hasProfile(uuid):
-                    return redirect("digikey.views.progress")
+                    return redirect("digikey.views.progress_page")
 
                 else:
                     return redirect("login.views.profile")

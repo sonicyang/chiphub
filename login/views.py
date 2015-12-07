@@ -25,7 +25,7 @@ def logout(request):
     if isLogin(request):
         auth.close_session(request, auth.get_session_token(request))
 
-    return redirect('digikey.views.progress')
+    return redirect('digikey.views.progress_page')
 
 def update_profile(request):
     if auth.isLogin(request):
@@ -44,7 +44,7 @@ def update_profile(request):
         else:
             auth.update_data(uuid, user_profile)
 
-        return redirect('digikey.views.progress')
+        return redirect('digikey.views.progress_page')
 
 def google_login(request):
     #XXX: large overhaed to create objects
