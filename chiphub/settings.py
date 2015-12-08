@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'login',
     'digikey',
     'ComponentLibrary',
+    'chatroom',
 )
 
 MIDDLEWARE_CLASSES = (

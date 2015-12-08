@@ -4,6 +4,7 @@ from django.forms.models import model_to_dict
 
 from ComponentLibrary.models import GComponents, GClasses
 from chatroom.models import Comment, Entry
+from login.models import Users, User_Profiles
 
 from login import auth
 
@@ -25,6 +26,16 @@ def retreive(request):
 
 def search(request):
     return HttpResponse("")
+
+def top100(request):
+    gcomponents = GComponents.objects.all()
+
+    comps = map(lambda x: x.pk, gcomponents)
+
+    response = HttpResponse(json.dumps(comps))
+    response.status_code = 200
+
+    return response
 
 def get_component_info(request):
     try:
@@ -51,12 +62,14 @@ def get_component_comments(request):
 
         dict_comments = map(model_to_dict, comments)
         map(lambda x: operator.setitem(x, 'date', str(x['date'])), dict_comments)
+        map(lambda x: operator.setitem(x, 'commenter', User_Profiles.objects.get(user = Users.objects.get(pk = int(x['commenter']))).username), dict_comments)
 
         response = HttpResponse(json.dumps(dict_comments))
         response.status_code = 200
 
         return response
-    except:
+    except Exception as ex:
+        raise ex
         response = HttpResponse()
         response.status_code = 404
 

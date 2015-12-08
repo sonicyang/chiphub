@@ -60,5 +60,7 @@ urlpatterns = [
     url(r'^digikey/order_info/$', digikey.get_single_order_info),
 
     # Chat Room
+    url(r'^chatroom/top100/$', chatroom.top100),
     url(r'^chatroom/get_component_info/$', chatroom.get_component_info),
+    url(r'^chatroom/get_component_comments/$', chatroom.get_component_comments),
 ]
