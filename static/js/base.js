@@ -14,14 +14,14 @@ $(document).ready(function(){
     url: "/islogin",
     statusCode: {
       200: function(){
-        $("#login_button_wrapper").hide()
-          $("#logout_button_wrapper").show()
-          $("#profile_button_wrapper").show()
+        $("#login_button_wrapper").fadeOut(350)
+          $("#logout_button_wrapper").fadeIn(350)
+          $("#profile_button_wrapper").fadeIn(350)
       },
       400: function(){
-        $("#login_button_wrapper").show()
-          $("#logout_button_wrapper").hide()
-          $("#profile_button_wrapper").hide()
+        $("#login_button_wrapper").fadeIn(350)
+          $("#logout_button_wrapper").fadeOut(350)
+          $("#profile_button_wrapper").fadeOut(350)
 
       }
     }

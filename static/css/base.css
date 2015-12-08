@@ -51,6 +51,9 @@ h1 {
 #container {
   background-color: green; }
 
+#login_button_wrapper, #profile_button_wrapper, #logout_button_wrapper {
+  display: none; }
+
 #login_wrapper {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.8);

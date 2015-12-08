@@ -37,6 +37,10 @@ body {
   body #drop-shadow-wrapper {
     margin: 0 auto;
     width: 90%; }
+    body #drop-shadow-wrapper #order {
+      display: none; }
+    body #drop-shadow-wrapper #list {
+      display: none; }
     body #drop-shadow-wrapper .drop-shadow {
       float: left;
       color: yellow;

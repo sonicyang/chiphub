@@ -23,12 +23,12 @@ $(document).ready(function(){
       url: "/islogin",
       statusCode: {
         200: function(){
-            $("#list").show()
-            $("#order").show()
+            $("#list").fadeIn(350)
+            $("#order").fadeIn(350)
         },
         400: function(){
-            $("#list").hide()
-            $("#order").hide()
+            $("#list").fadeOut(350)
+            $("#order").fadeOut(350)
         }
       }
     })
