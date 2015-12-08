@@ -25,6 +25,20 @@ String.prototype.hashCode = function() {
     return hash;
 };
 
+alert('ss')
+
+$("#close-chip-info").click(function(){
+    alert('ss')
+    $("#chip-info").fadeOut(500);
+})
+
+$(document).on('keyup',function(evt) {
+    if (evt.keyCode == 27) {
+        $("#chip-info").fadeOut(500);
+        disableEditPaidInfoMode();
+    }
+});
+
 $("#search").click(function(e){
     search(e);
 })
@@ -89,6 +103,3 @@ function appendChipCard(pn){
     $(family_pattern+ "a label").last().text(pn['common_name']);
 }
 
-$("#close-chip-info").click(function(){
-    $("#order-info").fadeOut(500);
-})
