@@ -17,7 +17,7 @@ class Entry(models.Model):
 
 
 class Comment(models.Model):
-    chip = models.ForeignKey(GComponents)
+    component = models.ForeignKey(GComponents)
     commenter = models.ForeignKey(Users)
     text = models.CharField(max_length = 300, null = True, blank = True)
     date = models.DateField(default=django.utils.timezone.now)
