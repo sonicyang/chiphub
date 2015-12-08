@@ -16,6 +16,8 @@
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000; }
+  #order-info h1 {
+    margin-bottom: 25px; }
 
 * {
   box-sizing: border-box;
