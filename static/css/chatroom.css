@@ -1,3 +1,14 @@
+#chatroom {
+  padding: 1px; }
 
+.chip-card-list {
+  padding: 1px; }
+
+.family {
+  padding: 1% 0 0 0; }
+
+.chip-card {
+  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  padding: 1rem; }
 
 /*# sourceMappingURL=chatroom.css.map */
