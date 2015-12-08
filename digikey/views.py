@@ -135,10 +135,10 @@ def addquantity(d, qty):
 
 # Backward Capability
 def get_digikey_price(request):
-    order(request, False)
+    return order(request, False)
 
 def order_digikey(request):
-    order(request, True)
+    return order(request, True)
 
 
 def order(request, ordering):
