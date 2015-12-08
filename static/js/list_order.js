@@ -97,6 +97,9 @@ var chip_html = "\
         </div>\
     </div>\
 "
+var shipping_fee = 120;
+var fee_percent = 0.1;
+
 var data_list = []
 var current_data_index;
 $.get("/digikey/user_history/", function(d){
@@ -146,7 +149,7 @@ $.get("/digikey/user_history/", function(d){
                 item.find(".order-info-link").attr("index", index)
 
                 if(counter == list.length){
-                    addEventForLinks()
+                    doneLoading()
                 }
             })
         })
@@ -166,6 +169,9 @@ $.get("/digikey/user_history/", function(d){
                 $(this).scrollTop(scrollTo + $(this).scrollTop());
             }
         });
+
+        // display shipping fee
+        $("#shipping-fee").text(shipping_fee);
     })
 
     $(document).on('keyup',function(evt) {
@@ -191,13 +197,15 @@ $.get("/digikey/user_history/", function(d){
     })
 
 })
-function addEventForLinks(){
+function doneLoading(){
     $(".order-info-link").click(function(e){
         $(".chip").remove()
         var ind = $(this).attr("index")
         $("#info-shipping-address").text(data_list[ind]["shipping_address"])
         $("#info-sent-date").text(data_list[ind]["sent_date"])
         $("#info-net").text(data_list[ind]["net"])
+        $("#fee").text(parseInt(data_list[ind]["net"]) * fee_percent);
+
         if(data_list[ind]["paid_account"] == "None"){
             $("#info-paid-date").text("尚未填寫")
         }else{
@@ -269,11 +277,5 @@ function disableEditPaidInfoMode(){
     button.attr("action", "edit")
 }
 
-function parseDate(str){
-    var minutes = 1000 * 60
-    var hours = minutes * 60
-    var days = hours * 24
-    var years = days * 365
-    var t = Date.parse("Jul 8, 2005")
-    var y = t / years;
-}
+
+

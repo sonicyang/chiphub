@@ -108,4 +108,18 @@ body {
   right: 1rem;
   bottom: 1rem; }
 
+.shipping-fee {
+  font-size: 20px;
+  color: #999; }
+
+#shipping-fee {
+  color: #000; }
+
+.fee {
+  font-size: 20px;
+  color: #999; }
+
+#fee {
+  color: #000; }
+
 /*# sourceMappingURL=list_order.css.map */
