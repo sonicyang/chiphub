@@ -176,13 +176,13 @@ $.get("/digikey/user_history/", function(d){
 
     $(document).on('keyup',function(evt) {
         if (evt.keyCode == 27) {
-            $("#order-info").hide();
+            $("#order-info").fadeOut(500);
             disableEditPaidInfoMode();
         }
     });
 
     $("#close-order-info").click(function(){
-        $("#order-info").hide();
+        $("#order-info").fadeOut(500);
         disableEditPaidInfoMode();
     })
 
@@ -222,7 +222,7 @@ function doneLoading(){
 
         current_data_index = ind;
         showChipList(ind);
-        $("#order-info").show()
+        $("#order-info").fadeIn(500)
     })
 
 }
