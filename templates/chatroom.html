@@ -5,59 +5,24 @@
 <link href="{% static 'css/chatroom.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
+{% block js %}
+<script src="{% static 'js/chatroom.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <div id="chatroom">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-offset-2 col-xs-6">
-                <input type="text" class="form-control" placeholder="Part Number">
+                <input id="part-number" type="text" class="form-control" placeholder="Part Number">
             </div>
             <div class="col-xs-2">
-                <button class="btn btn-default">Search</button>
+                <button id="search" class="btn btn-default">Search</button>
             </div>
         </div>
     </div>
 
     <div id="chip-card-list">
-        <div  class="family">
-            <h2 class="family-title">IC-asdkaasds</h2>
-            <label class="chip-card bg-info">
-                QWERTYQ
-            </label>
-            <label class="chip-card bg-info">
-                QWERTYQQQQ
-            </label>
-            <label class="chip-card bg-info">
-                QWERTYQQQQQQQQQ
-            </label>
-            <hr />
-        </div>
-        <div  class="family">
-            <h2 class="family-title">IC-asdkaasds</h2>
-            <label class="chip-card bg-info">
-                QWERTYQ
-            </label>
-            <label class="chip-card bg-info">
-                QWERTYQQQQ
-            </label>
-            <label class="chip-card bg-info">
-                QWERTYQQQQQQQQQ
-            </label>
-            <hr />
-        </div>
-        <div  class="family">
-            <h2 class="family-title">IC-asdkaasds</h2>
-            <label class="chip-card bg-info">
-                QWERTYQ
-            </label>
-            <label class="chip-card bg-info">
-                QWERTYQQQQ
-            </label>
-            <label class="chip-card bg-info">
-                QWERTYQQQQQQQQQ
-            </label>
-            <hr />
-        </div>
     </div>
 </div>
 {% endblock %}
