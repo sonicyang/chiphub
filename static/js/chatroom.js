@@ -7,11 +7,11 @@ var family_html = "\
 "
 
 var chip_card_html = "\
-            <a class=\"chip-card bg-info\" href=\"#\">\
+    <a class=\"chip-card bg-info\" href=\"#\">\
         <label>\
-                QWERTYQ\
+         QWERTYQ\
         </label>\
-            </a>\
+    </a>\
 "
 
 String.prototype.hashCode = function() {
