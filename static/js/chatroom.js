@@ -88,3 +88,7 @@ function appendChipCard(pn){
     $(family_pattern).append(chip_card_html);
     $(family_pattern+ "a label").last().text(pn['common_name']);
 }
+
+$("#close-chip-info").click(function(){
+    $("#order-info").fadeOut(500);
+})
