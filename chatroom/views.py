@@ -8,6 +8,7 @@ from chatroom.models import Comment, Entry
 from login import auth
 
 import json
+import operator
 
 def chatroom(request):
     return render(request, 'chatroom.html')
@@ -27,39 +28,39 @@ def search(request):
 
 def get_component_info(request):
     try:
-        gcomponent = GComponents.objects.get(pk = request.GET['pk'])
+        gcomponent = GComponents.objects.get(pk = int(request.GET['pk']))
 
         dict_comment = model_to_dict(gcomponent)
-        dict_comment['ctype'] = model_to_dict(dict_comment['ctype'])
+        dict_comment['ctype'] = model_to_dict(GClasses.objects.get(pk = int(dict_comment['ctype'])))
 
         response = HttpResponse(json.dumps(dict_comment))
         response.status_code = 200
 
-        return respnse
+        return response
     except:
         response = HttpResponse()
         response.status_code = 404
 
-        return respnse
+        return response
 
 def get_component_comments(request):
     try:
-        gcomponent = GComponents.objects.get(pk = request.GET['pk'])
+        gcomponent = GComponents.objects.get(pk = int(request.GET['pk']))
 
-        comment = Comment.objects.get(component = gcomponent)
+        comments = Comment.objects.all().filter(component = gcomponent)
 
-        dict_comment = model_to_dict(comment)
-        dict_comment['date'] = str(dict_comment['date'])
+        dict_comments = map(model_to_dict, comments)
+        map(lambda x: operator.setitem(x, 'date', str(x['date'])), dict_comments)
 
-        response = HttpResponse(json.dumps(dict_comment))
+        response = HttpResponse(json.dumps(dict_comments))
         response.status_code = 200
 
-        return respnse
+        return response
     except:
         response = HttpResponse()
         response.status_code = 404
 
-        return respnse
+        return response
 
 def add_component_comment(request):
     #XXX: Should use POST
@@ -67,7 +68,7 @@ def add_component_comment(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
             try:
-                gcomponent = GComponents.objects.get(pk = request.GET['pk'])
+                gcomponent = GComponents.objects.get(pk = int(request.GET['pk']))
 
                 comment = Comment(component = gcomponent, commenter = user, text = request.GET['content'])
 
@@ -76,7 +77,7 @@ def add_component_comment(request):
                 response = HttpResponse()
                 response.status_code = 200
 
-                return respnse
+                return response
             except:
                 response = HttpResponse()
                 response.status_code = 404
@@ -92,14 +93,14 @@ def del_component_comment(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
             try:
-                comment = Comment.objects.get(pk = request.GET['pk'], commenter = user)
+                comment = Comment.objects.get(pk = int(request.GET['pk']), commenter = user)
 
                 comment.delete()
 
                 response = HttpResponse()
                 response.status_code = 200
 
-                return respnse
+                return response
             except:
                 response = HttpResponse()
                 response.status_code = 404
@@ -117,7 +118,7 @@ def edit_component_comment(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
             try:
-                comment = Comment.objects.get(pk = request.GET['pk'], commenter = user)
+                comment = Comment.objects.get(pk = int(request.GET['pk']), commenter = user)
 
                 comment.text = request.GET['content']
 
@@ -126,7 +127,7 @@ def edit_component_comment(request):
                 response = HttpResponse()
                 response.status_code = 200
 
-                return respnse
+                return response
             except:
                 response = HttpResponse()
                 response.status_code = 404
@@ -143,7 +144,7 @@ def rank_comment(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
             try:
-                comment = Comment.objects.get(pk = request.GET['pk'])
+                comment = Comment.objects.get(pk = int(request.GET['pk']))
 
                 comment.rank += 1 if request.GET['up'] == "True" else -1
 
@@ -152,7 +153,7 @@ def rank_comment(request):
                 response = HttpResponse()
                 response.status_code = 200
 
-                return respnse
+                return response
             except:
                 response = HttpResponse()
                 response.status_code = 404
@@ -169,7 +170,7 @@ def rank_entry(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
             try:
-                entry = Entry.objects.get(pk = request.GET['pk'])
+                entry = Entry.objects.get(pk = int(request.GET['pk']))
 
                 entry.rank += 1 if request.GET['up'] == "True" else -1
 
@@ -178,7 +179,7 @@ def rank_entry(request):
                 response = HttpResponse()
                 response.status_code = 200
 
-                return respnse
+                return response
             except:
                 response = HttpResponse()
                 response.status_code = 404

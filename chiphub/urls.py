@@ -58,4 +58,7 @@ urlpatterns = [
     url(r'^digikey/group_info/$', digikey.get_group_info),
     url(r'^digikey/user_history/$', digikey.get_user_orders),
     url(r'^digikey/order_info/$', digikey.get_single_order_info),
+
+    # Chat Room
+    url(r'^chatroom/get_component_info/$', chatroom.get_component_info),
 ]
