@@ -97,7 +97,7 @@ var chip_html = "\
         </div>\
     </div>\
 "
-var shipping_fee = 120;
+var shipping_fee = 60;
 var fee_percent = 0.1;
 
 var data_list = []
@@ -201,10 +201,13 @@ function doneLoading(){
     $(".order-info-link").click(function(e){
         $(".chip").remove()
         var ind = $(this).attr("index")
+        var net = parseInt(data_list[ind]["net"]);
+        var fee = Math.ceil(net * fee_percent);
         $("#info-shipping-address").text(data_list[ind]["shipping_address"])
         $("#info-sent-date").text(data_list[ind]["sent_date"])
-        $("#info-net").text(data_list[ind]["net"])
-        $("#fee").text(parseInt(data_list[ind]["net"]) * fee_percent);
+
+        $("#fee").text(fee);
+        $("#info-net").text(net + fee + shipping_fee);
 
         if(data_list[ind]["paid_account"] == "None"){
             $("#info-paid-date").text("尚未填寫")
