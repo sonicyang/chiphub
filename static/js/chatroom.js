@@ -7,11 +7,11 @@ var family_html = "\
 "
 
 var chip_card_html = "\
-        <label class=\"chip-card bg-info\">\
-            <a href=\"#\">\
+            <a class=\"chip-card bg-info\" href=\"#\">\
+        <label>\
                 QWERTYQ\
-            </a>\
         </label>\
+            </a>\
 "
 
 String.prototype.hashCode = function() {
@@ -86,5 +86,5 @@ function appendChipCard(pn){
     var family_name = pn['ctype']['mname'] +  pn['ctype']['sname'];
     var family_pattern = ".family" + "[name=" + family_name.hashCode() + "]"
     $(family_pattern).append(chip_card_html);
-    $(family_pattern+ " label a").last().text(pn['common_name']);
+    $(family_pattern+ "a label").last().text(pn['common_name']);
 }
