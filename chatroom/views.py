@@ -28,6 +28,7 @@ def search(request):
     return HttpResponse("")
 
 def top100(request):
+    #XXX: Filter the real top 100!
     gcomponents = GComponents.objects.all()
 
     comps = map(lambda x: x.pk, gcomponents)
