@@ -143,7 +143,7 @@ var comment_html = "\
             </div>\
         </div>\
         <div class=\"grid group info-comment info-grid col-md-2\">\
-            <div class=\"info-module\">\
+            <div class=\"info-module rank\">\
                 <h2 class=\"comment-rank\">RANK</h2>\
                 </label>\
             </div>\

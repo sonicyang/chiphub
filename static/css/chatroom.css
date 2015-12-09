@@ -83,6 +83,9 @@ body {
   font-size: 1.5rem;
   font-weight: 800; }
 
+.rank {
+  text-align: center; }
+
 .paid-line {
   padding: 2rem 0 1rem 0;
   text-align: center; }
