@@ -196,6 +196,18 @@ $.get("/digikey/user_history/", function(d){
         }
     })
 
+    // avoid change line while pressing the enter key
+    $("#info-paid-account").keydown(function(event){
+        if(event.keyCode == 13){
+            return false
+        }
+    });
+
+    $("#info-paid-date").keydown(function(event){
+        if(event.keyCode == 13){
+            return false
+        }
+    });
 })
 function doneLoading(){
     $(".order-info-link").click(function(e){
