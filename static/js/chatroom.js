@@ -25,8 +25,11 @@ String.prototype.hashCode = function() {
     return hash;
 };
 
-$("#close-chip-info").click(function(){
-    $("#chip-info").fadeOut(500);
+$(document).ready(function(){
+    $("#close-chip-info").click(function(){
+        $("#chip-info").fadeOut(500);
+    })
+
 })
 
 $(document).on('keyup',function(evt) {
@@ -35,6 +38,7 @@ $(document).on('keyup',function(evt) {
         disableEditPaidInfoMode();
     }
 });
+
 
 $("#search").click(function(e){
     search(e);
