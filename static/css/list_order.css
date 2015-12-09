@@ -100,10 +100,10 @@ body {
     margin: 0 0 1rem 0; }
 
 #info-paid-date {
-  width: 70%; }
+  width: 200px; }
 
 #info-paid-account {
-  width: 70%; }
+  width: 200px; }
 
 #paid-info-button {
   position: absolute;
