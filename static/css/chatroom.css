@@ -74,7 +74,14 @@ body {
 .info-module {
   position: relative;
   border: 1px solid #ccc;
-  padding: 1rem; }
+  padding: 1rem;
+  min-height: 100px; }
+
+.info-module-half {
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  min-height: 48px; }
 
 .info-for {
   word-break: break-all; }
@@ -85,6 +92,9 @@ body {
 
 .rank {
   text-align: center; }
+  .rank label {
+    font-size: 24px;
+    font-weight: 200; }
 
 .paid-line {
   padding: 2rem 0 1rem 0;
