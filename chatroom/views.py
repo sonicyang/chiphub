@@ -62,7 +62,7 @@ def get_component_comments(request):
     try:
         gcomponent = GComponents.objects.get(pk = int(request.GET['pk']))
 
-        comments = Comment.objects.all().filter(component = gcomponent).order_by("-date")
+        comments = Comment.objects.all().filter(component = gcomponent).order_by("-date", "-rank")
 
         dict_comments = map(model_to_dict, comments)
         map(lambda x: operator.setitem(x, 'date', str(x['date'])), dict_comments)
