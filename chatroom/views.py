@@ -5,6 +5,7 @@ from django.forms.models import model_to_dict
 from ComponentLibrary.models import GComponents, GClasses
 from chatroom.models import Comment, Entry
 from login.models import Users, User_Profiles
+from digikey.models import Components
 
 from login import auth
 
@@ -44,6 +45,8 @@ def get_component_info(request):
 
         dict_comment = model_to_dict(gcomponent)
         dict_comment['ctype'] = model_to_dict(GClasses.objects.get(pk = int(dict_comment['ctype'])))
+        dict_comment['rank'] = Entry.objects.get_or_create(chip = gcomponent)[0].rank
+        dict_comment['digikey'] = model_to_dict(Components.objects.get(generic_type = gcomponent))
 
         response = HttpResponse(json.dumps(dict_comment))
         response.status_code = 200
