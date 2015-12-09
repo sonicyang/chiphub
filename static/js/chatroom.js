@@ -25,10 +25,7 @@ String.prototype.hashCode = function() {
     return hash;
 };
 
-alert('ss')
-
 $("#close-chip-info").click(function(){
-    alert('ss')
     $("#chip-info").fadeOut(500);
 })
 
@@ -100,6 +97,7 @@ function appendChipCard(pn){
     var family_name = pn['ctype']['mname'] +  pn['ctype']['sname'];
     var family_pattern = ".family" + "[name=" + family_name.hashCode() + "]"
     $(family_pattern).append(chip_card_html);
-    $(family_pattern+ "a label").last().text(pn['common_name']);
+    $(family_pattern+ " a label ").last().text(pn['common_name']);
+    console.log(pn['common_name'])
 }
 
