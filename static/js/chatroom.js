@@ -105,22 +105,55 @@ function appendChipCard(s){
     var family_pattern = ".family" + "[name=" + family_name.hashCode() + "]"
     $(family_pattern).append(chip_card_html);
     $(family_pattern+ " a label ").last().text(pn['common_name']);
-    $(family_pattern+ " a ").last().attr("index", s)
+    $(family_pattern+ " a ").last().attr("index", s);
     $(family_pattern+ " a ").click(function(){
-        //$(".chip").remove()
-        var ind = $(this).attr("index")
+        $(".comment").remove();
+        var ind = $(this).attr("index");
         fillInfo(pn_info_list[ind])
-        $("#chip-info").fadeIn(500)
 
+        $.get("/chatroom/get_component_comments?pk=" + pn_info_list[ind]['id'], function(e){
+            comments = JSON.parse(e);
+            for(comment of comments){
+                addComment(comment);
+            }
+        })
+
+        $("#chip-info").fadeIn(500);
     })
 
 }
 
 function fillInfo(part){
-    ci = $("#chip-info")
-    $(".info-container h1").text(part["common_name"])
-    $("#info-type").text(part["ctype"]["mname"])
-    $("#info-family").text(part["ctype"]["sname"])
-    $("#info-rank").text(part["rank"])
-    $("#info-unit-price").text(part["digikey"]["unit_price"])
+    ci = $("#chip-info");
+    $(".info-container h1").text(part["common_name"]);
+    $("#info-type").text(part["ctype"]["mname"]);
+    $("#info-family").text(part["ctype"]["sname"]);
+    $("#info-rank").text(part["rank"]);
+    $("#info-unit-price").text(part["digikey"]["unit_price"]);
+}
+
+var comment_html = "\
+    <div class=\"row comment\">\
+        <div class=\"grid group info-comment info-grid col-md-10\">\
+            <div class=\"info-module\">\
+                <h3 class=\"comment-title\">BOB - 2055/12/31</h3>\
+                <div class=\"comment-context\">\
+                    This chip Sucks\
+                </div>\
+            </div>\
+        </div>\
+        <div class=\"grid group info-comment info-grid col-md-2\">\
+            <div class=\"info-module\">\
+                <h2 class=\"comment-rank\">RANK</h2>\
+                </label>\
+            </div>\
+        </div>\
+    </div>\
+"
+
+function addComment(comment){
+    comment_tag = $("#comment-container").append(comment_html)
+    comment_tag.find(".comment-title").last().text(comment["commenter"] + " - " + comment["date"])
+    comment_tag.find(".comment-context").last().text(comment["text"])
+    comment_tag.find(".comment-rank").last().text(comment["rank"])
 }
