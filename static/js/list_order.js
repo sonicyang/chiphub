@@ -245,7 +245,7 @@ function showChipList(ind){
 function editPaidInfo(){
     $("#info-paid-account").prop("contenteditable", true);
     $("#info-paid-account").css("box-shadow", "0 0 2px 0px #0000cc");
-    $("#info-paid-date").prop("contenteditable", true);
+    $("#info-paid-date").prop("disabled", false);
     $("#info-paid-date").css("box-shadow", "0 0 2px 0px #0000cc");
     button.text("儲存");
     button.attr("action", "save")
@@ -254,11 +254,11 @@ function editPaidInfo(){
 function sendPaidInfo(){
     var oid = data_list[current_data_index]['uuid'];
     var account = $("#info-paid-account").text();
-    var date = new Date($("#info-paid-date").text());
+    var date = new Date($("#info-paid-date").attr("value"));
     var month = date.getMonth() + 1;
     var day = date.getDate();
     if (!isNaN(month) && !isNaN(day)){
-        $.get("digikey/pay/",
+        $.get("/digikey/pay/",
             {'OID': oid, 'PACCOUNT': account, 'PMONTH': month, 'PDAY': day})
             .success(function(d){
                 disableEditPaidInfoMode();
@@ -274,7 +274,7 @@ function sendPaidInfo(){
 function disableEditPaidInfoMode(){
     $("#info-paid-account").prop("contenteditable", false);
     $("#info-paid-account").css("box-shadow", "");
-    $("#info-paid-date").prop("contenteditable", false);
+    $("#info-paid-date").prop("disabled", true);
     $("#info-paid-date").css("box-shadow", "");
     button.text("編輯");
     button.attr("action", "edit")
