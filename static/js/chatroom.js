@@ -144,15 +144,15 @@ var comment_html = "\
         </div>\
         <div class=\"grid group info-parties info-grid col-md-1\">\
             <div class=\"info-module rank\">\
-                <h4>RANK</h4>\
+                <h5>RANK</h5>\
                 <label class=\"comment-rank\">RANK</label>\
             </div>\
         </div>\
         <div class=\"grid group info-parties info-grid col-md-1\">\
-            <div class=\"info-module-half rank\">\
+            <div class=\"info-module-half rank rbutton\">\
                 <i class=\"material-icons\">thumb_up</i>\
             </div>\
-            <div class=\"info-module-half rank\">\
+            <div class=\"info-module-half rank rbutton\">\
                 <i class=\"material-icons\">thumb_down</i>\
             </div>\
         </div>\

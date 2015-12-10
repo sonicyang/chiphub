@@ -96,6 +96,9 @@ body {
     font-size: 24px;
     font-weight: 200; }
 
+.rbutton {
+  width: 48px; }
+
 .paid-line {
   padding: 2rem 0 1rem 0;
   text-align: center; }
