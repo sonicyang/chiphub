@@ -89,7 +89,9 @@ def retrieve_component_detail(part_number):
         except Exception:
             sub_type = ""
 
-        if min_qty != 1 or no_stocking or float(price) <= 0:
+        if no_stocking or float(price) <= 0:
+            return comp
+        elif min_qty != 1:
             return comp
         else:
 
@@ -153,9 +155,10 @@ def order(request, ordering):
         part_detail_dicts = map(lambda x: addquantity(model_to_dict(x[0]), x[1]), parts_detail)
         part_detail_dicts = map(lambda x: removekey(x, "associated_order"), part_detail_dicts)
         part_detail_dicts = map(lambda x: removekey(x, "id"), part_detail_dicts)
-        map(lambda x: operator.setitem(x, "generic_type", model_to_dict(GComponents.objects.get(pk = x["generic_type"]))), part_detail_dicts)
-        map(lambda x: x["generic_type"].pop("id"), part_detail_dicts)
-        map(lambda x: x["generic_type"].pop("ctype"), part_detail_dicts)
+        #XXX: show pass common name to front end
+        # map(lambda x: operator.setitem(x, "generic_type", model_to_dict(GComponents.objects.get(pk = x["generic_type"]))), part_detail_dicts)
+        # map(lambda x: x["generic_type"].pop("id"), part_detail_dicts)
+        # map(lambda x: x["generic_type"].pop("ctype"), part_detail_dicts)
 
         response = HttpResponse(json.dumps(part_detail_dicts))
 
