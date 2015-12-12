@@ -35,4 +35,7 @@ body {
   .hide-in-small-screen {
     display: none !important; } }
 
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  margin: auto; }
+
 /*# sourceMappingURL=index.css.map */
