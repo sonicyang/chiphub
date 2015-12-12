@@ -1,3 +1,7 @@
+$('#myCarousel').carousel({
+    interval: 2000
+});
+
 app.controller('progress', function($scope, $http) {
     $http.get("/digikey/rally/")
         .then(function(response) {
