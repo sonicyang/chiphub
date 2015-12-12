@@ -68,7 +68,7 @@ function alertWarning(type){
     alert_msg = $("#alert-message")
     alert_msg.text(type + " 不合法！");
     changeAlertMsgForRWD();
-    alert_msg.animate({top:"10px"}, 500);
+    alert_msg.animate({top:"70px"}, 500);
 }
 function warningColor(input_type){
     $("input[type=\"" + input_type + "\"]").css("border-color", "#ff0000");
