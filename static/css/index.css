@@ -14,6 +14,10 @@
   color: white; }
   #banner-container .space-before {
     flex: 1.5; }
+  #banner-container #slogan-container {
+    margin: auto;
+    padding: 1%;
+    background-color: rgba(0, 0, 0, 0.4); }
   #banner-container h1 {
     flex: 1;
     margin: 0;
