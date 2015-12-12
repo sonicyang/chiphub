@@ -11,8 +11,8 @@
 
 {% block content %}
 <div  ng-controller="order_info_ctrl">
-    <div id="order-info" ng-if="invoice" ng-cloak>
-        <a id="close-order-info" href="#">
+    <div id="order-info" class="ang-fade" ng-if="invoice" ng-cloak>
+        <a id="close-order-info" href="" ng-click="hide_info()">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
         {% verbatim %}
