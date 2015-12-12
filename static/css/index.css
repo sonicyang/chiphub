@@ -48,7 +48,8 @@
     #service .service-item h1 {
       font-size: 2.8rem; }
     #service .service-item svg {
-      height: 40%; }
+      height: 40%;
+      min-height: 45px; }
     #service .service-item h2 {
       font-size: 2.3rem;
       margin: 1% 0 1% 0; }
