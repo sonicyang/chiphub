@@ -49,7 +49,7 @@ h1 {
     border-top-right-radius: 5px; }
 
 #container {
-  background-color: green; }
+  padding-top: 50px; }
 
 #login_button_wrapper, #profile_button_wrapper, #logout_button_wrapper {
   display: none; }

@@ -1,175 +1,77 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
-  <head>
-    <meta name="viewport" content="initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900,700,500' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet" media="screen">
-    <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet" media="screen">
-    {% block css %}
+    <head>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900,700,500' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link href="{% static 'css/base.css' %}" rel="stylesheet" media="screen">
 
-    {% endblock %}
+        {% block css %}
 
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="{% static 'js/base.js' %}"></script>
-    {% block js %}
+        {% endblock %}
 
-    {% endblock %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/base.js' %}"></script>
+        {% block js %}
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% endblock %}
 
-    <title>{% block title %}Chiphub{% endblock %}</title>
-  </head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <body>
-    <div id="wrapper">
+        <title>{% block title %}Chiphub{% endblock %}</title>
+    </head>
 
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="">
-            <a href="/">
-              <div class="titular">
-                <span href="/">CHIPHUB</span><br />
-              </div>
-              <!--<div>{{login_username}}</div>-->
-            </a>
-          </li>
-          <hr>
-          <div>基本服務</div>
+    <body>
+            <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
 
-          <li>
-            <a href="/progress/">
-              <div class="sb-icon"><i class="material-icons">shopping_cart</i></div>
-              <div class="sb-text">
-                <span href="/">集單進度</span><br />
-                <span>省錢又簡單</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="/chatroom/">
-              <div class="sb-icon"><i class="material-icons">mode_comment</i></div>
-              <div class="sb-text">
-                <span href="/">討論區</span><br />
-                <span>華山論零件</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="/exchange/">
-              <div class="sb-icon"><i class="material-icons">autorenew</i></div>
-              <div class="sb-text">
-                <span href="/">交換中心</span><br />
-                <span>有啥特別的嗎？</span>
-              </div>
-            </a>
-          </li>
-          <hr />
-          <div>帳號與設定</div>
-          <li id="login_button_wrapper">
-            <a id="login_button" href="#">
-              <div class="sb-icon"><i class="material-icons">vpn_key</i></div>
-              <div class="sb-text">
-                <span href="/">登入</span><br />
-                <span>讓我們開始吧</span>
-              </div>
-            </a>
-          </li>
-          <li id="profile_button_wrapper">
-            <a href="/profile/">
-              <div class="sb-icon"><i class="material-icons">build</i></div>
-              <div class="sb-text">
-                <span href="/">個人資料</span><br />
-                <span>讓我們更了解你</span>
-              </div>
-            </a>
-          </li>
-          <li id="logout_button_wrapper">
-            <a id="logout_button" href="/logout">
-              <div class="sb-icon"><i class="material-icons">directions_run</i></div>
-              <div class="sb-text">
-                <span href="/">登出</span><br />
-                <span>到離開的時候了</span>
-              </div>
-            </a>
-          </li>
-          <hr />
-          <div>更多資訊</div>
-          <li>
-            <a href="/faq/">
-              <div class="sb-icon"><i class="material-icons">question_answer</i></div>
-              <div class="sb-text">
-                <span href="/">FAQ</span><br />
-                <span>任何問題？</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="/about_us/">
-              <div class="sb-icon"><i class="material-icons">group</i></div>
-              <div class="sb-text">
-                <span href="/">關於我們</span><br />
-                <span>我們是誰呢？</span>
-              </div>
-            </a>
-          </li>
-
-        </ul>
-      </div>
-      <!-- /#sidebar-wrapper -->
-
-      <!-- Page Content -->
-      <div id="page-content-wrapper">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-12">
-              {% block content%}{% endblock %}
-            </div>
-          </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+            </nav>
+        <div id="container">
+            {% block content%}
+            {% endblock %}
         </div>
-      </div>
-      <!-- /#page-content-wrapper -->
+    </body>
 
-    </div>
-    <div class="row">
-      <div id="content" class="col-md-10">
-      </div>
-
-    </div>
-
-    <!-- Login Form 1-->
-    <div id="login_wrapper">
-      <div id="login_providers">
-        <div id="login_title">
-          Login
-        </div>
-        <hr />
-        <div id="login_options">
-          <a href="/google_login"><div id=login_google></div></a>
-        </div>
-        <hr />
-        <div id="login_footer">
-          You will be redirected to other sites for authentication
-        </div>
-      </div>
-    </div>
-    <!-- End Login Form 1-->
-    <div id="nob">
-        Alpha 版本 未正式營運
-    </div>
-    <footer>
-
-    </footer>
-  </body>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-  </script>
-</html>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+    </html>
