@@ -4,20 +4,28 @@ app.controller('base-ctrl', function($scope, $http) {
      $scope.login_wrapper = false;
 
      $http.get("/islogin")
-     .then(function(response) {
-         if(response.status == 200){
-             $scope.logined = true;
-         }else if(response.status == 400){
-             $scope.logined = false;
-         }
-     });
+        .then(function(response) {
+                $scope.logined = true;
+            },function(response){
+                $scope.logined = false;
+            });
 
      $scope.login = function(){
          $scope.login_wrapper = true;
+
+         return false;
      };
+
+     $scope.$on('showLogin', function(event) {
+         $scope.login_wrapper = true;
+
+         return false;
+     })
 
      $scope.exit_login = function(){
          $scope.login_wrapper = false;
+
+         return false;
      };
 });
 

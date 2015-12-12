@@ -2,7 +2,7 @@ $('#myCarousel').carousel({
     interval: 200
 });
 
-app.controller('progress', function($scope, $http) {
+app.controller('progress', function($scope, $http, $window, $rootScope) {
     $http.get("/digikey/rally/")
         .then(function(response) {
             $scope.current_accumulated = parseFloat(response.data[0]);
@@ -14,6 +14,15 @@ app.controller('progress', function($scope, $http) {
             $('#progress').animate({width: (percent + "%")}, 750);
 
         });
+
+        $scope.go_order = function(){
+            $http.get("/islogin")
+                .then(function(response) {
+                        $window.location.href = '/order';
+                      },function(response){
+                        $rootScope.$broadcast("showLogin");
+                      });
+        };
 });
 
 app.controller('group_history', function($scope, $http) {

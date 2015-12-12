@@ -145,4 +145,9 @@ body {
   background-image: none;
   width: 70px; }
 
+#go-button {
+  position: absolute;
+  right: 30px;
+  bottom: 30px; }
+
 /*# sourceMappingURL=progress.css.map */
