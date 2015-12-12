@@ -14,6 +14,7 @@ $(document).ready(function(){
 var app = angular.module('navbar', []);
 app.controller('navbar-ctrl', function($scope, $http) {
      $scope.logined = false;
+     #scope.login_wrapper = false;
 
      $http.get("/islogin")
      .then(function(response) {
@@ -25,7 +26,11 @@ app.controller('navbar-ctrl', function($scope, $http) {
      });
 
      $scope.login = function(){
-        $('#login_wrapper').fadeIn(700)
+         $scope.login_wrapper = true;
+     };
+
+     $scope.exit_login = function(){
+         $scope.login_wrapper = false;
      };
 });
 
