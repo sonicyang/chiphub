@@ -17,6 +17,7 @@
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
         <script src="{% static 'js/base.js' %}"></script>
         {% block js %}
 
@@ -29,7 +30,7 @@
 
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
+            <div class="container-fluid" ng-app="navbar" ng-controller="navbar-ctrl">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -55,8 +56,8 @@
                         </li>
                         <li><a href="#">零件討論區</a></li>
                         <li><a href="#">專案分享</a></li>
-                        <li><a href="#">登入</a></li>
-                        <li class="dropdown">
+                        <li ng-hide="logined" ng-click="login"><a href="#">登入</a></li>
+                        <li class="dropdown" ng-show="logined">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My CHIPHUB<span class="caret"></span><span class="sr-only">(current)</span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"></a></li>

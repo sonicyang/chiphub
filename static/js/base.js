@@ -9,22 +9,23 @@ $(document).ready(function(){
   $("#login_wrapper").click(function(){
     $('#login_wrapper').fadeOut(700)
   });
+});
 
-  $.ajax({
-    url: "/islogin",
-    statusCode: {
-      200: function(){
-        $("#login_button_wrapper").fadeOut(350)
-          $("#logout_button_wrapper").fadeIn(350)
-          $("#profile_button_wrapper").fadeIn(350)
-      },
-      400: function(){
-        $("#login_button_wrapper").fadeIn(350)
-          $("#logout_button_wrapper").fadeOut(350)
-          $("#profile_button_wrapper").fadeOut(350)
+var app = angular.module('navbar', []);
+app.controller('navbar-ctrl', function($scope, $http) {
+     $scope.logined = false;
 
-      }
-    }
-  })
+     $http.get("/islogin")
+     .then(function(response) {
+         if(response.status == 200){
+             $scope.logined = true;
+         }else if(response.status == 400){
+             $scope.logined = false;
+         }
+     });
+
+     $scope.login = function(){
+        $('#login_wrapper').fadeIn(700)
+     };
 });
 
