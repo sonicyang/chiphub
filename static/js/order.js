@@ -79,7 +79,6 @@ app.controller('order_form', function($scope, $http) {
         if(order_list != ""){
             $http.get("/digikey/price/?order_list=" + order_list)
                 .then(function(response){
-                    if(response.status == 200){
                         console.log(200);
                         var total = 0;
 
@@ -94,20 +93,22 @@ app.controller('order_form', function($scope, $http) {
                         resetColor();
                         $scope.stage = 2;
 
-                    }else if(response.status == 400){
-                        console.log(400);
-                        alertWarning("有不存在的料號、不可以1單位訂購的零件、沒有庫存的零件");
-                        response.data.forEach(function(element, index){
-                            if(element["unit_price"] <= 0){
-                                warningColor(index);
-                            }
-                        });
-                    }else if(response.status == 500){
-                        alertWarning("我們出錯了，請再試一次");
-                    }
+                        $scope.loading = false;
+                    }, function(response){
+                        if(response.status == 400){
+                            console.log(400);
+                            alertWarning("有不存在的料號、不可以1單位訂購的零件、沒有庫存的零件");
+                            response.data.forEach(function(element, index){
+                                if(element["unit_price"] <= 0){
+                                    warningColor(index);
+                                }
+                            });
+                        }else if(response.status == 500){
+                            alertWarning("我們出錯了，請再試一次");
+                        }
 
-                    $scope.loading = false;
-                 });
+                        $scope.loading = false;
+                    });
         }else{
             $scope.item_count = 1;
             alertWarning("尚未輸入任何訂單!")
