@@ -43,8 +43,8 @@
         </div>
     </div>
 
-    <div id="chip-info" class="ang-fade" ng-if="infoing" ng-cloak>
-        <a id="close-chip-info" href="">
+    <div id="chip-info" class="ang-fade" ng-if="infoing" ng-cloak ng-mouse-wheel-up="mousewheel()" ng-mouse-wheel-down="mousewheel()">
+        <a id="close-chip-info" href="" ng-click="hide_info()">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
         <div class="info-container">

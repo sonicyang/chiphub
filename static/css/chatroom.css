@@ -26,13 +26,14 @@
   margin-top: 10px;
   margin-bottom: 25px; }
 
-#close-chip-info span {
+#close-chip-info {
   position: absolute;
-  right: 1%;
-  top: 1rem;
-  font-size: 2.5rem;
-  color: white;
-  z-index: 1001; }
+  right: 15px;
+  top: 65px; }
+  #close-chip-info span {
+    font-size: 2.5rem;
+    color: white;
+    z-index: 1001; }
 
 #chip-info {
   position: fixed;
@@ -42,7 +43,8 @@
   width: 100%;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000; }
+  z-index: 1000;
+  padding-top: 115px; }
   #chip-info h1 {
     margin-bottom: 25px; }
 
@@ -54,8 +56,7 @@ body {
   color: #222;
   padding: 3rem 2rem 4rem 3rem;
   width: 90%;
-  margin: 5% auto;
-  margin: 4rem 5% 5rem 5%;
+  margin: 0rem 5% 5rem 5%;
   position: relative; }
   .info-container h1 {
     font-size: 50px;
