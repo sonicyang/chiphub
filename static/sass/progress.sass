@@ -1,3 +1,6 @@
+#slider
+  padding: 1% 5% 3% 5%
+
 $COMPLITED-COLOR: #2C3E50 
 $TODO-COLOR: #E1E2EB
 $ACTIVE-COLOR: #00ABC9
@@ -5,11 +8,12 @@ $MAIN-BACKGROUND: #F1F4F1
 body
   background-color: #F1F4F1
   font-family: Helvetica, sans-serif ,Microsoft JhengHei
-  #countdown-wrap
-    width: 80%
-    margin: auto
+  #progress-container
+    width: 100%
+    padding: 3% 10% 3% 10%
+    box-shadow: 0 -10px 10px 0px #bbbbbb
     #goal
-      font-size: 60px
+      font-size: 40px
       text-align: left
       width: 100%
       text-align : center
@@ -18,103 +22,36 @@ body
       height: 30px
       background: #c7c7c7
       border-radius: 15px
-      float: left
       overflow: hidden
+      @media only screen and (max-width: 768px)
+        height: 15px
       #progress
-        float: left
         width: 0%
         height: 30px
         background: #00ABC9
         z-index: 333
     .goal-stat
-      width: 25%
-      height: 50px
-      padding: 20px
-      float: left
-      font-size: 20px
-      margin: 0
-      .goal-number, .goal-label
-        display: block
-      .goal-number
-        font-weight: bold
-        padding-left: 5px
-  #drop-shadow-wrapper
-    margin: 0 auto
-    width: 90%
-    #order
-      display: none
-    #list
-      display: none
-    .drop-shadow
-      float: left
-      color: yellow
-      position: relative
-      width: 30%
-      height: 50px
-      background: #e3e3e3
-      text-align: center
-      line-height: 50px
-      margin: 0 auto
-      margin-left: 10%
-      margin-right: 10%
-      margin-top: 10%
-      font-family: Tahoma
-      p
-        color: #2C3E50
-        font-size: 20px
-      &:hover
-        cursor: pointer
-        background-color: #2C3E50
-        color: yellow
-        p
-          color: #FFF
-      &:before
-        content: ""
-        position: absolute
-        z-index: -1
-        bottom: 15px
-        left: 10px
-        width: 50%
-        height: 20%
-        max-width: 300px
-        -webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
-        -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
-        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
-        -webkit-transform: rotate(-3deg)
-        -moz-transform: rotate(-3deg)
-        -o-transform: rotate(-3deg)
-        transform: rotate(-3deg)
-      &:after
-        content: ""
-        position: absolute
-        z-index: -1
-        bottom: 15px
-        left: 10px
-        width: 50%
-        height: 20%
-        max-width: 300px
-        -webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
-        -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
-        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7)
-        -webkit-transform: rotate(-3deg)
-        -moz-transform: rotate(-3deg)
-        -o-transform: rotate(-3deg)
-        transform: rotate(-3deg)
-        right: 10px
-        left: auto
-        -webkit-transform: rotate(3deg)
-        -moz-transform: rotate(3deg)
-        -o-transform: rotate(3deg)
-        transform: rotate(3deg)
-  #table-list
-    display: table
-    width: 80%
-    height: 50px
-    background: $MAIN-BACKGROUND
-    margin: 0 auto
-    margin-top: 250px
-    box-sizing: border-box
-    line-height: 50px
+      padding-top: 3%
+      font-size: 1.65rem
+
+.hide-in-small-screen
+  @media only screen and (max-width: 767px)
+    display: none !important
+
+// middle the slider images
+.carousel-inner > .item >
+  img, a > img
+    margin: auto
+
+#table-list
+  display: table
+  width: 80%
+  height: 50px
+  background: $MAIN-BACKGROUND
+  margin: 0 auto
+  margin-top: 30px
+  box-sizing: border-box
+  line-height: 50px
   .header-row-list
     background: #8b8b8b
     color: #fff
@@ -166,27 +103,3 @@ body
       border-right: 10px solid #ccc
     .cell-list:nth-of-type(n+2)
       display: none
-    input
-      &[type="radio"], &[type="checkbox"]
-        display: block
-        position: absolute
-        z-index: 1
-        width: 99%
-        height: 100%
-        opacity: 0
-      &[type="radio"]:checked, &[type="checkbox"]:checked
-        z-index: -1
-      &[type="radio"]:checked ~ .cell-list, &[type="checkbox"]:checked ~ .cell-list
-        display: block
-        border-bottom: 1px solid #eee
-      &[type="radio"]:checked ~ .cell-list:nth-of-type(n+2), &[type="checkbox"]:checked ~ .cell-list:nth-of-type(n+2)
-        background: #e0e0e0
-      &[type="radio"]:checked ~ .cell-list:nth-of-type(n+2):before, &[type="checkbox"]:checked ~ .cell-list:nth-of-type(n+2):before
-        content: attr(data-label)
-        display: inline-block
-        width: 60px
-        background: #999
-        border-radius: 10px
-        height: 20px
-        margin-right: 10px
-
