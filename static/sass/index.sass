@@ -1,45 +1,26 @@
+#banner-container
+  width: 100%
+  height: 55%
+  min-height: 250px
+  background-color: black
 
-#slider
-  padding: 1% 5% 3% 5%
+#service
+  height: 45%
+  min-height: 150px
+  div
+    height: 100%
+  .service-item
+    height: 100%
+    padding: 3.5% 0 0.5% 0
+    h1
+      font-size: 3rem
+    svg
+      height: 40%
+    h2
+      font-size: 2.5rem
+      margin: 1% 0 1% 0
 
-$COMPLITED-COLOR: #2C3E50 
-$TODO-COLOR: #E1E2EB
-$ACTIVE-COLOR: #00ABC9
-$MAIN-BACKGROUND: #F1F4F1
-body
-  background-color: #F1F4F1
-  font-family: Helvetica, sans-serif ,Microsoft JhengHei
-  #progress-container
-    width: 100%
-    padding: 3% 10% 3% 10%
-    box-shadow: 0 -10px 10px 0px #bbbbbb
-    #goal
-      font-size: 40px
-      text-align: left
-      width: 100%
-      text-align : center
-    #glass
-      width: 100%
-      height: 30px
-      background: #c7c7c7
-      border-radius: 15px
-      overflow: hidden
-      @media only screen and (max-width: 768px)
-        height: 15px
-      #progress
-        width: 0%
-        height: 30px
-        background: #00ABC9
-        z-index: 333
-    .goal-stat
-      padding-top: 3%
-      font-size: 1.65rem
 
-.hide-in-small-screen
-  @media only screen and (max-width: 767px)
-    display: none !important
-
-// middle the slider images
-.carousel-inner > .item >
-  img, a > img
-    margin: auto
+// overwrite base
+#container
+  height: 100%
