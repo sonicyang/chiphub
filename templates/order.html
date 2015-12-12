@@ -139,7 +139,7 @@
                         <div class="">
                             <div class="col-xs-3">
                                 <div class=" unit-price">
-                                    {{ item[$index].unit_price }}
+                                    {{ item[$index].unit_price | currency }}
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                         <div class="">
                             <div class="col-xs-3">
                                 <div class=" chip-total-price">
-                                    {{ item[$index].price }}
+                                    {{ item[$index].price | currency }}
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                     </div>
 
                     <div id="shipping-fee" class="col-xs-3 shipping-fee" >
-                        {{ shipping_fee }}
+                        {{ shipping_fee | currency }}
                     </div>
                 </div>
                 <div class="row">
@@ -188,7 +188,7 @@
                         手續費(10%)
                     </div>
                     <div id="fee" class="col-xs-3 fee">
-                        {{ fee }}
+                        {{ fee | currency }}
                     </div>
                 </div>
                 <div class="row">
@@ -201,7 +201,7 @@
                         Total
                     </h2>
                     <h2 id="info-net" class="col-xs-3 info-net">
-                        {{ sum_price }}
+                        {{ sum_price | currency }}
                     </h2>
                 </div>
                 {% endverbatim %}
