@@ -18,7 +18,7 @@
     </div>
     <div class="space-after"></div>
 </div>
-<div id="chatroom">
+<div id="chatroom" ng-controller="chatroom-ctrl">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-offset-2 col-sm-6">
@@ -30,39 +30,46 @@
         </div>
     </div>
 
+    {% verbatim %}
     <div id="chip-card-list">
+        <div class=family ng-repeat="family in families">
+            <h3 class=family-mname>{{ family.mname }}</h3>
+            <h5 class=family-sname>{{ family.sname }}</h5>
+            <a class="chip-card bg-info" href="" ng-repeat="chip in family.components" ng-click="show_info(family, chip)">
+                <label>
+                    {{ chip.common_name }}
+                </label>
+            </a>
+        </div>
     </div>
 
-    <div id="chip-info">
-        <a id="close-chip-info" href="#">
+    <div id="chip-info" ng-if="infoing" ng-cloak>
+        <a id="close-chip-info" href="">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
         <div class="info-container">
-            <h1>CHIP NAME</h1>
+            <h1>{{ info.common_name }}</h1>
             <!--<div class="info-id"># 2015-10-D-RC-103323</div>-->
             <div class="container-fluid">
                 <div class="row">
                     <div class="grid group info-parties info-grid col-md-5">
                         <div class="info-module">
                             <h3>TYPE</h3>
-                            <label id="info-type">
-                            </label>
+                            <label id="info-type">{{ info_family.mname }}</label>
                         </div>
 
                     </div>
                     <div class="grid group info-parties info-grid col-md-5">
                         <div class="info-module">
                             <h3>FAMILY</h3>
-                            <label id="info-family">
-                            </label>
+                            <label id="info-family">{{ info_family.mname }}</label>
                         </div>
 
                     </div>
                     <div class="grid group info-parties info-grid col-md-2">
                         <div class="info-module">
                             <h3>RANK</h3>
-                            <label id="info-rank">
-                            </label>
+                            <label id="info-rank">{{ info.rank }}</label>
                         </div>
 
                     </div>
@@ -71,7 +78,8 @@
                     <div class="grid group info-pricing-detail info-grid col-md-12">
                         <div class="info-module">
                             <h3>UNIT PRICES</h3>
-                            <div id="info-unit-price"></div>
+                            <!--XXX: repeat-->
+                            <div id="info-unit-price">{{ price }}</div>
                         </div>
                     </div>
                 </div>
@@ -94,8 +102,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+    {% endverbatim %}
 </div>
 {% endblock %}

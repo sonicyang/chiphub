@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
+from django.db.models import Max
 
 from ComponentLibrary.models import GComponents, GClasses
 from chatroom.models import Comment, Entry
@@ -29,9 +30,26 @@ def search(request):
 
 def top100(request):
     #XXX: Filter the real top 100!
-    gcomponents = GComponents.objects.all()
+    gcomponents = GComponents.objects.all().order_by('ctype')
 
-    comps = map(lambda x: x.pk, gcomponents)
+    gcomponents = map(model_to_dict, gcomponents)
+    for x in gcomponents:
+        e = Entry.objects.all().get(chip = GComponents.objects.get(pk = x['id']))
+        if e is None:
+            x["rank"] = 0
+        else:
+            x["rank"] = e.rank
+
+    max_ctype = GComponents.objects.all().aggregate(Max('ctype'))['ctype__max']
+
+    comps = {};
+    for i in range(0, max_ctype + 1):
+        filt = filter(lambda x: x['ctype'] == i, gcomponents)
+        if len(filt):
+            comps[i] = {}
+            comps[i]['mname'] = GClasses.objects.get(pk = i).mname
+            comps[i]['sname'] = GClasses.objects.get(pk = i).sname
+            comps[i]['components'] = filt
 
     response = HttpResponse(json.dumps(comps))
     response.status_code = 200
