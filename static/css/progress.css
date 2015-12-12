@@ -40,12 +40,23 @@ body {
   .hide-in-small-screen {
     display: none !important; } }
 
-.carousel-inner > .item > img, .carousel-inner > .item > a > img {
-  margin: auto; }
-
 .item {
+  position: relative;
   width: 100%;
   height: 450px; }
+  .item div {
+    position: absolute;
+    padding: 5px 8px 5px 8px;
+    bottom: 40px;
+    color: white;
+    font-size: 3rem;
+    background-color: rgba(0, 0, 0, 0.4); }
+  .item.cover-1 > div {
+    right: 5%; }
+  .item.cover-2 > div {
+    left: 5%; }
+  .item.cover-3 > div {
+    right: 5%; }
 
 .cover-1 {
   background: url("../images/surplus.jpg") no-repeat;

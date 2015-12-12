@@ -44,13 +44,24 @@ body
     display: none !important
 
 // middle the slider images
-.carousel-inner > .item >
-  img, a > img
-    margin: auto
 
 .item
+  position: relative
   width: 100%
   height: 450px
+  div
+    position: absolute
+    padding: 5px 8px 5px 8px
+    bottom: 40px
+    color: white
+    font-size: 3rem
+    background-color: rgba(0, 0, 0, 0.4)
+  &.cover-1 > div
+    right: 5%
+  &.cover-2 > div
+    left: 5%
+  &.cover-3 > div
+    right: 5%
 
 .cover-1
   background: url('../images/surplus.jpg') no-repeat
