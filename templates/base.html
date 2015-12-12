@@ -28,9 +28,9 @@
         <title>{% block title %}Chiphub{% endblock %}</title>
     </head>
 
-    <body>
+    <body ng-app="base" ng-controller="base-ctrl">
         <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid" ng-app="navbar" ng-controller="navbar-ctrl">
+            <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -56,7 +56,7 @@
                         </li>
                         <li><a href="#">零件討論區</a></li>
                         <li><a href="#">專案分享</a></li>
-                        <li ng-hide="logined" ng-click="login"><a href="#">登入</a></li>
+                        <li ng-hide="logined" ng-click="login()"><a href="#">登入</a></li>
                         <li class="dropdown" ng-show="logined">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My CHIPHUB<span class="caret"></span><span class="sr-only">(current)</span></a>
                             <ul class="dropdown-menu">
@@ -72,6 +72,25 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+        
+        <!-- Login Form 1-->
+        <div id="login_wrapper" ng-show="login_wrapper" ng-click="exit_login()">
+          <div id="login_providers">
+            <div id="login_title">
+              Login
+            </div>
+            <hr />
+            <div id="login_options">
+              <a href="/google_login"><div id=login_google></div></a>
+            </div>
+            <hr />
+            <div id="login_footer">
+              You will be redirected to other sites for authentication
+            </div>
+          </div>
+        </div>
+        <!-- End Login Form 1-->
+
         <div id="container">
             {% block content%}
             {% endblock %}

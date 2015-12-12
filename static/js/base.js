@@ -1,20 +1,7 @@
-// Login Form 1
-$(document).ready(function(){
-  $("#login_button").click(function(){
-    $('#login_wrapper').fadeIn(700)
-
-      return false; //To prevent browser appending a # on to the URL
-  });
-
-  $("#login_wrapper").click(function(){
-    $('#login_wrapper').fadeOut(700)
-  });
-});
-
-var app = angular.module('navbar', []);
-app.controller('navbar-ctrl', function($scope, $http) {
+var app = angular.module('base', []);
+app.controller('base-ctrl', function($scope, $http) {
      $scope.logined = false;
-     #scope.login_wrapper = false;
+     $scope.login_wrapper = false;
 
      $http.get("/islogin")
      .then(function(response) {

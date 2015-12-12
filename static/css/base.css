@@ -61,8 +61,7 @@ h1 {
   width: 100%;
   top: 0px;
   left: 0px;
-  z-index: 10000;
-  display: none; }
+  z-index: 10000; }
   #login_wrapper #login_providers {
     z-index: 10001;
     background-color: black;
