@@ -103,200 +103,243 @@ var chip_html = "\
         </div>\
     </div>\
 "
-var shipping_fee = 60;
-var fee_percent = 0.1;
+app.controller('order_info_ctrl', function($scope, $http, $rootScope, $document) {
+    $scope.orders = []
 
-var data_list = []
-var current_data_index;
-$.get("/digikey/user_history/", function(d){
-    list = JSON.parse(d);
-    list = list.reverse();
-    $(document).ready(function(){
-        order_list = $("#order-list")
-        for (var i = 0; i < list.length; i ++){
-            order_list.append(order_html);
-        }
-        counter = 0
-        $('.order').each(function(index){
-            var item = $(this)
-            $.get("/digikey/order_info?UUID=" + list[index], function(d){
-                data = JSON.parse(d)
-                data_list[index] = data
-                counter += 1
-                item.find('.order-date').each(function(){
-                    var type = $(this).attr("type");
-                    var text = data[type];
-                    $(this).text(text);
-                })
+    $http.get("/digikey/user_history/")
+        .then(function(response){
+            response.data = response.data.reverse();
 
-                item.find('.order-price').each(function(){
-                    var type = $(this).attr("type");
-                    var text = data[type];
-                    text = '$ ' + text;
-                    $(this).text(text);
-                })
-
-                item.find(".sent").each(function(){
-                    var type = $(this).attr("type");
-                    var text = data[type];
-                    if (!text || text == "None"){
-                        text = "尚未寄送";
-                    }
-                    $(this).text(text);
-                })
-                item.find(".paid").each(function(){
-                    var type = $(this).attr("type");
-                    var text = data[type];
-                    if (!text || text == "None"){
-                        text = "尚未付款";
-                    }
-                    $(this).text(text);
-                })
-                item.find(".order-info-link").attr("index", index)
-
-                if(counter == list.length){
-                    doneLoading()
-                }
-            })
-        })
-        //$("label[type=shipping_address]").each(function(index){
-            //console.log(data[index]['shipping_address'])
-        //})
-        $('#order-info').bind("mousewheel DOMMouseScroll", function(e) {
-            var scrollTo = null;
-            if (e.type == 'mousewheel') {
-                scrollTo = (e.originalEvent.wheelDelta * -1);
-            } else if (e.type == 'DOMMouseScroll') {
-                scrollTo = 1000 * e.originalEvent.detail;
-            }
-
-            if (scrollTo) {
-                e.preventDefault();
-                $(this).scrollTop(scrollTo + $(this).scrollTop());
+            for(var i = 0; i < response.data.length; i++){
+                $http.get("/digikey/order_info?UUID=" + response.data[i])
+                    .then(function(response){
+                        if(response.data["paid_date"] == "None"){
+                            response.data["paid_date"] = "尚未付款"
+                        }
+                        if(response.data["sent_date"] == "None"){
+                            response.data["sent_date"] = "尚未寄送"
+                        }
+                        $scope.orders.push(response.data);
+                    });
             }
         });
 
-        // display shipping fee
-        $("#shipping-fee").text(shipping_fee);
-    })
+    //$scope.show_info = function(family, chip){
+        //$scope.infoing = true;
+        //$scope.info = chip;
+        //$scope.info_family = family;
+        //$scope.price = chip.digikey.unit_price;
+        //$http.get("/chatroom/get_component_comments?pk=" + chip.id)
+            //.then(function(response){
+                //$scope.comments = response.data;
+            //});
+    //};
 
-    $(document).on('keyup',function(evt) {
-        if (evt.keyCode == 27) {
-            $("#order-info").fadeOut(500);
-            disableEditPaidInfoMode();
-        }
-    });
+    //$scope.hide_info = function(){
+        //$scope.infoing = false;
+    //};
 
-    $("#close-order-info").click(function(){
-        $("#order-info").fadeOut(500);
-        disableEditPaidInfoMode();
-    })
+    //$document.on('keyup',function(evt) {
+        //if (evt.keyCode == 27) {
+            //$scope.hide_info();
+            //$scope.$apply()
+        //}
+    //});
+});
+//var shipping_fee = 60;
+//var fee_percent = 0.1;
 
-    $("#paid-info-button").click(function(e){
-        button = $(this)
-        action = button.attr("action")
-        if(action == "edit"){
-            editPaidInfo();
-        }else if (action == "save"){
-            sendPaidInfo();
-        }
-    })
+//var data_list = []
+//var current_data_index;
+//$.get("/digikey/user_history/", function(d){
+    //list = JSON.parse(d);
+    //list = list.reverse();
+    //$(document).ready(function(){
+        //order_list = $("#order-list")
+        //for (var i = 0; i < list.length; i ++){
+            //order_list.append(order_html);
+        //}
+        //counter = 0
+        //$('.order').each(function(index){
+            //var item = $(this)
+            //$.get("/digikey/order_info?UUID=" + list[index], function(d){
+                //data = JSON.parse(d)
+                //data_list[index] = data
+                //counter += 1
+                //item.find('.order-date').each(function(){
+                    //var type = $(this).attr("type");
+                    //var text = data[type];
+                    //$(this).text(text);
+                //})
 
-    // avoid change line while pressing the enter key
-    $("#info-paid-account").keydown(function(event){
-        if(event.keyCode == 13){
-            return false
-        }
-    });
+                //item.find('.order-price').each(function(){
+                    //var type = $(this).attr("type");
+                    //var text = data[type];
+                    //text = '$ ' + text;
+                    //$(this).text(text);
+                //})
 
-    $("#info-paid-date").keydown(function(event){
-        if(event.keyCode == 13){
-            return false
-        }
-    });
-})
-function doneLoading(){
-    $(".order-info-link").click(function(e){
-        $(".chip").remove()
-        var ind = $(this).attr("index")
-        var net = parseInt(data_list[ind]["net"]);
-        var fee = Math.ceil(net * fee_percent);
-        $("#info-shipping-address").text(data_list[ind]["shipping_address"])
-        $("#info-sent-date").text(data_list[ind]["sent_date"])
+                //item.find(".sent").each(function(){
+                    //var type = $(this).attr("type");
+                    //var text = data[type];
+                    //if (!text || text == "None"){
+                        //text = "尚未寄送";
+                    //}
+                    //$(this).text(text);
+                //})
+                //item.find(".paid").each(function(){
+                    //var type = $(this).attr("type");
+                    //var text = data[type];
+                    //if (!text || text == "None"){
+                        //text = "尚未付款";
+                    //}
+                    //$(this).text(text);
+                //})
+                //item.find(".order-info-link").attr("index", index)
 
-        $("#fee").text(fee);
-        $("#info-net").text(net + fee + shipping_fee);
+                //if(counter == list.length){
+                    //doneLoading()
+                //}
+            //})
+        //})
+        ////$("label[type=shipping_address]").each(function(index){
+            ////console.log(data[index]['shipping_address'])
+        ////})
+        //$('#order-info').bind("mousewheel DOMMouseScroll", function(e) {
+            //var scrollTo = null;
+            //if (e.type == 'mousewheel') {
+                //scrollTo = (e.originalEvent.wheelDelta * -1);
+            //} else if (e.type == 'DOMMouseScroll') {
+                //scrollTo = 1000 * e.originalEvent.detail;
+            //}
 
-        if(data_list[ind]["paid_account"] == "None"){
-            $("#info-paid-date").text("尚未填寫")
-        }else{
-            $("#info-paid-date").text(data_list[ind]["paid_date"])
-        }
-        if(data_list[ind]["paid_account"] == null){
-            $("#info-paid-account").text("尚未填寫")
-        }else{
-            $("#info-paid-account").text(data_list[ind]["paid_account"])
-        }
+            //if (scrollTo) {
+                //e.preventDefault();
+                //$(this).scrollTop(scrollTo + $(this).scrollTop());
+            //}
+        //});
 
-        current_data_index = ind;
-        showChipList(ind);
-        $("#order-info").fadeIn(500)
-    })
+        //// display shipping fee
+        //$("#shipping-fee").text(shipping_fee);
+    //})
 
-}
+    //$(document).on('keyup',function(evt) {
+        //if (evt.keyCode == 27) {
+            //$("#order-info").fadeOut(500);
+            //disableEditPaidInfoMode();
+        //}
+    //});
 
-function showChipList(ind){
-        $("#chip-list").append(chip_header_html)
-        for (var i = 0; i < data_list[ind]['components'].length; i ++){
-            $("#chip-list").append(chip_html)
-        }
-        $("#chip-list .item").each(function(){
-            var chip = $(this)
-            var comp = data_list[ind]['components'][chip.index() - 1]
-            chip.find(".part-number").text(comp['part_number'])
-            chip.find(".unit-price").text(comp['unit_price'])
-            chip.find(".quantity").text(comp['quantity'])
-            chip.find(".chip-total-price").text(comp['quantity'] * comp['unit_price'])
-        })
-}
+    //$("#close-order-info").click(function(){
+        //$("#order-info").fadeOut(500);
+        //disableEditPaidInfoMode();
+    //})
 
-function editPaidInfo(){
-    $("#info-paid-account").prop("contenteditable", true);
-    $("#info-paid-account").css("box-shadow", "0 0 2px 0px #0000cc");
-    $("#info-paid-date").prop("disabled", false);
-    $("#info-paid-date").css("box-shadow", "0 0 2px 0px #0000cc");
-    button.text("儲存");
-    button.attr("action", "save")
-}
+    //$("#paid-info-button").click(function(e){
+        //button = $(this)
+        //action = button.attr("action")
+        //if(action == "edit"){
+            //editPaidInfo();
+        //}else if (action == "save"){
+            //sendPaidInfo();
+        //}
+    //})
 
-function sendPaidInfo(){
-    var oid = data_list[current_data_index]['uuid'];
-    var account = $("#info-paid-account").text();
-    var date = new Date($("#info-paid-date").attr("value"));
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    if (!isNaN(month) && !isNaN(day)){
-        $.get("/digikey/pay/",
-            {'OID': oid, 'PACCOUNT': account, 'PMONTH': month, 'PDAY': day})
-            .success(function(d){
-                disableEditPaidInfoMode();
-            })
-            .error(function(d){
-                alert("儲存失敗");
-            })
-    }else{
-        alert("錯誤的日期格式")
-    }
-}
+    //// avoid change line while pressing the enter key
+    //$("#info-paid-account").keydown(function(event){
+        //if(event.keyCode == 13){
+            //return false
+        //}
+    //});
 
-function disableEditPaidInfoMode(){
-    $("#info-paid-account").prop("contenteditable", false);
-    $("#info-paid-account").css("box-shadow", "");
-    $("#info-paid-date").prop("disabled", true);
-    $("#info-paid-date").css("box-shadow", "");
-    button.text("編輯");
-    button.attr("action", "edit")
-}
+    //$("#info-paid-date").keydown(function(event){
+        //if(event.keyCode == 13){
+            //return false
+        //}
+    //});
+//})
+//function doneLoading(){
+    //$(".order-info-link").click(function(e){
+        //$(".chip").remove()
+        //var ind = $(this).attr("index")
+        //var net = parseInt(data_list[ind]["net"]);
+        //var fee = Math.ceil(net * fee_percent);
+        //$("#info-shipping-address").text(data_list[ind]["shipping_address"])
+        //$("#info-sent-date").text(data_list[ind]["sent_date"])
+
+        //$("#fee").text(fee);
+        //$("#info-net").text(net + fee + shipping_fee);
+
+        //if(data_list[ind]["paid_account"] == "None"){
+            //$("#info-paid-date").text("尚未填寫")
+        //}else{
+            //$("#info-paid-date").text(data_list[ind]["paid_date"])
+        //}
+        //if(data_list[ind]["paid_account"] == null){
+            //$("#info-paid-account").text("尚未填寫")
+        //}else{
+            //$("#info-paid-account").text(data_list[ind]["paid_account"])
+        //}
+
+        //current_data_index = ind;
+        //showChipList(ind);
+        //$("#order-info").fadeIn(500)
+    //})
+
+//}
+
+//function showChipList(ind){
+        //$("#chip-list").append(chip_header_html)
+        //for (var i = 0; i < data_list[ind]['components'].length; i ++){
+            //$("#chip-list").append(chip_html)
+        //}
+        //$("#chip-list .item").each(function(){
+            //var chip = $(this)
+            //var comp = data_list[ind]['components'][chip.index() - 1]
+            //chip.find(".part-number").text(comp['part_number'])
+            //chip.find(".unit-price").text(comp['unit_price'])
+            //chip.find(".quantity").text(comp['quantity'])
+            //chip.find(".chip-total-price").text(comp['quantity'] * comp['unit_price'])
+        //})
+//}
+
+//function editPaidInfo(){
+    //$("#info-paid-account").prop("contenteditable", true);
+    //$("#info-paid-account").css("box-shadow", "0 0 2px 0px #0000cc");
+    //$("#info-paid-date").prop("disabled", false);
+    //$("#info-paid-date").css("box-shadow", "0 0 2px 0px #0000cc");
+    //button.text("儲存");
+    //button.attr("action", "save")
+//}
+
+//function sendPaidInfo(){
+    //var oid = data_list[current_data_index]['uuid'];
+    //var account = $("#info-paid-account").text();
+    //var date = new Date($("#info-paid-date").attr("value"));
+    //var month = date.getMonth() + 1;
+    //var day = date.getDate();
+    //if (!isNaN(month) && !isNaN(day)){
+        //$.get("/digikey/pay/",
+            //{'OID': oid, 'PACCOUNT': account, 'PMONTH': month, 'PDAY': day})
+            //.success(function(d){
+                //disableEditPaidInfoMode();
+            //})
+            //.error(function(d){
+                //alert("儲存失敗");
+            //})
+    //}else{
+        //alert("錯誤的日期格式")
+    //}
+//}
+
+//function disableEditPaidInfoMode(){
+    //$("#info-paid-account").prop("contenteditable", false);
+    //$("#info-paid-account").css("box-shadow", "");
+    //$("#info-paid-date").prop("disabled", true);
+    //$("#info-paid-date").css("box-shadow", "");
+    //button.text("編輯");
+    //button.attr("action", "edit")
+//}
 
 
 

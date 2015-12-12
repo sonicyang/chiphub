@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+<div  ng-controller="order_info_ctrl">
     <div id="order-info">
         <a id="close-order-info" href="#">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -117,39 +118,51 @@
 
         </div>
     </div>
-    <div id="order-list">
-        <!--<div class="order">-->
-            <!--<div class="container-fluid">-->
-                <!--<h2 class="order-time">2015/12/31</h2>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-md-4 info-item">-->
-                        <!--<label class="control-label">-->
-                            <!--寄出日期:-->
-                        <!--</label>-->
-                        <!--<label class="control-label output" type="sent_date"></label>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-8 info-item">-->
-                        <!--<label class="control-label">-->
-                            <!--寄送地址:-->
-                        <!--</label>-->
-                        <!--<label class="control-label output" type="shipping_address"></label>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-md-4 info-item">-->
-                        <!--<label class="control-label">-->
-                            <!--付款日期:-->
-                        <!--</label>-->
-                        <!--<label class="control-label output" type="paid_date"></label>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-8 info-item">-->
-                        <!--<label class="control-label">-->
-                            <!--匯款帳戶:-->
-                        <!--</label>-->
-                        <!--<label class="control-label output" type="paid_account"></label>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+    <div id="order-list" ng-repeat="order in orders | orderBy:'-id'">
+        {% verbatim %}
+        <div class="order">
+            <div class="container-fluid">
+                <a class="order-info-link" href="#">link</a>
+                <div class="row">
+                    <div class="col-md-5">
+                        <h2 class="order-date" type="date">{{ order.date }}</h2>
+                    </div>
+                    <div class="col-md-7">
+                        <h2 class="order-price" type="net">{{ order.net | currency }}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 info-item">
+                        <label class="control-label">
+                            寄送日期：
+                        </label>
+                        <label class="control-label output sent" type="sent_date">{{ order.sent_date }}</label>
+                    </div>
+                    <div class="col-md-8 info-item">
+                        <label class="control-label">
+                            寄送地址：
+                        </label>
+                        <label class="control-label output sent" type="shipping_address">{{ order.shipping_address }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 info-item">
+                        <label class="control-label">
+                            匯款日期：
+                        </label>
+                        <label class="control-label output paid" type="paid_date">{{ order.paid_date }}</label>
+                    </div>
+                    <div class="col-md-8 info-item" ng-if="order.paid_account != ''">
+                        <label class="control-label">
+                            匯款帳戶：
+                        </label>
+                        <label class="control-label output paid" type="paid_account">{{ order.paid_account }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        {% endverbatim %}
     </div>
+</div>
 {% endblock %}

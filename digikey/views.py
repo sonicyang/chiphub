@@ -223,6 +223,7 @@ def get_group_info(request):
             "date": str(group.orderdate),
             "total": total,
             "person": person,
+            "id": group.pk,
             }
 
         response = HttpResponse(json.dumps(group_dict))
@@ -264,7 +265,6 @@ def get_single_order_info(request):
 
             total += detail.quantity * component.unit_price
             cdict = model_to_dict(component)
-            cdict.pop("id")
             cdict.pop("associated_order")
             cdict["quantity"] = detail.quantity
             cdict["generic_type"] = model_to_dict(GComponents.objects.get(pk = cdict["generic_type"]))
@@ -272,7 +272,6 @@ def get_single_order_info(request):
             component_list.append(cdict)
 
         order_dict = model_to_dict(order)
-        order_dict.pop("id")
         order_dict.pop("Orderer")
         order_dict.pop("group_id")
         order_dict["paid_date"] = str(order_dict["paid_date"])
