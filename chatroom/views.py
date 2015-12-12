@@ -46,19 +46,20 @@ def top100(request):
 
     gcomponents = map(model_to_dict, gcomponents)
     for x in gcomponents:
-        e = Entry.objects.all().get(chip = GComponents.objects.get(pk = x['id']))
-        if e is None:
-            x["rank"] = 0
-        else:
+        try:
+            e = Entry.objects.all().get(chip = GComponents.objects.get(pk = x['id']))
             x["rank"] = e.rank
+        except:
+            x["rank"] = 0
+
     for x in gcomponents:
-        e = Components.objects.all().get(generic_type = GComponents.objects.get(pk = x['id']))
-        if e is None:
-            x["digikey"] = None
-        else:
+        try:
+            e = Components.objects.all().get(generic_type = GComponents.objects.get(pk = x['id']))
             x["digikey"] = model_to_dict(e)
             x["digikey"].pop("associated_order")
             x["digikey"].pop("generic_type")
+        except:
+            x["digikey"] = None
 
     max_ctype = GComponents.objects.all().aggregate(Max('ctype'))['ctype__max']
 
