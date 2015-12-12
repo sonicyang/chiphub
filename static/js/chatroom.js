@@ -1,4 +1,4 @@
-app.controller('chatroom-ctrl', function($scope, $http, $rootScope) {
+app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
     $scope.infoing = false;
     $scope.families = [];
     $scope.comments = [];
@@ -18,4 +18,15 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope) {
                 $scope.comments = response.data;
             });
     };
+
+    $scope.hide_info = function(){
+        $scope.infoing = false;
+    };
+
+    $document.on('keyup',function(evt) {
+        if (evt.keyCode == 27) {
+            $scope.hide_info();
+            $scope.$apply()
+        }
+    });
 });

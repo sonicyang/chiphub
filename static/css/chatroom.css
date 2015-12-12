@@ -159,4 +159,18 @@ body {
   #banner .space-after {
     flex: 1; }
 
+.ang-fade.ng-enter {
+  transition: 0.3s linear all;
+  opacity: 0; }
+
+.ang-fade.ng-enter.ng-enter-active {
+  opacity: 1; }
+
+.ang-fade.ng-leave {
+  transition: 0.3s linear all;
+  opacity: 1; }
+
+.ang-fade.ng-leave.ng-leave-active {
+  opacity: 0; }
+
 /*# sourceMappingURL=chatroom.css.map */
