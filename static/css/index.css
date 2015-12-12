@@ -2,7 +2,11 @@
   width: 100%;
   height: 55%;
   min-height: 250px;
-  background-color: black; }
+  background-color: black;
+  background-image: url("../images/index-banner.jpg");
+  background-size: cover;
+  background-position: 50% 40%;
+  box-shadow: inset 0px 0px 10px 0px rgba(30, 30, 30, 0.8); }
 
 #service {
   height: 45%;
