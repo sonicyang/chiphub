@@ -29,13 +29,18 @@ $(document).ready(function(){
     $("#close-chip-info").click(function(){
         $("#chip-info").fadeOut(500);
     })
+    $("#submit-comment").click(function(){
+        var index = $(this).attr('index');
+        $.get("/chatroom/add_component_comment?pk=" + pn_info_list[index]['id'] + "&content=" + $("#commenting").val() , function(e){
+            updateComments(index)
+        })
 
+    })
 })
 
 $(document).on('keyup',function(evt) {
     if (evt.keyCode == 27) {
         $("#chip-info").fadeOut(500);
-        disableEditPaidInfoMode();
     }
 });
 
@@ -107,29 +112,37 @@ function appendChipCard(s){
     $(family_pattern+ " a label ").last().text(pn['common_name']);
     $(family_pattern+ " a ").last().attr("index", s);
     $(family_pattern+ " a ").click(function(){
-        $(".comment").remove();
         var ind = $(this).attr("index");
-        fillInfo(pn_info_list[ind])
-
-        $.get("/chatroom/get_component_comments?pk=" + pn_info_list[ind]['id'], function(e){
-            comments = JSON.parse(e);
-            for(comment of comments){
-                addComment(comment);
-            }
-        })
+        fillInfo(ind, pn_info_list[ind]);
+        updateComments(ind);
 
         $("#chip-info").fadeIn(500);
     })
 
 }
 
-function fillInfo(part){
+function updateComments(index){
+    $(".comment").remove();
+
+    console.log(index);
+
+    $.get("/chatroom/get_component_comments?pk=" + pn_info_list[index]['id'], function(e){
+        comments = JSON.parse(e);
+        for(comment of comments){
+            addComment(comment);
+        }
+    })
+
+}
+
+function fillInfo(index, part){
     ci = $("#chip-info");
     $(".info-container h1").text(part["common_name"]);
     $("#info-type").text(part["ctype"]["mname"]);
     $("#info-family").text(part["ctype"]["sname"]);
     $("#info-rank").text(part["rank"]);
     $("#info-unit-price").text(part["digikey"]["unit_price"]);
+    $("#submit-comment").attr("index", index);
 }
 
 var comment_html = "\

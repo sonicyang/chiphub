@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
+from django.shortcuts import render, redirect
 
 from ComponentLibrary.models import GComponents, GClasses
 from chatroom.models import Comment, Entry
@@ -13,7 +13,18 @@ import json
 import operator
 
 def chatroom(request):
-    return render(request, 'chatroom.html')
+    if auth.isLogin(request):
+        data = auth.get_user_data(request)
+        if auth.hasProfile(data.uuid):
+            profile = auth.get_user_profile(request)
+            return render(request, "chatroom.html", {'username' : profile.username,
+                                                     'disp': 'static'})
+        else:
+            return redirect("/profile/")
+
+    else:
+        return render(request, "chatroom.html", {'username' : '',
+                                                 'disp': 'none'})
 
 def append(request):
     # open("data", "a").write(str(request.args.get("msg")) + "\n\r")

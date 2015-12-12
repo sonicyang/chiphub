@@ -99,6 +99,18 @@ body {
 .rbutton {
   width: 48px; }
 
+.commenting-form {
+  position: relative; }
+
+.comment-button {
+  position: absolute;
+  right: 0px;
+  margin: 10px; }
+
+.fake {
+  margin: 10px;
+  opacity: 0; }
+
 .paid-line {
   padding: 2rem 0 1rem 0;
   text-align: center; }
