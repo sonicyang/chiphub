@@ -1,4 +1,4 @@
-var app = angular.module('base', []);
+var app = angular.module('base', ['ngAnimate']);
 app.controller('base-ctrl', function($scope, $http) {
      $scope.logined = false;
      $scope.login_wrapper = false;
