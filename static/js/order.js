@@ -1,3 +1,5 @@
+
+//XXX: Purge JQuery
 function changeAlertMsgForRWD(){
     $("#alert-message").css("left", function(){
         return $(window).width() / 2 - $(this).outerWidth() / 2;
@@ -31,138 +33,98 @@ function resetColor(){
     $("input[type=\"pd\"]").css("box-shadow", "");
 }
 
-var order_dom_element = "\
-        <div class=\"form-group order\">\
-            <div class=\"col-md-7 order-item order-row\">\
-                <div class=\"row\">\
-                    <label class=\"col-xs-3 control-label order-item\" for=\"\">料號:</label>\
-                    <div class=\"col-xs-8 order-item\">\
-                        <input type=\"pd\" class=\"form-control pd\">\
-                    </div>\
-                </div>\
-            </div>\
-            <div class=\"col-md-5 order-item order-row\">\
-                <div class=\"row\">\
-                    <label class=\"col-xs-3 control-label order-item\" for=\"\">數量:</label>\
-                    <div class=\"col-xs-3 order-item\">\
-                        <input type=\"amounts\" class=\"form-control amounts\">\
-                    </div>\
-                    <label class=\"col-xs-3 control-label order-item\" for=\"\" >金額:</label>\
-                    <label class=\"col-xs-3 control-label order-item price\" for=\"\" >-</label>\
-                </div>\
-            </div>\
-        </div>\
-    ";
-var order_list = ""
-function add_chip(){
-    $("#chip-list").append(order_dom_element)
-    $("#chip-list").append(order_dom_element)
-    $("#chip-list").append(order_dom_element)
-}
+app.controller('order_form', function($scope, $http) {
+    $scope.getNumber = function(num) {
+        return new Array(num);
+    };
 
-function update_price(data){
-    //XXX: How would you assume .price DOM object has the same arrangement as data returned
-    var total = 0;
-    $(".price").each(function(index){
-        price = parseInt(data[index]["unit_price"], 10) * data[index]["quantity"];
-        $(this).text(price);
-        total += price;
-    })
-    $('#total-price').text(total)
-}
-function cancel_form(){
-    if(confirm("您尚未提交訂單，確定要離開?")){
-        window.location.href = "/";
-    }
-}
-function go_to_stage2(){
-    $(".pd").prop("disabled", true);
-    $(".amounts").prop("disabled", true);
+    $scope.item = [];
+    $scope.item_count = 1;
+    $scope.stage = 1;
+    $scope.loading = false;
 
-    $("#order-button").hide()
-    $("#confirm-button").hide()
-    $("#cancel-button").hide()
-    $("#submit-button").show()
-    $("#modify-button").show()
+    $scope.increase_item_count = function(){
+        $scope.item_count += 3;
+    };
 
-}
-function back_to_stage1(){
-    $(".pd").prop("disabled", false);
-    $(".amounts").prop("disabled", false);
+    $scope.go_to_stage = function(num){
+        $scope.stage = num;
+    };
 
-    $("#order-button").show()
-    $("#confirm-button").show()
-    $("#cancel-button").show()
-    $("#submit-button").hide()
-    $("#modify-button").hide()
+    $scope.arrange_order = function(){
+        order_list = "";
 
-}
-function arrange_order(){
-    var pds = $(".pd")
-    var amounts = $(".amounts")
-    var orders = $(".order")
-    order_list = "";
-    for (var i = 0; i < pds.length; i ++){
-        pd = $(pds[i]).attr("value")
-        pd_amounts = $(amounts[i]).attr("value")
-        if (pd !== "" && pd_amounts !== "" && pd_amounts % 1 === 0){
-            order_list += $(pds[i]).attr("value")
-            order_list += ":"
-            order_list += $(amounts[i]).attr("value")
-            order_list += ","
-        }else{
-            $(orders[i]).remove()
+        for(item of $scope.item){
+            order_list += item.pn + ":" + item.quantity + ",";
         }
+        if(order_list != ""){
+            order_list = order_list.slice(0, -1)
+        }
+
+        $scope.item_count = $scope.item.length;
+
+        return order_list;
     }
-}
-function confirm_price(){
-    arrange_order()
-    if (order_list !== ""){
-        order_list = order_list.slice(0, -1)
-        $(".loader").show()
-        $.get("/digikey/price/",
-            {order_list: order_list})
-             .success(function(data){
-                $(".loader").hide()
-                update_price(JSON.parse(data));
-                alertWarningClear();
-                resetColor();
-                go_to_stage2();
-             })
-             .error(function(jqXHR){
-                 if (jqXHR.status == 400){
-                    $(".loader").hide()
-                    alertWarning("有不存在的料號、不可以1單位訂購的零件、沒有庫存的零件");
-                    data = JSON.parse(jqXHR.responseText);
-                    for(var i = 0; i < data.length; i++){
-                        if(data[i]["unit_price"] <= 0){
-                            warningColor(i);
-                        }
+
+    $scope.cancel_form = function(){
+        if(confirm("您尚未提交訂單，確定要離開?")){
+            window.location.href = "/";
+        }
+    };
+
+    $scope.confirm_price = function(){
+        $scope.loading = true;
+
+        var order_list = $scope.arrange_order();
+        if(order_list != ""){
+            $http.get("/digikey/price/?order_list=" + order_list)
+                .then(function(response){
+                    if(response.status == 200){
+                        console.log(200);
+                        var total = 0;
+
+                        response.data.forEach(function(element, index){
+                            $scope.item[index].price = parseInt(element["unit_price"], 10) * element["quantity"]
+                            total += $scope.item[index].price;
+                        });
+
+                        $scope.sum_price = total;
+
+                        alertWarningClear();
+                        resetColor();
+                        $scope.stage = 2;
+
+                    }else if(response.status == 400){
+                        console.log(400);
+                        alertWarning("有不存在的料號、不可以1單位訂購的零件、沒有庫存的零件");
+                        response.data.forEach(function(element, index){
+                            if(element["unit_price"] <= 0){
+                                warningColor(index);
+                            }
+                        });
+                    }else if(response.status == 500){
+                        alertWarning("我們出錯了，請再試一次");
                     }
-                }else if(jqXHR.status == 500){
-                    $(".loader").hide()
-                    alertWarning("我們出錯了，請再試一次");
+
+                    $scope.loading = false;
+                 });
+        }else{
+            $scope.item_count = 1;
+            alertWarning("尚未輸入任何訂單!")
+        }
+    };
+
+    $scope.submit_form = function(){
+        $scope.loading = true;
+        $http.get("/digikey/order?order_list=" + $scope.arrange_order())
+            .then(function(response){
+                if(response.status == 200){
+                    window.location.href = "/progress/";
                 }
-             })
-    }else{
-        $("#chip-list").append(order_dom_element)
-        alertWarning("尚未輸入任何訂單!")
-    }
-}
+            });
+    };
+});
 
-function modify_form(){
-    back_to_stage1();
-}
-
-function submit_form(){
-    $.get("/digikey/order/",
-        {order_list: order_list}
-    )
-    .success(function(){
-        window.location.href = "/progress/";
-    })
-    $(".loader").show();
-}
 $(window).resize(function(){
     changeAlertMsgForRWD();
 })

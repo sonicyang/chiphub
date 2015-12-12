@@ -13,16 +13,16 @@
 <div id="alert-message" class="alert alert-danger">
     Hello world!
 </div>
-<div id="profile_form_wrapper">
+<div id="profile_form_wrapper" ng-controller="order_form">
     <form id="order-form" class="form-horizontal" role="form">
         <div id="chip-list">
             <h2>訂單</h2>
-            <div class="form-group order">
+            <div class="form-group order" ng-repeat="i in getNumber(item_count) track by $index">
                 <div class="col-md-7 order-item order-row">
                     <div class="row">
                         <label class="col-xs-3 control-label order-item" for="">料號:</label>
                         <div class="col-xs-8 order-item">
-                            <input type="pd" class="form-control pd">
+                            <input type="pd" class="form-control pd" ng-model="item[$index].pn" ng-disabled="stage == 2">
                         </div>
                     </div>
                 </div>
@@ -30,32 +30,30 @@
                     <div class="row">
                         <label class="col-xs-3 control-label order-item" for="">數量:</label>
                         <div class="col-xs-3 order-item">
-                            <input type="amounts" class="form-control amounts">
+                            <input type="amounts" class="form-control amounts" ng-model="item[$index].quantity" ng-disabled="stage == 2">
                         </div>
-                        <label class="col-xs-3 control-label order-item" for="" >金額:</label>
-                        <label class="col-xs-3 control-label order-item price" for="" >-</label>
+                        <label class="col-xs-3 control-label order-item" for="">金額:</label>
+                        {% verbatim %}
+                        <label class="col-xs-3 control-label order-item price" for="">{{ item[$index].price }}</label>
+                        {% endverbatim %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-group order-button-container">
             <div class="col-xs-3">
-                <a id="order-button" type="button" class="btn btn-default" onclick="add_chip()">+</a>
+                <a id="order-button" type="button" class="btn btn-default" ng-click="increase_item_count()" ng-if="stage == 1">+</a>
             </div>
             <label id="total" class="col-xs-8">
                 <span>總計:</span>
-                <span id="total-price">-</span>
+                {% verbatim %}
+                <span id="total-price">{{ sum_price }}</span>
+                {% endverbatim %}
             </label>
         </div>
         <hr/>
         <h2>基本資料</h2>
         <div class="container-fluid">
-            <!--<div class="row">-->
-                <!--<div class="control-label col-md-2 shipping-info" for="realname">姓名:</div>-->
-                <!--<div class="control-label col-md-3 shipping-info">{{ realname }}</div>-->
-                <!--<div class="control-label col-md-2 shipping-info" for="phone">電話:</div>-->
-                <!--<div class="control-label col-md-5 shipping-info">{{ phone }}</div>-->
-            <!--</div>-->
             <div class="row">
                 <div class="control-label col-md-2 shipping-info" for="shipping_address">姓名:</div>
                 <div class="control-label col-md-10 shipping-info">{{ realname }}</div>
@@ -76,16 +74,16 @@
         <hr/>
         <div class="form-group">
             <div class="col-xs-11 btn-container">
-                <button id="cancel-button" type="button" class="btn btn-default" onclick="cancel_form()">取消訂單</button>
-                <button id="confirm-button" type="button" class="btn btn-default" onclick="confirm_price()">確認金額</button>
+                <button id="cancel-button" type="button" class="btn btn-default" ng-click="cancel_form()" ng-if="stage == 1">取消訂單</button>
+                <button id="confirm-button" type="button" class="btn btn-default" ng-click="confirm_price()" ng-if="stage == 1">確認金額</button>
 
-                <button id="modify-button" type="button" class="btn btn-default" onclick="modify_form()">修改訂單</button>
-                <button id="submit-button" type="button" class="btn btn-default" onclick="submit_form()">送出訂單</button>
+                <button id="modify-button" type="button" class="btn btn-default" ng-click="go_to_stage(1)" ng-if="stage == 2">修改訂單</button>
+                <button id="submit-button" type="button" class="btn btn-default" ng-click="submit_form()" ng-if="stage == 2">送出訂單</button>
             </div>
         </div>
     </form>
     <!-- 2 -->
-    <div class="loader" title="1">
+    <div class="loader" title="1" ng-show="loading">
         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
             <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
