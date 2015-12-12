@@ -11,10 +11,11 @@
 
 {% block content %}
 <div  ng-controller="order_info_ctrl">
-    <div id="order-info">
+    <div id="order-info" ng-if="invoice" ng-cloak>
         <a id="close-order-info" href="#">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
+        {% verbatim %}
         <div class="invoice">
             <h1>Invoice</h1>
             <!--<div class="invoice-id"># 2015-10-D-RC-103323</div>-->
@@ -25,7 +26,7 @@
                         <div class="invoice-module">
                             <h3>收件人地址</h3>
                             <label id="info-shipping-address">
-                                {{ shipping_address }}
+                                {{ info.shipping_address }}
                             </label>
                         </div>
 
@@ -35,7 +36,7 @@
                     <div class="grid group invoice-paid-details invoice-grid col-md-12">
                         <div class="invoice-module">
                             <h3>寄送日期</h3>
-                            <div id="info-sent-date">{{ sent_date }}</div>
+                            <div id="info-sent-date">{{ info.sent_date }}</div>
                         </div>
                     </div>
                 </div>
@@ -43,12 +44,13 @@
                     <div class="grid group invoice-details invoice-grid col-md-12">
                         <div class="invoice-module">
                             <h3>匯款帳戶(後五碼)</h3>
-                            <button id="paid-info-button" action="edit">編輯</button>
                             <div id="info-paid-account" class="invoice-for">
-                                {{ paid_account }}
+                                {{ info.paid_account }}
                             </div>
                             <h3>匯款日期</h3>
                             <input id="info-paid-date" class="due-date-date" type="date" disabled="true">
+                            <button id="paid-info-button" action="edit" ng-if"!editing_info" ng-click="editPayment(info)">編輯</button>
+                            <button id="paid-info-button" action="edit" ng-if="editing_info" ng-click="savePayment(info)">儲存</button>
                         </div>
                     </div>
                 </div>
@@ -60,23 +62,61 @@
                                     <h3>CHIP</h3>
                                 </div>
                             </div>
-                            <div class="">
+                            <div class="hide-in-middle-screen">
                                 <div class="col-md-3">
                                     <h3>單價</h3>
                                 </div>
                             </div>
-                            <div class="">
+                            <div class="hide-in-middle-screen">
                                 <div class="col-md-3">
                                     <h3>數量</h3>
                                 </div>
                             </div>
-                            <div class="">
+                            <div class="hide-in-middle-screen">
                                 <div class="col-md-3">
                                     <h3>總價 (單價X數量)</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row chip item" ng-repeat="chip in chips">
+                        <div class="">
+                            <div class="col-md-3">
+                                <div class="invoice-for part-number">
+                                    {{ chip.part_number }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-xs-3">
+                                <div class="invoice-for unit-price">
+                                    {{ chip.unit_price | currency }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="show-in-middle-screen">
+                            <div class="col-xs-3">
+                                <div class="invoice-for multiple">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-xs-3">
+                                <div class="invoice-for quantity">
+                                    {{ chip.quantity }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-xs-3">
+                                <div class="invoice-for chip-total-price">
+                                    {{ chip.quantity * chip.unit_price | currency}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-9">
                             <hr />
@@ -89,6 +129,7 @@
                             運費
                         </div>
                         <div id="shipping-fee" class="col-xs-3 shipping-fee">
+                            {{ shipping_fee | currency }}
                         </div>
                     </div>
                     <div class="row">
@@ -98,6 +139,7 @@
                             手續費(10%)
                         </div>
                         <div id="fee" class="col-xs-3 fee">
+                            {{ fee * total_price | currency }}
                         </div>
                     </div>
                     <div class="row">
@@ -110,7 +152,7 @@
                             Total
                         </h2>
                         <h2 id="info-net" class="col-xs-3">
-                            asd
+                            {{ fee * total_price + shipping_fee | currency }}
                         </h2>
                     </div>
                 </div>
@@ -119,10 +161,9 @@
         </div>
     </div>
     <div id="order-list" ng-repeat="order in orders | orderBy:'-id'">
-        {% verbatim %}
         <div class="order">
             <div class="container-fluid">
-                <a class="order-info-link" href="#">link</a>
+                <a class="order-info-link" href="" ng-click="show_info(order)">link</a>
                 <div class="row">
                     <div class="col-md-5">
                         <h2 class="order-date" type="date">{{ order.date }}</h2>
