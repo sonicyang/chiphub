@@ -18,49 +18,135 @@ body
     top: calc(50% - 50px)
     path, rect
       fill: #ffffff
-.order
-  padding-top: 10px
-  padding-bottom: 10px
-  margin-bottom: 0
-  background-color: #f8f8f8
-.order-item
-  padding-right: 5px
-  padding-left: 5px
+// stage 1
+#order
+  padding: 5% 5% 10% 5%
 
-.order-row
-  padding-top: 5px
-.order-button-container
-  padding-top: 10px
-  padding-bottom: 10px
-  margin-bottom: 0
-  background-color: #f8f8f8
+#order-list
+  padding-left: 6%
+  padding-right: 6%
+  .chip
+    padding-bottom: 15px
+  .button-container
+    margin-top: 10%
+    button
+      margin-bottom: 10px
+      width: 60%
+      font-size: 20px
+  h3
+    @media only screen and (max-width: 767px)
+      font-size: 2rem
 
-#order-button
-  background-color: #0066ff
-  color: white
-  border-radius: 50%
+// stage2
+#confirm-price
+  padding-left: 6%
+  padding-right: 6%
+  .chip
+    margin-top: 1rem
+    .invoice-module
+      padding: 0.5rem
+    .invoice-grid
+      margin: 0 0 1rem 0
+    .multiple
+      text-align: right
+    div
+      font-size: 2rem
+      @media only screen and (max-width: 991px)
+        font-size: 1.65rem
+    .part-number
+      font-size: 2rem
+      @media only screen and (max-width: 991px)
+        font-size: 1.85rem
+    .multiple
+      display: none
+      @media only screen and (max-width: 991px)
+        display: block
+    .quantity:before
+      @media only screen and (max-width: 991px)
+        content: "x"
+    .chip-total-price
+      @media only screen and (max-width: 991px)
+        text-align: right
+  .button-container
+    margin-top: 10%
+    button
+      margin-bottom: 10px
+      width: 60%
+      font-size: 20px
 
-#order-button:hover
-  background-color: #0099ff
+.shipping-fee
+  color: #999
+  font-size: 2rem
+#shipping-fee
+  color: #000
+  @media only screen and (max-width: 991px)
+    text-align: right
+.fee
+  color: #999
+  font-size: 2rem
+#fee
+  color: #000
+  @media only screen and (max-width: 991px)
+    text-align: right
+.info-net
+  @media only screen and (max-width: 991px)
+    font-size: 24px
+#info-net
+  @media only screen and (max-width: 991px)
+    text-align: right
 
-#total
-  font-size: 20px
-  text-align: right
+//stage 3
 
-.btn-container
-  text-align: right
+//stage 4
 
-.shipping-info
-  font-weight: 700
-  word-break: break-all
-  &:nth-child(even)
-    color: #444444
-    margin-bottom: 15px
-    text-align: left
-  &:nth-child(odd)
-    color: #000000
-    @media screen and (max-width: 991px)
-      text-align: left
+//============
+
+.hide-in-middle-screen
+  @media only screen and (max-width: 991px)
+    display: none !important
+//.order
+  //padding-top: 10px
+  //padding-bottom: 10px
+  //margin-bottom: 0
+  //background-color: #f8f8f8
+//.order-item
+  //padding-right: 5px
+  //padding-left: 5px
+
+//.order-row
+  //padding-top: 5px
+//.order-button-container
+  //padding-top: 10px
+  //padding-bottom: 10px
+  //margin-bottom: 0
+  //background-color: #f8f8f8
+
+//#order-button
+  //background-color: #0066ff
+  //color: white
+  //border-radius: 50%
+
+//#order-button:hover
+  //background-color: #0099ff
+
+//#total
+  //font-size: 20px
+  //text-align: right
+
+//.btn-container
+  //text-align: right
+
+//.shipping-info
+  //font-weight: 700
+  //word-break: break-all
+  //&:nth-child(even)
+    //color: #444444
+    //margin-bottom: 15px
+    //text-align: left
+  //&:nth-child(odd)
+    //color: #000000
+    //@media screen and (max-width: 991px)
+      //text-align: left
 
 #alert-message
   position: fixed

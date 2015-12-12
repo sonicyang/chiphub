@@ -33,10 +33,14 @@ function resetColor(){
     $("input[type=\"pd\"]").css("box-shadow", "");
 }
 
-app.controller('order_form', function($scope, $http) {
+app.controller('order_main', function($scope, $http) {
     $scope.getNumber = function(num) {
         return new Array(num);
     };
+
+    $scope.shipping_fee = 60
+    $scope.fee_rate = 0.1
+
 
     $scope.item = [];
     $scope.item_count = 1;
@@ -83,11 +87,13 @@ app.controller('order_form', function($scope, $http) {
                         var total = 0;
 
                         response.data.forEach(function(element, index){
+                            $scope.item[index].unit_price = parseInt(element["unit_price"], 10)
                             $scope.item[index].price = parseInt(element["unit_price"], 10) * element["quantity"]
                             total += $scope.item[index].price;
                         });
 
                         $scope.sum_price = total;
+                        $scope.fee = Math.ceil(total * $scope.fee_rate);
 
                         alertWarningClear();
                         resetColor();
@@ -120,7 +126,8 @@ app.controller('order_form', function($scope, $http) {
         $http.get("/digikey/order?order_list=" + $scope.arrange_order())
             .then(function(response){
                 if(response.status == 200){
-                    window.location.href = "/progress/";
+                    $scope.stage = 4
+                    //window.location.href = "/progress/";
                 }
             });
     };

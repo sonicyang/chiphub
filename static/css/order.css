@@ -19,52 +19,94 @@ body {
     .loader svg path, .loader svg rect {
       fill: #ffffff; }
 
-.order {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 0;
-  background-color: #f8f8f8; }
+#order {
+  padding: 5% 5% 10% 5%; }
 
-.order-item {
-  padding-right: 5px;
-  padding-left: 5px; }
+#order-list {
+  padding-left: 6%;
+  padding-right: 6%; }
+  #order-list .chip {
+    padding-bottom: 15px; }
+  #order-list .button-container {
+    margin-top: 10%; }
+    #order-list .button-container button {
+      margin-bottom: 10px;
+      width: 60%;
+      font-size: 20px; }
+  @media only screen and (max-width: 767px) {
+    #order-list h3 {
+      font-size: 2rem; } }
 
-.order-row {
-  padding-top: 5px; }
+#confirm-price {
+  padding-left: 6%;
+  padding-right: 6%; }
+  #confirm-price .chip {
+    margin-top: 1rem; }
+    #confirm-price .chip .invoice-module {
+      padding: 0.5rem; }
+    #confirm-price .chip .invoice-grid {
+      margin: 0 0 1rem 0; }
+    #confirm-price .chip .multiple {
+      text-align: right; }
+    #confirm-price .chip div {
+      font-size: 2rem; }
+      @media only screen and (max-width: 991px) {
+        #confirm-price .chip div {
+          font-size: 1.65rem; } }
+    #confirm-price .chip .part-number {
+      font-size: 2rem; }
+      @media only screen and (max-width: 991px) {
+        #confirm-price .chip .part-number {
+          font-size: 1.85rem; } }
+    #confirm-price .chip .multiple {
+      display: none; }
+      @media only screen and (max-width: 991px) {
+        #confirm-price .chip .multiple {
+          display: block; } }
+    @media only screen and (max-width: 991px) {
+      #confirm-price .chip .quantity:before {
+        content: "x"; } }
+    @media only screen and (max-width: 991px) {
+      #confirm-price .chip .chip-total-price {
+        text-align: right; } }
+  #confirm-price .button-container {
+    margin-top: 10%; }
+    #confirm-price .button-container button {
+      margin-bottom: 10px;
+      width: 60%;
+      font-size: 20px; }
 
-.order-button-container {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 0;
-  background-color: #f8f8f8; }
+.shipping-fee {
+  color: #999;
+  font-size: 2rem; }
 
-#order-button {
-  background-color: #0066ff;
-  color: white;
-  border-radius: 50%; }
+#shipping-fee {
+  color: #000; }
+  @media only screen and (max-width: 991px) {
+    #shipping-fee {
+      text-align: right; } }
 
-#order-button:hover {
-  background-color: #0099ff; }
+.fee {
+  color: #999;
+  font-size: 2rem; }
 
-#total {
-  font-size: 20px;
-  text-align: right; }
+#fee {
+  color: #000; }
+  @media only screen and (max-width: 991px) {
+    #fee {
+      text-align: right; } }
 
-.btn-container {
-  text-align: right; }
+@media only screen and (max-width: 991px) {
+  .info-net {
+    font-size: 24px; } }
 
-.shipping-info {
-  font-weight: 700;
-  word-break: break-all; }
-  .shipping-info:nth-child(even) {
-    color: #444444;
-    margin-bottom: 15px;
-    text-align: left; }
-  .shipping-info:nth-child(odd) {
-    color: #000000; }
-    @media screen and (max-width: 991px) {
-      .shipping-info:nth-child(odd) {
-        text-align: left; } }
+@media only screen and (max-width: 991px) {
+  #info-net {
+    text-align: right; } }
+
+@media only screen and (max-width: 991px) {
+  .hide-in-middle-screen {
+    display: none !important; } }
 
 #alert-message {
   position: fixed;

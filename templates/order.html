@@ -3,6 +3,7 @@
 
 {% block css %}
 <link href="{% static 'css/order.css' %}" rel="stylesheet" media="screen">
+<link href="{% static 'css/order-progress.css' %}" rel="stylesheet" media="screen">
 {% endblock %}
 
 {% block js %}
@@ -13,76 +14,307 @@
 <div id="alert-message" class="alert alert-danger">
     Hello world!
 </div>
-<div id="profile_form_wrapper" ng-controller="order_form">
-    <form id="order-form" class="form-horizontal" role="form">
-        <div id="chip-list">
-            <h2>訂單</h2>
-            <div class="form-group order" ng-repeat="i in getNumber(item_count) track by $index">
-                <div class="col-md-7 order-item order-row">
-                    <div class="row">
-                        <label class="col-xs-3 control-label order-item" for="">料號:</label>
-                        <div class="col-xs-8 order-item">
-                            <input type="pd" class="form-control pd" ng-model="item[$index].pn" ng-disabled="stage == 2">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 order-item order-row">
-                    <div class="row">
-                        <label class="col-xs-3 control-label order-item" for="">數量:</label>
-                        <div class="col-xs-3 order-item">
-                            <input type="amounts" class="form-control amounts" ng-model="item[$index].quantity" ng-disabled="stage == 2">
-                        </div>
-                        <label class="col-xs-3 control-label order-item" for="">金額:</label>
-                        {% verbatim %}
-                        <label class="col-xs-3 control-label order-item price" for="">{{ item[$index].price }}</label>
-                        {% endverbatim %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group order-button-container">
-            <div class="col-xs-3">
-                <a id="order-button" type="button" class="btn btn-default" ng-click="increase_item_count()" ng-if="stage == 1">+</a>
-            </div>
-            <label id="total" class="col-xs-8">
-                <span>總計:</span>
-                {% verbatim %}
-                <span id="total-price">{{ sum_price }}</span>
-                {% endverbatim %}
-            </label>
-        </div>
-        <hr/>
-        <h2>基本資料</h2>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="control-label col-md-2 shipping-info" for="shipping_address">姓名:</div>
-                <div class="control-label col-md-10 shipping-info">{{ realname }}</div>
-            </div>
-            <div class="row">
-                <div class="control-label col-md-2 shipping-info" for="shipping_address">電話:</div>
-                <div class="control-label col-md-10 shipping-info">{{ phone }}</div>
-            </div>
-            <div class="row">
-                <div class="control-label col-md-2 shipping-info" for="shipping_address">運送地址:</div>
-                <div class="control-label col-md-10 shipping-info">{{ shipping_address }}</div>
-            </div>
-            <div class="row">
-                <div class="control-label col-md-2 shipping-info" for="email">Email:</div>
-                <div class="control-label col-md-10 shipping-info">{{ email }}</div>
-            </div>
-        </div>
-        <hr/>
-        <div class="form-group">
-            <div class="col-xs-11 btn-container">
-                <button id="cancel-button" type="button" class="btn btn-default" ng-click="cancel_form()" ng-if="stage == 1">取消訂單</button>
-                <button id="confirm-button" type="button" class="btn btn-default" ng-click="confirm_price()" ng-if="stage == 1">確認金額</button>
 
-                <button id="modify-button" type="button" class="btn btn-default" ng-click="go_to_stage(1)" ng-if="stage == 2">修改訂單</button>
-                <button id="submit-button" type="button" class="btn btn-default" ng-click="submit_form()" ng-if="stage == 2">送出訂單</button>
+<div id="order" ng-controller="order_main">
+    <ol class="order-progress progress--medium" ng-if="stage == 1">
+        <li class="is-active" data-step="1">
+            輸入訂單
+        </li>
+        <li class="" data-step="2">
+            金額確認
+        </li>
+        <li class="" data-step="3">
+            資料確認
+        </li>
+        <li data-step="4" class="progress__last">
+            完成訂單
+        </li>
+    </ol>
+    <ol class="order-progress progress--medium" ng-if="stage == 2">
+        <li class="is-complete" data-step="1">
+            輸入訂單
+        </li>
+        <li class="is-active" data-step="2">
+            金額確認
+        </li>
+        <li class="" data-step="3">
+            資料確認
+        </li>
+        <li data-step="4" class="progress__last">
+            完成訂單
+        </li>
+    </ol>
+    <ol class="order-progress progress--medium" ng-if="stage == 3">
+        <li class="is-complete" data-step="1">
+            輸入訂單
+        </li>
+        <li class="is-complete" data-step="2">
+            金額確認
+        </li>
+        <li class="is-active" data-step="3">
+            資料確認
+        </li>
+        <li data-step="4" class="progress__last">
+            完成訂單
+        </li>
+    </ol>
+    <ol class="order-progress progress--medium" ng-if="stage == 4">
+        <li class="is-complete" data-step="1">
+            輸入訂單
+        </li>
+        <li class="is-complete" data-step="2">
+            金額確認
+        </li>
+        <li class="is-complete" data-step="3">
+            資料確認
+        </li>
+        <li data-step="4" class="progress__last is-active">
+            完成訂單
+        </li>
+    </ol>
+    <div id="order-main">
+        <div id="order-list" ng-if="stage == 1">
+            <div class="container-fluid">
+                <div class="row chip">
+                    <div class="">
+                        <div class="col-xs-8">
+                            <h3>CHIP</h3>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="col-xs-4">
+                            <h3>數量</h3>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="form-group order" ng-repeat="i in getNumber(item_count) track by $index">-->
+                <div class="row chip" ng-repeat="i in getNumber(item_count) track by $index">
+                    <div class="">
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="item[$index].pn"></input>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" ng-model="item[$index].quantity"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row button-container">
+                <div class="text-center col-sm-6">
+                </div>
+                <div class="text-center col-sm-6">
+                    <button id="check-info-button" type="button" class="btn btn-success" ng-click="confirm_price()">確認金額</button>
+                </div>
             </div>
         </div>
-    </form>
-    <!-- 2 -->
+        <div id="confirm-price" ng-if="stage == 2">
+            <div class="container-fluid">
+                <div class="row chip">
+                    <div class="col-xs-3">
+                        <h3>CHIP</h3>
+                    </div>
+                    <div class="col-xs-3 hide-in-middle-screen">
+                        <h3>單價</h3>
+                    </div>
+                    <div class="col-xs-3 hide-in-middle-screen">
+                        <h3>數量</h3>
+                    </div>
+                    <div class="col-xs-3 hide-in-middle-screen">
+                        <h3>總價</h3>
+                    </div>
+                </div>
+
+                {% verbatim %}
+                <div class="" ng-repeat="i in getNumber(item_count) track by $index">
+                    <div class="row chip item">
+                        <div class="">
+                            <div class="col-md-3">
+                                <div class=" part-number">
+                                    {{ item[$index].pn }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-xs-3">
+                                <div class=" unit-price">
+                                    {{ item[$index].unit_price }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="multiple">
+                            <div class="col-xs-3 ">
+                                <div class="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-xs-3">
+                                <div class=" quantity">
+                                    {{ item[$index].quantity }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-xs-3">
+                                <div class=" chip-total-price">
+                                    {{ item[$index].price }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-6 shipping-fee">
+                        運費
+                    </div>
+
+                    <div id="shipping-fee" class="col-xs-3 shipping-fee" >
+                        {{ shipping_fee }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-6 fee">
+                        手續費(10%)
+                    </div>
+                    <div id="fee" class="col-xs-3 fee">
+                        {{ fee }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-offset-6 col-xs-6">
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <h2 class="col-xs-offset-6 col-xs-3 info-net">
+                        Total
+                    </h2>
+                    <h2 id="info-net" class="col-xs-3 info-net">
+                        {{ sum_price }}
+                    </h2>
+                </div>
+                {% endverbatim %}
+                <div class="row button-container">
+                    <div class="text-center col-sm-6">
+                        <button id="modify-order-button" type="button" class="btn btn-info" ng-click="go_to_stage(1)">修改訂單</button>
+                    </div>
+                    <div class="text-center col-sm-6">
+                        <button id="check-info-button" type="button" class="btn btn-success" ng-click="go_to_stage(3)">確認基本資料</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="confirm-info" ng-if="stage == 3">
+            <div class="container-fluid">
+                <div class="row">
+                    <label>{{ realname }}</label>
+                </div>
+                <div class="row">
+                    <label>{{ email }}</label>
+                </div>
+                <div class="row">
+                    <label>{{ phone }}</label>
+                </div>
+                <div class="row">
+                    <label>{{ shipping_address }}</label>
+                </div>
+                <div class="row button-container">
+                    <div class="text-center col-sm-6">
+                        <button id="modify-order-button" type="button" class="btn btn-info" ng-click="go_to_stage(2)">重新確認金額</button>
+                    </div>
+                    <div class="text-center col-sm-6">
+                        <button id="check-info-button" type="button" class="btn btn-success" ng-click="submit_form()">送出訂單</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="finish-order" ng-if="stage == 4">
+            <div class="container-fluid">
+                Done
+            </div>
+        </div>
+    </div>
+        <!--<div id="profile_form_wrapper" ng-controller="order_form">-->
+    <!--<form id="order-form" class="form-horizontal" role="form">-->
+        <!--<div id="chip-list">-->
+            <!--<h2>訂單</h2>-->
+            <!--<div class="form-group order" ng-repeat="i in getNumber(item_count) track by $index">-->
+                <!--<div class="col-md-7 order-item order-row">-->
+                    <!--<div class="row">-->
+                        <!--<label class="col-xs-3 control-label order-item" for="">料號:</label>-->
+                        <!--<div class="col-xs-8 order-item">-->
+                            <!--<input type="pd" class="form-control pd" ng-model="item[$index].pn" ng-disabled="stage == 2">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-5 order-item order-row">-->
+                    <!--<div class="row">-->
+                        <!--<label class="col-xs-3 control-label order-item" for="">數量:</label>-->
+                        <!--<div class="col-xs-3 order-item">-->
+                            <!--<input type="amounts" class="form-control amounts" ng-model="item[$index].quantity" ng-disabled="stage == 2">-->
+                        <!--</div>-->
+                        <!--<label class="col-xs-3 control-label order-item" for="">金額:</label>-->
+                        <!--{% verbatim %}-->
+                        <!--<label class="col-xs-3 control-label order-item price" for="">{{ item[$index].price }}</label>-->
+                        <!--{% endverbatim %}-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group order-button-container">-->
+            <!--<div class="col-xs-3">-->
+                <!--<a id="order-button" type="button" class="btn btn-default" ng-click="increase_item_count()" ng-if="stage == 1">+</a>-->
+            <!--</div>-->
+            <!--<label id="total" class="col-xs-8">-->
+                <!--<span>總計:</span>-->
+                <!--{% verbatim %}-->
+                <!--<span id="total-price">{{ sum_price }}</span>-->
+                <!--{% endverbatim %}-->
+            <!--</label>-->
+        <!--</div>-->
+        <!--<hr/>-->
+        <!--<h2>基本資料</h2>-->
+        <!--<div class="container-fluid">-->
+            <!--<div class="row">-->
+                <!--<div class="control-label col-md-2 shipping-info" for="shipping_address">姓名:</div>-->
+                <!--<div class="control-label col-md-10 shipping-info">{{ realname }}</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="control-label col-md-2 shipping-info" for="shipping_address">電話:</div>-->
+                <!--<div class="control-label col-md-10 shipping-info">{{ phone }}</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="control-label col-md-2 shipping-info" for="shipping_address">運送地址:</div>-->
+                <!--<div class="control-label col-md-10 shipping-info">{{ shipping_address }}</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="control-label col-md-2 shipping-info" for="email">Email:</div>-->
+                <!--<div class="control-label col-md-10 shipping-info">{{ email }}</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<hr/>-->
+        <!--<div class="form-group">-->
+            <!--<div class="col-xs-11 btn-container">-->
+                <!--<button id="cancel-button" type="button" class="btn btn-default" ng-click="cancel_form()" ng-if="stage == 1">取消訂單</button>-->
+                <!--<button id="confirm-button" type="button" class="btn btn-default" ng-click="confirm_price()" ng-if="stage == 1">確認金額</button>-->
+
+                <!--<button id="modify-button" type="button" class="btn btn-default" ng-click="go_to_stage(1)" ng-if="stage == 2">修改訂單</button>-->
+                <!--<button id="submit-button" type="button" class="btn btn-default" ng-click="submit_form()" ng-if="stage == 2">送出訂單</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+    <!--[> 2 <]-->
     <div class="loader" title="1" ng-show="loading">
         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
