@@ -66,12 +66,19 @@
                         </div>
 
                     </div>
-                    <div class="grid group info-parties info-grid col-md-2">
-                        <div class="info-module">
-                            <h3>RANK</h3>
+                    <div class="grid group info-parties info-grid col-md-1">
+                        <div class="info-module rank">
+                            <h5>RANK</h5>
                             <label id="info-rank">{{ info.rank }}</label>
                         </div>
-
+                    </div>
+                    <div class="grid group info-parties info-grid col-md-1">
+                        <div class="info-module-half rank rbutton">
+                            <i class="material-icons">thumb_up</i>
+                        </div>
+                        <div class="info-module-half rank rbutton">
+                            <i class="material-icons">thumb_down</i>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -80,30 +87,47 @@
                             <h3>UNIT PRICES</h3>
                             <!--XXX: repeat-->
                             <div id="info-unit-price">{{ price }}</div>
-                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="grid group info-comment info-grid col-md-10">
-                        <div class="info-module">
-                            <h3>BOB - 2055/12/31</h3>
-                            <div class="info-context">
-                                This chip Sucks
+                <div id="comment-container">
+                    <div class="row comment" ng-repeat="comment in comments">
+                        <div class="grid group info-comment info-grid col-md-10">
+                            <div class="info-module">
+                                <h3>{{ comment.commenter }} - {{ comment.date }}</h3>
+                                <div class="info-context">
+                                    {{ comment.text }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid group info-parties info-grid col-md-1">
+                            <div class="info-module">
+                                <h3>RANK</h3>
+                                <label class="info-crank">{{ comment.rank }}</label>
+                            </div>
+                        </div>
+                        <div class="grid group info-parties info-grid col-md-1">
+                            <div class="info-module-half rank rbutton">
+                                <i class="material-icons">thumb_up</i>
+                            </div>
+                            <div class="info-module-half rank rbutton">
+                                <i class="material-icons">thumb_down</i>
                             </div>
                         </div>
                     </div>
-                    <div class="grid group info-parties info-grid col-md-2">
-                        <div class="info-module">
-                            <h3>RANK</h3>
-                            <label class="info-crank">
-                            </label>
+                </div>
+    {% endverbatim %}
+                <div class="row">
+                    <div class="grid group info-commenting info-grid col-md-12">
+                        <div class="info-module form-group commenting-form" style="display: {{ disp }}">
+                            <h3>{{ username }}</h3>
+                            <textarea class="form-control" rows="5" id="commenting"></textarea>
+                            <button type="button" class="btn btn-primary comment-button" id="submit-comment">Submit</button>
+                            <button type="button" class="btn btn-primary fake">Primary</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% endverbatim %}
 </div>
 {% endblock %}

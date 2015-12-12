@@ -1,11 +1,12 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
 from django.db.models import Max
+from django.shortcuts import render, redirect
 
 from ComponentLibrary.models import GComponents, GClasses
 from chatroom.models import Comment, Entry
 from login.models import Users, User_Profiles
+from digikey.models import Components
 
 from login import auth
 
@@ -13,7 +14,18 @@ import json
 import operator
 
 def chatroom(request):
-    return render(request, 'chatroom.html')
+    if auth.isLogin(request):
+        data = auth.get_user_data(request)
+        if auth.hasProfile(data.uuid):
+            profile = auth.get_user_profile(request)
+            return render(request, "chatroom.html", {'username' : profile.username,
+                                                     'disp': 'static'})
+        else:
+            return redirect("/profile/")
+
+    else:
+        return render(request, "chatroom.html", {'username' : '',
+                                                 'disp': 'none'})
 
 def append(request):
     # open("data", "a").write(str(request.args.get("msg")) + "\n\r")
@@ -39,6 +51,14 @@ def top100(request):
             x["rank"] = 0
         else:
             x["rank"] = e.rank
+    for x in gcomponents:
+        e = Components.objects.all().get(generic_type = GComponents.objects.get(pk = x['id']))
+        if e is None:
+            x["digikey"] = None
+        else:
+            x["digikey"] = model_to_dict(e)
+            x["digikey"].pop("associated_order")
+            x["digikey"].pop("generic_type")
 
     max_ctype = GComponents.objects.all().aggregate(Max('ctype'))['ctype__max']
 
@@ -62,6 +82,8 @@ def get_component_info(request):
 
         dict_comment = model_to_dict(gcomponent)
         dict_comment['ctype'] = model_to_dict(GClasses.objects.get(pk = int(dict_comment['ctype'])))
+        dict_comment['rank'] = Entry.objects.get_or_create(chip = gcomponent)[0].rank
+        dict_comment['digikey'] = model_to_dict(Components.objects.get(generic_type = gcomponent))
 
         response = HttpResponse(json.dumps(dict_comment))
         response.status_code = 200
@@ -77,7 +99,7 @@ def get_component_comments(request):
     try:
         gcomponent = GComponents.objects.get(pk = int(request.GET['pk']))
 
-        comments = Comment.objects.all().filter(component = gcomponent)
+        comments = Comment.objects.all().filter(component = gcomponent).order_by("-date", "-rank")
 
         dict_comments = map(model_to_dict, comments)
         map(lambda x: operator.setitem(x, 'date', str(x['date'])), dict_comments)
