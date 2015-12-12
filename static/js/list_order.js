@@ -51,17 +51,17 @@ var chip_header_html =  "\
                 <h3>CHIP</h3>\
             </div>\
         </div>\
-        <div class=\"\">\
+        <div class=\"hide-in-middle-screen\">\
             <div class=\"col-md-3\">\
                 <h3>單價</h3>\
             </div>\
         </div>\
-        <div class=\"\">\
+        <div class=\"hide-in-middle-screen\">\
             <div class=\"col-md-3\">\
                 <h3>數量</h3>\
             </div>\
         </div>\
-        <div class=\"\">\
+        <div class=\"hide-in-middle-screen\">\
             <div class=\"col-md-3\">\
                 <h3>總價 (單價X數量)</h3>\
             </div>\
@@ -78,19 +78,25 @@ var chip_html = "\
             </div>\
         </div>\
         <div class=\"\">\
-            <div class=\"col-md-3\">\
+            <div class=\"col-xs-3\">\
                 <div class=\"invoice-for unit-price\">\
                 </div>\
             </div>\
         </div>\
+        <div class=\"show-in-middle-screen\">\
+            <div class=\"col-xs-3\">\
+                <div class=\"invoice-for multiple\">\
+                </div>\
+            </div>\
+        </div>\
         <div class=\"\">\
-            <div class=\"col-md-3\">\
+            <div class=\"col-xs-3\">\
                 <div class=\"invoice-for quantity\">\
                 </div>\
             </div>\
         </div>\
         <div class=\"\">\
-            <div class=\"col-md-3\">\
+            <div class=\"col-xs-3\">\
                 <div class=\"invoice-for chip-total-price\">\
                 </div>\
             </div>\

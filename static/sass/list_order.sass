@@ -98,6 +98,21 @@ body
     padding: 0.5rem
   .invoice-grid
     margin: 0 0 1rem 0
+  .multiple
+    text-align: right
+  div
+    @media only screen and (max-width: 991px)
+      font-size: 1.6rem
+  .part-number
+    @media only screen and (max-width: 991px)
+      font-size: 2rem
+  .quantity:before
+    @media only screen and (max-width: 991px)
+      content: "x"
+  .chip-total-price
+    @media only screen and (max-width: 991px)
+      text-align: right
+    
 #info-paid-date
   width: 200px
 #info-paid-account
@@ -112,9 +127,26 @@ body
 
 #shipping-fee
   color: #000
+  @media only screen and (max-width: 991px)
+    text-align: right
 
 .fee
   color: #999
 
 #fee
   color: #000
+  @media only screen and (max-width: 991px)
+    text-align: right
+
+#info-net
+  @media only screen and (max-width: 991px)
+    text-align: right
+
+.hide-in-middle-screen
+  @media only screen and (max-width: 991px)
+    display: none !important
+
+.show-in-middle-screen
+  display: none
+  @media only screen and (max-width: 991px)
+    display: block !important

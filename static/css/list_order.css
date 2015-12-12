@@ -98,6 +98,20 @@ body {
     padding: 0.5rem; }
   .chip .invoice-grid {
     margin: 0 0 1rem 0; }
+  .chip .multiple {
+    text-align: right; }
+  @media only screen and (max-width: 991px) {
+    .chip div {
+      font-size: 1.6rem; } }
+  @media only screen and (max-width: 991px) {
+    .chip .part-number {
+      font-size: 2rem; } }
+  @media only screen and (max-width: 991px) {
+    .chip .quantity:before {
+      content: "x"; } }
+  @media only screen and (max-width: 991px) {
+    .chip .chip-total-price {
+      text-align: right; } }
 
 #info-paid-date {
   width: 200px; }
@@ -115,11 +129,31 @@ body {
 
 #shipping-fee {
   color: #000; }
+  @media only screen and (max-width: 991px) {
+    #shipping-fee {
+      text-align: right; } }
 
 .fee {
   color: #999; }
 
 #fee {
   color: #000; }
+  @media only screen and (max-width: 991px) {
+    #fee {
+      text-align: right; } }
+
+@media only screen and (max-width: 991px) {
+  #info-net {
+    text-align: right; } }
+
+@media only screen and (max-width: 991px) {
+  .hide-in-middle-screen {
+    display: none !important; } }
+
+.show-in-middle-screen {
+  display: none; }
+  @media only screen and (max-width: 991px) {
+    .show-in-middle-screen {
+      display: block !important; } }
 
 /*# sourceMappingURL=list_order.css.map */
