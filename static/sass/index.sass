@@ -1,7 +1,9 @@
 #banner-container
+  display: flex
+  flex-direction: column
   position: relative
   width: 100%
-  height: 55%
+  height: 60%
   min-height: 250px
   background-color: black
   background-image: url('../images/index-banner.jpg')
@@ -9,15 +11,29 @@
   background-position: 50% 40%
   box-shadow: inset 0px 0px 10px 0px rgba(30, 30, 30, 0.8)
   font-family: 'Orbitron', sans-serif
+  color: white
+  .space-before
+    flex: 1.5
   h1
-    font-size: 5rem
+    flex: 1
+    margin: 0
+    font-size: 7rem
     text-align: center
+    @media only screen and (max-width: 767px)
+      font-size: 5rem
   h2
+    flex: 1
+    margin: 0
     font-size: 3rem
     text-align: center
+    @media only screen and (max-width: 767px)
+      font-size: 2rem
+
+  .space-after
+    flex: 1
 
 #service
-  height: 45%
+  height: 40%
   min-height: 150px
   div
     height: 100%
@@ -25,11 +41,11 @@
     height: 100%
     padding: 3.5% 0 0.5% 0
     h1
-      font-size: 3rem
+      font-size: 2.8rem
     svg
       height: 40%
     h2
-      font-size: 2.5rem
+      font-size: 2.3rem
       margin: 1% 0 1% 0
 
 
