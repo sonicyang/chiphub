@@ -32,12 +32,12 @@ app.controller('group_history', function($scope, $http) {
         .then(function(response) {
             response.data = response.data.reverse();
 
-            for(uuid of response.data){
-                $http.get("/digikey/group_info?UUID=" + uuid).then(function(response){
+            for(var i = 0; i < response.data.length; i++){
+                $http.get("/digikey/group_info?UUID=" + response.data[i]).then(function(response){
                     if(response.data["date"] == "None"){
                         response.data["date"] = "已成單，正在訂購"
                     }
-                    $scope.groups.push(response.data);
+                    $scope.groups[i] = response.data;
                 });
             }
         });
