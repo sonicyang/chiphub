@@ -77,7 +77,7 @@
         </div>
         <div class="row-list" ng-repeat="group in groups">
             <span class="cell-list primary order-date" data-label="serial-num" type="date">{{ group.date }}</span>
-            <span class="cell-list order-price" data-label="sum" type="total">{{ group.total }}</span>
+            <span class="cell-list order-price" data-label="sum" type="total">{{ group.total | currency }}</span>
             <span class="cell-list order-person" data-label="person" type="person">{{ group.person }}</span>
         </div>
         {% endverbatim %}
