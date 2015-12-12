@@ -1,12 +1,22 @@
 #chatroom {
-  padding: 1px;
-  box-shadow: 0 -10px 10px 0px rgba(30, 30, 30, 0.8); }
+  padding: 1px 5% 5% 5%;
+  box-shadow: 0 -10px 10px 0px rgba(30, 30, 30, 0.8) i; }
+  #chatroom .row {
+    margin: 5% 0 5% 0; }
+  @media only screen and (max-width: 767px) {
+    #chatroom #search-container {
+      text-align: right;
+      margin-top: 5px; } }
+  #chatroom hr {
+    border-top: 1px solid #ddd; }
 
 .chip-card-list {
   padding: 1px; }
 
 .family {
-  padding: 1% 0 0 0; }
+  padding: 0 0 0 0; }
+  .family .family-mname {
+    margin-top: 0; }
 
 .chip-card {
   margin: 0.5rem 0.5rem 0.5rem 0.5rem;
