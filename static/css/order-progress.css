@@ -23,7 +23,7 @@
       line-height: 3em;
       border-radius: 100%;
       position: relative;
-      z-index: 1000; }
+      z-index: 100; }
     .order-progress > li:after {
       content: "";
       position: absolute;

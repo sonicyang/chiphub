@@ -10,13 +10,13 @@ function alertWarning(type){
     alert_msg = $("#alert-message")
     alert_msg.text(type);
     changeAlertMsgForRWD();
-    alert_msg.animate({top:"10px"}, 500);
+    alert_msg.animate({top:"70px"}, 500);
 }
 
 function alertWarningClear(){
     alert_msg = $("#alert-message")
     changeAlertMsgForRWD();
-    alert_msg.animate({top:"-100px"}, 500);
+    alert_msg.animate({top:"-50px"}, 500);
 }
 
 function warningColor(no){
