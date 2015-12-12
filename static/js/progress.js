@@ -1,5 +1,5 @@
 $('#myCarousel').carousel({
-    interval: 2000
+    interval: 200
 });
 
 app.controller('progress', function($scope, $http) {
