@@ -1,13 +1,12 @@
-#slider {
-  padding: 1% 0 3% 0; }
-
 body {
   background-color: #F1F4F1;
   font-family: Helvetica, sans-serif, Microsoft JhengHei; }
   body #progress-container {
+    position: relative;
+    z-index: 100;
     width: 100%;
     padding: 3% 10% 3% 10%;
-    box-shadow: 0 -10px 10px 0px #bbbbbb; }
+    box-shadow: 0 -10px 10px 0px rgba(30, 30, 30, 0.8); }
     body #progress-container #goal {
       font-size: 40px;
       text-align: left;
@@ -42,6 +41,31 @@ body {
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
   margin: auto; }
+
+.item {
+  width: 100%;
+  height: 450px; }
+
+.cover-1 {
+  background: url("../images/surplus.jpg") no-repeat;
+  position: relative;
+  margin: auto;
+  background-size: cover;
+  background-position: 50% 50%; }
+
+.cover-2 {
+  background: url("../images/bench.jpg") no-repeat;
+  position: relative;
+  margin: auto;
+  background-size: cover;
+  background-position: 50% 75%; }
+
+.cover-3 {
+  background: url("../images/warehouse.jpg") no-repeat;
+  position: relative;
+  margin: auto;
+  background-size: cover;
+  background-position: 50% 50%; }
 
 #table-list {
   display: table;

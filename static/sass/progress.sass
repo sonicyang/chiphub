@@ -1,6 +1,3 @@
-#slider
-  padding: 1% 0 3% 0
-
 $COMPLITED-COLOR: #2C3E50 
 $TODO-COLOR: #E1E2EB
 $ACTIVE-COLOR: #00ABC9
@@ -9,9 +6,11 @@ body
   background-color: #F1F4F1
   font-family: Helvetica, sans-serif ,Microsoft JhengHei
   #progress-container
+    position: relative
+    z-index: 100
     width: 100%
     padding: 3% 10% 3% 10%
-    box-shadow: 0 -10px 10px 0px #bbbbbb
+    box-shadow: 0 -10px 10px 0px rgba(30, 30, 30, 0.8)
     #goal
       font-size: 40px
       text-align: left
@@ -47,6 +46,31 @@ body
 .carousel-inner > .item >
   img, a > img
     margin: auto
+
+.item
+  width: 100%
+  height: 450px
+
+.cover-1
+  background: url('../images/surplus.jpg') no-repeat
+  position: relative
+  margin: auto
+  background-size: cover
+  background-position: 50% 50%
+
+.cover-2
+  background: url('../images/bench.jpg') no-repeat
+  position: relative
+  margin: auto
+  background-size: cover
+  background-position: 50% 75%
+
+.cover-3
+  background: url('../images/warehouse.jpg') no-repeat
+  position: relative
+  margin: auto
+  background-size: cover
+  background-position: 50% 50%
 
 #table-list
   display: table
