@@ -92,8 +92,8 @@ app.controller('order_main', function($scope, $http) {
                             total += $scope.item[index].price;
                         });
 
-                        $scope.sum_price = total;
                         $scope.fee = Math.ceil(total * $scope.fee_rate);
+                        $scope.sum_price = total + $scope.fee + $scope.shipping_fee;
 
                         alertWarningClear();
                         resetColor();
