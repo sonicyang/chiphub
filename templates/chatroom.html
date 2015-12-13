@@ -120,8 +120,8 @@
                     <div class="grid group info-commenting info-grid col-md-12">
                         <div class="info-module form-group commenting-form" style="display: {{ disp }}">
                             <h3>{{ username }}</h3>
-                            <textarea class="form-control" rows="5" id="commenting"></textarea>
-                            <button type="button" class="btn btn-primary comment-button" id="submit-comment">Submit</button>
+                            <textarea class="form-control" rows="5" id="commenting" ng-model="$parent.comment_text"></textarea>
+                            <button type="button" class="btn btn-primary comment-button" id="submit-comment" ng-click="submitComment(info)">Submit</button>
                         </div>
                     </div>
                 </div>
