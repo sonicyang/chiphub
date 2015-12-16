@@ -45,7 +45,7 @@ class Users(models.Model):
     uuid = models.CharField(max_length=40, unique=True)
     token = models.CharField(max_length=40, null=True)
     login_service = models.CharField(max_length=20)
-    access_token = models.CharField(max_length=50)
+    access_token = models.CharField(max_length=200)
     refresh_token = models.CharField(max_length=50, null=True)
 
     class Meta:
