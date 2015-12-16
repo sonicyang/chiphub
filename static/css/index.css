@@ -19,7 +19,7 @@ nav .navbar {
     flex: 1.5; }
   #banner-container #slogan-container {
     margin: auto;
-    padding: 6% 2.5% 6% 2.5%;
+    padding: 2rem 2.5% 2rem 2.5%;
     background-color: rgba(0, 0, 0, 0.6); }
   #banner-container h1 {
     flex: 1;
