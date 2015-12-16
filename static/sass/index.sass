@@ -44,15 +44,35 @@ nav
   background-color: #e8eded
   height: 40%
   min-height: 150px
-  div
+  padding: 0 10% 0 10%
+  > div
     height: 100%
   .service-item
     height: 100%
-    padding: 3.5% 0 0.5% 0
+    padding: 3.5% 0 2.5% 0
+    > div
+      border-right: 1px solid #aaa
+    @media only screen and (max-width: 767px)
+      padding-bottom: 3%
+      padding-top: 4%
+      &:after 
+        position: absolute
+        bottom: 0
+        left: 25%
+        content: ""
+        margin: auto
+        height: 1px
+        width: 50%
+        background-color: #aaa
+      > div
+        border-right: 0px
+        
+    &:last-child > div
+      border-right: 0px
     h1
       font-size: 2.8rem
     svg
-      height: 40%
+      height: 80px
       min-height: 45px
     h2
       font-size: 2.3rem

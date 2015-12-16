@@ -43,16 +43,36 @@ nav .navbar {
 #service {
   background-color: #e8eded;
   height: 40%;
-  min-height: 150px; }
-  #service div {
+  min-height: 150px;
+  padding: 0 10% 0 10%; }
+  #service > div {
     height: 100%; }
   #service .service-item {
     height: 100%;
-    padding: 3.5% 0 0.5% 0; }
+    padding: 3.5% 0 2.5% 0; }
+    #service .service-item > div {
+      border-right: 1px solid #aaa; }
+    @media only screen and (max-width: 767px) {
+      #service .service-item {
+        padding-bottom: 3%;
+        padding-top: 4%; }
+        #service .service-item:after {
+          position: absolute;
+          bottom: 0;
+          left: 25%;
+          content: "";
+          margin: auto;
+          height: 1px;
+          width: 50%;
+          background-color: #aaa; }
+        #service .service-item > div {
+          border-right: 0px; } }
+    #service .service-item:last-child > div {
+      border-right: 0px; }
     #service .service-item h1 {
       font-size: 2.8rem; }
     #service .service-item svg {
-      height: 40%;
+      height: 80px;
       min-height: 45px; }
     #service .service-item h2 {
       font-size: 2.3rem;
