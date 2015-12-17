@@ -9,7 +9,6 @@ machine:
 
   # Override /etc/hosts
   hosts:
-    c4labs.xyz: 127.0.0.1
 
 checkout:
   post:
