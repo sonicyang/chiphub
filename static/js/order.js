@@ -41,7 +41,6 @@ app.controller('order_main', function($scope, $http) {
     $scope.shipping_fee = 60
     $scope.fee_rate = 0.1
 
-
     $scope.item = [];
     $scope.item_count = 1;
     $scope.stage = 1;
@@ -81,6 +80,7 @@ app.controller('order_main', function($scope, $http) {
 
         var order_list = $scope.arrange_order();
         if(order_list != ""){
+            $scope.loading = true;
             $http.get("/digikey/price/?order_list=" + order_list)
                 .then(function(response){
                         console.log(200);
@@ -127,6 +127,7 @@ app.controller('order_main', function($scope, $http) {
             .then(function(response){
                 if(response.status == 200){
                     $scope.stage = 4
+                $scope.loading = false;
                     //window.location.href = "/progress/";
                 }
             });
