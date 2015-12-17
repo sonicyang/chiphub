@@ -76,7 +76,6 @@ app.controller('order_main', function($scope, $http) {
     };
 
     $scope.confirm_price = function(){
-        $scope.loading = true;
 
         var order_list = $scope.arrange_order();
         if(order_list != ""){
