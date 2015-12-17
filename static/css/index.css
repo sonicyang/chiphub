@@ -1,3 +1,6 @@
+body {
+  background-color: #e8eded; }
+
 nav .navbar {
   background-color: #c6d6df; }
 
@@ -45,7 +48,6 @@ nav .navbar {
     flex: 1; }
 
 #service {
-  background-color: #e8eded;
   height: 40%;
   min-height: 150px;
   padding: 0 10% 0 10%; }
