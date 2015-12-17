@@ -61,6 +61,7 @@ urlpatterns = [
 
     # Chat Room
     url(r'^chatroom/top100/$', chatroom.top100),
+    url(r'^chatroom/search/$', chatroom.search),
     url(r'^chatroom/get_component_info/$', chatroom.get_component_info),
     url(r'^chatroom/get_component_comments/$', chatroom.get_component_comments),
     url(r'^chatroom/add_component_comment/$', chatroom.add_component_comment),

@@ -3,7 +3,7 @@ from django.forms.models import model_to_dict
 from django.db.models import Max
 from django.shortcuts import render, redirect
 
-from ComponentLibrary.models import GComponents, GClasses
+from ComponentLibrary.models import GComponents, GClasses, fuzzy_search_component
 from chatroom.models import Comment, Entry
 from login.models import Users, User_Profiles
 from digikey.models import Components
@@ -27,27 +27,12 @@ def chatroom(request):
         return render(request, "chatroom.html", {'username' : '',
                                                  'disp': 'none'})
 
-def append(request):
-    # open("data", "a").write(str(request.args.get("msg")) + "\n\r")
-    open("/tmp/data", "ab").write(request.GET['msg'].encode('utf8') + "\n\r".encode('utf-8'))
-    return HttpResponse("")
 
-def retreive(request):
-    fil = open("/tmp/data", "rb")
-    payload = fil.read()
-    return HttpResponse(payload)
-
-def search(request):
-    return HttpResponse("")
-
-def top100(request):
-    #XXX: Filter the real top 100!
-    gcomponents = GComponents.objects.all().order_by('ctype')
-
+def components_to_json(gcomponents):
     gcomponents = map(model_to_dict, gcomponents)
     for x in gcomponents:
         try:
-            e = Entry.objects.all().get(chip = GComponents.objects.get(pk = x['id']))
+            e = Entry.objects.get_or_create(chip = GComponents.objects.get(pk = x['id']))[0]
             x["rank"] = e.rank
         except:
             x["rank"] = 0
@@ -72,7 +57,32 @@ def top100(request):
             comps[i]['sname'] = GClasses.objects.get(pk = i).sname
             comps[i]['components'] = filt
 
-    response = HttpResponse(json.dumps(comps))
+    return json.dumps(comps)
+
+def append(request):
+    # open("data", "a").write(str(request.args.get("msg")) + "\n\r")
+    open("/tmp/data", "ab").write(request.GET['msg'].encode('utf8') + "\n\r".encode('utf-8'))
+    return HttpResponse("")
+
+def retreive(request):
+    fil = open("/tmp/data", "rb")
+    payload = fil.read()
+    return HttpResponse(payload)
+
+def search(request):
+    gcomponents = fuzzy_search_component(request.GET['s'])
+
+    response = HttpResponse(components_to_json(gcomponents))
+    response.status_code = 200
+
+    return response
+
+    return HttpResponse("")
+
+def top100(request):
+    gcomponents = GComponents.objects.all().order_by('entry__rank').order_by('ctype')[:100]
+
+    response = HttpResponse(components_to_json(gcomponents))
     response.status_code = 200
 
     return response
