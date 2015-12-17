@@ -139,9 +139,13 @@ body {
   #banner .space-before {
     flex: 1.5; }
   #banner #slogan-container {
+    width: 500px;
     margin: auto;
-    padding: 3%;
+    padding: 3% 0 3% 0;
     background-color: rgba(0, 0, 0, 0.55); }
+    @media only screen and (max-width: 767px) {
+      #banner #slogan-container {
+        width: 280px; } }
   #banner h1 {
     flex: 1;
     margin: 0;
@@ -157,7 +161,7 @@ body {
     text-align: center; }
     @media only screen and (max-width: 767px) {
       #banner h2 {
-        font-size: 1.8rem; } }
+        font-size: 1.7rem; } }
   #banner .space-after {
     flex: 1; }
 

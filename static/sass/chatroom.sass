@@ -138,9 +138,12 @@ body
   .space-before
     flex: 1.5
   #slogan-container
+    width: 500px
     margin: auto
-    padding: 3%
+    padding: 3% 0 3% 0
     background-color: rgba(0, 0, 0, 0.55)
+    @media only screen and (max-width: 767px)
+      width: 280px
   h1
     flex: 1
     margin: 0
@@ -154,7 +157,7 @@ body
     font-size: 3rem
     text-align: center
     @media only screen and (max-width: 767px)
-      font-size: 1.8rem
+      font-size: 1.7rem
 
   .space-after
     flex: 1
