@@ -5,7 +5,10 @@ from login.models import Users
 from ComponentLibrary.models import GComponents
 
 class Entry(models.Model):
-    chip = models.ForeignKey(GComponents)
+    chip = models.OneToOneField(GComponents,
+                                on_delete=models.CASCADE,
+                                primary_key=True,
+                                )
     rank = models.IntegerField(default = 0)
     search_rank = models.IntegerField(default = 0)
 
@@ -17,6 +20,7 @@ class Entry(models.Model):
 
 
 class Comment(models.Model):
+    id = models.AutoField(primary_key = True)
     component = models.ForeignKey(GComponents)
     commenter = models.ForeignKey(Users)
     text = models.CharField(max_length = 300, null = True, blank = True)
