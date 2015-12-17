@@ -18,9 +18,13 @@ nav .navbar {
   #banner-container .space-before {
     flex: 1.5; }
   #banner-container #slogan-container {
+    width: 500px;
     margin: auto;
-    padding: 2rem 2.5% 2rem 2.5%;
+    padding: 2rem 0 2rem 0;
     background-color: rgba(0, 0, 0, 0.6); }
+    @media only screen and (max-width: 767px) {
+      #banner-container #slogan-container {
+        width: 280px; } }
   #banner-container h1 {
     flex: 1;
     margin: 0;
@@ -36,7 +40,7 @@ nav .navbar {
     text-align: center; }
     @media only screen and (max-width: 767px) {
       #banner-container h2 {
-        font-size: 2rem; } }
+        font-size: 1.8rem; } }
   #banner-container .space-after {
     flex: 1; }
 

@@ -19,9 +19,12 @@ nav
   .space-before
     flex: 1.5
   #slogan-container
+    width: 500px
     margin: auto
-    padding: 2rem 2.5% 2rem 2.5%
+    padding: 2rem 0 2rem 0
     background-color: rgba(0, 0, 0, 0.6)
+    @media only screen and (max-width: 767px)
+      width: 280px
   h1
     flex: 1
     margin: 0
@@ -35,7 +38,7 @@ nav
     font-size: 3rem
     text-align: center
     @media only screen and (max-width: 767px)
-      font-size: 2rem
+      font-size: 1.8rem
 
   .space-after
     flex: 1
