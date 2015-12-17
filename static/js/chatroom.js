@@ -9,7 +9,14 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
             $scope.families = response.data;
         });
 
-    $scope.submitComment= function(chip){
+    $scope.search = function(text){
+        $http.get("/chatroom/search?s=" + text)
+            .then(function(response){
+                $scope.families = response.data;
+            });
+    }
+
+    $scope.submitComment = function(chip){
         //XXX: Use Post
         $http.get("/chatroom/add_component_comment?pk=" + chip.id + "&content=" + $scope.comment_text)
             .then(function(response){

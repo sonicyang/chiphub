@@ -22,10 +22,10 @@
     <div class="container-fluid">
         <div class="row search-group">
             <div class="col-sm-offset-2 col-sm-6">
-                <input id="part-number" type="text" class="form-control" placeholder="Part Number">
+                <input id="part-number" type="text" class="form-control" placeholder="Part Number" ng-model="stext">
             </div>
             <div id="search-container" class="col-sm-2">
-                <button id="search" class="btn btn-default">Search</button>
+                <button id="search" class="btn btn-default" ng-click="search(stext)">Search</button>
             </div>
         </div>
     </div>
@@ -86,8 +86,7 @@
                     <div class="grid group info-pricing-detail info-grid col-md-12">
                         <div class="info-module">
                             <h3>UNIT PRICES</h3>
-                            <!--XXX: repeat-->
-                            <div id="info-unit-price">{{ price }}</div>
+                            <div id="info-unit-price">{{ price | currency }}</div>
                     </div>
                 </div>
                 <div id="comment-container">
