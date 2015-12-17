@@ -7,14 +7,24 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
     $http.get("/chatroom/top100/")
         .then(function(response){
             $scope.families = response.data;
+
+            console.log($scope.families);
         });
 
     $scope.search = function(text){
-        $http.get("/chatroom/search?s=" + text)
-            .then(function(response){
-                $scope.families = response.data;
-            });
-    }
+        //if(text != "" || text != null){
+            $http.get("/chatroom/search?s=" + text)
+                .then(function(response){
+                    $scope.families = response.data;
+                    console.log($scope.families);
+                });
+        //}else{
+            //$http.get("/chatroom/top100/")
+                //.then(function(response){
+                    //$scope.families = response.data;
+                //});
+        //}
+    };
 
     $scope.submitComment = function(chip){
         //XXX: Use Post

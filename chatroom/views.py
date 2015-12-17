@@ -28,7 +28,7 @@ def chatroom(request):
                                                  'disp': 'none'})
 
 
-def components_to_json(gcomponents):
+def classify_components(gcomponents):
     gcomponents = map(model_to_dict, gcomponents)
     for x in gcomponents:
         try:
@@ -57,7 +57,7 @@ def components_to_json(gcomponents):
             comps[i]['sname'] = GClasses.objects.get(pk = i).sname
             comps[i]['components'] = filt
 
-    return json.dumps(comps)
+    return comps
 
 def append(request):
     # open("data", "a").write(str(request.args.get("msg")) + "\n\r")
@@ -69,10 +69,18 @@ def retreive(request):
     payload = fil.read()
     return HttpResponse(payload)
 
-def search(request):
-    gcomponents = fuzzy_search_component(request.GET['s'])
 
-    response = HttpResponse(components_to_json(gcomponents))
+def merge_two_dicts(x, y):
+    z = x.copy()
+    z.update(y)
+    return z
+
+def search(request):
+    gcomponents_list = fuzzy_search_component(request.GET['s'])
+
+    combined = reduce(lambda x, y: merge_two_dicts(x, y), map(classify_components, gcomponents_list))
+
+    response = HttpResponse(json.dumps(combined))
     response.status_code = 200
 
     return response
@@ -82,7 +90,7 @@ def search(request):
 def top100(request):
     gcomponents = GComponents.objects.all().order_by('entry__rank').order_by('ctype')[:100]
 
-    response = HttpResponse(components_to_json(gcomponents))
+    response = HttpResponse(json.dumps(classify_components(gcomponents)))
     response.status_code = 200
 
     return response
