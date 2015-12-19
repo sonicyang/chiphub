@@ -52,6 +52,18 @@ nav
   padding: 0 10% 0 10%
   div
     height: 100%
+    .row
+      min-height: 200px
+      @media only screen and (max-width: 767px)
+        max-height: 260px
+    hr
+      display: none
+      @media only screen and (max-width: 767px)
+        display: block
+        position: relative
+        width: 50%
+        border-top: 1px solid #aaa
+        margin: auto
   .service-item
     display: flex
     flex-direction: column
@@ -60,17 +72,6 @@ nav
       border-right: 1px solid #aaa
       height: auto
     @media only screen and (max-width: 767px)
-      padding-bottom: 3%
-      padding-top: 4%
-      &:after 
-        position: absolute
-        bottom: 0
-        left: 25%
-        content: ""
-        margin: auto
-        height: 1px
-        width: 50%
-        background-color: #aaa
       > div
         border-right: 0px
     &:before
@@ -78,11 +79,16 @@ nav
       content: " "
       flex: 1
       min-height: 30px
+      @media only screen and (max-width: 767px)
+        min-height: 0px
     &:after
       display: block
       content: " "
       flex: 1.5
       min-height: 30px
+      @media only screen and (max-width: 767px)
+        min-height: 0px
+        flex: 1
     &:last-child > div
       border-right: 0px
     h1
@@ -93,7 +99,6 @@ nav
     h2
       font-size: 2.3rem
       margin: 1% 0 1% 0
-
 
 // overwrite base
 #container

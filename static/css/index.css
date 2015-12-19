@@ -55,6 +55,20 @@ nav .navbar {
   padding: 0 10% 0 10%; }
   #service div {
     height: 100%; }
+    #service div .row {
+      min-height: 200px; }
+      @media only screen and (max-width: 767px) {
+        #service div .row {
+          max-height: 260px; } }
+    #service div hr {
+      display: none; }
+      @media only screen and (max-width: 767px) {
+        #service div hr {
+          display: block;
+          position: relative;
+          width: 50%;
+          border-top: 1px solid #aaa;
+          margin: auto; } }
   #service .service-item {
     display: flex;
     flex-direction: column;
@@ -63,30 +77,25 @@ nav .navbar {
       border-right: 1px solid #aaa;
       height: auto; }
     @media only screen and (max-width: 767px) {
-      #service .service-item {
-        padding-bottom: 3%;
-        padding-top: 4%; }
-        #service .service-item:after {
-          position: absolute;
-          bottom: 0;
-          left: 25%;
-          content: "";
-          margin: auto;
-          height: 1px;
-          width: 50%;
-          background-color: #aaa; }
-        #service .service-item > div {
-          border-right: 0px; } }
+      #service .service-item > div {
+        border-right: 0px; } }
     #service .service-item:before {
       display: block;
       content: " ";
       flex: 1;
       min-height: 30px; }
+      @media only screen and (max-width: 767px) {
+        #service .service-item:before {
+          min-height: 0px; } }
     #service .service-item:after {
       display: block;
       content: " ";
       flex: 1.5;
       min-height: 30px; }
+      @media only screen and (max-width: 767px) {
+        #service .service-item:after {
+          min-height: 0px;
+          flex: 1; } }
     #service .service-item:last-child > div {
       border-right: 0px; }
     #service .service-item h1 {
