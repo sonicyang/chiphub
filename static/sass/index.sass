@@ -49,13 +49,15 @@ nav
   height: 40%
   min-height: 150px
   padding: 0 10% 0 10%
-  > div
+  div
     height: 100%
   .service-item
+    display: flex
+    flex-direction: column
     height: 100%
-    padding: 3.5% 0 2.5% 0
     > div
       border-right: 1px solid #aaa
+      height: auto
     @media only screen and (max-width: 767px)
       padding-bottom: 3%
       padding-top: 4%
@@ -70,7 +72,16 @@ nav
         background-color: #aaa
       > div
         border-right: 0px
-        
+    &:before
+      display: block
+      content: " "
+      flex: 1
+      min-height: 30px
+    &:after
+      display: block
+      content: " "
+      flex: 1.5
+      min-height: 30px
     &:last-child > div
       border-right: 0px
     h1
