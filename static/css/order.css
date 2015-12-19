@@ -50,7 +50,8 @@
         #confirm-price .chip div {
           font-size: 1.65rem; } }
     #confirm-price .chip .part-number {
-      font-size: 2rem; }
+      font-size: 2rem;
+      word-break: break-all; }
       @media only screen and (max-width: 991px) {
         #confirm-price .chip .part-number {
           font-size: 1.85rem; } }
