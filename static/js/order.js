@@ -41,13 +41,16 @@ app.controller('order_main', function($scope, $http) {
     $scope.shipping_fee = 60
     $scope.fee_rate = 0.1
 
-    $scope.item = [];
+    $scope.item = [{pn: "", quantity: ""}];
     $scope.item_count = 1;
     $scope.stage = 1;
     $scope.loading = false;
 
     $scope.increase_item_count = function(){
         $scope.item_count += 3;
+        for(var i = 0; i < 3; i ++){
+            $scope.item.push({pn: "", quantity: ""})
+        }
     };
 
     $scope.go_to_stage = function(num){
@@ -55,10 +58,19 @@ app.controller('order_main', function($scope, $http) {
     };
 
     $scope.arrange_order = function(){
+        var input_error = false;
         order_list = "";
 
         for(item of $scope.item){
+            var quantity = parseInt(item.quantity);
+            var pn = item.pn.replace(/\s/g, "");
             order_list += item.pn + ":" + item.quantity + ",";
+            if (pn && isNaN(quantity)){
+                input_error = true;
+            }
+        }
+        if(input_error){
+            order_list = "";
         }
         if(order_list != ""){
             order_list = order_list.slice(0, -1)
@@ -115,8 +127,28 @@ app.controller('order_main', function($scope, $http) {
                         $scope.loading = false;
                     });
         }else{
-            $scope.item_count = 1;
-            alertWarning("尚未輸入任何訂單!")
+            var new_item_list = [];
+            var new_item_count = 0;
+            for(item of $scope.item){
+                if(item.pn){
+                    var new_item = {pn: "", quantity: ""};
+                    if(!isNaN(parseInt(item.quantity))){
+                        new_item.quantity = item.quantity;
+                    }
+                    new_item.pn = item.pn;
+                    new_item_list.push(new_item);
+                    new_item_count += 1;
+                }
+            }
+            if(new_item_count < 1){
+                $scope.item_count = 1;
+                $scope.item = [{pn: "", quantity: ""}]
+            }else{
+                $scope.item_count = new_item_count;
+                $scope.item = new_item_list;
+            }
+
+            alertWarning("未輸入訂單或輸入了錯誤的零件數量!")
         }
     };
 
