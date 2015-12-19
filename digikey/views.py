@@ -12,6 +12,7 @@ from digikey.models import Components
 from digikey.models import Groups
 from digikey.models import Order_Details
 
+import mail.views as mail
 from login import auth
 
 import bs4
@@ -169,7 +170,7 @@ def order(request, ordering):
                 user = auth.get_user_data(request)
                 profile = auth.get_user_profile(request)
                 create_order(user, profile, parts_detail)
-
+                mail.send_order_received(request)
             response.status_code = 200
         return response
     else:
