@@ -11,12 +11,12 @@
 
 {% block content %}
 <div  ng-controller="order_info_ctrl">
-    <div id="order-info" class="ang-fade" ng-if="invoice" ng-cloak>
+    <div id="order-info" class="ang-fade" ng-if="invoice" ng-click="hide_info()" ng-cloak>
         <a id="close-order-info" href="" ng-click="hide_info()">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
         {% verbatim %}
-        <div class="invoice">
+        <div class="invoice" ng-click="$event.stopPropagation()">
             <h1>Invoice</h1>
             <!--<div class="invoice-id"># 2015-10-D-RC-103323</div>-->
             <div class="container-fluid">
