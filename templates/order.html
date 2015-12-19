@@ -21,10 +21,10 @@
             輸入訂單
         </li>
         <li class="" data-step="2">
-            金額確認
+            確認金額
         </li>
         <li class="" data-step="3">
-            資料確認
+            確認資料
         </li>
         <li data-step="4" class="progress__last">
             完成訂單
@@ -35,10 +35,10 @@
             輸入訂單
         </li>
         <li class="is-active" data-step="2">
-            金額確認
+            確認金額
         </li>
         <li class="" data-step="3">
-            資料確認
+            確認資料
         </li>
         <li data-step="4" class="progress__last">
             完成訂單
@@ -49,10 +49,10 @@
             輸入訂單
         </li>
         <li class="is-complete" data-step="2">
-            金額確認
+            確認金額
         </li>
         <li class="is-active" data-step="3">
-            資料確認
+            確認資料
         </li>
         <li data-step="4" class="progress__last">
             完成訂單
@@ -63,10 +63,10 @@
             輸入訂單
         </li>
         <li class="is-complete" data-step="2">
-            金額確認
+            確認金額
         </li>
         <li class="is-complete" data-step="3">
-            資料確認
+            確認資料
         </li>
         <li data-step="4" class="progress__last is-active">
             完成訂單
@@ -75,6 +75,7 @@
     <div id="order-main">
         <div id="order-list" ng-if="stage == 1">
             <div class="container-fluid">
+                <h2 class="text-center">輸入訂單</h2>
                 <div class="row chip">
                     <div class="">
                         <div class="col-xs-8">
@@ -114,8 +115,9 @@
         </div>
         <div id="confirm-price" ng-if="stage == 2">
             <div class="container-fluid">
-                <div class="row chip">
-                    <div class="col-xs-3">
+                <h2 class="text-center">確認金額</h2>
+                <div class="row">
+                    <div class="col-md-3">
                         <h3>零件編號</h3>
                     </div>
                     <div class="col-xs-3 hide-in-middle-screen">
@@ -208,37 +210,53 @@
                     </h2>
                 </div>
                 {% endverbatim %}
-                <div class="row button-container">
-                    <div class="text-center col-sm-6">
-                        <button id="modify-order-button" type="button" class="btn btn-info" ng-click="go_to_stage(1)">修改訂單</button>
-                    </div>
-                    <div class="text-center col-sm-6">
-                        <button id="check-info-button" type="button" class="btn btn-success" ng-click="go_to_stage(3)">確認基本資料</button>
-                    </div>
+            </div>
+            <div class="row button-container">
+                <div class="text-center col-sm-6">
+                    <button id="modify-order-button" type="button" class="btn btn-info" ng-click="go_to_stage(1)">修改訂單</button>
+                </div>
+                <div class="text-center col-sm-6">
+                    <button id="check-info-button" type="button" class="btn btn-success" ng-click="go_to_stage(3)">確認基本資料</button>
                 </div>
             </div>
         </div>
         <div id="confirm-info" ng-if="stage == 3">
             <div class="container-fluid">
-                <div class="row">
-                    <label>{{ realname }}</label>
-                </div>
-                <div class="row">
-                    <label>{{ email }}</label>
-                </div>
-                <div class="row">
-                    <label>{{ phone }}</label>
-                </div>
-                <div class="row">
-                    <label>{{ shipping_address }}</label>
-                </div>
-                <div class="row button-container">
-                    <div class="text-center col-sm-6">
-                        <button id="modify-order-button" type="button" class="btn btn-info" ng-click="go_to_stage(2)">重新確認金額</button>
+                <h2 class="text-center">確認資料</h2>
+                <form id="confirm_info_form" class="form-horizontal" role="form" action="/update_profile/" method="get">
+                    <div class="row info-item">
+                        <label class="control-label col-md-2" for="realname">真實姓名:</label>
+                        <div class="col-md-9">
+                            <input type="realname" class="form-control" id="realname" name="realname" value="{{ realname }}" ng-disabled="true">
+                        </div>
                     </div>
-                    <div class="text-center col-sm-6">
-                        <button id="check-info-button" type="button" class="btn btn-success" ng-click="submit_form()">送出訂單</button>
+                    <div class="row info-item">
+                        <label class="control-label col-md-2" for="email">Email:</label>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" value="{{ email }}" ng-disabled="true">
+                        </div>
                     </div>
+                    <div class="row info-item">
+                        <label class="control-label col-md-2" for="shipping_address">寄送地址:</label>
+                        <div class="col-md-9">
+                            <input type="shipping_address" class="form-control" id="shipping_address" name="shipping_address" value="{{ shipping_address }}" ng-disabled="true">
+                        </div>
+                    </div>
+
+                    <div class="row info-item">
+                        <label class="control-label col-md-2" for="phone">聯絡電話:</label>
+                        <div class="col-md-9">
+                            <input type="phone" class="form-control" id="phone" name="phone" value="{{ phone }}" ng-disabled="true">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row button-container">
+                <div class="text-center col-sm-6">
+                    <button id="modify-order-button" type="button" class="btn btn-info" ng-click="go_to_stage(2)">重新確認金額</button>
+                </div>
+                <div class="text-center col-sm-6">
+                    <button id="check-info-button" type="button" class="btn btn-success" ng-click="submit_form()">送出訂單</button>
                 </div>
             </div>
         </div>

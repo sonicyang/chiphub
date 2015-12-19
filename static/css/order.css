@@ -23,12 +23,6 @@
   padding-right: 6%; }
   #order-list .chip {
     padding-bottom: 15px; }
-  #order-list .button-container {
-    margin-top: 10%; }
-    #order-list .button-container button {
-      margin-bottom: 10px;
-      width: 60%;
-      font-size: 20px; }
   @media only screen and (max-width: 767px) {
     #order-list h3 {
       font-size: 2rem; } }
@@ -66,12 +60,9 @@
     @media only screen and (max-width: 991px) {
       #confirm-price .chip .chip-total-price {
         text-align: right; } }
-  #confirm-price .button-container {
-    margin-top: 10%; }
-    #confirm-price .button-container button {
-      margin-bottom: 10px;
-      width: 60%;
-      font-size: 20px; }
+  @media only screen and (max-width: 767px) {
+    #confirm-price h3 {
+      font-size: 2rem; } }
 
 .shipping-fee {
   color: #999;
@@ -100,6 +91,20 @@
 @media only screen and (max-width: 991px) {
   #info-net {
     text-align: right; } }
+
+#confirm-info {
+  padding: 0% 6% 0% 6%; }
+  #confirm-info form {
+    margin-top: 3%; }
+  #confirm-info .info-item {
+    margin-bottom: 1.5%; }
+
+.button-container {
+  margin-top: 5%; }
+  .button-container button {
+    margin-bottom: 10px;
+    width: 60%;
+    font-size: 20px; }
 
 @media only screen and (max-width: 991px) {
   .hide-in-middle-screen {

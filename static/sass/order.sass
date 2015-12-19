@@ -23,12 +23,6 @@
   padding-right: 6%
   .chip
     padding-bottom: 15px
-  .button-container
-    margin-top: 10%
-    button
-      margin-bottom: 10px
-      width: 60%
-      font-size: 20px
   h3
     @media only screen and (max-width: 767px)
       font-size: 2rem
@@ -64,12 +58,9 @@
     .chip-total-price
       @media only screen and (max-width: 991px)
         text-align: right
-  .button-container
-    margin-top: 10%
-    button
-      margin-bottom: 10px
-      width: 60%
-      font-size: 20px
+  h3
+    @media only screen and (max-width: 767px)
+      font-size: 2rem
 
 .shipping-fee
   color: #999
@@ -93,11 +84,23 @@
     text-align: right
 
 //stage 3
-
+#confirm-info
+  padding: 0% 6% 0% 6%
+  form
+    margin-top: 3%
+  .info-item
+    margin-bottom: 1.5%
 //stage 4
 
-//============
+//global style
+.button-container
+  margin-top: 5%
+  button
+    margin-bottom: 10px
+    width: 60%
+    font-size: 20px
 
+//=============
 .hide-in-middle-screen
   @media only screen and (max-width: 991px)
     display: none !important
