@@ -64,9 +64,11 @@ app.controller('order_main', function($scope, $http) {
         for(item of $scope.item){
             var quantity = parseInt(item.quantity);
             var pn = item.pn.replace(/\s/g, "");
-            order_list += item.pn + ":" + item.quantity + ",";
-            if (pn && isNaN(quantity)){
-                input_error = true;
+            if (pn){
+                order_list += item.pn + ":" + item.quantity + ",";
+                if(isNaN(quantity)){
+                    input_error = true;
+                }
             }
         }
         if(input_error){
