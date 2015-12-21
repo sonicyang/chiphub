@@ -94,7 +94,7 @@ app.controller('order_main', function($scope, $http) {
         var order_list = $scope.arrange_order();
         if(order_list != ""){
             $scope.loading = true;
-            $http.get("/digikey/price/?order_list=" + order_list)
+            $http.post("/digikey/price/", {"order_list": order_list})
                 .then(function(response){
                         console.log(200);
                         var total = 0;
@@ -156,7 +156,7 @@ app.controller('order_main', function($scope, $http) {
 
     $scope.submit_form = function(){
         $scope.loading = true;
-        $http.get("/digikey/order?order_list=" + $scope.arrange_order())
+        $http.post("/digikey/order", {"order_list": $scope.arrange_order()})
             .then(function(response){
                 if(response.status == 200){
                     $scope.stage = 4

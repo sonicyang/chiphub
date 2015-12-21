@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -123,3 +122,4 @@ STATICFILES_DIRS = (
         ("images", os.path.join(STATIC_ROOT,'images')),
 
 )
+

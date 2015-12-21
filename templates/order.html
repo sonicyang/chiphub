@@ -11,6 +11,9 @@
 {% endblock %}
 
 {% block content %}
+
+{% csrf_token %}
+
 <div id="alert-message" class="alert alert-danger">
     Hello world!
 </div>

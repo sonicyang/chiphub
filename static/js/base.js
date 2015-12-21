@@ -1,4 +1,8 @@
-var app = angular.module('base', ['ngAnimate']);
+var app = angular.module('base', ['ngAnimate']).config(function($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+});
+
 app.controller('base-ctrl', function($scope, $http) {
      $scope.logined = false;
      $scope.login_wrapper = false;

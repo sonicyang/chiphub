@@ -145,9 +145,8 @@ def order_digikey(request):
 
 
 def order(request, ordering):
-    #XXX: should user POST
     if auth.isLogin(request) and auth.hasProfile(auth.get_user_data(request).uuid):
-        parts = request.GET['order_list'].split(',')
+        parts = json.loads(request.body)['order_list'].split(',')
         parts = map(lambda x: x.split(':'), parts)
         parts_detail = map(lambda x: [retrieve_component_detail(x[0]), int(x[1])], parts)
 
@@ -291,15 +290,14 @@ def get_single_order_info(request):
 
 
 def apply_paying_info(request):
-    #XXX: should use POST
     if auth.isLogin(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
 
             try:
-                order = Orders.objects.get(uuid=request.GET["OID"], Orderer = user)
-                order.paid_account = request.GET["PACCOUNT"]
-                order.paid_date = datetime.date(datetime.date.today().year, int(request.GET["PMONTH"]), int(request.GET["PDAY"]))
+                order = Orders.objects.get(uuid=json.loads(request.body)["OID"], Orderer = user)
+                order.paid_account = request.POST["PACCOUNT"]
+                order.paid_date = datetime.date(datetime.date.today().year, int(request.POST["PMONTH"]), int(request.POST["PDAY"]))
                 order.save()
 
                 response = HttpResponse()
