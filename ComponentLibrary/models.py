@@ -28,6 +28,6 @@ def fuzzy_search_component(text):
     #XXX: Apply to every column
     result = []
     for x in text.split(" "):
-        result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gcomponents\" WHERE common_name %% '{0}' LIMIT 100".format(text)))
+        result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gcomponents\" WHERE common_name %% %s LIMIT 100", [text]))
 
     return result
