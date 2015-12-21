@@ -6,7 +6,7 @@ app.controller('order_info_ctrl', function($scope, $http, $rootScope, $document)
     $scope.fee = 1.1;
     $scope.shipping_fee = 60;
 
-    $http.get("/digikey/user_history/")
+    $http.get("/digikey/user_history")
         .then(function(response){
             response.data = response.data.reverse();
 
@@ -66,7 +66,7 @@ app.controller('order_info_ctrl', function($scope, $http, $rootScope, $document)
         var month = date.getMonth() + 1;
         var day = date.getDate();
         if (!isNaN(month) && !isNaN(day)){
-            $http.get("/digikey/pay?OID=" + order.uuid + "&PACCOUNT=" + account + "&PDAY=" + day)
+            $http.post("/digikey/pay", {"pay": order.uuid, "PACCOUNT": account, "PDAY": day})
                 .then(function(d){
                         $scope.disableEditPaidInfoMode();
                         $scope.$apply();

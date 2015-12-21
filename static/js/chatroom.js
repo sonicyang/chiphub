@@ -4,7 +4,7 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
     $scope.comments = [];
     $scope.comment_text = "";
 
-    $http.get("/chatroom/top100/")
+    $http.get("/chatroom/top100")
         .then(function(response){
             $scope.families = response.data;
 
@@ -12,23 +12,23 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
         });
 
     $scope.search = function(text){
-        //if(text != "" || text != null){
+        if(text != "" || text != null){
+            console.log(text);
             $http.get("/chatroom/search?s=" + text)
                 .then(function(response){
                     $scope.families = response.data;
                     console.log($scope.families);
                 });
-        //}else{
-            //$http.get("/chatroom/top100/")
-                //.then(function(response){
-                    //$scope.families = response.data;
-                //});
-        //}
+        }else{
+            $http.get("/chatroom/top100")
+                .then(function(response){
+                    $scope.families = response.data;
+                });
+        }
     };
 
     $scope.submitComment = function(chip){
-        //XXX: Use Post
-        $http.get("/chatroom/add_component_comment?pk=" + chip.id + "&content=" + $scope.comment_text)
+        $http.post("/chatroom/add_component_comment", {"pk": chip.id, "content": $scope.comment_text})
             .then(function(response){
                 $scope.comment_text = "";
                 $http.get("/chatroom/get_component_comments?pk=" + chip.id)

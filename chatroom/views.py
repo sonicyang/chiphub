@@ -136,14 +136,15 @@ def get_component_comments(request):
         return response
 
 def add_component_comment(request):
-    #XXX: Should use POST
+    payload = json.loads(request.body)
+
     if auth.isLogin(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
             try:
-                gcomponent = GComponents.objects.get(pk = int(request.GET['pk']))
+                gcomponent = GComponents.objects.get(pk = int(payload['pk']))
 
-                comment = Comment(component = gcomponent, commenter = user, text = request.GET['content'])
+                comment = Comment(component = gcomponent, commenter = user, text = payload['content'])
 
                 comment.save()
 
@@ -186,14 +187,15 @@ def del_component_comment(request):
     return response
 
 def edit_component_comment(request):
-    #XXX: Should use POST
+    payload = json.loads(request.body)
+
     if auth.isLogin(request):
         user = auth.get_user_data(request)
         if auth.hasProfile(user.uuid):
             try:
-                comment = Comment.objects.get(pk = int(request.GET['pk']), commenter = user)
+                comment = Comment.objects.get(pk = int(payload['pk']), commenter = user)
 
-                comment.text = request.GET['content']
+                comment.text = payload['content']
 
                 comment.save()
 

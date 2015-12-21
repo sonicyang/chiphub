@@ -36,11 +36,11 @@ urlpatterns = [
 
     # Login
     url(r'^profile/$', login.profile),
-    url(r'^update_profile/$', login.update_profile),
+    url(r'^update_profile$', login.update_profile),
     url(r'^list_order/$', digikey.list_order),
 
-    url(r'^islogin/$', login.isLogin),
-    url(r'^logout/$', login.logout),
+    url(r'^islogin$', login.isLogin),
+    url(r'^logout$', login.logout),
 
     # Google OAuth
     url(r'^google_login/$', login.google_login),
@@ -50,23 +50,23 @@ urlpatterns = [
     url(r'^progress/$', digikey.progress_page),
     url(r'^order/$', digikey.order_page),
 
-    url(r'^digikey/order/$', digikey.order_digikey),
-    url(r'^digikey/pay/$', digikey.apply_paying_info),
-    url(r'^digikey/price/$', digikey.get_digikey_price),
-    url(r'^digikey/rally/$', digikey.get_current_rally),
-    url(r'^digikey/groups/$', digikey.get_groups),
-    url(r'^digikey/group_info/$', digikey.get_group_info),
-    url(r'^digikey/user_history/$', digikey.get_user_orders),
-    url(r'^digikey/order_info/$', digikey.get_single_order_info),
+    url(r'^digikey/order$', digikey.order_digikey),
+    url(r'^digikey/pay$', digikey.apply_paying_info),
+    url(r'^digikey/price$', digikey.get_digikey_price),
+    url(r'^digikey/rally$', digikey.get_current_rally),
+    url(r'^digikey/groups$', digikey.get_groups),
+    url(r'^digikey/group_info$', digikey.get_group_info),
+    url(r'^digikey/user_history$', digikey.get_user_orders),
+    url(r'^digikey/order_info$', digikey.get_single_order_info),
 
     # Chat Room
-    url(r'^chatroom/top100/$', chatroom.top100),
-    url(r'^chatroom/search/$', chatroom.search),
-    url(r'^chatroom/get_component_info/$', chatroom.get_component_info),
-    url(r'^chatroom/get_component_comments/$', chatroom.get_component_comments),
-    url(r'^chatroom/add_component_comment/$', chatroom.add_component_comment),
-    url(r'^chatroom/del_component_comment/$', chatroom.del_component_comment),
-    url(r'^chatroom/edit_component_comment/$', chatroom.edit_component_comment),
-    url(r'^chatroom/rank_comment/$', chatroom.rank_comment),
-    url(r'^chatroom/rank_entry/$', chatroom.rank_entry),
+    url(r'^chatroom/top100$', chatroom.top100),
+    url(r'^chatroom/search$', chatroom.search),
+    url(r'^chatroom/get_component_info$', chatroom.get_component_info),
+    url(r'^chatroom/get_component_comments$', chatroom.get_component_comments),
+    url(r'^chatroom/add_component_comment$', chatroom.add_component_comment),
+    url(r'^chatroom/del_component_comment$', chatroom.del_component_comment),
+    url(r'^chatroom/edit_component_comment$', chatroom.edit_component_comment),
+    url(r'^chatroom/rank_comment$', chatroom.rank_comment),
+    url(r'^chatroom/rank_entry$', chatroom.rank_entry),
 ]

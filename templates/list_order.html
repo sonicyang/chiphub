@@ -10,6 +10,9 @@
 {% endblock %}
 
 {% block content %}
+
+{% csrf_token %}
+
 <div  ng-controller="order_info_ctrl">
     <div id="order-info" class="ang-fade" ng-if="invoice" ng-click="hide_info()" ng-cloak>
         <a id="close-order-info" href="" ng-click="hide_info()">

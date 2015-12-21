@@ -94,7 +94,7 @@ app.controller('order_main', function($scope, $http) {
         var order_list = $scope.arrange_order();
         if(order_list != ""){
             $scope.loading = true;
-            $http.post("/digikey/price/", {"order_list": order_list})
+            $http.post("/digikey/price", {"order_list": order_list})
                 .then(function(response){
                         console.log(200);
                         var total = 0;
