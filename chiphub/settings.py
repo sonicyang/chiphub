@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'chiphub',
         'USER': 'chiphub',
         'PASSWORD': DB_KEY,
-        'HOST': 'c4labs.xyz',
+        'HOST': 'tiger.c4labs.xyz',
         'PORT': '5432',
     }
 }
