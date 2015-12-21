@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
 
 from login.models import User_Profiles
 
@@ -31,12 +32,12 @@ def update_profile(request):
     if auth.isLogin(request):
         uuid = auth.get_user_data(request).uuid
 
-        user_profile = User_Profiles(username = request.GET['username'],
-                                    email = request.GET['email'],
-                                    default_shipping_address = request.GET['shipping_address'],
-                                    phone_number = request.GET['phone'],
-                                    real_name = request.GET['realname'],
-                                    tw_id = request.GET['id']
+        user_profile = User_Profiles(username = request.POST['username'],
+                                    email = request.POST['email'],
+                                    default_shipping_address = request.POST['shipping_address'],
+                                    phone_number = request.POST['phone'],
+                                    real_name = request.POST['realname'],
+                                    tw_id = request.POST['id']
                                     )
 
         if not auth.hasProfile(uuid):
