@@ -21,13 +21,16 @@ class GComponents(models.Model):
     def __str__(self):
         return "GComponent No." + str(self.pk).zfill(5) + " / CName: " + str(self.common_name) + " / Manufacturer: " + str(self.manufacturer)
 
-def sanity_injection(text):
-    pass
-
 def fuzzy_search_component(text):
     #XXX: Apply to every column
     result = []
-    for x in text.split(" "):
-        result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gcomponents\" WHERE common_name %% %s LIMIT 100", [text]))
+
+    text = "{"+ text.replace(" ", ",") + "}"
+
+    result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gcomponents\" WHERE common_name %% ANY(%s) LIMIT 100", [text]))
+    result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gcomponents\" WHERE manufacturer %% ANY(%s) LIMIT 100", [text]))
+    result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gclasses\" WHERE mname %% ANY(%s) LIMIT 100", [text]))
+    result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gclasses\" WHERE sname %% ANY(%s) LIMIT 100", [text]))
+    result.append(GComponents.objects.raw("SELECT * FROM \"digikey_components\" WHERE part_number %% ANY(%s) LIMIT 100"), [text])
 
     return result
