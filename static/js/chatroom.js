@@ -12,7 +12,7 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
         });
 
     $scope.search = function(text){
-        if(text != "" || text != null){
+        if(text){
             console.log(text);
             $http.get("/chatroom/search?s=" + text)
                 .then(function(response){
