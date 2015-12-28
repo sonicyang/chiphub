@@ -31,6 +31,6 @@ def fuzzy_search_component(text):
     result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gcomponents\" WHERE manufacturer %% ANY(%s) LIMIT 100", [text]))
     result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gclasses\" WHERE mname %% ANY(%s) LIMIT 100", [text]))
     result.append(GComponents.objects.raw("SELECT * FROM \"ComponentLibrary_gclasses\" WHERE sname %% ANY(%s) LIMIT 100", [text]))
-    result.append(GComponents.objects.raw("SELECT * FROM \"digikey_components\" WHERE part_number %% ANY(%s) LIMIT 100"), [text])
+    result.append(GComponents.objects.raw("SELECT * FROM \"digikey_components\" WHERE part_number %% ANY(%s) LIMIT 100", [text]))
 
     return result
