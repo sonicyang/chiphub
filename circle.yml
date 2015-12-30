@@ -21,4 +21,4 @@ dependencies:
 
 test:
   pre:
-    - echo "No Test Now"
+    - echo "Testing"
