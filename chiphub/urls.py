@@ -30,8 +30,6 @@ urlpatterns = [
     url(r'^about_us/$', main.about_us),
 
     # ChatRoom
-    url(r'^append/$', chatroom.append),
-    url(r'^retreive/$', chatroom.retreive),
     url(r'^chatroom/$', chatroom.chatroom),
 
     # Login
