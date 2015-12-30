@@ -59,4 +59,10 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
             $scope.$apply()
         }
     });
+
+    $("part-number").on('keypress',function(evt) {
+        if (evt.keyCode == 13) {
+			$scope.search(stext);
+        }
+    });
 });

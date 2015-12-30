@@ -24,12 +24,14 @@
 <div id="chatroom" ng-controller="chatroom-ctrl">
     <div class="container-fluid">
         <div class="row search-group">
-            <div class="col-sm-offset-2 col-sm-6">
-                <input id="part-number" type="text" class="form-control" placeholder="Part Number" ng-model="stext">
-            </div>
-            <div id="search-container" class="col-sm-2">
-                <button id="search" class="btn btn-default" ng-click="search(stext)">Search</button>
-            </div>
+			<form ng-submit="search(stext)">
+				<div class="col-sm-offset-2 col-sm-6">
+					<input id="part-number" type="text" class="form-control" placeholder="Part Number" ng-model="stext">
+				</div>
+				<div id="search-container" class="col-sm-2">
+					<button id="search" class="btn btn-default" ng-click="search(stext)">Search</button>
+				</div>
+			</form>
         </div>
     </div>
 
