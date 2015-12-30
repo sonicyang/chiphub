@@ -77,6 +77,26 @@
     </ol>
     <div id="order-main">
         <div id="order-list" ng-if="stage == 1">
+            <div class="alert alert-info fade in" id="ordering-hint">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                歡迎嘗是我的們服務，請在下面輸入你所需要的零件的Digikey 零件編號與數量，<br />
+                零件編號可以在Digikey的網站上查詢到<br />
+                我們像在下個頁面幫您查詢正確的價格供您確認<br />
+
+                傳送門：<a href="http://www.digikey.tw/catalog/zh" target="_blank">http://www.digikey.tw/catalog/zh</a><br /><br />
+
+                範例：
+                <ul>
+                    <li>零件頁面：<a href="http://www.digikey.tw/product-search/zh?keywords=OP275GS-ND" target="_blank">http://www.digikey.tw/product-search/zh?keywords=OP275GS-ND</a></li>
+                    <li>此零件的編號為：「OP275GS-ND」</li>
+                </ul>
+
+                注意：
+                <ul>
+                    <li>任何訂購的項目都必須有庫存、可以以最小單位為一訂購，價格皆以台幣計算</li>
+                    <li>任何訂購需負擔10%的手續費與台幣60元的運費</li>
+                </ul>
+            </div>
             <div class="container-fluid">
                 <h2 class="text-center">輸入訂單</h2>
                 <div class="row chip">
@@ -117,6 +137,12 @@
             </div>
         </div>
         <div id="confirm-price" ng-if="stage == 2">
+            <div class="alert alert-info fade in" id="ordering-hint">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                請確認您所訂購的項目、數量與價格接沒有錯誤<br />
+                總價方面以幫您試算加上手續費與運費後的價格<br />
+                如果需要修改的話 請按修改訂單。
+            </div>
             <div class="container-fluid">
                 <h2 class="text-center">確認金額</h2>
                 <div class="row">
@@ -224,6 +250,11 @@
             </div>
         </div>
         <div id="confirm-info" ng-if="stage == 3">
+            <div class="alert alert-info fade in" id="ordering-hint">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                請確認您的個人資料正確無誤，如果有錯誤，請至個人資料頁面修改<br />
+                個人資料正瘸才能確保你可以收到貨品，請正確的填寫！
+            </div>
             <div class="container-fluid">
                 <h2 class="text-center">確認資料</h2>
                 <form id="confirm_info_form" class="form-horizontal" role="form" action="/update_profile/" method="get">
@@ -264,8 +295,17 @@
             </div>
         </div>
         <div id="finish-order" ng-if="stage == 4">
-            <div class="container-fluid">
-                Done
+            <div class="alert alert-success fade in" id="ordering-hint">
+                大成功～<br />
+                你已經成功地註冊參加CHIPHUB的Digikey集單服務<br />
+                請至您所註冊的E-Mail信箱中收取關於付款資訊的信件<br />
+                關於您的訂單歷史記錄將可以在My CHIPHUB中查詢<br />
+                <br />
+                注意：
+                <ul>
+                    <li>您的集單金額只將會在您付完款之後才成立</li>
+                    <li>如果有錯誤，不付款，直接重新填寫訂單即可</li>
+                </ul>
             </div>
         </div>
     </div>
