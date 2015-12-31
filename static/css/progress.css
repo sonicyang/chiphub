@@ -55,12 +55,6 @@ body {
     body #progress-container .goal-stat {
       padding-top: 3%;
       font-size: 1.65rem; }
-  body #table-container {
-    position: relative;
-    z-index: 101;
-    width: 100%;
-    padding: 3% 10% 3% 10%;
-    box-shadow: 0 -10px 10px 0px #bbbbbb; }
 
 @media only screen and (max-width: 767px) {
   .hide-in-small-screen {
@@ -113,64 +107,6 @@ body {
   margin: auto;
   background-size: cover;
   background-position: 50% 50%; }
-
-#table-list {
-  display: table;
-  width: 80%;
-  height: 50px;
-  background: #F1F4F1;
-  margin: 0 auto;
-  margin-top: 30px;
-  box-sizing: border-box;
-  line-height: 50px; }
-  #table-list .header-row-list {
-    background: #8b8b8b;
-    color: #fff;
-    font-size: 22px; }
-  #table-list .row-list {
-    display: table-row; }
-  #table-list .cell-list {
-    display: table-cell;
-    padding: 6px;
-    border-bottom: 1px solid #e5e5e5;
-    text-align: left; }
-  #table-list .primary {
-    text-align: left; }
-  #table-list input[type="radio"], #table-list input[type="checkbox"] {
-    display: none; }
-  @media only screen and (max-width: 760px) {
-    #table-list body {
-      padding: 0; }
-    #table-list #table-list {
-      display: block;
-      margin: 44px 0 0 0; }
-    #table-list .row-list {
-      position: relative;
-      display: block;
-      border-bottom: 1px solid #ccc; }
-    #table-list .header-row-list {
-      display: none; }
-    #table-list .cell-list {
-      display: block;
-      border: none;
-      position: relative;
-      height: 45px;
-      line-height: 45px;
-      text-align: left; }
-    #table-list .primary:after {
-      content: "";
-      display: block;
-      position: absolute;
-      right: 20px;
-      top: 18px;
-      z-index: 2;
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-right: 10px solid #ccc; }
-    #table-list .cell-list:nth-of-type(n+2) {
-      display: none; } }
 
 .left.carousel-control {
   background-image: none;
