@@ -18,7 +18,7 @@
     Hello world!
 </div>
 
-<div id="order" ng-controller="order_main">
+<div id="order" ng-controller="order_main as dateCtrl">
     <ol class="order-progress progress--medium" ng-if="stage == 1">
         <li class="is-active" data-step="1">
             輸入訂單
@@ -129,7 +129,9 @@
                 </div>
             </div>
             <div class="row button-container">
-                <div class="text-center col-sm-6">
+                <div id="expire-time-container" class="text-center col-sm-6">
+                    <h3>期限</h3>
+                    <input id="expire-time" type="date" ng-model="expire-time"></input>
                 </div>
                 <div class="text-center col-sm-6">
                     <button id="check-info-button" type="button" class="btn btn-success" ng-click="confirm_price()">確認金額</button>
