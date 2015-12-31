@@ -46,7 +46,7 @@ $MAIN-BACKGROUND: #F1F4F1
   background-color: rgba(0, 0, 0, 0.7)
   z-index: 1000
   padding-top: 115px
-  h1
+  > h1
     margin-bottom: 25px
 
 body
@@ -59,17 +59,58 @@ body
   width: 90%
   margin: 0rem 5% 5rem 5%
   position: relative
+  @media only screen and (max-width: 767px)
+    padding: 2rem 0rem 2rem 0rem
   h1
+    display: inline-block
     font-size: 50px
     text-transform: uppercase
-    margin: 0
+    vertical-align: middle
+    margin-bottom: 20px
+    @media only screen and (max-width: 767px)
+      font-size: 28px
   h3
     font-weight: 500
     text-transform: uppercase
     font-size: 20px
     margin: 0.8rem 0 1rem 0
     color: #999
-
+  #chip-header
+    border-bottom: 1px solid #ccc
+    padding-bottom: 40px
+  .rank
+    display: inline-block
+    border: 0px
+    padding: 0px
+    width: 70px
+    vertical-align: middle
+    margin-bottom: 20px
+    @media only screen and (max-width: 767px)
+      width: 50px
+    & > *
+      display: block
+      font-size: 28px
+      text-align: center
+      margin-bottom: 0px
+      @media only screen and (max-width: 767px)
+        font-size: 24px
+  #comment-container
+    .comment
+      padding: 20px 0 20px 0
+      border-bottom: 1px solid #ccc
+      &:last-child
+        border-bottom: 0px
+      .comment-rank > *
+        font-size: 24px
+        @media only screen and (max-width: 767px)
+          font-size: 20px
+      h3
+        display: inline-block
+      .comment-content
+        margin-left: 70px
+        text-overflow: ellipsis
+        @media only screen and (max-width: 767px)
+          margin-left: 50px
 .info-id
   color: #999
   margin: 0 0 2rem 0

@@ -54,68 +54,46 @@
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </a>
         <div class="info-container" ng-click="$event.stopPropagation()">
-            <h1>{{ info.common_name }}</h1>
             <!--<div class="info-id"># 2015-10-D-RC-103323</div>-->
             <div class="container-fluid">
-                <div class="row">
-                    <div class="grid group info-parties info-grid col-md-5">
-                        <div class="info-module">
-                            <h3>TYPE</h3>
-                            <label id="info-type">{{ info_family.mname }}</label>
+                <div id="chip-header">
+                    <div class="row">
+                        <div class="grid group rank">
+                                <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                <label id="info-rank">{{ info.rank }}</label>
+                                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                         </div>
+                        <h1>{{ info.common_name }}</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                                <h3>TYPE</h3>
+                                <label id="info-type">{{ info_family.mname }}</label>
 
-                    </div>
-                    <div class="grid group info-parties info-grid col-md-5">
-                        <div class="info-module">
-                            <h3>FAMILY</h3>
-                            <label id="info-family">{{ info_family.mname }}</label>
                         </div>
-
-                    </div>
-                    <div class="grid group info-parties info-grid col-md-1">
-                        <div class="info-module rank">
-                            <h5>RANK</h5>
-                            <label id="info-rank">{{ info.rank }}</label>
+                        <div class="col-sm-4">
+                                <h3>FAMILY</h3>
+                                <label id="info-family">{{ info_family.mname }}</label>
+                        </div>
+                        <div class="col-sm-4">
+                                <h3>UNIT PRICES</h3>
+                                <label id="info-unit-price">{{ price | currency }}</label>
                         </div>
                     </div>
-                    <div class="grid group info-parties info-grid col-md-1">
-                        <div class="info-module-half rank rbutton">
-                            <i class="material-icons">thumb_up</i>
-                        </div>
-                        <div class="info-module-half rank rbutton">
-                            <i class="material-icons">thumb_down</i>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="grid group info-pricing-detail info-grid col-md-12">
-                        <div class="info-module">
-                            <h3>UNIT PRICES</h3>
-                            <div id="info-unit-price">{{ price | currency }}</div>
+                    <div class="row">
                     </div>
                 </div>
                 <div id="comment-container">
                     <div class="row comment" ng-repeat="comment in comments">
-                        <div class="grid group info-comment info-grid col-md-10">
-                            <div class="info-module">
-                                <h3>{{ comment.commenter }} - {{ comment.date }}</h3>
-                                <div class="info-context">
-                                    {{ comment.text }}
-                                </div>
-                            </div>
+                        <div class="grid group rank comment-rank">
+                                <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                <label id="info-rank">{{ comment.rank }}</label>
+                                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                         </div>
-                        <div class="grid group info-parties info-grid col-md-1">
-                            <div class="info-module">
-                                <h3>RANK</h3>
-                                <label class="info-crank">{{ comment.rank }}</label>
-                            </div>
-                        </div>
-                        <div class="grid group info-parties info-grid col-md-1">
-                            <div class="info-module-half rank rbutton">
-                                <i class="material-icons">thumb_up</i>
-                            </div>
-                            <div class="info-module-half rank rbutton">
-                                <i class="material-icons">thumb_down</i>
+                        <h3>{{ comment.commenter }} - {{ comment.date }}</h3>
+                        <div class="comment-content">
+                            <div class="info-context">
+                                {{ comment.text }}
                             </div>
                         </div>
                     </div>

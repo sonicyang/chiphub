@@ -46,7 +46,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
   padding-top: 115px; }
-  #chip-info h1 {
+  #chip-info > h1 {
     margin-bottom: 25px; }
 
 body {
@@ -59,16 +59,63 @@ body {
   width: 90%;
   margin: 0rem 5% 5rem 5%;
   position: relative; }
+  @media only screen and (max-width: 767px) {
+    .info-container {
+      padding: 2rem 0rem 2rem 0rem; } }
   .info-container h1 {
+    display: inline-block;
     font-size: 50px;
     text-transform: uppercase;
-    margin: 0; }
+    vertical-align: middle;
+    margin-bottom: 20px; }
+    @media only screen and (max-width: 767px) {
+      .info-container h1 {
+        font-size: 28px; } }
   .info-container h3 {
     font-weight: 500;
     text-transform: uppercase;
     font-size: 20px;
     margin: 0.8rem 0 1rem 0;
     color: #999; }
+  .info-container #chip-header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 40px; }
+  .info-container .rank {
+    display: inline-block;
+    border: 0px;
+    padding: 0px;
+    width: 70px;
+    vertical-align: middle;
+    margin-bottom: 20px; }
+    @media only screen and (max-width: 767px) {
+      .info-container .rank {
+        width: 50px; } }
+    .info-container .rank > * {
+      display: block;
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 0px; }
+      @media only screen and (max-width: 767px) {
+        .info-container .rank > * {
+          font-size: 24px; } }
+  .info-container #comment-container .comment {
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #ccc; }
+    .info-container #comment-container .comment:last-child {
+      border-bottom: 0px; }
+    .info-container #comment-container .comment .comment-rank > * {
+      font-size: 24px; }
+      @media only screen and (max-width: 767px) {
+        .info-container #comment-container .comment .comment-rank > * {
+          font-size: 20px; } }
+    .info-container #comment-container .comment h3 {
+      display: inline-block; }
+    .info-container #comment-container .comment .comment-content {
+      margin-left: 70px;
+      text-overflow: ellipsis; }
+      @media only screen and (max-width: 767px) {
+        .info-container #comment-container .comment .comment-content {
+          margin-left: 50px; } }
 
 .info-id {
   color: #999;
