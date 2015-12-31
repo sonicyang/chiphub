@@ -2,23 +2,48 @@ $COMPLITED-COLOR: #2C3E50
 $TODO-COLOR: #E1E2EB
 $ACTIVE-COLOR: #00ABC9
 $MAIN-BACKGROUND: #F1F4F1
+
+$SLIDER-NORMAL-HEIGHT: 350px
+$SLIDER-SMALL-HEIGHT: 260px
 body
   background-color: #F1F4F1
   font-family: Helvetica, sans-serif ,Microsoft JhengHei
+  #container
+    height: 100%
   #progress-container
+    display: flex
+    flex-direction: column
     position: relative
-    z-index: 100
     width: 100%
-    padding: 3% 10% 3% 10%
+    height: calc(100% - #{$SLIDER-NORMAL-HEIGHT})
+    padding: 0 10% 0 10%
+    min-height: 280px
+    z-index: 100
     box-shadow: 0 -10px 10px 0px rgba(30, 30, 30, 0.8)
+    &:before
+      display: block
+      content: " "
+      flex: 1
+    &:after
+      display: block
+      content: " "
+      flex: 2
+    @media only screen and (max-width: 767px)
+      height: calc(100% - #{$SLIDER-SMALL-HEIGHT})
+    @media only screen and (max-height: 650px)
+      height: calc(100% - #{$SLIDER-SMALL-HEIGHT})
+
     #goal
+      width: 100%
+      margin-bottom: 2rem
       font-size: 40px
       text-align: left
-      width: 100%
       text-align : center
+      @media only screen and (max-width: 767px)
+        font-size: 30px
     #glass
       width: 100%
-      height: 30px
+      height: 24px
       background: #c7c7c7
       border-radius: 15px
       overflow: hidden
@@ -29,6 +54,8 @@ body
         height: 30px
         background: #00ABC9
         z-index: 333
+    .container-fluid
+      width: 85%
     .goal-stat
       padding-top: 3%
       font-size: 1.65rem
@@ -48,9 +75,11 @@ body
 .item
   position: relative
   width: 100%
-  height: 400px
+  height: 350px
   @media only screen and (max-width: 767px)
-    height: 300px
+    height: 260px
+  @media only screen and (max-height: 650px)
+    height: 260px
   div
     position: absolute
     padding: 5px 8px 5px 8px
@@ -58,6 +87,8 @@ body
     color: white
     font-size: 3rem
     background-color: rgba(0, 0, 0, 0.4)
+    @media only screen and (max-width: 767px)
+      font-size: 2rem
   &.cover-1 > div
     right: 5%
   &.cover-2 > div
@@ -155,7 +186,11 @@ body
   background-image: none
   width: 70px
 
-#go-button
-  position: absolute
-  right: 30px
-  bottom: 30px
+#button-container
+  padding-top: 3%
+  button
+    font-size: 20px
+    padding: 1% 5% 1% 5%
+    @media only screen and (max-width: 760px)
+      font-size: 14px
+      padding: 2% 5% 2% 5%

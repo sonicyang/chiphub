@@ -70,24 +70,10 @@
                 <label class="goal-number" id="funds-count">{{ current_person_count }}</label>
             </div>
             {% endverbatim %}
+        </div>
+        <div id="button-container" class="text-center">
             <button id="go-button" type="button" class="btn btn-success" ng-click="go_order()">馬上參加集單</button>
         </div>
-    </div>
-</div>
-<div id="table-container" ng-controller="group_history">
-    <div id="table-list">
-        {% verbatim %}
-        <div class="header-row-list row-list">
-            <span class="cell-list primary">日期</span>
-            <span class="cell-list">金額</span>
-            <span class="cell-list">人數</span>
-        </div>
-        <div class="row-list" ng-repeat="group in groups" ng-if="group != undefined">
-            <span class="cell-list primary order-date" data-label="serial-num" type="date">{{ group.date }}</span>
-            <span class="cell-list order-price" data-label="sum" type="total">{{ group.total | currency }}</span>
-            <span class="cell-list order-person" data-label="person" type="person">{{ group.person }}</span>
-        </div>
-        {% endverbatim %}
     </div>
 </div>
 <!-- End Ordered List -->
