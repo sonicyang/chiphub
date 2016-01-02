@@ -3,6 +3,8 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
     $scope.families = [];
     $scope.comments = [];
     $scope.comment_text = "";
+    $scope.max_comment_length = 300;
+    $scope.remaining_char = $scope.max_comment_length;
 
     $http.get("/chatroom/top100")
         .then(function(response){
@@ -52,7 +54,9 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
     $scope.hide_info = function(){
         $scope.infoing = false;
     };
-
+    $scope.onInputComment = function(){
+        $scope.remaining_char = $scope.max_comment_length - $scope.comment_text.length;
+    }
     $document.on('keyup',function(evt) {
         if (evt.keyCode == 27) {
             $scope.hide_info();

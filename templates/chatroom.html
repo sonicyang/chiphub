@@ -103,8 +103,16 @@
                     <div class="grid group info-commenting info-grid col-md-12">
                         <div class="info-module form-group commenting-form" style="display: {{ disp }}">
                             <h3>{{ username }}</h3>
-                            <textarea class="form-control" rows="5" id="commenting" ng-model="$parent.comment_text"></textarea>
+                            <textarea class="form-control" rows="5" id="commenting" ng-model="$parent.comment_text" ng-change="onInputComment()"></textarea>
                             <button type="button" class="btn btn-primary comment-button" id="submit-comment" ng-click="submitComment(info)">Submit</button>
+                            <label id="remaining" ng-class="{'remaining-warning': remaining_char < 0}">
+                                <label>剩餘：</label>
+                                {% verbatim %}
+                                <label>
+                                    {{ remaining_char }}
+                                </label>
+                                {% endverbatim %}
+                            </label>
                         </div>
                     </div>
                 </div>
