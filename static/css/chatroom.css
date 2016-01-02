@@ -122,6 +122,8 @@ body {
       @media only screen and (max-width: 767px) {
         .info-container #comment-container .comment .comment-content {
           margin-left: 40px; } }
+      .info-container #comment-container .comment .comment-content .info-context {
+        white-space: pre; }
 
 .info-id {
   color: #999;
