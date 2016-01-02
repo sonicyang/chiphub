@@ -123,7 +123,8 @@ body {
         .info-container #comment-container .comment .comment-content {
           margin-left: 40px; } }
       .info-container #comment-container .comment .comment-content .info-context {
-        white-space: pre; }
+        white-space: pre-wrap;
+        word-wrap: break-word; }
 
 .info-id {
   color: #999;
