@@ -26,14 +26,6 @@ $MAIN-BACKGROUND: #F1F4F1
   margin-top: 10px
   margin-bottom: 25px
 
-#close-chip-info
-  position: absolute
-  right: 15px
-  top: 65px
-  span
-    font-size: 2.5rem
-    color: white
-    z-index: 1001
 
 #chip-info
   overflow-y: scroll
@@ -46,6 +38,20 @@ $MAIN-BACKGROUND: #F1F4F1
   background-color: rgba(0, 0, 0, 0.7)
   z-index: 1000
   padding-top: 115px
+  @media only screen and (max-width: 767px)
+    padding-top: 95px
+
+  #close-chip-info
+    position: absolute
+    right: 15px
+    top: 65px
+    span
+      font-size: 2.5rem
+      color: white
+      z-index: 1001
+      @media only screen and (max-width: 767px)
+        font-size: 1.5rem
+
   > h1
     margin-bottom: 25px
 
@@ -60,6 +66,7 @@ body
   margin: 0rem 5% 5rem 5%
   position: relative
   @media only screen and (max-width: 767px)
+    margin: 0rem 5% 3rem 5%
     padding: 2rem 0rem 2rem 0rem
   h1
     display: inline-block
@@ -86,7 +93,7 @@ body
     vertical-align: middle
     margin-bottom: 20px
     @media only screen and (max-width: 767px)
-      width: 50px
+      width: 40px
     & > *
       display: block
       font-size: 28px
@@ -100,17 +107,18 @@ body
       border-bottom: 1px solid #ccc
       &:last-child
         border-bottom: 0px
-      .comment-rank > *
-        font-size: 24px
-        @media only screen and (max-width: 767px)
-          font-size: 20px
+      .comment-rank
+        margin-bottom: 6px
+        & > *
+          @media only screen and (max-width: 767px)
+            font-size: 20px
       h3
         display: inline-block
       .comment-content
         margin-left: 70px
         text-overflow: ellipsis
         @media only screen and (max-width: 767px)
-          margin-left: 50px
+          margin-left: 40px
 .info-id
   color: #999
   margin: 0 0 2rem 0

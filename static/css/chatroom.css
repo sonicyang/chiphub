@@ -26,15 +26,6 @@
   margin-top: 10px;
   margin-bottom: 25px; }
 
-#close-chip-info {
-  position: absolute;
-  right: 15px;
-  top: 65px; }
-  #close-chip-info span {
-    font-size: 2.5rem;
-    color: white;
-    z-index: 1001; }
-
 #chip-info {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -46,6 +37,20 @@
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
   padding-top: 115px; }
+  @media only screen and (max-width: 767px) {
+    #chip-info {
+      padding-top: 95px; } }
+  #chip-info #close-chip-info {
+    position: absolute;
+    right: 15px;
+    top: 65px; }
+    #chip-info #close-chip-info span {
+      font-size: 2.5rem;
+      color: white;
+      z-index: 1001; }
+      @media only screen and (max-width: 767px) {
+        #chip-info #close-chip-info span {
+          font-size: 1.5rem; } }
   #chip-info > h1 {
     margin-bottom: 25px; }
 
@@ -61,6 +66,7 @@ body {
   position: relative; }
   @media only screen and (max-width: 767px) {
     .info-container {
+      margin: 0rem 5% 3rem 5%;
       padding: 2rem 0rem 2rem 0rem; } }
   .info-container h1 {
     display: inline-block;
@@ -89,7 +95,7 @@ body {
     margin-bottom: 20px; }
     @media only screen and (max-width: 767px) {
       .info-container .rank {
-        width: 50px; } }
+        width: 40px; } }
     .info-container .rank > * {
       display: block;
       font-size: 28px;
@@ -103,8 +109,8 @@ body {
     border-bottom: 1px solid #ccc; }
     .info-container #comment-container .comment:last-child {
       border-bottom: 0px; }
-    .info-container #comment-container .comment .comment-rank > * {
-      font-size: 24px; }
+    .info-container #comment-container .comment .comment-rank {
+      margin-bottom: 6px; }
       @media only screen and (max-width: 767px) {
         .info-container #comment-container .comment .comment-rank > * {
           font-size: 20px; } }
@@ -115,7 +121,7 @@ body {
       text-overflow: ellipsis; }
       @media only screen and (max-width: 767px) {
         .info-container #comment-container .comment .comment-content {
-          margin-left: 50px; } }
+          margin-left: 40px; } }
 
 .info-id {
   color: #999;
