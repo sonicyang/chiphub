@@ -84,14 +84,19 @@ body
     color: #999
   #chip-header
     border-bottom: 1px solid #ccc
-    padding-bottom: 40px
+    padding-bottom: 10px
+  .info-title
+    border-bottom: 1px solid #ccc
+    height: 60px
+    margin-bottom: 10px
+    @media only screen and (max-width: 767px)
+      height: 35px
   .rank
+    color: #999
     display: inline-block
     border: 0px
     padding: 0px
-    width: 70px
     vertical-align: middle
-    margin-bottom: 20px
     @media only screen and (max-width: 767px)
       width: 40px
     & > *
@@ -115,13 +120,13 @@ body
       h3
         display: inline-block
       .comment-content
-        margin-left: 70px
         text-overflow: ellipsis
         @media only screen and (max-width: 767px)
-          margin-left: 40px
         .info-context
           white-space: pre-wrap
           word-wrap: break-word
+      .commenter
+        color: #444
 .info-id
   color: #999
   margin: 0 0 2rem 0

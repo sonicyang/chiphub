@@ -85,14 +85,20 @@ body {
     color: #999; }
   .info-container #chip-header {
     border-bottom: 1px solid #ccc;
-    padding-bottom: 40px; }
+    padding-bottom: 10px; }
+  .info-container .info-title {
+    border-bottom: 1px solid #ccc;
+    height: 60px;
+    margin-bottom: 10px; }
+    @media only screen and (max-width: 767px) {
+      .info-container .info-title {
+        height: 35px; } }
   .info-container .rank {
+    color: #999;
     display: inline-block;
     border: 0px;
     padding: 0px;
-    width: 70px;
-    vertical-align: middle;
-    margin-bottom: 20px; }
+    vertical-align: middle; }
     @media only screen and (max-width: 767px) {
       .info-container .rank {
         width: 40px; } }
@@ -117,14 +123,12 @@ body {
     .info-container #comment-container .comment h3 {
       display: inline-block; }
     .info-container #comment-container .comment .comment-content {
-      margin-left: 70px;
       text-overflow: ellipsis; }
-      @media only screen and (max-width: 767px) {
-        .info-container #comment-container .comment .comment-content {
-          margin-left: 40px; } }
       .info-container #comment-container .comment .comment-content .info-context {
         white-space: pre-wrap;
         word-wrap: break-word; }
+    .info-container #comment-container .comment .commenter {
+      color: #444; }
 
 .info-id {
   color: #999;
