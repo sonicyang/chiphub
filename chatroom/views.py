@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
-from django.db.models import Max
+from django.db.models import Max, Sum
 from django.shortcuts import render, redirect
 
 from ComponentLibrary.models import GComponents, GClasses, fuzzy_search_component
@@ -115,25 +115,27 @@ def get_component_info(request):
         return response
 
 def get_component_comments(request):
-    try:
+    # try:
         gcomponent = GComponents.objects.get(pk = int(request.GET['pk']))
 
-        comments = Comment.objects.all().filter(component = gcomponent).order_by("-date", "-rank")
+        comments = Comment.objects.all().filter(component = gcomponent).annotate(rank=Sum('cranking__rank')).order_by("-rank", "-date")
 
         dict_comments = map(model_to_dict, comments)
         map(lambda x: operator.setitem(x, 'date', str(x['date'])), dict_comments)
         map(lambda x: operator.setitem(x, 'commenter', User_Profiles.objects.get(user = Users.objects.get(pk = int(x['commenter']))).username), dict_comments)
+        map(lambda x: operator.setitem(x, 'rank', Comment.objects.all().filter(pk = x['id']).aggregate(rank=Sum('cranking__rank'))['rank']), dict_comments)
+        map(lambda x: operator.setitem(x, 'rank', 0 if x['rank'] is None else x['rank']), dict_comments)
 
         response = HttpResponse(json.dumps(dict_comments))
         response.status_code = 200
 
         return response
-    except Exception as ex:
-        raise ex
-        response = HttpResponse()
-        response.status_code = 404
+    # except Exception as ex:
+        # raise ex
+        # response = HttpResponse()
+        # response.status_code = 404
 
-        return response
+        # return response
 
 def add_component_comment(request):
     payload = json.loads(request.body)
