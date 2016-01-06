@@ -20,7 +20,7 @@ class EntryAdmin(admin.ModelAdmin):
     inlines = [ERankingInline]
 
     def get_ranking(self, obj):
-        return ERanking.objects.get(entry = obj).aggregate(Sum('rank'))
+        return ERanking.objects.all().filter(entry = obj).aggregate(Sum('rank'))['rank__sum']
     get_ranking.short_description = 'ranking'
 
     def get_component_name(self, obj):
@@ -34,7 +34,7 @@ class CommentAdmin(admin.ModelAdmin):
     inlines = [CRankingInline]
 
     def get_ranking(self, obj):
-        return CRanking.objects.get(comment = obj).aggregate(Sum('rank'))
+        return CRanking.objects.all().filter(comment = obj).aggregate(Sum('rank'))['rank__sum']
     get_ranking.short_description = 'ranking'
 
     def get_commenter_username(self, obj):
