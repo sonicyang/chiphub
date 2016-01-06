@@ -52,9 +52,6 @@ $MAIN-BACKGROUND: #F1F4F1
       @media only screen and (max-width: 767px)
         font-size: 1.5rem
 
-  > h1
-    margin-bottom: 25px
-
 body
   background: $MAIN-BACKGROUND
 
@@ -83,19 +80,25 @@ body
     margin: 0.8rem 0 1rem 0
     color: #999
   #chip-header
-    padding-bottom: 10px
+    padding-bottom: 40px
   .info-title
     border-bottom: 1px solid #ccc
     height: 60px
-    margin-bottom: 10px
+    margin-bottom: 20px
     @media only screen and (max-width: 767px)
       height: 35px
+  .info-detail
+    display: inline-block
+    width: calc(100% - 70px)
   .rank
     color: #999
     display: inline-block
     border: 0px
     padding: 0px
-    vertical-align: middle
+    vertical-align: top
+    width: 40px
+    margin-left: 10px
+    margin-right: 10px
     @media only screen and (max-width: 767px)
       width: 40px
     & > *
@@ -106,6 +109,9 @@ body
       @media only screen and (max-width: 767px)
         font-size: 24px
   #comment-container
+    .comment-count
+      color: #444
+      padding-left: 10px
     .comment
       padding: 20px 0 20px 0
       border-top: 1px solid #ccc
@@ -118,16 +124,21 @@ body
             font-size: 20px
       h3
         display: inline-block
-      .comment-content
-        text-overflow: ellipsis
-        @media only screen and (max-width: 767px)
-        .info-context
-          white-space: pre-wrap
-          word-wrap: break-word
-      .commenter
-        border: 1px dashed #999
-        padding: 5px
-        color: #444
+      .content-container
+        display: inline-block
+        width: calc(100% - 70px)
+        .comment-content
+          text-overflow: ellipsis
+          display: inline-block
+          padding: 5px
+          @media only screen and (max-width: 767px)
+          .info-context
+            white-space: pre-wrap
+            word-wrap: break-word
+        .commenter
+          border: 1px dashed #999
+          padding: 5px
+          color: #444
 .info-id
   color: #999
   margin: 0 0 2rem 0

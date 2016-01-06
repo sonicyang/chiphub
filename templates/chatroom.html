@@ -57,17 +57,17 @@
             <!--<div class="info-id"># 2015-10-D-RC-103323</div>-->
             <div class="container-fluid">
                 <div id="chip-header">
-                    <div class="row">
+                    <div>
                         <div class="row info-title">
                             <h1>{{ info.common_name }}</h1>
                         </div>
-                        <div class="row info-detail">
-                            <div class="chip-rank rank col-xs-1 col-md-1 col-sm-1">
+                        <div class="row">
+                            <div class="chip-rank rank grid">
                                     <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                                     <label id="info-rank">{{ info.rank }}</label>
                                     <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                             </div>
-                            <div class="col-xs-11 col-md-11 col-sm-11">
+                            <div class="info-detail">
                                 <div class="col-sm-4">
                                         <h3>類別</h3>
                                         <label id="info-type">{{ info_family.mname }}</label>
@@ -87,24 +87,23 @@
                 </div>
                 <div id="comment-container">
                     <div class="row">
-                        <h4 class="grid group rank col-xs-12 col-sm-12 col-md-12">
+                        <h4 class="comment-count">
                             本零件共有 {{ comments.length }} 個評論
                         </h4>
                     </div>
                     <div class="comment" ng-repeat="comment in comments">
                         <div class="row">
-                            <div class="grid group rank comment-rank col-xs-1 col-sm-1 col-md-1">
+                            <div class="grid group rank comment-rank">
                                     <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                                     <label id="info-rank">{{ comment.rank }}</label>
                                     <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                             </div>
-                            <div class="comment-content col-xs-11 col-sm-11 col-md-11">
-                                <div class="info-context">{{ comment.text }}</div>
+                            <div class="content-container">
+                                <div class="comment-content col-md-11">
+                                    <div class="info-context">{{ comment.text }}</div>
+                                </div>
+                                <div class="commenter col-md-1"><span>Commenter <br /> {{ comment.commenter }} <br /> Comment Date: <br /> {{ comment.date }}</span></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 col-sm-8"></div>
-                            <div class="col-md-4 cold-sm-4"><span class="commenter">Commented by: {{ comment.commenter }} @ {{ comment.date }}</span></div>
                         </div>
                     </div>
                 </div>
