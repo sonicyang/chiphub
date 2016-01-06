@@ -9,7 +9,7 @@ class Entry(models.Model):
                                 on_delete=models.CASCADE,
                                 primary_key=True,
                                 )
-    rank = models.IntegerField(default = 0)
+    ranker = models.ManyToManyField(Users, through='ERanking', related_name="entries_ranked")
     search_rank = models.IntegerField(default = 0)
 
     class Meta:
@@ -35,5 +35,10 @@ class Comment(models.Model):
 
 class CRanking(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    users = models.ForeignKey(Users, on_delete=models.CASCADE)
+    rank = models.IntegerField(default=0)
+
+class ERanking(models.Model):
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
     users = models.ForeignKey(Users, on_delete=models.CASCADE)
     rank = models.IntegerField(default=0)

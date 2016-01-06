@@ -4,7 +4,7 @@ from django.db.models import Max
 from django.shortcuts import render, redirect
 
 from ComponentLibrary.models import GComponents, GClasses, fuzzy_search_component
-from chatroom.models import Comment, Entry, CRanking
+from chatroom.models import Comment, Entry, CRanking, ERanking
 from login.models import Users, User_Profiles
 from digikey.models import Components
 
@@ -247,9 +247,9 @@ def rank_entry(request):
             try:
                 entry = Entry.objects.get(pk = int(request.GET['pk']))
 
-                entry.rank += 1 if request.GET['up'] == "True" else -1
-
-                entry.save()
+                er, newed = ERanking.objects.get_or_create(entry = entry, users = user)
+                er.rank = 1 if request.GET['up'] == "True" else -1
+                er.save()
 
                 response = HttpResponse()
                 response.status_code = 200
