@@ -3,8 +3,8 @@ $TODO-COLOR: #E1E2EB
 $ACTIVE-COLOR: #00ABC9
 $MAIN-BACKGROUND: #F1F4F1
 
-$SLIDER-NORMAL-HEIGHT: 350px
-$SLIDER-SMALL-HEIGHT: 260px
+$SLIDER-NORMAL-HEIGHT: 450px
+$SLIDER-SMALL-HEIGHT: 350px
 body
   background-color: #F1F4F1
   font-family: Helvetica, sans-serif ,Microsoft JhengHei
@@ -69,11 +69,11 @@ body
 .item
   position: relative
   width: 100%
-  height: 350px
+  height: #{$SLIDER-NORMAL-HEIGHT}
   @media only screen and (max-width: 767px)
-    height: 260px
+    height: #{$SLIDER-SMALL-HEIGHT}
   @media only screen and (max-height: 650px)
-    height: 260px
+    height: #{$SLIDER-SMALL-HEIGHT}
   div
     position: absolute
     padding: 5px 8px 5px 8px
