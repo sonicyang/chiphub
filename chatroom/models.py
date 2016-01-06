@@ -25,10 +25,15 @@ class Comment(models.Model):
     commenter = models.ForeignKey(Users)
     text = models.CharField(max_length = 300, null = True, blank = True)
     date = models.DateField(default=django.utils.timezone.now)
-    rank = models.IntegerField(default = 0)
+    ranker = models.ManyToManyField(Users, through='CRanking', related_name="comments_ranked")
 
     class Meta:
         verbose_name = "Comment"
 
     def __str__(self):
         return "Comment No." + str(self.pk).zfill(5)
+
+class CRanking(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    users = models.ForeignKey(Users, on_delete=models.CASCADE)
+    rank = models.IntegerField(default=0)
