@@ -69,16 +69,16 @@
                             </div>
                             <div class="col-xs-11 col-md-11 col-sm-11">
                                 <div class="col-sm-4">
-                                        <h3>TYPE</h3>
+                                        <h3>類別</h3>
                                         <label id="info-type">{{ info_family.mname }}</label>
 
                                 </div>
                                 <div class="col-sm-4">
-                                        <h3>FAMILY</h3>
+                                        <h3>家族</h3>
                                         <label id="info-family">{{ info_family.sname }}</label>
                                 </div>
                                 <div class="col-sm-4">
-                                        <h3>UNIT PRICES</h3>
+                                        <h3>單價</h3>
                                         <label id="info-unit-price">{{ price | currency }}</label>
                                 </div>
                             </div>
@@ -87,9 +87,9 @@
                 </div>
                 <div id="comment-container">
                     <div class="row">
-                        <div class="grid group rank col-xs-12 col-sm-12 col-md-12">
+                        <h4 class="grid group rank col-xs-12 col-sm-12 col-md-12">
                             本零件共有 {{ comments.length }} 個評論
-                        </div>
+                        </h4>
                     </div>
                     <div class="comment" ng-repeat="comment in comments">
                         <div class="row">
