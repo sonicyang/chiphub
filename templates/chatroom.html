@@ -86,6 +86,11 @@
                     </div>
                 </div>
                 <div id="comment-container">
+                    <div class="row">
+                        <div class="grid group rank col-xs-12 col-sm-12 col-md-12">
+                            本零件共有 {{ comments.length }} 個評論
+                        </div>
+                    </div>
                     <div class="comment" ng-repeat="comment in comments">
                         <div class="row">
                             <div class="grid group rank comment-rank col-xs-1 col-sm-1 col-md-1">

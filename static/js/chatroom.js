@@ -45,6 +45,7 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
         $scope.info = chip;
         $scope.info_family = family;
         $scope.price = chip.digikey.unit_price;
+        $scope.comments = null;
         $http.get("/chatroom/get_component_comments?pk=" + chip.id)
             .then(function(response){
                 $scope.comments = response.data;
