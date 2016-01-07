@@ -47,13 +47,11 @@
                     <div class="grid group invoice-details invoice-grid col-md-12">
                         <div class="invoice-module">
                             <h3>匯款帳戶(後五碼)</h3>
-                            <div id="info-paid-account" class="invoice-for">
-                                {{ info.paid_account }}
-                            </div>
+                            <input type="text" id="info-paid-account" class="invoice-for" value="{{ info.paid_account  }}" ng-disabled="!editing_info"/>
                             <h3>匯款日期</h3>
-                            <input id="info-paid-date" class="due-date-date" type="date" disabled="true">
+                            <input id="info-paid-date" class="due-date-date" type="text" ng-disabled="!editing_info" />
                             <button id="paid-info-button" action="edit" ng-if"!editing_info" ng-click="editPayment(info)">編輯</button>
-                            <button id="paid-info-button" action="edit" ng-if="editing_info" ng-click="savePayment(info)">儲存</button>
+                            <button id="paid-info-button" action="edit" ng-if="editing_info" ng-click="sendPayment(info)">儲存</button>
                         </div>
                     </div>
                 </div>

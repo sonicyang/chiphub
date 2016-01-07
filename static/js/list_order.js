@@ -38,9 +38,7 @@ app.controller('order_info_ctrl', function($scope, $http, $rootScope, $document)
     };
 
     $scope.disableEditPaidInfoMode = function(){
-        $("#info-paid-account").prop("contenteditable", false);
         $("#info-paid-account").css("box-shadow", "");
-        $("#info-paid-date").prop("disabled", true);
         $("#info-paid-date").css("box-shadow", "");
 
         $scope.editing_info = false;
@@ -52,21 +50,20 @@ app.controller('order_info_ctrl', function($scope, $http, $rootScope, $document)
     };
 
     $scope.editPayment = function(order){
-        $("#info-paid-account").prop("contenteditable", true);
         $("#info-paid-account").css("box-shadow", "0 0 2px 0px #0000cc");
-        $("#info-paid-date").prop("disabled", false);
         $("#info-paid-date").css("box-shadow", "0 0 2px 0px #0000cc");
 
         $scope.editing_info = true;
+        createPaidDatePicker();
     };
 
     $scope.sendPayment = function(order){
-        var account = $("#info-paid-account").text();
-        var date = new Date($("#info-paid-date").attr("value"));
+        var account = $("#info-paid-account").attr("value").replace(/\s/g, '');
+        var date = new Date(getPaidDate());
         var month = date.getMonth() + 1;
         var day = date.getDate();
         if (!isNaN(month) && !isNaN(day)){
-            $http.post("/digikey/pay", {"pay": order.uuid, "PACCOUNT": account, "PDAY": day})
+            $http.post("/digikey/pay", {"pay": order.uuid, "PACCOUNT": account, "PDAY": day, "PMONTH": month})
                 .then(function(d){
                         $scope.disableEditPaidInfoMode();
                         $scope.$apply();
@@ -112,3 +109,9 @@ app.controller('order_info_ctrl', function($scope, $http, $rootScope, $document)
         }
     });
 });
+function createPaidDatePicker(){
+     $("#info-paid-date").datepicker();
+}
+function getPaidDate(){
+     return $("#info-paid-date").attr("value");
+}
