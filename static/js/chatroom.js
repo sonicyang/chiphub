@@ -52,6 +52,18 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
             });
     };
 
+    $scope.rank_comment = function(comment, up){
+        var up = up ? "True": "False"
+        $http.get("/chatroom/rank_comment?pk=" + comment.id + "&up=" + up)
+         .then(function(response){
+         });
+    }
+    $scope.rank_entry = function(chip, up){
+        var up = up ? "True": "False"
+        $http.get("/chatroom/rank_entry?pk=" + chip.id + "&up=" + up)
+         .then(function(response){
+         });
+    }
     $scope.hide_info = function(){
         $scope.infoing = false;
     };

@@ -63,9 +63,9 @@
                         </div>
                         <div class="row">
                             <div class="chip-rank rank grid">
-                                    <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-triangle-top" aria-hidden="true" ng-click="rank_entry(info, true)"></span>
                                     <label id="info-rank">{{ info.rank }}</label>
-                                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" ng-click="rank_entry(info, false)"></span>
                             </div>
                             <div class="info-detail">
                                 <div class="col-sm-4">
@@ -95,9 +95,9 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="grid group rank comment-rank">
-                                        <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-triangle-top" aria-hidden="true" ng-click="rank_comment(comment, true)"></span>
                                         <label id="info-rank">{{ comment.rank }}</label>
-                                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" ng-click="rank_comment(comment, false)"></span>
                                 </div>
                                 <div class="content-container">
                                     <div class="comment-content col-md-10">
