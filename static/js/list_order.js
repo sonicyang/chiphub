@@ -63,10 +63,9 @@ app.controller('order_info_ctrl', function($scope, $http, $rootScope, $document)
         var month = date.getMonth() + 1;
         var day = date.getDate();
         if (!isNaN(month) && !isNaN(day)){
-            $http.post("/digikey/pay", {"pay": order.uuid, "PACCOUNT": account, "PDAY": day, "PMONTH": month})
+            $http.post("/digikey/pay", {"OID": order.uuid, "PACCOUNT": account, "PDAY": day, "PMONTH": month})
                 .then(function(d){
                         $scope.disableEditPaidInfoMode();
-                        $scope.$apply();
                     }, function(d){
                         alert("儲存失敗");
                     });

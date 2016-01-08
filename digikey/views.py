@@ -295,9 +295,10 @@ def apply_paying_info(request):
         if auth.hasProfile(user.uuid):
 
             try:
-                order = Orders.objects.get(uuid=json.loads(request.body)["OID"], Orderer = user)
-                order.paid_account = request.POST["PACCOUNT"]
-                order.paid_date = datetime.date(datetime.date.today().year, int(request.POST["PMONTH"]), int(request.POST["PDAY"]))
+                req_data = json.loads(request.body)
+                order = Orders.objects.get(uuid=req_data["OID"], Orderer = user)
+                order.paid_account = req_data["PACCOUNT"]
+                order.paid_date = datetime.date(datetime.date.today().year, int(req_data["PMONTH"]), int(req_data["PDAY"]))
                 order.save()
 
                 response = HttpResponse()
