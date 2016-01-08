@@ -32,9 +32,12 @@ def classify_components(gcomponents):
     gcomponents = map(model_to_dict, gcomponents)
     for x in gcomponents:
         try:
-            e = Entry.objects.get_or_create(chip = GComponents.objects.get(pk = x['id']))[0]
-            x["rank"] = e.rank
-        except:
+            e = Entry.objects.all().filter(chip = GComponents.objects.get(pk = x['id']))
+            x["rank"] = e.aggregate(rank=Sum('eranking__rank'))['rank']
+            if x["rank"] is None:
+                x["rank"] = 0
+        except Exception as ex:
+            raise ex
             x["rank"] = 0
 
     for x in gcomponents:
@@ -101,7 +104,7 @@ def get_component_info(request):
 
         dict_comment = model_to_dict(gcomponent)
         dict_comment['ctype'] = model_to_dict(GClasses.objects.get(pk = int(dict_comment['ctype'])))
-        dict_comment['rank'] = Entry.objects.get_or_create(chip = gcomponent)[0].rank
+        dict_comment['rank'] = Entry.objects.get_or_create(chip = gcomponent)[0].aggreate(rank=Sum('eranking__rank'))['rank']
         dict_comment['digikey'] = model_to_dict(Components.objects.get(generic_type = gcomponent))
 
         response = HttpResponse(json.dumps(dict_comment))
