@@ -56,12 +56,14 @@ app.controller('chatroom-ctrl', function($scope, $http, $rootScope, $document) {
         var up = up ? "True": "False"
         $http.get("/chatroom/rank_comment?pk=" + comment.id + "&up=" + up)
          .then(function(response){
+             comment.rank += parseInt(response.data)
          });
     }
     $scope.rank_entry = function(chip, up){
         var up = up ? "True": "False"
         $http.get("/chatroom/rank_entry?pk=" + chip.id + "&up=" + up)
          .then(function(response){
+             chip.rank += parseInt(response.data)
          });
     }
     $scope.hide_info = function(){

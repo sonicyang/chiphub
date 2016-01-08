@@ -228,10 +228,21 @@ def rank_comment(request):
                 comment = Comment.objects.get(pk = int(request.GET['pk']))
 
                 cr, newed = CRanking.objects.get_or_create(comment = comment, users = user)
+                old_rank = cr.rank
                 cr.rank = 1 if request.GET['up'] == "True" else -1
                 cr.save()
 
-                response = HttpResponse()
+                if old_rank == 0:
+                    response_data = str(cr.rank)
+                elif old_rank != cr.rank:
+                    if old_rank == -1:
+                        response_data = "2"
+                    else:
+                        response_data = "-2"
+                else:
+                        response_data = "0"
+
+                response = HttpResponse(response_data)
                 response.status_code = 200
 
                 return response
@@ -254,10 +265,21 @@ def rank_entry(request):
                 entry = Entry.objects.get(pk = int(request.GET['pk']))
 
                 er, newed = ERanking.objects.get_or_create(entry = entry, users = user)
+                old_rank = er.rank
                 er.rank = 1 if request.GET['up'] == "True" else -1
                 er.save()
 
-                response = HttpResponse()
+                if old_rank == 0:
+                    response_data = str(er.rank)
+                elif old_rank != er.rank:
+                    if old_rank == -1:
+                        response_data = "2"
+                    else:
+                        response_data = "-2"
+                else:
+                        response_data = "0"
+
+                response = HttpResponse(response_data)
                 response.status_code = 200
 
                 return response
