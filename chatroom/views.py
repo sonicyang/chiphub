@@ -32,6 +32,7 @@ def classify_components(gcomponents):
     gcomponents = map(model_to_dict, gcomponents)
     for x in gcomponents:
         try:
+            e = Entry.objects.get_or_create(chip = GComponents.objects.get(pk = x['id']))
             e = Entry.objects.all().filter(chip = GComponents.objects.get(pk = x['id']))
             x["rank"] = e.aggregate(rank=Sum('eranking__rank'))['rank']
             if x["rank"] is None:
