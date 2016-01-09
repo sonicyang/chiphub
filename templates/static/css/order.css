@@ -1,0 +1,131 @@
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000; }
+  .loader svg {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: calc(50% - 50px);
+    top: calc(50% - 50px); }
+    .loader svg path, .loader svg rect {
+      fill: #ffffff; }
+
+#expire-time-container {
+  margin-bottom: 50px; }
+  #expire-time-container h3 {
+    display: inline-block;
+    margin: 5px 10px 5px 10px;
+    font-size: 2.6rem;
+    vertical-align: middle; }
+
+#order {
+  padding: 5% 5% 10% 5%; }
+
+#order-list {
+  padding-left: 6%;
+  padding-right: 6%; }
+  #order-list .chip {
+    padding-bottom: 15px; }
+  @media only screen and (max-width: 767px) {
+    #order-list h3 {
+      font-size: 2rem; } }
+
+#confirm-price {
+  padding-left: 6%;
+  padding-right: 6%; }
+  #confirm-price .chip {
+    margin-top: 1rem; }
+    #confirm-price .chip .invoice-module {
+      padding: 0.5rem; }
+    #confirm-price .chip .invoice-grid {
+      margin: 0 0 1rem 0; }
+    #confirm-price .chip .multiple {
+      text-align: right; }
+    #confirm-price .chip div {
+      font-size: 2rem; }
+      @media only screen and (max-width: 991px) {
+        #confirm-price .chip div {
+          font-size: 1.65rem; } }
+    #confirm-price .chip .part-number {
+      font-size: 2rem;
+      word-break: break-all; }
+      @media only screen and (max-width: 991px) {
+        #confirm-price .chip .part-number {
+          font-size: 1.85rem; } }
+    #confirm-price .chip .multiple {
+      display: none; }
+      @media only screen and (max-width: 991px) {
+        #confirm-price .chip .multiple {
+          display: block; } }
+    @media only screen and (max-width: 991px) {
+      #confirm-price .chip .quantity:before {
+        content: "x"; } }
+    @media only screen and (max-width: 991px) {
+      #confirm-price .chip .chip-total-price {
+        text-align: right; } }
+  @media only screen and (max-width: 767px) {
+    #confirm-price h3 {
+      font-size: 2rem; } }
+
+.shipping-fee {
+  color: #999;
+  font-size: 2rem; }
+
+#shipping-fee {
+  color: #000; }
+  @media only screen and (max-width: 991px) {
+    #shipping-fee {
+      text-align: right; } }
+
+.fee {
+  color: #999;
+  font-size: 2rem; }
+
+#fee {
+  color: #000; }
+  @media only screen and (max-width: 991px) {
+    #fee {
+      text-align: right; } }
+
+@media only screen and (max-width: 991px) {
+  .info-net {
+    font-size: 24px; } }
+
+@media only screen and (max-width: 991px) {
+  #info-net {
+    text-align: right; } }
+
+#confirm-info {
+  padding: 0% 6% 0% 6%; }
+  #confirm-info form {
+    margin-top: 3%; }
+  #confirm-info .info-item {
+    margin-bottom: 1.5%; }
+
+.button-container {
+  margin-top: 5%; }
+  .button-container button {
+    margin-bottom: 10px;
+    width: 60%;
+    font-size: 20px; }
+
+@media only screen and (max-width: 991px) {
+  .hide-in-middle-screen {
+    display: none !important; } }
+
+#alert-message {
+  position: fixed;
+  top: -50px;
+  z-index: 200; }
+
+#ordering-hint {
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-top: 5%; }
+
+/*# sourceMappingURL=order.css.map */

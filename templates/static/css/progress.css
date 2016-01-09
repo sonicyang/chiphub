@@ -1,0 +1,129 @@
+body {
+  background-color: #F1F4F1;
+  font-family: Helvetica, sans-serif, Microsoft JhengHei; }
+  body #container {
+    height: 100%; }
+  body #progress-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: calc(100% - 450px);
+    padding: 0 10% 0 10%;
+    min-height: 280px;
+    z-index: 100;
+    box-shadow: 0 -10px 10px 0px rgba(30, 30, 30, 0.8); }
+    body #progress-container:before {
+      display: block;
+      content: " ";
+      flex: 1; }
+    body #progress-container:after {
+      display: block;
+      content: " ";
+      flex: 2; }
+    @media only screen and (max-width: 767px) {
+      body #progress-container {
+        height: calc(100% - 350px); } }
+    @media only screen and (max-height: 650px) {
+      body #progress-container {
+        height: calc(100% - 350px); } }
+    body #progress-container #goal {
+      width: 100%;
+      margin-bottom: 2rem;
+      font-size: 40px;
+      text-align: left;
+      text-align: center; }
+      @media only screen and (max-width: 767px) {
+        body #progress-container #goal {
+          font-size: 30px; } }
+    body #progress-container #glass {
+      width: 100%;
+      height: 24px;
+      background: #c7c7c7;
+      border-radius: 15px;
+      overflow: hidden; }
+      @media only screen and (max-width: 767px) {
+        body #progress-container #glass {
+          height: 15px; } }
+      body #progress-container #glass #progress {
+        width: 0%;
+        height: 30px;
+        background: #00ABC9;
+        z-index: 333; }
+    body #progress-container .container-fluid {
+      width: 85%; }
+    body #progress-container .goal-stat {
+      padding-top: 3%;
+      font-size: 1.65rem; }
+
+@media only screen and (max-width: 767px) {
+  .hide-in-small-screen {
+    display: none !important; } }
+
+.item {
+  position: relative;
+  width: 100%;
+  height: 450px; }
+  @media only screen and (max-width: 767px) {
+    .item {
+      height: 350px; } }
+  @media only screen and (max-height: 650px) {
+    .item {
+      height: 350px; } }
+  .item div {
+    position: absolute;
+    padding: 5px 8px 5px 8px;
+    bottom: 40px;
+    color: white;
+    font-size: 3rem;
+    background-color: rgba(0, 0, 0, 0.4); }
+    @media only screen and (max-width: 767px) {
+      .item div {
+        font-size: 2rem; } }
+  .item.cover-1 > div {
+    right: 5%; }
+  .item.cover-2 > div {
+    left: 5%; }
+  .item.cover-3 > div {
+    right: 5%; }
+
+.cover-1 {
+  background: url("../images/surplus.jpg") no-repeat;
+  position: relative;
+  margin: auto;
+  background-size: cover;
+  background-position: 50% 50%; }
+
+.cover-2 {
+  background: url("../images/bench.jpg") no-repeat;
+  position: relative;
+  margin: auto;
+  background-size: cover;
+  background-position: 50% 75%; }
+
+.cover-3 {
+  background: url("../images/warehouse.jpg") no-repeat;
+  position: relative;
+  margin: auto;
+  background-size: cover;
+  background-position: 50% 50%; }
+
+.left.carousel-control {
+  background-image: none;
+  width: 70px; }
+
+.right.carousel-control {
+  background-image: none;
+  width: 70px; }
+
+#button-container {
+  padding-top: 3%; }
+  #button-container button {
+    font-size: 20px;
+    padding: 1% 5% 1% 5%; }
+    @media only screen and (max-width: 760px) {
+      #button-container button {
+        font-size: 14px;
+        padding: 2% 5% 2% 5%; } }
+
+/*# sourceMappingURL=progress.css.map */

@@ -1,0 +1,12 @@
+body #about_us {
+  padding: 5% 5% 5% 5%; }
+  body #about_us h2 {
+    margin-bottom: 7%; }
+  body #about_us img {
+    width: 150px;
+    margin-bottom: 15px; }
+body .member-item {
+  padding: 0 2% 0 2%;
+  margin-bottom: 5%; }
+
+/*# sourceMappingURL=about_us.css.map */
