@@ -161,11 +161,40 @@
 
         </div>
     </div>
+
+
+    <div class="title">
+        <div class="center">
+            <h1>訂單紀錄</h1>
+        </div>
+    </div>
     <div id="order-list" ng-repeat="order in orders | orderBy:'-id'">
         <div class="order">
             <div class="container-fluid">
-                <a class="order-info-link" href="" ng-click="show_info(order)">link</a>
-                <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>價格</th>
+                            <th>匯款日期</th>
+                            <th>匯款帳戶</th>
+                            <th>寄送日期</th>
+                            <th>寄送地址</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{order.date}}</td>
+                            <td>{{order.net | currency}}</td>
+                            <td>{{order.paid_date}}</td>
+                            <td>{{order.paid_account}}</td>
+                            <td>{{order.sent_date}}</td>
+                            <td>{{order.shipping_address}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--<a class="order-info-link" href="" ng-click="show_info(order)">link</a>-->
+                <!--<div class="row">
                     <div class="col-md-5">
                         <h2 class="order-date" type="date">{{ order.date }}</h2>
                     </div>
@@ -201,6 +230,7 @@
                         <label class="control-label output paid" type="paid_account">{{ order.paid_account }}</label>
                     </div>
                 </div>
+-->
             </div>
         </div>
         <hr />
