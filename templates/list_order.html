@@ -168,7 +168,8 @@
             <h1>訂單紀錄</h1>
         </div>
     </div>
-    <div id="order-list" ng-repeat="order in orders | orderBy:'-id'">
+    <a class="order-info-link" href="" ng-click="show_info(order)">link</a>
+    <div>
         <div class="order">
             <div class="container-fluid">
                 <table>
@@ -183,7 +184,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr id="order-list" ng-repeat="order in orders | orderBy:'-id'">
                             <td>{{order.date}}</td>
                             <td>{{order.net | currency}}</td>
                             <td>{{order.paid_date}}</td>
